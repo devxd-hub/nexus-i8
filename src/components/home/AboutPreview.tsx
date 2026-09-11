@@ -32,10 +32,11 @@ export const AboutPreview: React.FC<AboutPreviewProps> = ({ onRouteChange }) => 
             <div className="relative group overflow-hidden border border-[rgba(10,10,9,0.14)] bg-[#151311] shadow-[0_16px_40px_rgba(10,10,9,0.08)]">
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <img
-                  src="/gallery-img/event-qna.jpg"
+                  src="/gallery-img/event-qna.webp"
                   alt="NEXUS Community & Student Discourse"
                   className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105 filter contrast-[1.03]"
                   loading="eager"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-300" />
                 

@@ -32,6 +32,9 @@ export const GalleryTile: React.FC<GalleryTileProps> = ({
   onSelect,
   className = '',
 }) => {
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const [hasError, setHasError] = React.useState(false);
+
   const aspectClass = {
     '16/9': 'aspect-[16/9]',
     '4/3': 'aspect-[4/3]',
@@ -68,18 +71,31 @@ export const GalleryTile: React.FC<GalleryTileProps> = ({
         ${className}
       `}
     >
-      {/* Image container with overflow-hidden */}
+      {/* Image container with overflow-hidden and shimmer placeholder */}
       <div
         className={`relative w-full overflow-hidden bg-[#E8E2D7] border-b border-[rgba(10,10,9,0.1)] ${aspectClass}`}
       >
+        {/* Shimmer loading skeleton placeholder */}
+        {!isLoaded && !hasError && (
+          <div className="absolute inset-0 bg-gradient-to-r from-[#E8E2D7] via-[#F3EEE5] to-[#E8E2D7] animate-pulse" />
+        )}
+
         {/* Visual surface scaling 1 -> 1.03 on hover */}
         <div className="w-full h-full flex flex-col items-center justify-center text-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
-          {item.imageUrl ? (
+          {item.imageUrl && !hasError ? (
             <img
               src={item.imageUrl}
               alt={item.title}
-              className="w-full h-full object-cover filter grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500"
+              onLoad={() => setIsLoaded(true)}
+              onError={() => {
+                setHasError(true);
+                setIsLoaded(true);
+              }}
+              className={`w-full h-full object-cover filter grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500 ${
+                isLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
               loading="lazy"
+              decoding="async"
               referrerPolicy="no-referrer"
             />
           ) : (
