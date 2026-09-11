@@ -22,8 +22,8 @@ export interface RotatingTextRef {
 
 export interface RotatingTextProps
   extends Omit<
-    React.ComponentPropsWithoutRef<typeof motion.span>,
-    'children' | 'transition' | 'initial' | 'animate' | 'exit'
+    React.HTMLAttributes<HTMLSpanElement>,
+    'children'
   > {
   texts: string[];
   transition?: Transition;

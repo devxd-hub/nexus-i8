@@ -10,7 +10,7 @@ import { GalleryItem } from '../../types.ts';
 
 interface GalleryTileProps {
   item: GalleryItem;
-  aspectRatio?: '16/9' | '4/3' | '1/1' | '3/2' | '21/9' | 'auto';
+  aspectRatio?: '16/9' | '4/3' | '1/1' | '3/2' | '21/9' | 'portrait' | 'auto';
   onSelect?: (item: GalleryItem) => void;
   className?: string;
 }
@@ -38,6 +38,7 @@ export const GalleryTile: React.FC<GalleryTileProps> = ({
     '1/1': 'aspect-square',
     '3/2': 'aspect-[3/2]',
     '21/9': 'aspect-[21/9]',
+    'portrait': 'aspect-[3/4]',
     'auto': '',
   }[aspectRatio];
 

@@ -62,8 +62,8 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
 }) => {
   const meta = STAGE_METAS[activeIndex] || STAGE_METAS[0];
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     onSelectStage((activeIndex + 1) % 4);
   };
 

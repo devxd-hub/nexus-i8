@@ -59,8 +59,21 @@ export const NexusIcon: React.FC<NexusIconProps> = ({
 export const InteractiveNexusX: React.FC<{
   className?: string;
   sizeClass?: string;
+  size?: string;
   alt?: string;
-}> = ({ className = '', sizeClass = 'w-[0.84em] h-[0.84em]', alt = 'NEXUS X' }) => {
+}> = ({ className = '', sizeClass = 'w-[0.84em] h-[0.84em]', size, alt = 'NEXUS X' }) => {
+  const resolvedSizeClass = size
+    ? {
+        xs: 'w-3.5 h-3.5',
+        sm: 'w-5 h-5',
+        md: 'w-7 h-7',
+        lg: 'w-9 h-9',
+        xl: 'w-12 h-12',
+        '2xl': 'w-16 h-16',
+        '3xl': 'w-24 h-24',
+        hero: 'w-28 h-28 md:w-36 md:h-36',
+      }[size] || sizeClass
+    : sizeClass;
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
   const [canHover, setCanHover] = useState(true);
@@ -102,7 +115,7 @@ export const InteractiveNexusX: React.FC<{
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative inline-flex items-center justify-center shrink-0 select-none aspect-square cursor-pointer ${sizeClass} ${className}`}
+      className={`relative inline-flex items-center justify-center shrink-0 select-none aspect-square cursor-pointer ${resolvedSizeClass} ${className}`}
       aria-label="NEXUS X"
     >
       {/* Canonical Bottom Layer: 100% untouched original orange X */}
