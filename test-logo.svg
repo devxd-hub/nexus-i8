@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left Half -->
+  <path
+    d="M 120 78 H 320 L 590 620 H 590 L 120 78 Z"
+    stroke="#EF5A2A"
+    stroke-width="110"
+    stroke-linejoin="miter"
+    stroke-miterlimit="10"
+  />
+  <path
+    d="M 590 620 L 100 960"
+    stroke="#EF5A2A"
+    stroke-width="110"
+    stroke-linecap="square"
+  />
+  <!-- Right Half (180 deg rotated) -->
+  <g transform="rotate(180 500 500)">
+    <path
+      d="M 120 78 H 320 L 590 620 H 590 L 120 78 Z"
+      stroke="#EF5A2A"
+      stroke-width="110"
+      stroke-linejoin="miter"
+      stroke-miterlimit="10"
+    />
+    <path
+      d="M 590 620 L 100 960"
+      stroke="#EF5A2A"
+      stroke-width="110"
+      stroke-linecap="square"
+    />
+  </g>
+</svg>

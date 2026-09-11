@@ -1,0 +1,8 @@
+{
+  "name": "Remix I9",
+  "description": "NEXUS: A student-led college community for ideation, technology, and project building.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

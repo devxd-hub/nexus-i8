@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="100%" height="100%">
+  <defs>
+    <!-- Rich Warm Lighting Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#1A1815" />
+      <stop offset="50%" stopColor="#12100E" />
+      <stop offset="100%" stopColor="#0A0908" />
+    </linearGradient>
+
+    <linearGradient id="woodSurface" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#2A221B" />
+      <stop offset="25%" stopColor="#352B23" />
+      <stop offset="50%" stopColor="#2F251E" />
+      <stop offset="75%" stopColor="#3C3026" />
+      <stop offset="100%" stopColor="#261E17" />
+    </linearGradient>
+
+    <linearGradient id="anodizedMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#8E857B" />
+      <stop offset="30%" stopColor="#E2DBD1" />
+      <stop offset="70%" stopColor="#6E665D" />
+      <stop offset="100%" stopColor="#38332E" />
+    </linearGradient>
+
+    <linearGradient id="orangeAccentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#EF5A2A" stopOpacity="0.9" />
+      <stop offset="100%" stopColor="#FF7A45" stopOpacity="0.3" />
+    </linearGradient>
+
+    <pattern id="gridSub" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#F3EEE5" stroke-width="0.75" stroke-opacity="0.05" />
+    </pattern>
+
+    <pattern id="dotMatrix" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#F3EEE5" fill-opacity="0.08" />
+    </pattern>
+  </defs>
+
+  <!-- Dark Architectural Studio Canvas -->
+  <rect width="1600" height="900" fill="url(#bgGrad)" />
+
+  <!-- Studio Ambient Grid & Alignment Guides -->
+  <rect width="1600" height="900" fill="url(#gridSub)" />
+  <rect width="1600" height="900" fill="url(#dotMatrix)" />
+
+  <!-- Background Technical Schematic Lines -->
+  <g opacity="0.18" stroke="#F3EEE5" stroke-width="1" stroke-dasharray="4 6">
+    <line x1="160" y1="0" x2="160" y2="900" />
+    <line x1="800" y1="0" x2="800" y2="900" />
+    <line x1="1440" y1="0" x2="1440" y2="900" />
+    <line x1="0" y1="450" x2="1600" y2="450" />
+    <circle cx="800" cy="450" r="320" fill="none" />
+    <circle cx="800" cy="450" r="380" fill="none" stroke-dasharray="2 8" />
+  </g>
+
+  <!-- Central Highlight Glow -->
+  <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stopColor="#EF5A2A" stopOpacity="0.14" />
+    <stop offset="60%" stopColor="#EF5A2A" stopOpacity="0.02" />
+    <stop offset="100%" stopColor="#000000" stopOpacity="0" />
+  </radialGradient>
+  <circle cx="800" cy="450" r="500" fill="url(#centerGlow)" />
+
+  <!-- ==============================================
+       VOXEN HARDWARE CONTROLLER CHASSIS (ISO PROJECTION)
+       ============================================== -->
+  <g id="hardware-chassis" transform="translate(300, 160)">
+    <!-- Drop Shadow for Chassis -->
+    <rect x="20" y="30" width="960" height="540" rx="4" fill="#000000" opacity="0.6" filter="blur(16px)" />
+
+    <!-- Walnut Base Housing -->
+    <rect x="0" y="0" width="1000" height="580" rx="3" fill="url(#woodSurface)" stroke="#5A4739" stroke-width="1.5" />
+
+    <!-- Inner Machined Aluminum Top Plate -->
+    <rect x="24" y="24" width="952" height="532" rx="2" fill="#1C1A17" stroke="#3A352F" stroke-width="1.2" />
+
+    <!-- Technical Dimension Markings on Top Plate -->
+    <g opacity="0.4" font-family="'Dosis', 'Space Grotesk', sans-serif" font-size="11" fill="#A8A095" letter-spacing="2">
+      <text x="44" y="54">NXS-004 // MODULAR MIDI CONTROLLER</text>
+      <text x="780" y="54">CHASSIS: RECLAIMED WALNUT</text>
+      <line x1="44" y1="64" x2="956" y2="64" stroke="#3A352F" stroke-width="1" />
+    </g>
+
+    <!-- SECTION 1: 4 PRECISION ROTARY POTENTIOMETERS (LEFT) -->
+    <g transform="translate(60, 100)">
+      <!-- Knob 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="50" cy="50" r="42" fill="#141311" stroke="#4A443D" stroke-width="1.5" />
+        <circle cx="50" cy="50" r="36" fill="url(#anodizedMetal)" />
+        <circle cx="50" cy="50" r="28" fill="#181614" stroke="#332E29" stroke-width="1" />
+        <line x1="50" y1="22" x2="50" y2="34" stroke="#EF5A2A" stroke-width="2.5" stroke-linecap="round" />
+        <text x="50" y="115" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#EF5A2A" text-anchor="middle" letter-spacing="1.5">GAIN // 01</text>
+      </g>
+
+      <!-- Knob 2 -->
+      <g transform="translate(130, 0)">
+        <circle cx="50" cy="50" r="42" fill="#141311" stroke="#4A443D" stroke-width="1.5" />
+        <circle cx="50" cy="50" r="36" fill="url(#anodizedMetal)" />
+        <circle cx="50" cy="50" r="28" fill="#181614" stroke="#332E29" stroke-width="1" />
+        <line x1="50" y1="50" x2="68" y2="32" stroke="#EF5A2A" stroke-width="2.5" stroke-linecap="round" />
+        <text x="50" y="115" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="1.5">FREQ // 02</text>
+      </g>
+
+      <!-- Knob 3 -->
+      <g transform="translate(0, 150)">
+        <circle cx="50" cy="50" r="42" fill="#141311" stroke="#4A443D" stroke-width="1.5" />
+        <circle cx="50" cy="50" r="36" fill="url(#anodizedMetal)" />
+        <circle cx="50" cy="50" r="28" fill="#181614" stroke="#332E29" stroke-width="1" />
+        <line x1="50" y1="50" x2="34" y2="66" stroke="#EF5A2A" stroke-width="2.5" stroke-linecap="round" />
+        <text x="50" y="115" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="1.5">RESON // 03</text>
+      </g>
+
+      <!-- Knob 4 -->
+      <g transform="translate(130, 150)">
+        <circle cx="50" cy="50" r="42" fill="#141311" stroke="#4A443D" stroke-width="1.5" />
+        <circle cx="50" cy="50" r="36" fill="url(#anodizedMetal)" />
+        <circle cx="50" cy="50" r="28" fill="#181614" stroke="#332E29" stroke-width="1" />
+        <line x1="50" y1="50" x2="50" y2="78" stroke="#EF5A2A" stroke-width="2.5" stroke-linecap="round" />
+        <text x="50" y="115" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="1.5">DRIVE // 04</text>
+      </g>
+    </g>
+
+    <!-- SECTION 2: 4x4 CAPACITIVE TOUCH MATRIX (CENTER) -->
+    <g transform="translate(350, 100)">
+      <rect x="-16" y="-16" width="312" height="312" rx="4" fill="#12110F" stroke="#2B2722" stroke-width="1" />
+
+      <!-- 16 Capacitive Pads -->
+      <!-- Row 1 -->
+      <rect x="0" y="0" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="74" y="0" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="148" y="0" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="222" y="0" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+
+      <!-- Row 2 -->
+      <rect x="0" y="74" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <!-- Active Illuminated Pad (NEXUS Orange) -->
+      <rect x="74" y="74" width="60" height="60" rx="3" fill="#EF5A2A" stroke="#FFA380" stroke-width="1.5" />
+      <circle cx="104" cy="104" r="10" fill="#FFFFFF" opacity="0.4" />
+      <rect x="148" y="74" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="222" y="74" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+
+      <!-- Row 3 -->
+      <rect x="0" y="148" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="74" y="148" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="148" y="148" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="222" y="148" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+
+      <!-- Row 4 -->
+      <rect x="0" y="222" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="74" y="222" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="148" y="222" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+      <rect x="222" y="222" width="60" height="60" rx="3" fill="#24211D" stroke="#3E3830" stroke-width="1" />
+
+      <text x="140" y="322" font-family="'Dosis', sans-serif" font-size="11" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="2">16-STEP VELOCITY GRID</text>
+    </g>
+
+    <!-- SECTION 3: LINEAR TOUCH RIBBONS & OLED TELEMETRY (RIGHT) -->
+    <g transform="translate(690, 100)">
+      <!-- OLED Display Module -->
+      <rect x="0" y="0" width="220" height="90" rx="2" fill="#0A0908" stroke="#3A352F" stroke-width="1" />
+      <text x="14" y="28" font-family="'Courier New', monospace" font-size="12" font-weight="bold" fill="#EF5A2A">VOXEN FIRMWARE v1.4</text>
+      <text x="14" y="48" font-family="'Courier New', monospace" font-size="11" fill="#F3EEE5">BPM: 124.0 // USB-MIDI</text>
+      <text x="14" y="68" font-family="'Courier New', monospace" font-size="10" fill="#8E857B">POLY-AFTERTOUCH: ON</text>
+      <!-- Waveform graphic in OLED -->
+      <path d="M 140 45 Q 155 25, 170 45 T 200 45" fill="none" stroke="#EF5A2A" stroke-width="1.5" />
+
+      <!-- Dual Touch Strips (Capacitive Faders) -->
+      <g transform="translate(20, 120)">
+        <rect x="0" y="0" width="36" height="180" rx="2" fill="#141311" stroke="#2B2722" stroke-width="1" />
+        <rect x="6" y="60" width="24" height="6" rx="1" fill="#EF5A2A" />
+        <text x="18" y="205" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="1">PITCH</text>
+      </g>
+
+      <g transform="translate(120, 120)">
+        <rect x="0" y="0" width="36" height="180" rx="2" fill="#141311" stroke="#2B2722" stroke-width="1" />
+        <rect x="6" y="110" width="24" height="6" rx="1" fill="#EF5A2A" />
+        <text x="18" y="205" font-family="'Dosis', sans-serif" font-size="10" font-weight="700" fill="#A8A095" text-anchor="middle" letter-spacing="1">MOD</text>
+      </g>
+    </g>
+
+    <!-- Bottom Laser Engraved Branding -->
+    <g transform="translate(44, 520)">
+      <text font-family="'Fraunces', Georgia, serif" font-weight="700" font-size="20" fill="#F3EEE5" letter-spacing="4">NEXUS</text>
+      <text x="130" y="-3" font-family="'Dosis', sans-serif" font-weight="600" font-size="11" fill="#EF5A2A" letter-spacing="3">// STUDIO PROTOTYPE LAB</text>
+    </g>
+  </g>
+
+  <!-- Editorial Annotation Overlays Outside Chassis -->
+  <g font-family="'Dosis', 'Space Grotesk', sans-serif" font-size="12" font-weight="600" fill="#F3EEE5" opacity="0.65" letter-spacing="2">
+    <!-- Top Left -->
+    <text x="80" y="80">EXHIBIT // 004</text>
+    <text x="80" y="100" font-size="10" fill="#EF5A2A">HARDWARE × INTERACTION DESIGN</text>
+    <line x1="80" y1="115" x2="220" y2="115" stroke="#3A352F" stroke-width="1" />
+
+    <!-- Top Right -->
+    <text x="1520" y="80" text-anchor="end">STATUS // DEPLOYED</text>
+    <text x="1520" y="100" font-size="10" fill="#A8A095" text-anchor="end">STUDIO SOUND LAB CRIT</text>
+    <line x1="1380" y1="115" x2="1520" y2="115" stroke="#3A352F" stroke-width="1" />
+
+    <!-- Bottom Left -->
+    <text x="80" y="820">CNC WALNUT × CAPACITIVE MATRIX</text>
+    <text x="80" y="840" font-size="10" fill="#8E857B">NEXUS CAMPUS STUDIO // 2026</text>
+
+    <!-- Bottom Right -->
+    <text x="1520" y="820" text-anchor="end">TOUCH TO DISTORT SURFACE</text>
+    <text x="1520" y="840" font-size="10" fill="#EF5A2A" text-anchor="end">DYNAMIC WEBGL REACTION</text>
+  </g>
+
+  <!-- Framing Precision Corners -->
+  <g stroke="#EF5A2A" stroke-width="1.5" fill="none" opacity="0.6">
+    <path d="M 40 60 L 40 40 L 60 40" />
+    <path d="M 1560 60 L 1560 40 L 1540 40" />
+    <path d="M 40 840 L 40 860 L 60 860" />
+    <path d="M 1560 840 L 1560 860 L 1540 860" />
+  </g>
+</svg>
