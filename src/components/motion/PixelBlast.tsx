@@ -721,13 +721,24 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
 
     const startTime = performance.now();
 
+    let lastFrameTime = 0;
+
     function render(now: number) {
       if (!gl || !program) return;
+
+      const isMobile = width < 768;
+      // On mobile devices, throttle rendering to ~35fps to keep scroll buttery smooth and save battery
+      if (isMobile && now - lastFrameTime < 28) {
+        if (isVisible) {
+          rafRef.current = requestAnimationFrame(render);
+        }
+        return;
+      }
+      lastFrameTime = now;
 
       const p = propsRef.current;
       const elapsed = (now - startTime) * 0.001;
       const effectiveSpeed = prefersReducedMotion ? 0.0 : p.speed;
-      const isMobile = width < 768;
       const effectiveBasePixelSize = isMobile ? Math.max(6.5, p.pixelSize * 1.3) : p.pixelSize;
 
       // Smooth mouse lerp

@@ -187,12 +187,16 @@ export const NexusPenguin: React.FC<NexusPenguinProps> = ({
     const count = getPageSightingCount(currentRoute);
     if (count >= 2) return;
 
+    // On small mobile devices, avoid floating overlays to preserve clean touch zones
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      return;
+    }
+
     const spawnDelay = currentRoute === '/' ? 4200 : 3400;
 
     spawnTimeoutRef.current = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.innerWidth < 640) return;
       incrementPageSighting(currentRoute);
-
-      if (typeof window === 'undefined') return;
 
       const windowW = window.innerWidth;
       const minX = Math.max(28, windowW * 0.05);

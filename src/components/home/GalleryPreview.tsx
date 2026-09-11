@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Container } from '../primitives/Container.tsx';
 import { SectionLabel } from '../primitives/SectionLabel.tsx';
 import { PrimaryButton, TextLink } from '../primitives/Button.tsx';
@@ -11,6 +11,7 @@ import { GalleryTile } from '../primitives/GalleryTile.tsx';
 import { RevealSection, RevealText } from '../motion/MotionPrimitives.tsx';
 import { AppRoute } from '../../types.ts';
 import { GALLERY_ITEMS } from '../../data/nexusData.ts';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface GalleryPreviewProps {
   onRouteChange: (route: AppRoute) => void;
@@ -19,42 +20,127 @@ interface GalleryPreviewProps {
 /**
  * GALLERY PREVIEW
  * Heading: INSIDE NEXUS.
- * Editorial composition representing: people, workshops, projects, events, prototyping, collaboration, presentations.
- * Interactive tiles with subtle hover scale, caption reveal, and arrow indicator.
+ * On Desktop: Editorial Asymmetric Grid
+ * On Mobile / Small Screens: Smooth Horizontal Touch-Snap Carousel with Indicators
  */
 export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange }) => {
-  // Select an editorial mix of images across categories
-  const previewItems = GALLERY_ITEMS.slice(0, 4);
+  const previewItems = GALLERY_ITEMS.slice(0, 6);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, offsetWidth } = scrollRef.current;
+    if (offsetWidth > 0) {
+      const idx = Math.round(scrollLeft / (offsetWidth * 0.85));
+      setActiveMobileIdx(Math.min(previewItems.length - 1, Math.max(0, idx)));
+    }
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (!scrollRef.current) return;
+    const itemWidth = scrollRef.current.offsetWidth * 0.85;
+    scrollRef.current.scrollTo({
+      left: index * itemWidth,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <RevealSection
       id="nexus-gallery-preview"
-      className="w-full py-14 sm:py-18 md:py-22 bg-[#EBE5DB] border-b border-[rgba(10,10,9,0.12)]"
+      className="w-full py-12 sm:py-16 md:py-22 bg-[#EBE5DB] border-b border-[rgba(10,10,9,0.12)]"
     >
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-10 pb-4 sm:pb-5 border-b border-[rgba(10,10,9,0.12)]">
-          <div className="space-y-3">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10 pb-4 sm:pb-5 border-b border-[rgba(10,10,9,0.12)]">
+          <div className="space-y-2 sm:space-y-3">
             <SectionLabel number="04" label="STUDIO ARCHIVE" />
             <RevealText
               as="h2"
               staggerMs={45}
-              className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight uppercase"
+              className="font-fraunces font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight uppercase"
             >
               INSIDE NEXUS.
             </RevealText>
-            <p className="font-bitter text-[#66615A] max-w-lg text-base sm:text-lg leading-relaxed">
+            <p className="font-bitter text-[#66615A] max-w-lg text-sm sm:text-base md:text-lg leading-relaxed">
               Moments from workshops, sprint nights, team critiques, and hands-on making in the studio.
             </p>
           </div>
-          <TextLink
-            label="FULL ARCHIVE"
-            onClick={() => onRouteChange('/gallery')}
-          />
+          <div className="flex items-center justify-between md:justify-end gap-4">
+            {/* Mobile Carousel Controls */}
+            <div className="flex md:hidden items-center gap-1.5 bg-[#FAF6F0] p-1 border border-[rgba(10,10,9,0.12)]">
+              <button
+                type="button"
+                onClick={() => scrollToIndex(Math.max(0, activeMobileIdx - 1))}
+                disabled={activeMobileIdx === 0}
+                className="p-1 disabled:opacity-30 text-[#0A0A09]"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <span className="text-[10px] font-mono font-bold px-1.5 text-[#66615A]">
+                {activeMobileIdx + 1} / {previewItems.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => scrollToIndex(Math.min(previewItems.length - 1, activeMobileIdx + 1))}
+                disabled={activeMobileIdx === previewItems.length - 1}
+                className="p-1 disabled:opacity-30 text-[#0A0A09]"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <TextLink
+              label="FULL ARCHIVE"
+              onClick={() => onRouteChange('/gallery')}
+            />
+          </div>
         </div>
 
-        {/* Editorial Composition Grid with Interactive Tiles */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-start">
-          {/* Item 1: Prototyping (Span 7) */}
+        {/* Mobile Swipe Carousel (< md) */}
+        <div className="block md:hidden">
+          <div
+            ref={scrollRef}
+            onScroll={handleScroll}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 -mx-4 px-4 touch-pan-x"
+            style={{ WebkitOverflowScrolling: 'touch' }}
+          >
+            {previewItems.map((item, idx) => (
+              <div
+                key={item.id}
+                className="w-[82vw] max-w-[340px] shrink-0 snap-center"
+              >
+                <GalleryTile
+                  item={item}
+                  aspectRatio="1/1"
+                  onSelect={() => onRouteChange('/gallery')}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Swipe indicator dots */}
+          <div className="flex justify-center items-center gap-1.5 pt-2">
+            {previewItems.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollToIndex(idx)}
+                aria-label={`Slide ${idx + 1}`}
+                className={`h-1.5 transition-all duration-300 ${
+                  activeMobileIdx === idx
+                    ? 'w-6 bg-[#EF5A2A]'
+                    : 'w-1.5 bg-[rgba(10,10,9,0.2)]'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop Editorial Grid (>= md) */}
+        <div className="hidden md:grid grid-cols-12 gap-5 sm:gap-6 items-start">
           <div className="md:col-span-7">
             <GalleryTile
               item={previewItems[0]}
@@ -63,7 +149,6 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
             />
           </div>
 
-          {/* Item 2: People (Span 5) */}
           <div className="md:col-span-5">
             <GalleryTile
               item={previewItems[1]}
@@ -72,7 +157,6 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
             />
           </div>
 
-          {/* Item 3: Projects / Testing (Span 5) */}
           <div className="md:col-span-5">
             <GalleryTile
               item={previewItems[2]}
@@ -81,7 +165,6 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
             />
           </div>
 
-          {/* Item 4: Workshops (Span 7) */}
           <div className="md:col-span-7">
             <GalleryTile
               item={previewItems[3]}
@@ -92,7 +175,7 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
         </div>
 
         {/* CTA: VIEW THE GALLERY */}
-        <div className="mt-10 sm:mt-12 text-center">
+        <div className="mt-8 sm:mt-12 text-center">
           <PrimaryButton
             label="VIEW THE GALLERY"
             onClick={() => onRouteChange('/gallery')}

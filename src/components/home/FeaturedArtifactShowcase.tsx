@@ -112,10 +112,10 @@ export const FeaturedArtifactShowcase: React.FC<FeaturedArtifactShowcaseProps> =
             </div>
 
             {/* Interactive GridDistortion Surface */}
-            <div className="relative w-full aspect-[16/9] min-h-[320px] max-h-[560px] bg-[#0A0908] overflow-hidden">
+            <div className="relative w-full aspect-[16/9] min-h-[260px] sm:min-h-[320px] max-h-[560px] bg-[#0A0908] overflow-hidden touch-pan-y">
               <GridDistortion
                 imageSrc="/voxen-prototype.svg"
-                grid={12}
+                grid={10}
                 mouse={0.09}
                 strength={0.11}
                 relaxation={0.92}
@@ -124,7 +124,7 @@ export const FeaturedArtifactShowcase: React.FC<FeaturedArtifactShowcaseProps> =
                 tintColor="#EF5A2A"
                 onInteraction={() => setHasInteracted(true)}
                 alt={`${project.title} interactive tactile hardware prototype`}
-                className="w-full h-full"
+                className="w-full h-full pointer-events-auto touch-pan-y"
               />
 
               {/* Editorial Marker: 01 / INTERACTION // DISTURB TO EXPLORE ↗ (Fades after first touch) */}

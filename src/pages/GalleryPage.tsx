@@ -79,7 +79,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
   return (
     <main id="nexus-gallery-page" className="w-full bg-[#F3EEE5]">
       {/* 1. Header with Atmospheric ColorBends Shader Backdrop */}
-      <RevealSection className="relative pt-20 md:pt-28 pb-16 md:pb-24 border-b border-[rgba(10,10,9,0.12)] overflow-hidden bg-[#F3EEE5]">
+      <RevealSection className="relative pt-12 sm:pt-20 md:pt-28 pb-10 sm:pb-16 md:pb-24 border-b border-[rgba(10,10,9,0.12)] overflow-hidden bg-[#F3EEE5]">
         {/* Generative ColorBends Interactive Background */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-40 mix-blend-multiply overflow-hidden">
           <ColorBends
@@ -100,10 +100,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
         </div>
 
         <Container className="relative z-10">
-          <div className="max-w-4xl space-y-6">
-            <div className="flex flex-wrap items-center gap-3">
+          <div className="max-w-4xl space-y-4 sm:space-y-6">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <SectionLabel number="03" label="STUDIO ARCHIVE" />
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#0A0A09] text-white text-xs font-dosis tracking-[0.2em] uppercase border border-[rgba(239,90,42,0.3)]">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 bg-[#0A0A09] text-white text-[11px] sm:text-xs font-dosis tracking-[0.2em] uppercase border border-[rgba(239,90,42,0.3)]">
                 <NexusIcon size="xs" />
                 <span>NEXUS GALLERY</span>
               </span>
@@ -111,11 +111,11 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
             <RevealText
               as="h1"
               staggerMs={40}
-              className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight"
+              className="font-fraunces font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight"
             >
               Inside the studio: crits, sprints, and builds.
             </RevealText>
-            <p className="font-bitter text-lg text-[#66615A] leading-relaxed max-w-3xl">
+            <p className="font-bitter text-base sm:text-lg text-[#66615A] leading-relaxed max-w-3xl">
               An authentic visual chronicle of NEXUS cohort assemblies, lab experiments, university presentations, and collaborative technical sprints.
             </p>
           </div>
@@ -123,21 +123,22 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
       </RevealSection>
 
       {/* 2. Filter Tabs Bar */}
-      <section className="py-6 border-b border-[rgba(10,10,9,0.12)] bg-[#EBE5DB] sticky top-16 z-20 backdrop-blur-md">
+      <section className="py-4 sm:py-6 border-b border-[rgba(10,10,9,0.12)] bg-[#EBE5DB] sticky top-16 z-20 backdrop-blur-md">
         <Container>
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-dosis text-xs font-bold text-[#66615A] tracking-[0.2em] mr-2">CATEGORY:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
+              <span className="font-dosis text-[11px] sm:text-xs font-bold text-[#66615A] tracking-[0.2em] shrink-0 mr-1">CATEGORY:</span>
               {categories.map((cat) => (
-                <NexusFilterButton
-                  key={cat}
-                  label={cat}
-                  active={categoryFilter === cat}
-                  onClick={() => setCategoryFilter(cat)}
-                />
+                <div key={cat} className="shrink-0">
+                  <NexusFilterButton
+                    label={cat}
+                    active={categoryFilter === cat}
+                    onClick={() => setCategoryFilter(cat)}
+                  />
+                </div>
               ))}
             </div>
-            <span className="font-dosis text-xs tracking-[0.18em] text-[#66615A] font-semibold">
+            <span className="font-dosis text-[11px] sm:text-xs tracking-[0.18em] text-[#66615A] font-semibold text-right hidden sm:inline">
               {filteredItems.length} RECORDS CATALOGED
             </span>
           </div>

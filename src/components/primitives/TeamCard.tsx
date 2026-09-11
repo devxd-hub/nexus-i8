@@ -65,7 +65,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
   }, [activeSrc]);
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isCoordinatorOrMentor) return;
+    if (!isCoordinatorOrMentor || e.pointerType !== 'mouse') return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
