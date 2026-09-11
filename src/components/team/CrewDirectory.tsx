@@ -271,6 +271,7 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
                         }`}
                         style={{ objectPosition: member.imagePosition || 'center 20%' }}
                         loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center text-[#66615A] bg-[#ECE5D8]">
