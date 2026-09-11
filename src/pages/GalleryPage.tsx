@@ -11,21 +11,15 @@ import { GalleryTile } from '../components/primitives/GalleryTile.tsx';
 import { NexusIcon } from '../components/brand/NexusLogo.tsx';
 import { RevealSection, RevealText } from '../components/motion/MotionPrimitives.tsx';
 import { ColorBends } from '../components/motion/ColorBends.tsx';
-import { DomeGallery } from '../components/motion/DomeGallery.tsx';
 import { AppRoute, GalleryItem } from '../types.ts';
 import { GALLERY_ITEMS } from '../data/nexusData.ts';
 import {
   X,
-  Maximize2,
   Calendar,
   MapPin,
   User,
   ChevronLeft,
   ChevronRight,
-  Globe,
-  Grid,
-  Sparkles,
-  ArrowRight,
 } from 'lucide-react';
 
 interface GalleryPageProps {
@@ -33,16 +27,15 @@ interface GalleryPageProps {
 }
 
 /**
- * GALLERY PAGE (Restructured with 3D Dome Gallery)
+ * GALLERY PAGE
  * - Atmospheric ColorBends Header
- * - Interactive 3D Dome Spherical Amphitheater Showcase
- * - Responsive Editorial Masonry Archive Grid
- * - High-Precision Keyboard Accessible Lightbox Modal
+ * - Category Filter Bar
+ * - High-Precision Editorial Masonry Archive Grid with Authentic Images
+ * - Keyboard Accessible Lightbox Modal
  */
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
-  const [galleryViewMode, setGalleryViewMode] = useState<'DOME' | 'GRID' | 'BOTH'>('BOTH');
 
   const categories = ['ALL', 'PEOPLE', 'WORKSHOPS', 'PROJECTS', 'PROTOTYPING', 'COLLABORATION', 'PRESENTATIONS'];
 
@@ -123,139 +116,64 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
               Inside the studio: crits, sprints, and builds.
             </RevealText>
             <p className="font-bitter text-lg text-[#66615A] leading-relaxed max-w-3xl">
-              An interactive visual record of student teams in the lab — exploring projects on the 3D geodesic dome amphitheater or browsing the chronological editorial print archive.
+              An authentic visual chronicle of NEXUS cohort assemblies, lab experiments, university presentations, and collaborative technical sprints.
             </p>
-
-            {/* View Mode Switcher Pills */}
-            <div className="pt-2 flex flex-wrap items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setGalleryViewMode('BOTH')}
-                className={`inline-flex items-center gap-2 px-4 py-2 text-xs font-dosis font-bold tracking-[0.18em] uppercase transition-all duration-200 border cursor-pointer ${
-                  galleryViewMode === 'BOTH'
-                    ? 'bg-[#0A0A09] text-white border-[#0A0A09] shadow-xs'
-                    : 'bg-[#FAF6F0] text-[#66615A] hover:text-[#0A0A09] border-[rgba(10,10,9,0.15)]'
-                }`}
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#EF5A2A]" />
-                <span>FULL EXPERIENCE (DOME + ARCHIVE)</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setGalleryViewMode('DOME')}
-                className={`inline-flex items-center gap-2 px-4 py-2 text-xs font-dosis font-bold tracking-[0.18em] uppercase transition-all duration-200 border cursor-pointer ${
-                  galleryViewMode === 'DOME'
-                    ? 'bg-[#0A0A09] text-white border-[#0A0A09] shadow-xs'
-                    : 'bg-[#FAF6F0] text-[#66615A] hover:text-[#0A0A09] border-[rgba(10,10,9,0.15)]'
-                }`}
-              >
-                <Globe className="w-3.5 h-3.5 text-[#EF5A2A]" />
-                <span>3D DOME SPHERE</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setGalleryViewMode('GRID')}
-                className={`inline-flex items-center gap-2 px-4 py-2 text-xs font-dosis font-bold tracking-[0.18em] uppercase transition-all duration-200 border cursor-pointer ${
-                  galleryViewMode === 'GRID'
-                    ? 'bg-[#0A0A09] text-white border-[#0A0A09] shadow-xs'
-                    : 'bg-[#FAF6F0] text-[#66615A] hover:text-[#0A0A09] border-[rgba(10,10,9,0.15)]'
-                }`}
-              >
-                <Grid className="w-3.5 h-3.5 text-[#EF5A2A]" />
-                <span>EDITORIAL GRID</span>
-              </button>
-            </div>
           </div>
         </Container>
       </RevealSection>
 
-      {/* 2. IMMERSIVE 3D DOME GALLERY SECTION */}
-      {(galleryViewMode === 'DOME' || galleryViewMode === 'BOTH') && (
-        <section className="relative w-full border-b border-[rgba(10,10,9,0.14)] bg-[#0A0A09]">
-          <div className="w-full h-[72vh] min-h-[580px] max-h-[860px]">
-            <DomeGallery
-              items={GALLERY_ITEMS}
-              onSelect={(item) => setActiveItem(item)}
-              showControls={true}
-              autoRotateSpeed={0.2}
-            />
+      {/* 2. Filter Tabs Bar */}
+      <section className="py-6 border-b border-[rgba(10,10,9,0.12)] bg-[#EBE5DB] sticky top-16 z-20 backdrop-blur-md">
+        <Container>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-dosis text-xs font-bold text-[#66615A] tracking-[0.2em] mr-2">CATEGORY:</span>
+              {categories.map((cat) => (
+                <NexusFilterButton
+                  key={cat}
+                  label={cat}
+                  active={categoryFilter === cat}
+                  onClick={() => setCategoryFilter(cat)}
+                />
+              ))}
+            </div>
+            <span className="font-dosis text-xs tracking-[0.18em] text-[#66615A] font-semibold">
+              {filteredItems.length} RECORDS CATALOGED
+            </span>
           </div>
-        </section>
-      )}
+        </Container>
+      </section>
 
-      {/* 3. CHRONOLOGICAL EDITORIAL ARCHIVE GRID SECTION */}
-      {(galleryViewMode === 'GRID' || galleryViewMode === 'BOTH') && (
-        <>
-          {/* Filter Tabs */}
-          <section className="py-6 border-b border-[rgba(10,10,9,0.12)] bg-[#EBE5DB]">
-            <Container>
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-dosis text-xs font-bold text-[#66615A] tracking-[0.2em] mr-2">CATEGORY:</span>
-                  {categories.map((cat) => (
-                    <NexusFilterButton
-                      key={cat}
-                      label={cat}
-                      active={categoryFilter === cat}
-                      onClick={() => setCategoryFilter(cat)}
-                    />
-                  ))}
-                </div>
-                <span className="font-dosis text-xs tracking-[0.18em] text-[#66615A] font-semibold">
-                  {filteredItems.length} RECORDS CATALOGED
-                </span>
+      {/* 3. Responsive Asymmetric Editorial Gallery Grid */}
+      <section className="py-16 md:py-24 border-b border-[rgba(10,10,9,0.12)]">
+        <Container>
+          <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="space-y-2">
+              <SectionLabel number="03.1" label="PRINT & DIGITAL ARCHIVE" />
+              <h2 className="font-fraunces font-bold text-3xl sm:text-4xl text-[#0A0A09] tracking-tight">
+                Studio Photo Journal
+              </h2>
+            </div>
+            <p className="font-bitter text-sm text-[#66615A] max-w-md">
+              Click any photo record to open the high-resolution documentation lightbox with lab notes and contributor tags.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+            {filteredItems.map((item) => (
+              <div key={item.id} className="w-full">
+                <GalleryTile
+                  item={item}
+                  aspectRatio={item.aspectRatio || '1/1'}
+                  onSelect={(selected) => setActiveItem(selected)}
+                />
               </div>
-            </Container>
-          </section>
+            ))}
+          </div>
+        </Container>
+      </section>
 
-          {/* Responsive Asymmetric Editorial Grid */}
-          <section className="py-20 md:py-28 border-b border-[rgba(10,10,9,0.12)]">
-            <Container>
-              <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div className="space-y-2">
-                  <SectionLabel number="03.2" label="PRINT & DIGITAL ARCHIVE" />
-                  <h2 className="font-fraunces font-bold text-3xl sm:text-4xl text-[#0A0A09] tracking-tight">
-                    Studio Photo Journal
-                  </h2>
-                </div>
-                <p className="font-bitter text-sm text-[#66615A] max-w-md">
-                  Click any photo record to open the high-resolution documentation lightbox with lab notes and contributor tags.
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                {filteredItems.map((item, idx) => {
-                  // Create deliberate asymmetric span rhythm:
-                  const spanClasses = [
-                    'md:col-span-7',
-                    'md:col-span-5',
-                    'md:col-span-5',
-                    'md:col-span-7',
-                    'md:col-span-8',
-                    'md:col-span-4',
-                    'md:col-span-6',
-                    'md:col-span-6',
-                  ][idx % 8];
-
-                  return (
-                    <div key={item.id} className={spanClasses}>
-                      <GalleryTile
-                        item={item}
-                        aspectRatio={item.aspectRatio || '16/9'}
-                        onSelect={(selected) => setActiveItem(selected)}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </Container>
-          </section>
-        </>
-      )}
-
-      {/* 4. Lightbox / Image Expansion Modal with Carousel Controls */}
+      {/* 4. Lightbox / Image Expansion Modal */}
       {activeItem && (
         <div
           role="dialog"
@@ -315,7 +233,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
                 <img
                   src={activeItem.imageUrl}
                   alt={activeItem.title}
-                  className="w-full h-full max-h-[480px] object-cover object-center filter contrast-[1.03]"
+                  className="w-full h-full max-h-[480px] object-contain object-center"
                   loading="eager"
                   referrerPolicy="no-referrer"
                 />
@@ -386,7 +304,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
         <Container>
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <SectionLabel
-              number="03.3"
+              number="03.2"
               label="GET INVOLVED"
               className="justify-center text-[#F3EEE5]/70"
             />
@@ -414,4 +332,3 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
     </main>
   );
 };
-
