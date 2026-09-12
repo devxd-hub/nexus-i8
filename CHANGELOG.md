@@ -21,7 +21,7 @@ All notable changes to the NEXUS platform backend and application links develope
 - **Structured Production Logging**:
   - Implemented structured JSON logging in `server/middleware/requestLogger.ts` for production environments.
   - Automatically masks client IP addresses (`192.168.*.*`) and redacts sensitive query parameters (`token`, `password`, `secret`, `key`, `apiKey`).
-- **Incident Error IDs & Safe Error Responses**:
+- **Incident Error IDs &                                                                               **:
   - Enhanced `server/middleware/errorHandler.ts` to generate unique incident reference tokens (`err_<timestamp>_<randomHex>`) for internal 500 errors.
   - Sanitizes production error messages (`An internal server error occurred. Please quote error reference ID.`) while logging full stacks and diagnostics server-side with zero secret or stack leakage.
 - **Production HTTP Security Headers**:
