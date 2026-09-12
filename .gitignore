@@ -7,4 +7,11 @@ coverage/
 .env*
 !.env.example
 .vercel
+*.db
+*.db-journal
+*.db-wal
+*.sqlite
+*.sqlite3
+data/
+
 
