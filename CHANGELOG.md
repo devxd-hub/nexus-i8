@@ -12,16 +12,23 @@ All notable changes to the NEXUS platform backend and application links develope
 - **Discord**: Removed legacy Discord link from global footer.
 - **Unspecified Links Cleanup**: Removed Substack and other unspecified social/placeholder links to ensure only verified official community endpoints are rendered.
 
+### 2. Team & Leadership Updates
+- **New Member - Siba Prasand Panda**:
+  - Added to Coordinators & Mentors section as **Vice Head Of Ops**.
+  - Synchronized portrait asset (`siba-hoops.png` / `siba-hoops.webp`) from `assets/team/`.
+  - Updated `TEAM_MEMBERS` dataset, `LeadershipShowcase` side-by-side grid, and `CrewDirectory`.
+  - Re-seeded database members via `npm run db:seed`.
+
 ---
 
-### 2. Production Security Hardening & Observability
+### 3. Production Security Hardening & Observability
 - **Distributed Request Tracing**:
   - Implemented `requestIdMiddleware` in `server/middleware/requestId.ts`.
   - Assigns unique `X-Request-Id` (`req_<uuid>`) per request, attaches `req.id`, and reflects it back in response headers. Supports client-propagated trace IDs.
 - **Structured Production Logging**:
   - Implemented structured JSON logging in `server/middleware/requestLogger.ts` for production environments.
   - Automatically masks client IP addresses (`192.168.*.*`) and redacts sensitive query parameters (`token`, `password`, `secret`, `key`, `apiKey`).
-- **Incident Error IDs &                                                                               **:
+- **Incident Error IDs & Safe Error Responses**:
   - Enhanced `server/middleware/errorHandler.ts` to generate unique incident reference tokens (`err_<timestamp>_<randomHex>`) for internal 500 errors.
   - Sanitizes production error messages (`An internal server error occurred. Please quote error reference ID.`) while logging full stacks and diagnostics server-side with zero secret or stack leakage.
 - **Production HTTP Security Headers**:
@@ -46,7 +53,7 @@ All notable changes to the NEXUS platform backend and application links develope
 
 ---
 
-### 3. Public Submission & Event Registration Workflows
+### 4. Public Submission & Event Registration Workflows
 - **NEXUS Recruitment Pipeline**:
   - Added structured recruitment applications under `server/domains/recruitment/`.
   - Captures name, email, department, year of study, selected domain (`Software & Systems`, `Hardware & Robotics`, `Design & Creative Media`, `Research & AI`, `General Core`), interests, portfolio/GitHub/LinkedIn URLs, and consent.
@@ -74,7 +81,7 @@ All notable changes to the NEXUS platform backend and application links develope
 
 ---
 
-### 4. Media & Storage Architecture
+### 5. Media & Storage Architecture
 - **Pluggable Storage Abstraction**:
   - Created `IStorageProvider` interface in `server/storage/storageProvider.interface.ts`.
   - Implemented `LocalStorageProvider` (`server/storage/localStorageProvider.ts`) with strict path boundary validation (`path.resolve()`), automatic category/year directory creation, and ETag generation.
@@ -96,7 +103,7 @@ All notable changes to the NEXUS platform backend and application links develope
 
 ---
 
-### 5. Secure Admin Backend & RBAC
+### 6. Secure Admin Backend & RBAC
 - **Authentication & Sessions**:
   - Node 22 native scrypt password hashing with 16-byte random salts and constant-time verification.
   - Cryptographically secure session tokens (32 bytes / 64 hex characters) stored as SHA-256 hashes with 24-hour expiration.
@@ -114,7 +121,7 @@ All notable changes to the NEXUS platform backend and application links develope
 
 ---
 
-### 6. Public Read APIs & Core Database
+### 7. Public Read APIs & Core Database
 - **Database Engine**:
   - Embedded SQLite database via Node 22 native `node:sqlite` (`DatabaseSync`).
   - Migration runner (`server/db/migrate.ts`) applying migrations `001`, `002`, and `003`.

@@ -219,7 +219,7 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
           <div
             className={`pt-8 sm:pt-10 ${
               isLeadershipCategory
-                ? 'grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl lg:max-w-5xl mx-auto items-stretch'
+                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl lg:max-w-6xl mx-auto items-stretch'
                 : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7 items-stretch'
             }`}
             onMouseLeave={() => setHoveredMemberId(null)}

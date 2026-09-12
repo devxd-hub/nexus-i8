@@ -37,7 +37,7 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
   const leadershipMembers: { member: TeamMember; badge: string; categoryLabel: string }[] = [
     ...coordinators.map((c) => ({
       member: c,
-      badge: 'COORDINATOR',
+      badge: c.role === 'COORDINATOR' ? 'COORDINATOR' : c.role,
       categoryLabel: 'STUDIO LEADERSHIP',
     })),
     ...mentors.map((m) => ({
@@ -72,14 +72,20 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
           </div>
 
           <div className="flex items-center gap-2 font-dosis text-xs font-bold tracking-[0.2em] text-[#66615A] uppercase self-start sm:self-end">
-            <span className="font-fraunces text-2xl text-[#0A0A09] font-bold">02</span>
+            <span className="font-fraunces text-2xl text-[#0A0A09] font-bold">
+              {String(leadershipMembers.length).padStart(2, '0')}
+            </span>
             <span>LEADERS</span>
           </div>
         </div>
 
         {/* Coordinators & Mentors in the Same Row (Grid aligned side-by-side) */}
         <div
-          className="pt-8 sm:pt-10 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl lg:max-w-5xl mx-auto items-stretch"
+          className={`pt-8 sm:pt-10 grid grid-cols-1 md:grid-cols-2 ${
+            leadershipMembers.length >= 3
+              ? 'lg:grid-cols-3 max-w-5xl lg:max-w-6xl'
+              : 'max-w-4xl lg:max-w-5xl'
+          } gap-6 sm:gap-8 mx-auto items-stretch`}
           onMouseLeave={() => setHoveredId(null)}
         >
           {leadershipMembers.map(({ member, badge, categoryLabel }) => {

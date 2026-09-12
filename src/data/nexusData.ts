@@ -371,6 +371,18 @@ export const TEAM_MEMBERS: TeamMember[] = [
     imagePosition: 'center 20%',
   },
   {
+    id: 'team-coord-02',
+    name: 'SIBA PRASAND PANDA',
+    role: 'VICE HEAD OF OPS',
+    group: 'COORDINATOR & MENTOR',
+    discipline: 'Studio Operations & Program Coordination',
+    yearOfStudy: 'Coordinator',
+    bio: 'Oversees operational logistics, squad workflows, resource coordination, and cross-team execution across NEXUS.',
+    imageUrl: '/team-images/siba-hoops.webp',
+    alternateImageUrl: '/team-images/siba-hoops.png',
+    imagePosition: 'center 20%',
+  },
+  {
     id: 'team-mentor-01',
     name: 'OM PANDEY',
     role: 'MENTOR',

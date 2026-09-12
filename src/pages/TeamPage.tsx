@@ -40,7 +40,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Coordinator (Authentic dataset)
+  // Coordinators & Ops Leadership (Authentic dataset)
   const coordinators: TeamMember[] = [
     TEAM_MEMBERS.find((m) => m.id === 'team-coord-01') || {
       id: 'team-coord-01',
@@ -51,6 +51,17 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       yearOfStudy: 'Coordinator',
       bio: 'Coordinates studio operations, event logistics, and multidisciplinary project sprints across NEXUS squads.',
       imageUrl: '/team-images/manish-prakash-coordinator.webp',
+      imagePosition: 'center 20%',
+    },
+    TEAM_MEMBERS.find((m) => m.id === 'team-coord-02') || {
+      id: 'team-coord-02',
+      name: 'SIBA PRASAND PANDA',
+      role: 'VICE HEAD OF OPS',
+      group: 'COORDINATOR & MENTOR',
+      discipline: 'Studio Operations & Program Coordination',
+      yearOfStudy: 'Coordinator',
+      bio: 'Oversees operational logistics, squad workflows, resource coordination, and cross-team execution across NEXUS.',
+      imageUrl: '/team-images/siba-hoops.webp',
       imagePosition: 'center 20%',
     },
   ];
