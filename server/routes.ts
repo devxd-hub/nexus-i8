@@ -9,6 +9,7 @@ import submissionsRouter from './domains/submissions/submissions.routes.ts';
 import siteConfigRouter from './domains/site-config/siteConfig.routes.ts';
 import authRouter from './domains/auth/auth.routes.ts';
 import adminRouter from './domains/admin/admin.routes.ts';
+import mediaRouter from './domains/media/media.routes.ts';
 
 const router = Router();
 
@@ -31,6 +32,7 @@ router.get('/health', (req, res) => {
       'site-config',
       'auth',
       'admin',
+      'media',
     ],
   });
 });
@@ -46,5 +48,6 @@ router.use('/submissions', submissionsRouter);
 router.use('/site-config', siteConfigRouter);
 router.use('/auth', authRouter);
 router.use('/admin', adminRouter);
+router.use('/media', mediaRouter);
 
 export default router;

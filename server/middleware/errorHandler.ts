@@ -42,16 +42,24 @@ export function errorHandler(
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ): void {
-  const statusCode = 'statusCode' in err && typeof err.statusCode === 'number' ? err.statusCode : 500;
-  const code = 'code' in err && typeof err.code === 'string' ? err.code : getErrorCode(statusCode);
-  const message = err.message || 'Internal Server Error';
+  const errStatusCode = 'statusCode' in err && typeof err.statusCode === 'number' ? err.statusCode : 500;
+  const isPayloadTooLarge = (err as any).type === 'entity.too.large' || errStatusCode === 413;
+  const finalStatusCode = isPayloadTooLarge ? 413 : errStatusCode;
+  const code = isPayloadTooLarge
+    ? 'FILE_TOO_LARGE'
+    : 'code' in err && typeof err.code === 'string'
+    ? err.code
+    : getErrorCode(finalStatusCode);
+  const message = isPayloadTooLarge
+    ? 'Payload size exceeds the allowable limit'
+    : err.message || 'Internal Server Error';
   const details = 'details' in err ? err.details : undefined;
 
-  if (statusCode === 500) {
+  if (finalStatusCode === 500) {
     console.error(`[Error] Unhandled exception on ${req.method} ${req.originalUrl}:`, err);
   }
 
-  res.status(statusCode).json({
+  res.status(finalStatusCode).json({
     data: null,
     meta: null,
     error: {

@@ -15,7 +15,8 @@
     "db:seed": "tsx server/db/seed.ts",
     "test:api": "tsx server/tests/api.test.ts",
     "test:admin": "tsx server/tests/admin.test.ts",
-    "test": "npm run test:api && npm run test:admin"
+    "test:media": "tsx server/tests/media.test.ts",
+    "test": "npm run test:api && npm run test:admin && npm run test:media"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

@@ -299,7 +299,7 @@ async function runAdminTestSuite() {
   console.log('\n--- Test Group 6: Brute Force Protection & Lockout ---');
   {
     // Create dedicated test user for lockout testing
-    const testEmail = 'lockout-test@nexus.campus';
+    const testEmail = `lockout-${Date.now()}@nexus.campus`;
     await post<any>(
       '/api/admin/users',
       {

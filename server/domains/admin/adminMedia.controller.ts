@@ -1,8 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { mediaAssetsRepository, type MediaAssetRecord } from '../../db/repositories/mediaAssets.repository.ts';
+import { mediaService } from '../../services/media.service.ts';
 import { auditService } from '../../services/audit.service.ts';
 import { AppError } from '../../middleware/errorHandler.ts';
 import { apiSuccess, createPaginationMeta } from '../../utils/apiResponse.ts';
+import { storageProvider } from '../../storage/index.ts';
 
 export class AdminMediaController {
   public async list(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -14,6 +16,7 @@ export class AdminMediaController {
       const { items, total } = mediaAssetsRepository.findPaginated({ page, limit, search });
       const enriched = items.map((m) => ({
         ...m,
+        url: storageProvider.getUrl(m.storage_key),
         metadata: m.metadata ? JSON.parse(m.metadata) : {},
       }));
 
@@ -35,6 +38,7 @@ export class AdminMediaController {
       res.status(200).json(
         apiSuccess({
           ...asset,
+          url: storageProvider.getUrl(asset.storage_key),
           metadata: asset.metadata ? JSON.parse(asset.metadata) : {},
         })
       );
@@ -43,34 +47,44 @@ export class AdminMediaController {
     }
   }
 
-  public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+  /**
+   * Upload binary or base64 media asset
+   */
+  public async upload(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { id, storageKey, filename, mimeType, fileSize, metadata } = req.body;
+      let buffer: Buffer;
+      let filename: string;
+      let category: 'projects' | 'events' | 'members' | 'archive' | 'resources' = 'projects';
+      let customStorageKey: string | undefined;
 
-      if (!storageKey || typeof storageKey !== 'string') {
-        throw new AppError(400, 'storageKey is required', undefined, 'INVALID_STORAGE_KEY');
-      }
-      if (!filename || typeof filename !== 'string') {
-        throw new AppError(400, 'filename is required', undefined, 'INVALID_FILENAME');
-      }
-      if (!mimeType || typeof mimeType !== 'string') {
-        throw new AppError(400, 'mimeType is required', undefined, 'INVALID_MIME_TYPE');
+      if (req.is('application/json')) {
+        const { content, filename: fname, category: cat, storageKey } = req.body;
+        if (!content || typeof content !== 'string') {
+          throw new AppError(400, 'Content (base64) is required', undefined, 'INVALID_PAYLOAD');
+        }
+        if (!fname || typeof fname !== 'string') {
+          throw new AppError(400, 'Filename is required', undefined, 'INVALID_FILENAME');
+        }
+
+        // Handle data URLs like data:image/png;base64,...
+        const base64Data = content.includes(';base64,') ? content.split(';base64,')[1] : content;
+        buffer = Buffer.from(base64Data, 'base64');
+        filename = fname;
+        if (cat) category = cat;
+        if (storageKey) customStorageKey = storageKey;
+      } else if (Buffer.isBuffer(req.body)) {
+        buffer = req.body;
+        filename = (req.headers['x-filename'] as string) || `upload_${Date.now()}.bin`;
+        category = (req.headers['x-category'] as any) || 'projects';
+      } else {
+        throw new AppError(400, 'Unsupported upload format. Use application/json with base64 content or raw binary payload.', undefined, 'UNSUPPORTED_MEDIA_TYPE');
       }
 
-      const existing = mediaAssetsRepository.findByStorageKey(storageKey);
-      if (existing) {
-        throw new AppError(409, `An asset with storage_key '${storageKey}' already exists`, undefined, 'STORAGE_KEY_EXISTS');
-      }
-
-      const assetId = id || `med-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
-
-      const asset = mediaAssetsRepository.create({
-        id: assetId,
-        storage_key: storageKey.trim(),
-        filename: filename.trim(),
-        mime_type: mimeType.trim(),
-        file_size: typeof fileSize === 'number' ? fileSize : 0,
-        metadata: metadata ? JSON.stringify(metadata) : null,
+      const asset = await mediaService.uploadMedia({
+        buffer,
+        filename,
+        category,
+        customStorageKey,
       });
 
       auditService.log(
@@ -78,24 +92,26 @@ export class AdminMediaController {
           adminId: req.admin?.adminId,
           adminName: req.admin?.name,
           adminRole: req.admin?.role,
-          action: 'CREATE',
+          action: 'UPLOAD_MEDIA',
           entityType: 'MEDIA',
-          entityId: assetId,
-          details: { filename, storageKey, mimeType },
+          entityId: asset.id,
+          details: { filename: asset.filename, storageKey: asset.storage_key, size: asset.file_size },
         },
         req
       );
 
-      res.status(201).json(apiSuccess(asset, { message: 'Media metadata registered successfully' }));
+      res.status(201).json(apiSuccess(asset, { message: 'Media asset uploaded and processed successfully' }));
     } catch (err) {
       next(err);
     }
   }
 
+  /**
+   * Update metadata or filename of existing media asset
+   */
   public async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-
       const asset = mediaAssetsRepository.findById(id);
       if (!asset) {
         throw new AppError(404, `Media asset with ID '${id}' was not found`, undefined, 'MEDIA_NOT_FOUND');
@@ -103,9 +119,9 @@ export class AdminMediaController {
 
       const updates: Partial<MediaAssetRecord> = {};
       if (req.body.filename !== undefined) updates.filename = req.body.filename;
-      if (req.body.mimeType !== undefined) updates.mime_type = req.body.mimeType;
-      if (req.body.fileSize !== undefined) updates.file_size = req.body.fileSize;
-      if (req.body.metadata !== undefined) updates.metadata = JSON.stringify(req.body.metadata);
+      if (req.body.metadata !== undefined) {
+        updates.metadata = typeof req.body.metadata === 'object' ? JSON.stringify(req.body.metadata) : String(req.body.metadata);
+      }
 
       const updated = mediaAssetsRepository.update(id, updates);
 
@@ -114,7 +130,7 @@ export class AdminMediaController {
           adminId: req.admin?.adminId,
           adminName: req.admin?.name,
           adminRole: req.admin?.role,
-          action: 'UPDATE',
+          action: 'UPDATE_MEDIA_METADATA',
           entityType: 'MEDIA',
           entityId: id,
           details: { updatedFields: Object.keys(updates) },
@@ -122,7 +138,43 @@ export class AdminMediaController {
         req
       );
 
-      res.status(200).json(apiSuccess(updated, { message: 'Media asset metadata updated successfully' }));
+      res.status(200).json(apiSuccess(updated, { message: 'Media metadata updated successfully' }));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  /**
+   * Replace existing media asset content
+   */
+  public async replace(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const { id } = req.params;
+      const { content, filename: fname } = req.body;
+
+      if (!content || typeof content !== 'string') {
+        throw new AppError(400, 'Content (base64) is required', undefined, 'INVALID_PAYLOAD');
+      }
+
+      const base64Data = content.includes(';base64,') ? content.split(';base64,')[1] : content;
+      const buffer = Buffer.from(base64Data, 'base64');
+
+      const updated = await mediaService.replaceMedia(id, buffer, fname);
+
+      auditService.log(
+        {
+          adminId: req.admin?.adminId,
+          adminName: req.admin?.name,
+          adminRole: req.admin?.role,
+          action: 'REPLACE_MEDIA',
+          entityType: 'MEDIA',
+          entityId: id,
+          details: { filename: updated.filename, size: updated.file_size },
+        },
+        req
+      );
+
+      res.status(200).json(apiSuccess(updated, { message: 'Media asset replaced successfully' }));
     } catch (err) {
       next(err);
     }
@@ -137,7 +189,7 @@ export class AdminMediaController {
         throw new AppError(404, `Media asset with ID '${id}' was not found`, undefined, 'MEDIA_NOT_FOUND');
       }
 
-      mediaAssetsRepository.deleteAsset(id);
+      await mediaService.deleteMedia(id);
 
       auditService.log(
         {
@@ -152,7 +204,47 @@ export class AdminMediaController {
         req
       );
 
-      res.status(200).json(apiSuccess({ deleted: true, id }, { message: 'Media metadata deleted successfully' }));
+      res.status(200).json(apiSuccess({ deleted: true, id }, { message: 'Media asset deleted successfully' }));
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async getOrphans(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const orphans = mediaService.getOrphans();
+      res.status(200).json(
+        apiSuccess(orphans, {
+          totalOrphans: orphans.length,
+        })
+      );
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  public async cleanupOrphans(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const result = await mediaService.cleanupOrphans();
+
+      auditService.log(
+        {
+          adminId: req.admin?.adminId,
+          adminName: req.admin?.name,
+          adminRole: req.admin?.role,
+          action: 'CLEANUP_ORPHANS',
+          entityType: 'MEDIA',
+          entityId: 'batch',
+          details: { purgedCount: result.purgedCount, purgedKeys: result.purgedKeys },
+        },
+        req
+      );
+
+      res.status(200).json(
+        apiSuccess(result, {
+          message: `Orphan cleanup complete. ${result.purgedCount} asset(s) removed.`,
+        })
+      );
     } catch (err) {
       next(err);
     }
@@ -160,3 +252,4 @@ export class AdminMediaController {
 }
 
 export const adminMediaController = new AdminMediaController();
+

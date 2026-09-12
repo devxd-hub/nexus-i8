@@ -112,9 +112,12 @@ router.delete('/resources/:id', requireSuperAdmin, (req, res, next) => adminReso
 // 11. MEDIA MANAGEMENT
 // ==========================================
 router.get('/media', (req, res, next) => adminMediaController.list(req, res, next));
-router.post('/media', (req, res, next) => adminMediaController.create(req, res, next));
+router.post('/media/upload', (req, res, next) => adminMediaController.upload(req, res, next));
+router.get('/media/orphans', (req, res, next) => adminMediaController.getOrphans(req, res, next));
+router.post('/media/orphans/cleanup', requireSuperAdmin, (req, res, next) => adminMediaController.cleanupOrphans(req, res, next));
 router.get('/media/:id', (req, res, next) => adminMediaController.getById(req, res, next));
 router.put('/media/:id', (req, res, next) => adminMediaController.update(req, res, next));
+router.put('/media/:id/replace', (req, res, next) => adminMediaController.replace(req, res, next));
 router.delete('/media/:id', requireSuperAdmin, (req, res, next) => adminMediaController.delete(req, res, next));
 
 export default router;
