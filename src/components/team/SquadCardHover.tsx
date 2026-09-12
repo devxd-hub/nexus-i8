@@ -5,7 +5,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { TeamMember } from '../../types.ts';
-import { InlineNoise } from '../../../components/ui/card-hover.tsx';
+import { InlineNoise } from '../ui/card-hover.tsx';
 import { ArrowUpRight } from 'lucide-react';
 
 interface SquadCardHoverProps {
