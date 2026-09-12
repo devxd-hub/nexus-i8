@@ -13,13 +13,14 @@ import { adminSiteSettingsController } from './adminSiteSettings.controller.ts';
 import { adminAuditLogsController } from './adminAuditLogs.controller.ts';
 import { recruitmentController } from '../recruitment/recruitment.controller.ts';
 import { eventRegistrationController } from '../events/eventRegistration.controller.ts';
+import { authRateLimiter } from '../../middleware/rateLimiter.ts';
 
 const router = Router();
 
 // ==========================================
-// 1. AUTHENTICATION (Public login)
+// 1. AUTHENTICATION (Public login with brute-force rate limit)
 // ==========================================
-router.post('/auth/login', (req, res, next) => adminAuthController.login(req, res, next));
+router.post('/auth/login', authRateLimiter, (req, res, next) => adminAuthController.login(req, res, next));
 
 // ==========================================
 // ALL SUBSEQUENT ROUTES REQUIRE AUTHENTICATION

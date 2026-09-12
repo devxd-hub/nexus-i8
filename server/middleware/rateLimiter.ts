@@ -77,3 +77,17 @@ export const submissionRateLimiter = createRateLimiter({
   max: 5,
   message: 'Too many submissions from this connection. Please wait before trying again.',
 });
+
+// Authentication rate limiter: 20 login attempts per 15 minutes per IP
+export const authRateLimiter = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: 'Too many authentication attempts. Please wait 15 minutes before trying again.',
+});
+
+// Global API rate limiter: 1000 requests per 15 minutes per IP
+export const apiRateLimiter = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 1000,
+  message: 'Rate limit exceeded for API requests. Please wait a few moments.',
+});

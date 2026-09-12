@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { getDatabase } from './db/connection.ts';
+import { storageProvider } from './storage/index.ts';
 import membersRouter from './domains/members/members.routes.ts';
 import projectsRouter from './domains/projects/projects.routes.ts';
 import eventsRouter from './domains/events/events.routes.ts';
@@ -14,14 +16,51 @@ import mediaRouter from './domains/media/media.routes.ts';
 
 const router = Router();
 
-// Health check endpoint
-router.get('/health', (req, res) => {
-  res.json({
-    success: true,
-    status: 'healthy',
+// Deep health check endpoint (probes live DB & storage readiness without leaking secrets)
+router.get('/health', async (req, res) => {
+  let dbStatus = 'disconnected';
+  let storageStatus = 'operational';
+  let isHealthy = true;
+
+  try {
+    const db = getDatabase();
+    const row = db.prepare('SELECT 1 as alive;').get() as { alive: number };
+    if (row && row.alive === 1) {
+      dbStatus = 'connected';
+    } else {
+      isHealthy = false;
+    }
+  } catch {
+    dbStatus = 'error';
+    isHealthy = false;
+  }
+
+  try {
+    // Quick test if storage provider is instantiated
+    if (typeof storageProvider.getUrl !== 'function') {
+      storageStatus = 'degraded';
+    }
+  } catch {
+    storageStatus = 'degraded';
+  }
+
+  const memory = process.memoryUsage();
+  const statusCode = isHealthy ? 200 : 503;
+
+  res.status(statusCode).json({
+    success: isHealthy,
+    status: isHealthy ? 'healthy' : 'degraded',
     timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
+    uptime: Math.round(process.uptime()),
     version: '1.0.0',
+    checks: {
+      database: dbStatus,
+      storage: storageStatus,
+    },
+    metrics: {
+      heapUsedMb: Math.round((memory.heapUsed / 1024 / 1024) * 10) / 10,
+      rssMb: Math.round((memory.rss / 1024 / 1024) * 10) / 10,
+    },
     domains: [
       'members',
       'projects',

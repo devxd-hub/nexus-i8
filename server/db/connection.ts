@@ -36,3 +36,20 @@ export function closeDatabase(): void {
     instance = null;
   }
 }
+
+/**
+ * Execute a multi-step database operation inside an ACID transaction with automatic rollback on error.
+ */
+export function runTransaction<T>(fn: (db: DatabaseSync) => T, dbPath?: string): T {
+  const db = getDatabase(dbPath);
+  db.exec('BEGIN TRANSACTION;');
+  try {
+    const result = fn(db);
+    db.exec('COMMIT;');
+    return result;
+  } catch (err) {
+    db.exec('ROLLBACK;');
+    throw err;
+  }
+}
+
