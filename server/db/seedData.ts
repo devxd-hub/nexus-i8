@@ -162,9 +162,8 @@ export const SEED_SITE_CONFIG: SiteConfigItem = {
   cohortYear: '2026/2027',
   contactEmail: 'contact@nexus.campus',
   socials: {
-    github: 'https://github.com/mishraorosmit/nexus-i8-',
-    instagram: 'https://instagram.com/nexus_soa',
-    linkedin: 'https://linkedin.com/company/nexus-soa',
+    github: 'https://github.com/nexushuborg',
+    instagram: 'https://www.instagram.com/nexusfordev',
   },
   openSessions: {
     day: 'Tuesdays & Thursdays',
