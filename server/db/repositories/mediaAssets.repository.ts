@@ -57,6 +57,63 @@ export class MediaAssetsRepository extends BaseRepository<MediaAssetRecord> {
 
     return record;
   }
+
+  public findPaginated(options: { page?: number; limit?: number; search?: string } = {}): {
+    items: MediaAssetRecord[];
+    total: number;
+  } {
+    const page = Math.max(1, options.page || 1);
+    const limit = Math.min(100, Math.max(1, options.limit || 20));
+    const offset = (page - 1) * limit;
+
+    let whereClause = ' WHERE 1=1';
+    const params: (string | number)[] = [];
+
+    if (options.search) {
+      whereClause += ' AND (LOWER(filename) LIKE LOWER(?) OR LOWER(storage_key) LIKE LOWER(?) OR LOWER(mime_type) LIKE LOWER(?))';
+      const q = `%${options.search}%`;
+      params.push(q, q, q);
+    }
+
+    const countStmt = this.db.prepare(`SELECT COUNT(*) as count FROM media_assets${whereClause}`);
+    const countRow = countStmt.get(...params) as { count: number };
+    const total = countRow.count;
+
+    const query = `
+      SELECT * FROM media_assets
+      ${whereClause}
+      ORDER BY created_at DESC
+      LIMIT ? OFFSET ?
+    `;
+    const items = this.db.prepare(query).all(...params, limit, offset) as unknown as MediaAssetRecord[];
+    return { items, total };
+  }
+
+  public update(id: string, data: Partial<MediaAssetRecord>): MediaAssetRecord | null {
+    const existing = this.findById(id);
+    if (!existing) return null;
+
+    const updated: MediaAssetRecord = {
+      ...existing,
+      ...data,
+      id,
+    };
+
+    const stmt = this.db.prepare(`
+      UPDATE media_assets SET
+        filename = ?, mime_type = ?, file_size = ?, metadata = ?
+      WHERE id = ?
+    `);
+
+    stmt.run(updated.filename, updated.mime_type, updated.file_size, updated.metadata, id);
+    return updated;
+  }
+
+  public deleteAsset(id: string): boolean {
+    const stmt = this.db.prepare('DELETE FROM media_assets WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
 }
 
 export const mediaAssetsRepository = new MediaAssetsRepository();

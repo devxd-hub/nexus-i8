@@ -8,6 +8,7 @@ import resourcesRouter from './domains/resources/resources.routes.ts';
 import submissionsRouter from './domains/submissions/submissions.routes.ts';
 import siteConfigRouter from './domains/site-config/siteConfig.routes.ts';
 import authRouter from './domains/auth/auth.routes.ts';
+import adminRouter from './domains/admin/admin.routes.ts';
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.get('/health', (req, res) => {
       'submissions',
       'site-config',
       'auth',
+      'admin',
     ],
   });
 });
@@ -43,5 +45,6 @@ router.use('/resources', resourcesRouter);
 router.use('/submissions', submissionsRouter);
 router.use('/site-config', siteConfigRouter);
 router.use('/auth', authRouter);
+router.use('/admin', adminRouter);
 
 export default router;

@@ -1,5 +1,5 @@
 import { getDatabase } from './connection.ts';
-import { MIGRATIONS_TABLE_SQL, INITIAL_SCHEMA_SQL } from './schema.ts';
+import { MIGRATIONS_TABLE_SQL, INITIAL_SCHEMA_SQL, ADMIN_AND_AUDIT_SCHEMA_SQL } from './schema.ts';
 
 export interface Migration {
   id: string;
@@ -13,6 +13,21 @@ export const migrations: Migration[] = [
     name: 'Initial NEXUS core showcase schema',
     up: (db) => {
       db.exec(INITIAL_SCHEMA_SQL);
+    },
+  },
+  {
+    id: '002_admin_and_audit',
+    name: 'Admin authentication, RBAC, sessions, and audit logging schema',
+    up: (db) => {
+      db.exec(ADMIN_AND_AUDIT_SCHEMA_SQL);
+
+      // Add status column to archive_items if not present
+      const columns = db.prepare('PRAGMA table_info(archive_items);').all() as Array<{ name: string }>;
+      const hasStatus = columns.some((c) => c.name === 'status');
+      if (!hasStatus) {
+        db.exec("ALTER TABLE archive_items ADD COLUMN status TEXT NOT NULL DEFAULT 'published';");
+        db.exec('CREATE INDEX IF NOT EXISTS idx_archive_status ON archive_items(status);');
+      }
     },
   },
 ];

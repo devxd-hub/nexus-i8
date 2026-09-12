@@ -7,6 +7,8 @@ import { announcementsRepository } from './repositories/announcements.repository
 import { archiveRepository } from './repositories/archive.repository.ts';
 import { resourcesRepository } from './repositories/resources.repository.ts';
 import { siteSettingsRepository } from './repositories/siteSettings.repository.ts';
+import { adminUsersRepository } from './repositories/adminUsers.repository.ts';
+import { hashPasswordSync } from '../utils/crypto.ts';
 import {
   SEED_MEMBERS,
   SEED_PROJECTS,
@@ -218,6 +220,49 @@ export function seedDatabase(customDb?: ReturnType<typeof getDatabase>): {
   siteSettingsRepository.set('socials', JSON.stringify(SEED_SITE_CONFIG.socials), 'Official Social Media Handles');
   siteSettingsRepository.set('open_sessions', JSON.stringify(SEED_SITE_CONFIG.openSessions), 'Studio Open Hours & Room');
 
+  // 9. Seed Default Admin Users
+  const superAdminEmail = 'admin@nexus.campus';
+  if (!adminUsersRepository.findByEmail(superAdminEmail)) {
+    const adminPass = process.env.INITIAL_ADMIN_PASSWORD || 'NexusAdmin!2026';
+    const { hash, salt } = hashPasswordSync(adminPass);
+    const now = new Date().toISOString();
+    adminUsersRepository.create({
+      id: 'admin-001',
+      email: superAdminEmail,
+      name: 'NEXUS Super Administrator',
+      password_hash: hash,
+      salt,
+      role: 'super_admin',
+      status: 'active',
+      failed_attempts: 0,
+      locked_until: null,
+      last_login_at: null,
+      created_at: now,
+      updated_at: now,
+    });
+  }
+
+  const contentAdminEmail = 'editor@nexus.campus';
+  if (!adminUsersRepository.findByEmail(contentAdminEmail)) {
+    const editorPass = process.env.INITIAL_EDITOR_PASSWORD || 'NexusEditor!2026';
+    const { hash, salt } = hashPasswordSync(editorPass);
+    const now = new Date().toISOString();
+    adminUsersRepository.create({
+      id: 'admin-002',
+      email: contentAdminEmail,
+      name: 'NEXUS Content Editor',
+      password_hash: hash,
+      salt,
+      role: 'content_admin',
+      status: 'active',
+      failed_attempts: 0,
+      locked_until: null,
+      last_login_at: null,
+      created_at: now,
+      updated_at: now,
+    });
+  }
+
   console.log(`[Seed] ✓ Seeding complete:`);
   console.log(`  - Members: ${membersRepository.count()}`);
   console.log(`  - Projects: ${projectsRepository.count()}`);
@@ -226,6 +271,7 @@ export function seedDatabase(customDb?: ReturnType<typeof getDatabase>): {
   console.log(`  - Archive Items: ${archiveRepository.count()}`);
   console.log(`  - Resources: ${resourcesRepository.count()}`);
   console.log(`  - Site Settings: ${siteSettingsRepository.getAll().length}`);
+  console.log(`  - Admin Users: ${adminUsersRepository.count()}`);
 
   return {
     members: membersRepository.count(),

@@ -56,6 +56,8 @@ export class ProjectsRepository extends BaseRepository<ProjectRecord> {
     if (options.status) {
       whereClause += ' AND LOWER(status) = LOWER(?)';
       params.push(options.status);
+    } else {
+      whereClause += " AND LOWER(status) != 'draft'";
     }
     if (options.featured !== undefined) {
       whereClause += ' AND featured = ?';
@@ -241,6 +243,153 @@ export class ProjectsRepository extends BaseRepository<ProjectRecord> {
       ORDER BY e.event_date DESC
     `);
     return stmt.all(projectId) as unknown as Array<{ id: string; title: string; event_date: string; event_type: string }>;
+  }
+
+  public findAllAdmin(options: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    category?: string;
+    search?: string;
+  } = {}): { items: ProjectRecord[]; total: number } {
+    const page = Math.max(1, options.page || 1);
+    const limit = Math.min(100, Math.max(1, options.limit || 20));
+    const offset = (page - 1) * limit;
+
+    let whereClause = ' WHERE 1=1';
+    const params: (string | number)[] = [];
+
+    if (options.status) {
+      whereClause += ' AND LOWER(status) = LOWER(?)';
+      params.push(options.status);
+    }
+    if (options.category) {
+      whereClause += ' AND LOWER(category) = LOWER(?)';
+      params.push(options.category);
+    }
+    if (options.search) {
+      whereClause += ' AND (LOWER(title) LIKE LOWER(?) OR LOWER(short_description) LIKE LOWER(?) OR LOWER(slug) LIKE LOWER(?))';
+      const q = `%${options.search}%`;
+      params.push(q, q, q);
+    }
+
+    const countStmt = this.db.prepare(`SELECT COUNT(*) as count FROM projects${whereClause}`);
+    const countRow = countStmt.get(...params) as { count: number };
+    const total = countRow.count;
+
+    const query = `
+      SELECT * FROM projects
+      ${whereClause}
+      ORDER BY updated_at DESC, id ASC
+      LIMIT ? OFFSET ?
+    `;
+    const items = this.db.prepare(query).all(...params, limit, offset) as unknown as ProjectRecord[];
+    return { items, total };
+  }
+
+  public createProject(project: Omit<ProjectRecord, 'created_at' | 'updated_at'> & { created_at?: string; updated_at?: string }): ProjectRecord {
+    const now = new Date().toISOString();
+    const created_at = project.created_at || now;
+    const updated_at = project.updated_at || now;
+
+    const stmt = this.db.prepare(`
+      INSERT INTO projects (
+        id, slug, project_number, title, category, year, short_description,
+        full_description, disciplines, status, featured, technologies,
+        deliverables, cover_image, demo_url, repository_url, created_at, updated_at
+      ) VALUES (
+        ?, ?, ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, ?
+      )
+    `);
+
+    stmt.run(
+      project.id,
+      project.slug,
+      project.project_number || null,
+      project.title,
+      project.category,
+      project.year,
+      project.short_description,
+      project.full_description,
+      project.disciplines,
+      project.status,
+      project.featured,
+      project.technologies,
+      project.deliverables || null,
+      project.cover_image || null,
+      project.demo_url || null,
+      project.repository_url || null,
+      created_at,
+      updated_at
+    );
+
+    return {
+      ...project,
+      project_number: project.project_number || null,
+      deliverables: project.deliverables || null,
+      cover_image: project.cover_image || null,
+      demo_url: project.demo_url || null,
+      repository_url: project.repository_url || null,
+      created_at,
+      updated_at,
+    };
+  }
+
+  public updateProject(
+    id: string,
+    updates: Partial<ProjectRecord>,
+    expectedUpdatedAt?: string
+  ): { success: boolean; conflict?: boolean; project?: ProjectRecord } {
+    const existing = this.findById(id);
+    if (!existing) return { success: false };
+
+    if (expectedUpdatedAt && existing.updated_at !== expectedUpdatedAt) {
+      return { success: false, conflict: true, project: existing };
+    }
+
+    const fields: string[] = [];
+    const values: (string | number | null)[] = [];
+
+    const allowedKeys: (keyof ProjectRecord)[] = [
+      'slug', 'project_number', 'title', 'category', 'year', 'short_description',
+      'full_description', 'disciplines', 'status', 'featured', 'technologies',
+      'deliverables', 'cover_image', 'demo_url', 'repository_url'
+    ];
+
+    for (const key of allowedKeys) {
+      if (updates[key] !== undefined) {
+        fields.push(`${key} = ?`);
+        values.push(updates[key] as string | number | null);
+      }
+    }
+
+    const now = new Date().toISOString();
+    fields.push('updated_at = ?');
+    values.push(now);
+
+    values.push(id);
+
+    const query = `UPDATE projects SET ${fields.join(', ')} WHERE id = ?`;
+    this.db.prepare(query).run(...values);
+
+    const updated = this.findById(id);
+    return { success: true, project: updated || undefined };
+  }
+
+  public updateStatus(id: string, status: string): ProjectRecord | null {
+    const now = new Date().toISOString();
+    const stmt = this.db.prepare('UPDATE projects SET status = ?, updated_at = ? WHERE id = ?');
+    const result = stmt.run(status, now, id);
+    if (result.changes === 0) return null;
+    return this.findById(id);
+  }
+
+  public deleteProject(id: string): boolean {
+    const stmt = this.db.prepare('DELETE FROM projects WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
   }
 }
 

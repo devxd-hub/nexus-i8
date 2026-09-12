@@ -162,6 +162,75 @@ export class MembersRepository extends BaseRepository<MemberRecord> {
 
     return updated;
   }
+
+  public findAllAdmin(options: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    role?: string;
+    domain?: string;
+    search?: string;
+  } = {}): { items: MemberRecord[]; total: number } {
+    const page = Math.max(1, options.page || 1);
+    const limit = Math.min(100, Math.max(1, options.limit || 20));
+    const offset = (page - 1) * limit;
+
+    let whereClause = ' WHERE 1=1';
+    const params: (string | number)[] = [];
+
+    if (options.status) {
+      whereClause += ' AND LOWER(status) = LOWER(?)';
+      params.push(options.status);
+    }
+    if (options.role) {
+      whereClause += ' AND LOWER(role) LIKE LOWER(?)';
+      params.push(`%${options.role}%`);
+    }
+    if (options.domain) {
+      whereClause += ' AND LOWER(domain) LIKE LOWER(?)';
+      params.push(`%${options.domain}%`);
+    }
+    if (options.search) {
+      whereClause += ' AND (LOWER(name) LIKE LOWER(?) OR LOWER(email) LIKE LOWER(?) OR LOWER(role) LIKE LOWER(?))';
+      const q = `%${options.search}%`;
+      params.push(q, q, q);
+    }
+
+    const countStmt = this.db.prepare(`SELECT COUNT(*) as count FROM members${whereClause}`);
+    const countRow = countStmt.get(...params) as { count: number };
+    const total = countRow.count;
+
+    const query = `
+      SELECT * FROM members
+      ${whereClause}
+      ORDER BY updated_at DESC, name ASC
+      LIMIT ? OFFSET ?
+    `;
+    const items = this.db.prepare(query).all(...params, limit, offset) as unknown as MemberRecord[];
+    return { items, total };
+  }
+
+  public updateWithConcurrency(
+    id: string,
+    updates: Partial<MemberRecord>,
+    expectedUpdatedAt?: string
+  ): { success: boolean; conflict?: boolean; member?: MemberRecord } {
+    const existing = this.findById(id);
+    if (!existing) return { success: false };
+
+    if (expectedUpdatedAt && existing.updated_at !== expectedUpdatedAt) {
+      return { success: false, conflict: true, member: existing };
+    }
+
+    const updated = this.update(id, updates);
+    return { success: true, member: updated || undefined };
+  }
+
+  public deleteMember(id: string): boolean {
+    const stmt = this.db.prepare('DELETE FROM members WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
 }
 
 export const membersRepository = new MembersRepository();

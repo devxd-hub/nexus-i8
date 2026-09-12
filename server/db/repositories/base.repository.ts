@@ -18,6 +18,12 @@ export abstract class BaseRepository<T extends { id: string }> {
     return row ? Number(row.count) : 0;
   }
 
+  public findById(id: string): T | null {
+    const stmt = this.db.prepare(`SELECT * FROM ${this.tableName} WHERE id = ? LIMIT 1`);
+    const row = stmt.get(id);
+    return (row as unknown as T) || null;
+  }
+
   public deleteById(id: string): boolean {
     const stmt = this.db.prepare(`DELETE FROM ${this.tableName} WHERE id = ?`);
     const result = stmt.run(id);

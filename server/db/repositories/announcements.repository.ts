@@ -118,6 +118,91 @@ export class AnnouncementsRepository extends BaseRepository<AnnouncementRecord> 
 
     return updated;
   }
+
+  public findAllAdmin(options: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    priority?: string;
+    search?: string;
+  } = {}): { items: AnnouncementRecord[]; total: number } {
+    const page = Math.max(1, options.page || 1);
+    const limit = Math.min(100, Math.max(1, options.limit || 20));
+    const offset = (page - 1) * limit;
+
+    let whereClause = ' WHERE 1=1';
+    const params: (string | number)[] = [];
+
+    if (options.status) {
+      whereClause += ' AND LOWER(publish_status) = LOWER(?)';
+      params.push(options.status);
+    }
+    if (options.priority) {
+      whereClause += ' AND LOWER(priority) = LOWER(?)';
+      params.push(options.priority);
+    }
+    if (options.search) {
+      whereClause += ' AND (LOWER(title) LIKE LOWER(?) OR LOWER(summary) LIKE LOWER(?) OR LOWER(body) LIKE LOWER(?))';
+      const q = `%${options.search}%`;
+      params.push(q, q, q);
+    }
+
+    const countStmt = this.db.prepare(`SELECT COUNT(*) as count FROM announcements${whereClause}`);
+    const countRow = countStmt.get(...params) as { count: number };
+    const total = countRow.count;
+
+    const query = `
+      SELECT * FROM announcements
+      ${whereClause}
+      ORDER BY updated_at DESC, created_at DESC
+      LIMIT ? OFFSET ?
+    `;
+    const items = this.db.prepare(query).all(...params, limit, offset) as unknown as AnnouncementRecord[];
+    return { items, total };
+  }
+
+  public updateWithConcurrency(
+    id: string,
+    updates: Partial<AnnouncementRecord>,
+    expectedUpdatedAt?: string
+  ): { success: boolean; conflict?: boolean; announcement?: AnnouncementRecord } {
+    const existing = this.findById(id);
+    if (!existing) return { success: false };
+
+    if (expectedUpdatedAt && existing.updated_at !== expectedUpdatedAt) {
+      return { success: false, conflict: true, announcement: existing };
+    }
+
+    const updated = this.update(id, updates);
+    return { success: true, announcement: updated || undefined };
+  }
+
+  public updateStatus(id: string, status: 'draft' | 'published' | 'archived'): AnnouncementRecord | null {
+    const now = new Date().toISOString();
+    const publishedAt = status === 'published' ? now : null;
+
+    let query = 'UPDATE announcements SET publish_status = ?, updated_at = ?';
+    const params: (string | null)[] = [status, now];
+
+    if (status === 'published') {
+      query += ', published_at = COALESCE(published_at, ?)';
+      params.push(publishedAt);
+    }
+
+    query += ' WHERE id = ?';
+    params.push(id);
+
+    const stmt = this.db.prepare(query);
+    const result = stmt.run(...params);
+    if (result.changes === 0) return null;
+    return this.findById(id);
+  }
+
+  public deleteAnnouncement(id: string): boolean {
+    const stmt = this.db.prepare('DELETE FROM announcements WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
+  }
 }
 
 export const announcementsRepository = new AnnouncementsRepository();

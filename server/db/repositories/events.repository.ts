@@ -38,6 +38,8 @@ export class EventsRepository extends BaseRepository<EventRecord> {
     if (options.status) {
       whereClause += ' AND LOWER(status) = LOWER(?)';
       params.push(options.status);
+    } else {
+      whereClause += " AND LOWER(status) != 'draft'";
     }
     if (options.event_type) {
       whereClause += ' AND LOWER(event_type) = LOWER(?)';
@@ -174,6 +176,78 @@ export class EventsRepository extends BaseRepository<EventRecord> {
     );
 
     return updated;
+  }
+
+  public findAllAdmin(options: {
+    page?: number;
+    limit?: number;
+    status?: string;
+    event_type?: string;
+    search?: string;
+  } = {}): { items: EventRecord[]; total: number } {
+    const page = Math.max(1, options.page || 1);
+    const limit = Math.min(100, Math.max(1, options.limit || 20));
+    const offset = (page - 1) * limit;
+
+    let whereClause = ' WHERE 1=1';
+    const params: (string | number)[] = [];
+
+    if (options.status) {
+      whereClause += ' AND LOWER(status) = LOWER(?)';
+      params.push(options.status);
+    }
+    if (options.event_type) {
+      whereClause += ' AND LOWER(event_type) = LOWER(?)';
+      params.push(options.event_type);
+    }
+    if (options.search) {
+      whereClause += ' AND (LOWER(title) LIKE LOWER(?) OR LOWER(description) LIKE LOWER(?) OR LOWER(venue) LIKE LOWER(?))';
+      const q = `%${options.search}%`;
+      params.push(q, q, q);
+    }
+
+    const countStmt = this.db.prepare(`SELECT COUNT(*) as count FROM events${whereClause}`);
+    const countRow = countStmt.get(...params) as { count: number };
+    const total = countRow.count;
+
+    const query = `
+      SELECT * FROM events
+      ${whereClause}
+      ORDER BY updated_at DESC, id ASC
+      LIMIT ? OFFSET ?
+    `;
+    const items = this.db.prepare(query).all(...params, limit, offset) as unknown as EventRecord[];
+    return { items, total };
+  }
+
+  public updateWithConcurrency(
+    id: string,
+    updates: Partial<EventRecord>,
+    expectedUpdatedAt?: string
+  ): { success: boolean; conflict?: boolean; event?: EventRecord } {
+    const existing = this.findById(id);
+    if (!existing) return { success: false };
+
+    if (expectedUpdatedAt && existing.updated_at !== expectedUpdatedAt) {
+      return { success: false, conflict: true, event: existing };
+    }
+
+    const updated = this.update(id, updates);
+    return { success: true, event: updated || undefined };
+  }
+
+  public updateStatus(id: string, status: string): EventRecord | null {
+    const now = new Date().toISOString();
+    const stmt = this.db.prepare('UPDATE events SET status = ?, updated_at = ? WHERE id = ?');
+    const result = stmt.run(status, now, id);
+    if (result.changes === 0) return null;
+    return this.findById(id);
+  }
+
+  public deleteEvent(id: string): boolean {
+    const stmt = this.db.prepare('DELETE FROM events WHERE id = ?');
+    const result = stmt.run(id);
+    return result.changes > 0;
   }
 }
 
