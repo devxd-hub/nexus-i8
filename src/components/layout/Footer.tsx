@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
             <ul className="space-y-2 text-xs font-dosis font-semibold tracking-[0.2em] uppercase text-[#F3EEE5]/75">
               <li>
                 <a
-                  href="https://github.com/nexus-club"
+                  href="https://github.com/nexushuborg"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
@@ -110,32 +110,12 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
               </li>
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/nexusfordev"
                   target="_blank"
                   rel="noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
                 >
                   INSTAGRAM ↗
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://discord.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[#EF5A2A] transition-colors"
-                >
-                  DISCORD ↗
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://substack.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hover:text-[#EF5A2A] transition-colors"
-                >
-                  SUBSTACK ↗
                 </a>
               </li>
             </ul>

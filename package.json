@@ -8,7 +8,17 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "server:dev": "tsx server/index.ts",
+    "server:start": "node --import=tsx server/index.ts",
+    "db:migrate": "tsx server/db/migrate.ts",
+    "db:seed": "tsx server/db/seed.ts",
+    "test:api": "tsx server/tests/api.test.ts",
+    "test:admin": "tsx server/tests/admin.test.ts",
+    "test:media": "tsx server/tests/media.test.ts",
+    "test:submissions": "tsx server/tests/submissions.test.ts",
+    "test:hardening": "tsx server/tests/hardening.test.ts",
+    "test": "npm run test:api && npm run test:admin && npm run test:media && npm run test:submissions && npm run test:hardening"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

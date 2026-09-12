@@ -22,6 +22,7 @@ function normalizeName(filename: string): string {
 
 function sync() {
   const possibleSourceDirs = [
+    path.resolve(process.cwd(), 'assets/team'),
     path.resolve(process.cwd(), 'team images'),
     path.resolve(process.cwd(), 'team images '),
   ];
