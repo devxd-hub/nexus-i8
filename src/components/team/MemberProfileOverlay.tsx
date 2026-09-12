@@ -89,6 +89,7 @@ export const MemberProfileOverlay: React.FC<MemberProfileOverlayProps> = ({ memb
                   className="w-full h-full object-cover grayscale contrast-105"
                   style={{ objectPosition: member.imagePosition || 'center 20%' }}
                   loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-[#66615A] p-6 text-center">

@@ -99,6 +99,8 @@ export const SquadCardHover: React.FC<SquadCardHoverProps> = ({
                       className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                       src={member.imageUrl}
                       alt={member.name}
+                      loading="lazy"
+                      decoding="async"
                       style={{
                         objectPosition: member.imagePosition || 'center 20%',
                         transform: isExpanded ? 'scale(1.04)' : 'scale(1)',

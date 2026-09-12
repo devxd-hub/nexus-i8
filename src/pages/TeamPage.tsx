@@ -50,7 +50,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Studio Operations & Program Coordination',
       yearOfStudy: 'Coordinator',
       bio: 'Coordinates studio operations, event logistics, and multidisciplinary project sprints across NEXUS squads.',
-      imageUrl: '/team-images/manish-prakash-coordinator.jpeg',
+      imageUrl: '/team-images/manish-prakash-coordinator.webp',
       imagePosition: 'center 20%',
     },
   ];
@@ -65,7 +65,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Systems Architecture & Creative Mentorship',
       yearOfStudy: 'Mentor',
       bio: 'Mentors squad members on design engineering, technical problem-solving, and professional project execution.',
-      imageUrl: '/team-images/om-pandey.png',
+      imageUrl: '/team-images/om-pandey.webp',
       imagePosition: 'center 22%',
     },
   ];

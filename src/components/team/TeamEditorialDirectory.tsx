@@ -163,6 +163,7 @@ export const TeamEditorialDirectory: React.FC<TeamEditorialDirectoryProps> = ({
                       className="w-full h-full object-cover grayscale contrast-105 group-hover:scale-[1.03] group-hover:grayscale-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
                       style={{ objectPosition: member.imagePosition || 'center 20%' }}
                       loading="lazy"
+                      decoding="async"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-[#66615A]">
