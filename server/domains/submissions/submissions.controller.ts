@@ -32,9 +32,10 @@ export class SubmissionsController {
 
   public async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { fullName, email, intent, majorOrAffiliation, message } = req.body;
+      const { fullName, name, email, intent, category, majorOrAffiliation, message } = req.body;
+      const contactName = name || fullName;
 
-      if (!fullName || typeof fullName !== 'string' || fullName.trim().length === 0) {
+      if (!contactName || typeof contactName !== 'string' || contactName.trim().length === 0) {
         throw new AppError(400, 'Full name is required', undefined, 'INVALID_NAME');
       }
       if (!email || typeof email !== 'string' || !email.includes('@')) {
@@ -42,9 +43,10 @@ export class SubmissionsController {
       }
 
       const created = await submissionsService.createSubmission({
-        fullName: fullName.trim(),
+        name: contactName.trim(),
         email: email.trim().toLowerCase(),
         intent: intent || 'COLLABORATE WITH US',
+        category: category || intent || 'general inquiry',
         majorOrAffiliation: majorOrAffiliation ? String(majorOrAffiliation).trim() : undefined,
         message: message ? String(message).trim() : undefined,
       });

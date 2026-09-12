@@ -16,7 +16,8 @@
     "test:api": "tsx server/tests/api.test.ts",
     "test:admin": "tsx server/tests/admin.test.ts",
     "test:media": "tsx server/tests/media.test.ts",
-    "test": "npm run test:api && npm run test:admin && npm run test:media"
+    "test:submissions": "tsx server/tests/submissions.test.ts",
+    "test": "npm run test:api && npm run test:admin && npm run test:media && npm run test:submissions"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

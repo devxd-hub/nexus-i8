@@ -244,3 +244,52 @@ CREATE INDEX IF NOT EXISTS idx_audit_logs_entity_type ON audit_logs(entity_type)
 CREATE INDEX IF NOT EXISTS idx_audit_logs_admin_id ON audit_logs(admin_id);
 CREATE INDEX IF NOT EXISTS idx_audit_logs_created_at ON audit_logs(created_at);
 `;
+
+export const SUBMISSIONS_AND_REGISTRATIONS_SCHEMA_SQL = `
+-- 14. RECRUITMENT SUBMISSIONS
+CREATE TABLE IF NOT EXISTS recruitment_submissions (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  department TEXT,
+  year_of_study TEXT,
+  selected_domain TEXT NOT NULL,
+  interests TEXT NOT NULL DEFAULT '[]',
+  portfolio_url TEXT,
+  github_url TEXT,
+  linkedin_url TEXT,
+  message TEXT,
+  consent INTEGER NOT NULL DEFAULT 1,
+  status TEXT NOT NULL DEFAULT 'SUBMITTED' CHECK (status IN ('SUBMITTED', 'UNDER_REVIEW', 'SHORTLISTED', 'ACCEPTED', 'REJECTED', 'WITHDRAWN')),
+  status_notes TEXT,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS idx_recruitment_email ON recruitment_submissions(email);
+CREATE INDEX IF NOT EXISTS idx_recruitment_domain ON recruitment_submissions(selected_domain);
+CREATE INDEX IF NOT EXISTS idx_recruitment_status ON recruitment_submissions(status);
+CREATE INDEX IF NOT EXISTS idx_recruitment_created_at ON recruitment_submissions(created_at);
+
+-- 15. EVENT REGISTRATIONS
+CREATE TABLE IF NOT EXISTS event_registrations (
+  id TEXT PRIMARY KEY,
+  event_id TEXT NOT NULL,
+  attendee_name TEXT NOT NULL,
+  attendee_email TEXT NOT NULL,
+  attendee_phone TEXT,
+  organization TEXT,
+  status TEXT NOT NULL DEFAULT 'CONFIRMED' CHECK (status IN ('CONFIRMED', 'WAITLISTED', 'CANCELLED', 'ATTENDED')),
+  metadata TEXT,
+  registration_timestamp TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+  UNIQUE(event_id, attendee_email)
+);
+
+CREATE INDEX IF NOT EXISTS idx_event_reg_event ON event_registrations(event_id);
+CREATE INDEX IF NOT EXISTS idx_event_reg_email ON event_registrations(attendee_email);
+CREATE INDEX IF NOT EXISTS idx_event_reg_status ON event_registrations(status);
+`;

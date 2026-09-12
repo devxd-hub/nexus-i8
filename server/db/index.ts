@@ -10,5 +10,7 @@ export * from './repositories/announcements.repository.ts';
 export * from './repositories/archive.repository.ts';
 export * from './repositories/resources.repository.ts';
 export * from './repositories/submissions.repository.ts';
+export * from './repositories/recruitment.repository.ts';
+export * from './repositories/eventRegistrations.repository.ts';
 export * from './repositories/mediaAssets.repository.ts';
 export * from './repositories/siteSettings.repository.ts';

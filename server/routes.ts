@@ -6,6 +6,7 @@ import announcementsRouter from './domains/announcements/announcements.routes.ts
 import archiveRouter from './domains/archive/archive.routes.ts';
 import resourcesRouter from './domains/resources/resources.routes.ts';
 import submissionsRouter from './domains/submissions/submissions.routes.ts';
+import recruitmentRouter from './domains/recruitment/recruitment.routes.ts';
 import siteConfigRouter from './domains/site-config/siteConfig.routes.ts';
 import authRouter from './domains/auth/auth.routes.ts';
 import adminRouter from './domains/admin/admin.routes.ts';
@@ -29,6 +30,7 @@ router.get('/health', (req, res) => {
       'archive',
       'resources',
       'submissions',
+      'recruitment',
       'site-config',
       'auth',
       'admin',
@@ -45,6 +47,8 @@ router.use('/announcements', announcementsRouter);
 router.use('/archive', archiveRouter);
 router.use('/resources', resourcesRouter);
 router.use('/submissions', submissionsRouter);
+router.use('/contact', submissionsRouter); // Alias for contact submissions
+router.use('/recruitment', recruitmentRouter);
 router.use('/site-config', siteConfigRouter);
 router.use('/auth', authRouter);
 router.use('/admin', adminRouter);

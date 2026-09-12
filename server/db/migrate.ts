@@ -1,5 +1,10 @@
 import { getDatabase } from './connection.ts';
-import { MIGRATIONS_TABLE_SQL, INITIAL_SCHEMA_SQL, ADMIN_AND_AUDIT_SCHEMA_SQL } from './schema.ts';
+import {
+  MIGRATIONS_TABLE_SQL,
+  INITIAL_SCHEMA_SQL,
+  ADMIN_AND_AUDIT_SCHEMA_SQL,
+  SUBMISSIONS_AND_REGISTRATIONS_SCHEMA_SQL,
+} from './schema.ts';
 
 export interface Migration {
   id: string;
@@ -27,6 +32,25 @@ export const migrations: Migration[] = [
       if (!hasStatus) {
         db.exec("ALTER TABLE archive_items ADD COLUMN status TEXT NOT NULL DEFAULT 'published';");
         db.exec('CREATE INDEX IF NOT EXISTS idx_archive_status ON archive_items(status);');
+      }
+    },
+  },
+  {
+    id: '003_submissions_and_registrations',
+    name: 'Recruitment submissions, event registrations, and event capacity schema',
+    up: (db) => {
+      db.exec(SUBMISSIONS_AND_REGISTRATIONS_SCHEMA_SQL);
+
+      // Add capacity and registration_status columns to events if not present
+      const eventColumns = db.prepare('PRAGMA table_info(events);').all() as Array<{ name: string }>;
+      const hasCapacity = eventColumns.some((c) => c.name === 'capacity');
+      if (!hasCapacity) {
+        db.exec('ALTER TABLE events ADD COLUMN capacity INTEGER DEFAULT NULL;');
+      }
+      const hasRegStatus = eventColumns.some((c) => c.name === 'registration_status');
+      if (!hasRegStatus) {
+        db.exec("ALTER TABLE events ADD COLUMN registration_status TEXT NOT NULL DEFAULT 'OPEN';");
+        db.exec('CREATE INDEX IF NOT EXISTS idx_events_reg_status ON events(registration_status);');
       }
     },
   },

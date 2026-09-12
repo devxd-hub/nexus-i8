@@ -11,6 +11,8 @@ import { adminResourcesController } from './adminResources.controller.ts';
 import { adminMediaController } from './adminMedia.controller.ts';
 import { adminSiteSettingsController } from './adminSiteSettings.controller.ts';
 import { adminAuditLogsController } from './adminAuditLogs.controller.ts';
+import { recruitmentController } from '../recruitment/recruitment.controller.ts';
+import { eventRegistrationController } from '../events/eventRegistration.controller.ts';
 
 const router = Router();
 
@@ -119,5 +121,18 @@ router.get('/media/:id', (req, res, next) => adminMediaController.getById(req, r
 router.put('/media/:id', (req, res, next) => adminMediaController.update(req, res, next));
 router.put('/media/:id/replace', (req, res, next) => adminMediaController.replace(req, res, next));
 router.delete('/media/:id', requireSuperAdmin, (req, res, next) => adminMediaController.delete(req, res, next));
+
+// ==========================================
+// 12. RECRUITMENT MANAGEMENT
+// ==========================================
+router.get('/recruitment', (req, res, next) => recruitmentController.list(req, res, next));
+router.get('/recruitment/:id', (req, res, next) => recruitmentController.getById(req, res, next));
+router.patch('/recruitment/:id/status', (req, res, next) => recruitmentController.updateStatus(req, res, next));
+
+// ==========================================
+// 13. EVENT REGISTRATIONS MANAGEMENT
+// ==========================================
+router.get('/events/:id/registrations', (req, res, next) => eventRegistrationController.listForEvent(req, res, next));
+router.patch('/event-registrations/:id/status', (req, res, next) => eventRegistrationController.updateStatus(req, res, next));
 
 export default router;

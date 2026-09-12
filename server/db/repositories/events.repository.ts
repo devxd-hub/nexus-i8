@@ -13,6 +13,8 @@ export interface EventRecord {
   cover_image: string | null;
   featured: number; // 0 or 1
   status: 'Upcoming' | 'Completed' | 'Cancelled';
+  capacity?: number | null;
+  registration_status?: 'OPEN' | 'CLOSED' | 'INVITE_ONLY';
   created_at: string;
   updated_at: string;
 }
@@ -116,8 +118,8 @@ export class EventsRepository extends BaseRepository<EventRecord> {
     const stmt = this.db.prepare(`
       INSERT INTO events (
         id, slug, title, description, event_type, event_date, event_time,
-        venue, registration_url, cover_image, featured, status, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        venue, registration_url, cover_image, featured, status, capacity, registration_status, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     stmt.run(
@@ -133,6 +135,8 @@ export class EventsRepository extends BaseRepository<EventRecord> {
       record.cover_image,
       record.featured,
       record.status,
+      record.capacity !== undefined ? record.capacity : null,
+      record.registration_status || 'OPEN',
       record.created_at,
       record.updated_at
     );
@@ -155,7 +159,7 @@ export class EventsRepository extends BaseRepository<EventRecord> {
       UPDATE events SET
         slug = ?, title = ?, description = ?, event_type = ?, event_date = ?,
         event_time = ?, venue = ?, registration_url = ?, cover_image = ?,
-        featured = ?, status = ?, updated_at = ?
+        featured = ?, status = ?, capacity = ?, registration_status = ?, updated_at = ?
       WHERE id = ?
     `);
 
@@ -171,6 +175,8 @@ export class EventsRepository extends BaseRepository<EventRecord> {
       updated.cover_image,
       updated.featured,
       updated.status,
+      updated.capacity !== undefined ? updated.capacity : null,
+      updated.registration_status || 'OPEN',
       updated.updated_at,
       id
     );
