@@ -77,11 +77,12 @@ export const Chapter05Showcase: React.FC<Chapter05ShowcaseProps> = ({ onRouteCha
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
+              onClick={() => onRouteChange(`/projects/${project.id}` as AppRoute)}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="p-6 sm:p-8 bg-[#FAF6F0] border border-[rgba(10,10,9,0.16)] rounded-[2px] shadow-xs flex flex-col justify-between hover:border-[#EF5A2A] hover:bg-white transition-all duration-300 group"
+              className="p-6 sm:p-8 bg-[#FAF6F0] border border-[rgba(10,10,9,0.16)] rounded-[2px] shadow-xs flex flex-col justify-between hover:border-[#EF5A2A] hover:bg-white transition-all duration-300 group cursor-pointer"
             >
               <div className="space-y-4">
                 {/* Top Badge Line */}
@@ -142,7 +143,11 @@ export const Chapter05Showcase: React.FC<Chapter05ShowcaseProps> = ({ onRouteCha
               {/* Bottom Action */}
               <div className="pt-6 mt-6 border-t border-[rgba(10,10,9,0.1)] flex items-center justify-between">
                 <button
-                  onClick={() => onRouteChange('/projects')}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRouteChange(`/projects/${project.id}` as AppRoute);
+                  }}
                   className="font-dosis text-xs font-bold uppercase tracking-[0.2em] text-[#0A0A09] group-hover:text-[#EF5A2A] flex items-center gap-1 cursor-pointer"
                 >
                   <span>VIEW SPECIFICATION</span>

@@ -21,10 +21,11 @@ import { LinuxAltTabSwitcher } from './LinuxAltTabSwitcher.tsx';
 
 interface LinuxDesktopProps {
   onRouteChange: (route: AppRoute) => void;
+  initialProject?: Project | null;
 }
 
-export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => {
-  const [isBooting, setIsBooting] = useState(true);
+export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange, initialProject }) => {
+  const [isBooting, setIsBooting] = useState(() => !initialProject);
   const [projectsList, setProjectsList] = useState<Project[]>(PROJECTS);
   const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null);
   const [windows, setWindows] = useState<LinuxWindowData[]>([]);
@@ -70,6 +71,15 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
         return;
       }
 
+      // Sync URL with project deep link if not already on it
+      if (
+        typeof window !== 'undefined' &&
+        !window.location.pathname.endsWith(`/${project.id}`) &&
+        !window.location.pathname.endsWith(`/${project.title.toLowerCase()}`)
+      ) {
+        window.history.pushState(null, '', `/projects/${project.id}`);
+      }
+
       // Compute initial responsive position
       const isMobile = window.innerWidth < 768;
       const width = isMobile ? window.innerWidth - 20 : Math.min(840, window.innerWidth - 80);
@@ -100,6 +110,14 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
     },
     [windows, highestZIndex, focusWindow]
   );
+
+  // Directly open initial project when passed from About page or deep link URL
+  useEffect(() => {
+    if (initialProject) {
+      setIsBooting(false);
+      openProjectWindow(initialProject);
+    }
+  }, [initialProject, openProjectWindow]);
 
   // Open Terminal Window
   const openTerminal = useCallback(() => {
@@ -250,7 +268,16 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
 
   // Close Window
   const closeWindow = useCallback((id: string) => {
-    setWindows((prev) => prev.filter((w) => w.id !== id));
+    setWindows((prev) => {
+      const remaining = prev.filter((w) => w.id !== id);
+      if (id.startsWith('win-project-')) {
+        const hasOtherProject = remaining.some((w) => w.type === 'project');
+        if (!hasOtherProject && typeof window !== 'undefined' && window.location.pathname.startsWith('/projects/')) {
+          window.history.pushState(null, '', '/projects');
+        }
+      }
+      return remaining;
+    });
     setActiveWindowId((prevActive) => (prevActive === id ? null : prevActive));
   }, []);
 

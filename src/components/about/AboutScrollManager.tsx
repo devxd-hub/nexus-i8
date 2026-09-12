@@ -47,8 +47,9 @@ export const ABOUT_SECTIONS: AboutSectionInfo[] = [
   { id: 'nexus-story-scroll-section', number: '02', title: 'STORY' },
   { id: 'about-thinking', number: '03', title: 'THINKING' },
   { id: 'about-building', number: '04', title: 'BUILDING' },
-  { id: 'about-beliefs', number: '05', title: 'BELIEFS' },
-  { id: 'about-final-statement', number: '06', title: 'STATEMENT' },
+  { id: 'chapter-05', number: '05', title: 'PROJECTS' },
+  { id: 'about-beliefs', number: '06', title: 'BELIEFS' },
+  { id: 'about-final-statement', number: '07', title: 'STATEMENT' },
 ];
 
 interface AboutScrollManagerProps {

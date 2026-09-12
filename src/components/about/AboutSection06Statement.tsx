@@ -64,7 +64,7 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
           <EditorialWordReveal
             id="about-final-title"
             as="h2"
-            text="THERE IS ALWAYS ROOM FOR ONE MORE IDEA."
+            text="THERE IS ALWAYS ROOM FOR ONE MORE IDEA,"
             className="font-fraunces text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[#0A0A09] leading-[0.98]"
             delay={0.1}
             stagger={0.04}

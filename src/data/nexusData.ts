@@ -287,7 +287,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     group: 'CONTENT',
     discipline: 'Sound Engineering & Digital Audio',
     yearOfStudy: 'Junior // 2027',
-    bio: 'Produces audio recordings, ambient soundscapes, and sonic experiments for interactive installations.',
+    bio: 'Crafts immersive audio recordings, ambient soundscapes, and sonic experiments for interactive installations.',
     imageUrl: '/team-images/debojeet-content.webp',
     imagePosition: 'center 18%',
   },

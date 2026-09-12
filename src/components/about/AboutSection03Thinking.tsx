@@ -87,30 +87,40 @@ export const AboutSection03Thinking: React.FC = () => {
 
         {/* Typographic Matrix with Staggered Entrance */}
         <div className="space-y-0 divide-y divide-[#0A0A09]/15">
-          {principles.map((p, idx) => (
-            <motion.div
-              key={p.name}
-              ref={
-                idx === 0
-                  ? curiosityRowRef
-                  : idx === 1
-                  ? collaborationRowRef
-                  : idx === 2
-                  ? experimentationRowRef
-                  : idx === 3
-                  ? craftRowRef
-                  : undefined
-              }
-              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
-              transition={{
-                duration: 0.75,
-                delay: idx * 0.1,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="py-8 sm:py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 relative items-center"
-            >
+          {principles.map((p, idx) => {
+            const rowPadding =
+              idx === 1
+                ? 'pt-8 sm:pt-10 md:pt-12 pb-14 sm:pb-16 md:pb-20'
+                : idx === 2
+                ? 'py-14 sm:py-16 md:py-20'
+                : idx === 3
+                ? 'pt-14 sm:pt-16 md:pt-20 pb-8 sm:pb-10 md:pb-12'
+                : 'py-8 sm:py-10 md:py-12';
+
+            return (
+                <motion.div
+                  key={p.name}
+                  ref={
+                    idx === 0
+                      ? curiosityRowRef
+                      : idx === 1
+                      ? collaborationRowRef
+                      : idx === 2
+                      ? experimentationRowRef
+                      : idx === 3
+                      ? craftRowRef
+                      : undefined
+                  }
+                  initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
+                  transition={{
+                    duration: 0.75,
+                    delay: idx * 0.1,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className={`${rowPadding} grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 relative items-center`}
+                >
               {/* Index marker (Curiosity Pinwheel, Collaboration Orbiting Sparkle, Experimentation Reverse Pinwheel, Craft Orbiting Sparkle) */}
               <div className="md:col-span-2 relative flex items-center">
                 {p.number === '01' ? (
@@ -142,7 +152,8 @@ export const AboutSection03Thinking: React.FC = () => {
                 </p>
               </div>
             </motion.div>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

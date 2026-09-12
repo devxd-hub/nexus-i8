@@ -11,6 +11,7 @@ import { AboutSection01Hero } from '../components/about/AboutSection01Hero.tsx';
 import { NexusStoryScroll } from '../components/about/NexusStoryScroll.tsx';
 import { AboutSection03Thinking } from '../components/about/AboutSection03Thinking.tsx';
 import { AboutSection04Building } from '../components/about/AboutSection04Building.tsx';
+import { Chapter05Showcase } from '../components/about/Chapter05Showcase.tsx';
 import { AboutSection05Beliefs } from '../components/about/AboutSection05Beliefs.tsx';
 import { AboutSection06Statement } from '../components/about/AboutSection06Statement.tsx';
 
@@ -27,18 +28,14 @@ interface AboutPageProps {
  * 02 — About Story (NexusStoryScroll — Dedicated Sticky Scroll-Driven Narrative)
  * 03 — Nexus Philosophy (AboutSection03Thinking)
  * 04 — Nexus Building Process (AboutSection04Building)
- * 05 — What We Believe (AboutSection05Beliefs)
- * 06 — Closing CTA Statement (AboutSection06Statement)
+ * 05 — Shipped Artifacts (Chapter05Showcase)
+ * 06 — What We Believe (AboutSection05Beliefs)
+ * 07 — Closing CTA Statement (AboutSection06Statement)
  */
 export const AboutPage: React.FC<AboutPageProps> = ({ onRouteChange }) => {
-  // Ensure top scroll on mount
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <AboutScrollManager>
-      <main
+      <div
         id="nexus-about-page"
         className="w-full min-h-screen bg-[#F3EEE5] text-[#0A0A09] selection:bg-[#EF5A2A] selection:text-white flex flex-col"
       >
@@ -57,12 +54,15 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onRouteChange }) => {
         {/* 04 / Building Process */}
         <AboutSection04Building />
 
-        {/* 05 / Beliefs */}
+        {/* 05 / Shipped Artifacts */}
+        <Chapter05Showcase onRouteChange={onRouteChange} />
+
+        {/* 06 / Beliefs */}
         <AboutSection05Beliefs />
 
-        {/* 06 / Closing Statement & CTA */}
+        {/* 07 / Closing Statement & CTA */}
         <AboutSection06Statement onRouteChange={onRouteChange} />
-      </main>
+      </div>
     </AboutScrollManager>
   );
 };

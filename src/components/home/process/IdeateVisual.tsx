@@ -26,7 +26,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
   ];
 
   return (
-    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-4 flex flex-col justify-between overflow-hidden select-none">
+    <div className="relative w-full min-h-[220px] sm:min-h-[235px] h-full bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-3.5 sm:p-4 pb-2.5 sm:pb-3 flex flex-col justify-between overflow-hidden select-none">
       {/* Background Architectural Coordinate Grid */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"

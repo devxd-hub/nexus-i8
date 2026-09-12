@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type AppRoute = '/' | '/about' | '/projects' | '/gallery' | '/team' | '/contact';
+export type AppRoute = '/' | '/about' | '/projects' | '/gallery' | '/team' | '/contact' | '/crew' | `/projects/${string}`;
 
 export interface NavItem {
   label: string;

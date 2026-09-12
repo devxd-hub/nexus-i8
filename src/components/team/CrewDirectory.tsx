@@ -178,10 +178,10 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
           </div>
         </div>
 
-        {/* Card Hover Ribbon Mode for Squads */}
-        {viewMode === 'card-hover' && searchQuery.trim() === '' && !isLeadershipCategory ? (
+        {/* Card Hover Ribbon Mode for Squads & Categories */}
+        {viewMode === 'card-hover' && searchQuery.trim() === '' ? (
           <div className="pt-6 space-y-10">
-            {isSquadCategory ? (
+            {isSquadCategory || isLeadershipCategory ? (
               <SquadCardHover
                 members={filteredMembers}
                 onSelectMember={onSelectMember}
@@ -226,8 +226,6 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
           >
           {filteredMembers.map((member) => {
             const isHovered = hoveredMemberId === member.id;
-            const isAnyHovered = hoveredMemberId !== null;
-            const isDimmed = isAnyHovered && !isHovered;
             const isLead = isLeadership(member);
 
             return (
@@ -237,11 +235,9 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
                 onClick={() => onSelectMember(member)}
                 className={`group relative bg-[#FAF7F2] ${
                   isLead ? 'border-2 border-[#0A0A09]/20 p-6 sm:p-7' : 'border border-[#0A0A09]/15 p-5 sm:p-6'
-                } flex flex-col justify-between transition-[transform,opacity,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none ${
+                } flex flex-col justify-between transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none ${
                   isHovered
                     ? 'border-[#0A0A09] bg-white shadow-xl -translate-y-1 z-10'
-                    : isDimmed
-                    ? 'opacity-45'
                     : 'hover:border-[#0A0A09]'
                 }`}
                 role="button"

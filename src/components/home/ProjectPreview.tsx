@@ -56,7 +56,7 @@ export const ProjectPreview: React.FC<ProjectPreviewProps> = ({ onRouteChange })
             <ProjectCard
               key={project.id}
               project={project}
-              onSelect={() => onRouteChange('/projects')}
+              onSelect={() => onRouteChange(`/projects/${project.id}` as AppRoute)}
               isDimmed={Boolean(hoveredId && hoveredId !== project.id)}
               onHoverStart={() => setHoveredId(project.id)}
               onHoverEnd={() => setHoveredId(null)}

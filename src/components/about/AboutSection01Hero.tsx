@@ -70,10 +70,10 @@ export const AboutSection01Hero: React.FC = () => {
               initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-4 max-w-xl"
+              className="my-4 sm:my-6 space-y-4 max-w-xl"
             >
               <p className="font-bitter text-base sm:text-lg md:text-xl text-[#0A0A09]/85 leading-relaxed">
-                NEXUS is a student-led community where ideas become projects through collaboration, experimentation and making.
+                NEXUS is a student-led community where ideas become projects through collaboration, experimentation and active creation.
               </p>
               <p className="font-bitter text-sm sm:text-base text-[#0A0A09]/60 leading-relaxed">
                 Students from different disciplines come together to question, design, engineer and build solutions that matter.

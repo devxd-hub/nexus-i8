@@ -84,8 +84,6 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
         >
           {leadershipMembers.map(({ member, badge, categoryLabel }) => {
             const isHovered = hoveredId === member.id;
-            const isAnyHovered = hoveredId !== null;
-            const isDimmed = isAnyHovered && !isHovered;
 
             return (
               <motion.div
@@ -96,11 +94,9 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative bg-[#FAF7F2] border-2 border-[#0A0A09]/20 p-6 sm:p-7 flex flex-col justify-between transition-[transform,opacity,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none shadow-sm ${
+                className={`group relative bg-[#FAF7F2] border-2 border-[#0A0A09]/20 p-6 sm:p-7 flex flex-col justify-between transition-[transform,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none shadow-sm ${
                   isHovered
                     ? 'border-[#0A0A09] bg-white shadow-2xl -translate-y-1 z-10'
-                    : isDimmed
-                    ? 'opacity-45'
                     : 'hover:border-[#0A0A09]'
                 }`}
                 role="button"

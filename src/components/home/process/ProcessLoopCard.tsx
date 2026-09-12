@@ -99,7 +99,7 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
       </div>
 
       {/* Interactive Micro-Visual Container with smooth transition */}
-      <div className="my-2 relative min-h-[190px] sm:min-h-[210px] w-full">
+      <div className="my-2 relative min-h-[220px] sm:min-h-[235px] w-full">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeIndex}

@@ -4,11 +4,12 @@
  */
 
 import React from 'react';
-import { AppRoute } from '../types.ts';
+import { AppRoute, Project } from '../types.ts';
 import { LinuxDesktop } from '../components/linux/LinuxDesktop.tsx';
 
 interface ProjectsPageProps {
   onRouteChange: (route: AppRoute) => void;
+  initialProject?: Project | null;
 }
 
 /**
@@ -20,10 +21,10 @@ interface ProjectsPageProps {
  * file manager explorer, and contextual action menus with direct access to
  * real student project artifacts and GitHub repositories.
  */
-export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onRouteChange }) => {
+export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onRouteChange, initialProject }) => {
   return (
     <div id="nexus-projects-workspace" className="w-full h-full min-h-screen bg-[#0D0E13]">
-      <LinuxDesktop onRouteChange={onRouteChange} />
+      <LinuxDesktop onRouteChange={onRouteChange} initialProject={initialProject} />
     </div>
   );
 };

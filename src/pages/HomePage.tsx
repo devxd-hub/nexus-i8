@@ -19,7 +19,7 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onRouteChange }) => {
   return (
-    <main id="nexus-home-page" className="w-full">
+    <div id="nexus-home-page" className="w-full">
       {/* 1. HERO */}
       <Hero onRouteChange={onRouteChange} />
 
@@ -40,6 +40,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onRouteChange }) => {
 
       {/* 7. FINAL CALL TO ACTION */}
       <FinalCTA onRouteChange={onRouteChange} />
-    </main>
+    </div>
   );
 };

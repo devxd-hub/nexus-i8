@@ -91,6 +91,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
     if (e) e.preventDefault();
     onRouteChange(href);
     setMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    onRouteChange('/');
+    setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -112,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
           <div className="flex items-center">
             <a
               href="/"
-              onClick={(e) => handleNavClick('/', e)}
+              onClick={(e) => handleLogoClick(e)}
               className="group relative flex items-center py-1.5 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#EF5A2A] rounded-xs select-none"
               aria-label="NEXUS College Community Home"
             >

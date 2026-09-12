@@ -127,7 +127,13 @@ export const LinuxTerminal: React.FC<LinuxTerminalProps> = ({ onOpenProject, onC
 
       case 'github': {
         if (!argString) {
-          outputNode = <div className="text-[#EF5A2A]">Usage: github &lt;project_name&gt;</div>;
+          window.open('https://github.com/nexus-club', '_blank', 'noopener,noreferrer');
+          outputNode = (
+            <div className="text-[#EF5A2A] space-y-1">
+              <div>[OK] Opening NEXUS GitHub organization in browser: https://github.com/nexus-club</div>
+              <div className="text-white/60 text-[11px]">Tip: Specify a project name to open its repo directly (e.g. 'github algolab').</div>
+            </div>
+          );
           break;
         }
         const target = PROJECTS.find(
@@ -173,6 +179,18 @@ export const LinuxTerminal: React.FC<LinuxTerminalProps> = ({ onOpenProject, onC
               <div>{target.summary}</div>
               <div className="text-[#8C8881]">{target.description}</div>
               <div className="text-[11px] text-[#EF5A2A]">Leads: {target.leadStudents.join(', ')}</div>
+              {target.githubUrl && (
+                <div className="pt-1">
+                  <a
+                    href={target.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#EF5A2A] underline hover:text-white inline-flex items-center gap-1 font-mono text-[11px]"
+                  >
+                    GitHub Repository ↗
+                  </a>
+                </div>
+              )}
             </div>
           );
         } else {

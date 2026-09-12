@@ -110,6 +110,7 @@ function getNavbarHeight(): number {
 export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = '' }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState<number>(0);
+  const [entranceProgress, setEntranceProgress] = useState<number>(1);
   const shouldReduceMotion = useReducedMotion();
   const { subscribe } = useAboutScroll();
 
@@ -120,6 +121,11 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
     const rect = section.getBoundingClientRect();
     const navHeight = getNavbarHeight();
     const scrollableDistance = section.offsetHeight - (window.innerHeight - navHeight);
+
+    const viewportH = window.innerHeight || 800;
+    const distanceIntoView = viewportH - rect.top;
+    const entrance = clamp(distanceIntoView / (viewportH * 0.4), 0, 1);
+    setEntranceProgress(entrance);
 
     if (scrollableDistance <= 0) {
       setProgress(0);
@@ -212,21 +218,26 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
       }
     }
 
-    const isVisible = opacity > 0.01;
+    const finalOpacity = idx === 0 ? opacity * entranceProgress : opacity;
+    const isVisible = finalOpacity > 0.01;
 
     return {
       container: {
-        opacity: isVisible ? opacity : 0,
-        pointerEvents: opacity > 0.5 ? ('auto' as const) : ('none' as const),
+        opacity: isVisible ? finalOpacity : 0,
+        pointerEvents: finalOpacity > 0.5 ? ('auto' as const) : ('none' as const),
+        transition: 'opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
       },
       label: {
         transform: isVisible ? `translateY(${(yOffset * 1.1).toFixed(2)}px)` : 'none',
+        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
       },
       headline: {
         transform: isVisible ? `translateY(${yOffset.toFixed(2)}px)` : 'none',
+        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
       },
       text: {
         transform: isVisible ? `translateY(${(yOffset * 0.75).toFixed(2)}px)` : 'none',
+        transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
       },
     };
   };

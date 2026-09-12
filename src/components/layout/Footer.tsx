@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
   return (
     <footer
       id="nexus-global-footer"
-      className="w-full bg-[#151311] text-[#F3EEE5] pt-16 md:pt-20 pb-12 border-t border-[rgba(243,238,229,0.1)]"
+      className="w-full bg-[#151311] text-[#F3EEE5] pt-16 md:pt-20 pb-16 md:pb-24 border-t border-[rgba(243,238,229,0.1)]"
     >
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 pb-14 border-b border-[rgba(243,238,229,0.12)]">
@@ -102,7 +102,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 <a
                   href="https://github.com/nexus-club"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
                 >
                   GITHUB ↗
@@ -112,7 +112,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 <a
                   href="https://instagram.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
                 >
                   INSTAGRAM ↗
@@ -122,7 +122,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 <a
                   href="https://discord.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
                 >
                   DISCORD ↗
@@ -132,7 +132,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 <a
                   href="https://substack.com"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="hover:text-[#EF5A2A] transition-colors"
                 >
                   SUBSTACK ↗
