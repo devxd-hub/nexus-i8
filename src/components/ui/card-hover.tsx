@@ -106,20 +106,20 @@ const CardHover: React.FC<CardHoverProps> = ({
   };
 
   return (
-    <div className={cn("w-full bg-[#f5f4f3] py-8 sm:py-12", isDemo && "h-screen min-h-screen", className)}>
+    <div className={cn("w-full bg-[#0C0C0C] py-8 sm:py-12", isDemo && "h-screen min-h-screen", className)}>
       <div className={cn("relative grid items-center justify-center p-2 lg:flex transition-all duration-300 w-full", isDemo && "min-h-screen")}>
-        <div className="w-full h-full overflow-hidden rounded-3xl">
-          <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#f5f4f3]">
+        <div className="w-full h-full overflow-hidden rounded-[2px]">
+          <div className="flex h-full w-full flex-col items-center justify-center overflow-hidden bg-[#0C0C0C]">
             {/* Optional Header when displaying squads */}
             {(title || subtitle) && (
               <div className="w-full max-w-6xl px-5 mb-6 text-center sm:text-left">
                 {title && (
-                  <h3 className="font-fraunces font-bold text-2xl sm:text-3xl text-[#0A0A09] uppercase tracking-tight">
+                  <h3 className="font-fraunces font-bold text-2xl sm:text-3xl text-[#F5EFE6] uppercase tracking-tight">
                     {title}
                   </h3>
                 )}
                 {subtitle && (
-                  <p className="font-bitter text-xs sm:text-sm text-[#66615A] mt-1">
+                  <p className="font-bitter text-xs sm:text-sm text-[#C2BBB0] mt-1">
                     {subtitle}
                   </p>
                 )}
@@ -134,7 +134,7 @@ const CardHover: React.FC<CardHoverProps> = ({
                       return (
                         <div
                           key={idx}
-                          className="relative shrink-0 cursor-pointer overflow-hidden rounded-3xl transition-[width,transform,opacity,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-[width] border border-[#0A0A09]/10 shadow-sm"
+                          className="relative shrink-0 cursor-pointer overflow-hidden rounded-[2px] transition-[width,transform,opacity,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-[width] border border-[rgba(245,239,230,0.14)] shadow-xs"
                           style={{
                             width: getImageWidth(idx),
                             height: "24rem",
@@ -142,7 +142,7 @@ const CardHover: React.FC<CardHoverProps> = ({
                           }}
                           onMouseEnter={() => handleMouseEnter(idx)}
                         >
-                          <InlineNoise className="rounded-3xl h-full w-full" opacity={0.27}>
+                          <InlineNoise className="rounded-[2px] h-full w-full" opacity={0.27}>
                             <img
                               className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                               src={src}
@@ -159,10 +159,10 @@ const CardHover: React.FC<CardHoverProps> = ({
                           key={member.id || idx}
                           onClick={() => onSelect && onSelect(member)}
                           className={cn(
-                            "relative shrink-0 cursor-pointer overflow-hidden rounded-3xl transition-[width,transform,opacity,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-[width] border-2 select-none shadow-md",
+                            "relative shrink-0 cursor-pointer overflow-hidden rounded-[2px] transition-[width,transform,opacity,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu will-change-[width] border select-none shadow-xs",
                             isExpanded
-                              ? "border-[#0A0A09] shadow-xl z-10"
-                              : "border-[#0A0A09]/15 hover:border-[#0A0A09]/40 opacity-90 hover:opacity-100"
+                              ? "border-[#F2613F] bg-[#181818] shadow-md z-10"
+                              : "border-[rgba(245,239,230,0.14)] bg-[#141414] hover:border-[rgba(245,239,230,0.30)] opacity-90 hover:opacity-100"
                           )}
                           style={{
                             width: getImageWidth(idx),
@@ -171,7 +171,7 @@ const CardHover: React.FC<CardHoverProps> = ({
                           }}
                           onMouseEnter={() => handleMouseEnter(idx)}
                         >
-                          <InlineNoise className="rounded-3xl h-full w-full" opacity={0.27}>
+                          <InlineNoise className="rounded-[2px] h-full w-full bg-[#181818]" opacity={0.27}>
                             {member.imageUrl ? (
                               <img
                                 className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
@@ -183,22 +183,22 @@ const CardHover: React.FC<CardHoverProps> = ({
                                 }}
                               />
                             ) : (
-                              <div className="w-full h-full bg-[#E5DFD4] flex items-center justify-center font-dosis font-bold text-xs uppercase text-[#66615A]">
+                              <div className="w-full h-full bg-[#181818] flex items-center justify-center font-dosis font-bold text-xs uppercase text-[#857E74]">
                                 {member.name}
                               </div>
                             )}
 
                             {/* Top Badge Overlay */}
                             <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-20">
-                              <span className="px-2.5 py-1 bg-[#0A0A09]/85 backdrop-blur-xs text-white text-[10px] font-dosis font-bold tracking-[0.2em] uppercase rounded-full">
+                              <span className="px-2.5 py-1 bg-[#181818] border border-[rgba(245,239,230,0.14)] text-[#F5EFE6] text-[10px] font-dosis font-bold tracking-[0.2em] uppercase rounded-[2px]">
                                 {member.group || "CREW"}
                               </span>
                             </div>
 
                             {/* Collapsed State Name Indicator (Vertical text) */}
                             {!isExpanded && (
-                              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A09]/80 via-transparent to-transparent flex flex-col justify-end p-3 pointer-events-none">
-                                <span className="text-[11px] font-dosis font-bold tracking-[0.15em] text-white uppercase truncate text-center">
+                              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/85 via-transparent to-transparent flex flex-col justify-end p-3 pointer-events-none">
+                                <span className="text-[11px] font-dosis font-bold tracking-[0.15em] text-[#F5EFE6] uppercase truncate text-center">
                                   {member.name?.split(" ")[0]}
                                 </span>
                               </div>
@@ -207,25 +207,25 @@ const CardHover: React.FC<CardHoverProps> = ({
                             {/* Expanded Editorial Dossier Bar */}
                             <div
                               className={cn(
-                                "absolute inset-0 bg-gradient-to-t from-[#0A0A09]/95 via-[#0A0A09]/40 to-transparent flex flex-col justify-end p-6 text-white transition-opacity duration-300 pointer-events-none",
+                                "absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/95 via-[#0C0C0C]/50 to-transparent flex flex-col justify-end p-6 text-[#F5EFE6] transition-opacity duration-300 pointer-events-none",
                                 isExpanded ? "opacity-100" : "opacity-0"
                               )}
                             >
                               <div className="space-y-1">
-                                <span className="text-[11px] font-dosis font-bold tracking-[0.25em] text-[#EF5A2A] uppercase block">
+                                <span className="text-[11px] font-dosis font-bold tracking-[0.25em] text-[#F2613F] uppercase block">
                                   {member.role}
                                 </span>
-                                <h4 className="font-fraunces font-bold text-2xl text-white tracking-tight uppercase leading-tight">
+                                <h4 className="font-fraunces font-bold text-2xl text-[#F5EFE6] tracking-tight uppercase leading-tight">
                                   {member.name}
                                 </h4>
                                 {member.discipline && (
-                                  <p className="font-bitter text-xs text-white/80 line-clamp-2 pt-1">
+                                  <p className="font-bitter text-xs text-[#C2BBB0] line-clamp-2 pt-1">
                                     {member.discipline}
                                   </p>
                                 )}
                               </div>
 
-                              <div className="pt-3 mt-2 flex items-center justify-between border-t border-white/20 text-[10px] font-dosis font-bold tracking-[0.2em] text-[#EF5A2A]">
+                              <div className="pt-3 mt-2 flex items-center justify-between border-t border-[rgba(245,239,230,0.14)] text-[10px] font-dosis font-bold tracking-[0.2em] text-[#F2613F]">
                                 <span>CLICK TO VIEW FULL DOSSIER</span>
                                 <span>↗</span>
                               </div>

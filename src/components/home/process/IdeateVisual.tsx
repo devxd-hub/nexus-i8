@@ -26,7 +26,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
   ];
 
   return (
-    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-4 flex flex-col justify-between overflow-hidden select-none">
+    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#141414] border border-[rgba(245,239,230,0.10)] p-4 flex flex-col justify-between overflow-hidden select-none">
       {/* Background Architectural Coordinate Grid */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -37,7 +37,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             <path
               d="M 24 0 L 0 0 0 24"
               fill="none"
-              stroke="rgba(10,10,9,0.05)"
+              stroke="rgba(245,239,230,0.05)"
               strokeWidth="0.75"
             />
           </pattern>
@@ -46,12 +46,12 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
       </svg>
 
       {/* Header telemetry */}
-      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#66615A] uppercase border-b border-[rgba(10,10,9,0.08)] pb-1.5">
+      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#857E74] uppercase border-b border-[rgba(245,239,230,0.08)] pb-1.5">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
           IDEA FIELD CONVERGENCE
         </span>
-        <span className="text-[#0A0A09]/60 font-mono text-[9px]">FOCUS: 89.4%</span>
+        <span className="text-[#F5EFE6]/60 font-mono text-[9px]">FOCUS: 89.4%</span>
       </div>
 
       {/* Main SVG Convergence Canvas */}
@@ -68,7 +68,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             y1="40"
             x2="140"
             y2="140"
-            stroke="rgba(10,10,9,0.12)"
+            stroke="rgba(245,239,230,0.12)"
             strokeDasharray="2 3"
             strokeWidth="0.75"
           />
@@ -77,7 +77,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             y1="90"
             x2="200"
             y2="90"
-            stroke="rgba(10,10,9,0.12)"
+            stroke="rgba(245,239,230,0.12)"
             strokeDasharray="2 3"
             strokeWidth="0.75"
           />
@@ -91,7 +91,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
                 y1={pt.y}
                 x2={140}
                 y2={90}
-                stroke={isActive ? 'rgba(239,90,42,0.35)' : 'rgba(10,10,9,0.1)'}
+                stroke={isActive ? 'rgba(242,97,63,0.45)' : 'rgba(245,239,230,0.10)'}
                 strokeWidth={isActive ? '1' : '0.75'}
                 strokeDasharray="3 3"
                 initial={{ pathLength: 0.2, opacity: 0.2 }}
@@ -116,7 +116,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
                 cx={pt.x}
                 cy={pt.y}
                 r={isActive ? 2.5 : 2}
-                fill={isActive ? '#0A0A09' : 'rgba(10,10,9,0.4)'}
+                fill={isActive ? '#F5EFE6' : 'rgba(245,239,230,0.4)'}
                 animate={
                   shouldReduceMotion || !isActive
                     ? {}
@@ -141,7 +141,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             cx="140"
             cy="90"
             r="16"
-            stroke="rgba(239,90,42,0.25)"
+            stroke="rgba(242,97,63,0.35)"
             strokeWidth="1"
             strokeDasharray="4 3"
             animate={
@@ -164,8 +164,8 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             cx="140"
             cy="90"
             r="7"
-            fill="#EBE5DB"
-            stroke="#0A0A09"
+            fill="#181818"
+            stroke="#F5EFE6"
             strokeWidth="1.25"
           />
 
@@ -174,7 +174,7 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
             cx="140"
             cy="90"
             r="3.5"
-            fill="#EF5A2A"
+            fill="#F2613F"
             animate={
               shouldReduceMotion || !isActive
                 ? {}
@@ -193,11 +193,11 @@ export const IdeateVisual: React.FC<IdeateVisualProps> = ({ isActive }) => {
       </div>
 
       {/* Utility Tags Footer */}
-      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#0A0A09]/80 border-t border-[rgba(10,10,9,0.08)] pt-1.5 font-semibold">
+      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#F5EFE6]/80 border-t border-[rgba(245,239,230,0.08)] pt-1.5 font-semibold">
         <span>QUESTION</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>OBSERVE</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>EXPLORE</span>
       </div>
     </div>

@@ -8,6 +8,9 @@ import { Container } from '../primitives/Container.tsx';
 import { NexusLogo, NexusWordmark } from '../brand/NexusLogo.tsx';
 import { InteractiveFooterPenguin } from '../mascot/InteractiveFooterPenguin.tsx';
 import { AppRoute } from '../../types.ts';
+import { useTheme } from '../../context/ThemeContext.tsx';
+import codingNinjasDarkLogo from '../../assets/cn/coding_ninjas_dark_clean.png';
+import codingNinjasLightLogo from '../../assets/cn/coding_ninjas_light_clean.png';
 
 interface FooterProps {
   onRouteChange: (route: AppRoute) => void;
@@ -23,6 +26,8 @@ interface FooterProps {
  * - © 2026 NEXUS
  */
 export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
+  const { isDark } = useTheme();
+
   const handleNavClick = (href: AppRoute, e: React.MouseEvent) => {
     e.preventDefault();
     onRouteChange(href);
@@ -32,15 +37,14 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
   return (
     <footer
       id="nexus-global-footer"
-      className="w-full bg-[#151311] text-[#F3EEE5] pt-16 md:pt-20 pb-12 border-t border-[rgba(243,238,229,0.1)]"
+      className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] pt-16 md:pt-20 pb-12 border-t border-[var(--border-subtle)] transition-colors duration-250"
     >
       <Container>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8 pb-14 border-b border-[rgba(243,238,229,0.12)]">
-          {/* Logo & College Community */}
-          <div className="col-span-2 md:col-span-1 space-y-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pb-14 border-b border-[var(--border-subtle)]">
+          {/* 1. Logo & College Community */}
+          <div className="col-span-2 md:col-span-3 lg:col-span-1 space-y-4">
             <NexusLogo
-              size="md"
-              inverted={true}
+              size="lg"
               showSubtitle={true}
               subtitleLayout="below"
               onClick={() => {
@@ -48,62 +52,62 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             />
-            <p className="font-bitter text-sm text-[#F3EEE5]/75 max-w-xs pt-2 leading-relaxed">
+            <p className="font-bitter text-sm text-[var(--text-secondary)] max-w-xs pt-1 leading-relaxed">
               A student-led community for building, experimenting, and creating projects that matter.
             </p>
           </div>
 
-          {/* Navigation */}
+          {/* 2. Navigation */}
           <div className="col-span-1 space-y-3">
-            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#EF5A2A] font-bold">
+            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#F2613F] font-bold">
               NAVIGATION
             </h4>
-            <ul className="space-y-2 text-xs font-dosis font-semibold tracking-[0.2em] uppercase text-[#F3EEE5]/75">
+            <ul className="space-y-2 text-xs font-dosis font-semibold tracking-[0.2em] uppercase text-[var(--text-secondary)]">
               <li>
-                <a href="/" onClick={(e) => handleNavClick('/', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/" onClick={(e) => handleNavClick('/', e)} className="hover:text-[#F2613F] transition-colors">
                   HOME
                 </a>
               </li>
               <li>
-                <a href="/about" onClick={(e) => handleNavClick('/about', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/about" onClick={(e) => handleNavClick('/about', e)} className="hover:text-[#F2613F] transition-colors">
                   ABOUT
                 </a>
               </li>
               <li>
-                <a href="/projects" onClick={(e) => handleNavClick('/projects', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/projects" onClick={(e) => handleNavClick('/projects', e)} className="hover:text-[#F2613F] transition-colors">
                   PROJECTS
                 </a>
               </li>
               <li>
-                <a href="/gallery" onClick={(e) => handleNavClick('/gallery', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/gallery" onClick={(e) => handleNavClick('/gallery', e)} className="hover:text-[#F2613F] transition-colors">
                   GALLERY
                 </a>
               </li>
               <li>
-                <a href="/team" onClick={(e) => handleNavClick('/team', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/team" onClick={(e) => handleNavClick('/team', e)} className="hover:text-[#F2613F] transition-colors">
                   TEAM
                 </a>
               </li>
               <li>
-                <a href="/contact" onClick={(e) => handleNavClick('/contact', e)} className="hover:text-[#EF5A2A] transition-colors">
+                <a href="/contact" onClick={(e) => handleNavClick('/contact', e)} className="hover:text-[#F2613F] transition-colors">
                   CONTACT
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Socials */}
+          {/* 3. Socials */}
           <div className="col-span-1 space-y-3">
-            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#EF5A2A] font-bold">
+            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#F2613F] font-bold">
               SOCIALS
             </h4>
-            <ul className="space-y-2 text-xs font-dosis font-semibold tracking-[0.2em] uppercase text-[#F3EEE5]/75">
+            <ul className="space-y-2 text-xs font-dosis font-semibold tracking-[0.2em] uppercase text-[var(--text-secondary)]">
               <li>
                 <a
                   href="https://github.com/nexushuborg"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-[#EF5A2A] transition-colors"
+                  className="hover:text-[#F2613F] transition-colors"
                 >
                   GITHUB ↗
                 </a>
@@ -113,7 +117,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                   href="https://www.instagram.com/nexusfordev"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-[#EF5A2A] transition-colors"
+                  className="hover:text-[#F2613F] transition-colors"
                 >
                   INSTAGRAM ↗
                 </a>
@@ -121,30 +125,46 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
             </ul>
           </div>
 
-          {/* University & Location */}
-          <div className="col-span-2 md:col-span-1 space-y-4">
+          {/* 4. University & Location */}
+          <div className="col-span-1 space-y-3">
+            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#F2613F] font-bold">
+              CAMPUS
+            </h4>
             <div className="space-y-1">
-              <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#EF5A2A] font-bold">
-                CAMPUS
-              </h4>
-              <p className="text-xs font-bitter text-[#F3EEE5]/85">
+              <p className="text-xs font-bitter text-[var(--text-primary)]">
                 Center for Student Innovation
               </p>
-              <p className="text-xs font-bitter text-[#F3EEE5]/65">
+              <p className="text-xs font-bitter text-[var(--text-secondary)]">
                 Design Pavilion • Lab 204
               </p>
             </div>
-            <div className="pt-2 text-xs font-mono text-[#F3EEE5]/40">
+            <div className="pt-1 text-xs font-mono text-[var(--text-muted)]">
               MEETINGS: THU 6:00 PM
+            </div>
+          </div>
+
+          {/* 5. Coding Ninjas Affiliation (Rightmost Column) */}
+          <div className="col-span-2 sm:col-span-1 lg:col-span-1 space-y-3">
+            <h4 className="font-dosis text-xs uppercase tracking-[0.22em] text-[#F2613F] font-bold">
+              AFFILIATION
+            </h4>
+            <div className="pt-1">
+              <img
+                src={isDark ? codingNinjasDarkLogo : codingNinjasLightLogo}
+                alt="Coding Ninjas - A 10x Club Initiative ITER Chapter"
+                className="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain block select-none"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
 
         {/* Minimal Copyright Line & Interactive Mascot */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-dosis tracking-[0.2em] uppercase text-[#F3EEE5]/50">
-          <div className="flex items-center gap-1.5">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-dosis tracking-[0.2em] uppercase text-[var(--text-muted)]">
+          <div className="flex items-center gap-1.5 text-[var(--text-secondary)]">
             <span>© 2026</span>
-            <NexusWordmark size="xs" inverted={true} />
+            <NexusWordmark size="xs" />
           </div>
 
           {/* Clean Interactive Mascot — Draggable, physics-reactive, zero UI box/slop */}
@@ -152,7 +172,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
             <InteractiveFooterPenguin scale={2.6} />
           </div>
 
-          <p className="text-[#F3EEE5]/40 tracking-[0.2em] text-center sm:text-right">
+          <p className="text-[var(--text-muted)] tracking-[0.2em] text-center sm:text-right">
             STUDENT-LED COLLEGE COMMUNITY
           </p>
         </div>

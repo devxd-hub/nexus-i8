@@ -25,13 +25,13 @@ export const SectionLabel: React.FC<SectionLabelProps> = ({
   return (
     <div
       id={id}
-      className={`inline-flex items-center gap-2 font-dosis font-semibold text-xs uppercase tracking-[0.22em] text-[#66615A] ${className}`}
+      className={`inline-flex items-center gap-2 font-dosis font-semibold text-xs uppercase tracking-[0.22em] text-[#857E74] ${className}`}
     >
       {number && (
-        <span className="text-[#EF5A2A] font-bold">{number}</span>
+        <span className="text-[#F2613F] font-bold">{number}</span>
       )}
-      {number && <span className="text-[rgba(10,10,9,0.25)]">/</span>}
-      <span className="text-[#0A0A09]">{label}</span>
+      {number && <span className="text-[rgba(245,239,230,0.25)]">/</span>}
+      <span className="text-[#F5EFE6]">{label}</span>
     </div>
   );
 };

@@ -69,15 +69,15 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
 
   return (
     <div
-      className={`relative bg-[#F3EEE5] border border-[rgba(10,10,9,0.14)] p-5 sm:p-6 shadow-[0_12px_36px_rgba(10,10,9,0.06)] flex flex-col justify-between select-none ${className}`}
+      className={`relative bg-[#181818] border border-[rgba(245,239,230,0.10)] p-5 sm:p-6 shadow-sm flex flex-col justify-between select-none ${className}`}
     >
       {/* Top Meta Bar */}
       <div>
-        <div className="flex items-center justify-between pb-3.5 mb-3 border-b border-[rgba(10,10,9,0.1)]">
-          <span className="font-dosis font-bold text-xs tracking-[0.24em] text-[#0A0A09] uppercase">
+        <div className="flex items-center justify-between pb-3.5 mb-3 border-b border-[rgba(245,239,230,0.10)]">
+          <span className="font-dosis font-bold text-xs tracking-[0.24em] text-[#F5EFE6] uppercase">
             THE NEXUS LOOP // {meta.number}
           </span>
-          <span className="font-dosis font-semibold text-[11px] tracking-[0.18em] text-[#66615A] uppercase">
+          <span className="font-dosis font-semibold text-[11px] tracking-[0.18em] text-[#857E74] uppercase">
             {meta.cycleRole}
           </span>
         </div>
@@ -85,14 +85,14 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
         {/* Stage Name & Tag */}
         <div className="flex items-baseline justify-between gap-4 mb-3">
           <div>
-            <h4 className="font-fraunces font-bold text-2xl text-[#0A0A09] tracking-tight uppercase">
+            <h4 className="font-fraunces font-bold text-2xl text-[#F5EFE6] tracking-tight uppercase">
               {meta.name}
             </h4>
-            <span className="font-dosis font-medium text-[11px] tracking-[0.16em] text-[#66615A] uppercase block mt-0.5">
+            <span className="font-dosis font-medium text-[11px] tracking-[0.16em] text-[#C2BBB0] uppercase block mt-0.5">
               {meta.tag}
             </span>
           </div>
-          <span className="font-mono text-xs font-semibold text-[#0A0A09]/40 tracking-wider">
+          <span className="font-mono text-xs font-semibold text-[#F5EFE6]/40 tracking-wider">
             0{activeIndex + 1} / 04
           </span>
         </div>
@@ -118,7 +118,7 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
       </div>
 
       {/* Bottom Loop Progression & Step Action */}
-      <div className="pt-3 mt-1 border-t border-[rgba(10,10,9,0.1)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div className="pt-3 mt-1 border-t border-[rgba(245,239,230,0.10)] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         {/* Continuous 4-stage Loop Segment Bar */}
         <div className="flex items-center gap-1.5" role="tablist" aria-label="NEXUS Loop Stages">
           {STAGE_METAS.map((stage, idx) => {
@@ -133,10 +133,10 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
                   e.stopPropagation();
                   onSelectStage(idx);
                 }}
-                className={`h-1.5 transition-all duration-300 rounded-none cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#EF5A2A] ${
+                className={`h-1.5 transition-all duration-300 rounded-none cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-[#F2613F] ${
                   isCurrent
-                    ? 'w-7 bg-[#EF5A2A]'
-                    : 'w-3.5 bg-[rgba(10,10,9,0.18)] hover:bg-[rgba(10,10,9,0.4)]'
+                    ? 'w-7 bg-[#F2613F]'
+                    : 'w-3.5 bg-[rgba(245,239,230,0.18)] hover:bg-[rgba(245,239,230,0.35)]'
                 }`}
               />
             );
@@ -149,9 +149,9 @@ export const ProcessLoopCard: React.FC<ProcessLoopCardProps> = ({
           onClick={handleNext}
           icon={
             activeIndex === 3 ? (
-              <RotateCcw className="w-3.5 h-3.5 text-[#EF5A2A]" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#F2613F]" />
             ) : (
-              <ArrowRight className="w-3.5 h-3.5 text-[#EF5A2A]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#F2613F]" />
             )
           }
         />

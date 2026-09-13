@@ -26,7 +26,7 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
   ];
 
   return (
-    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-4 flex flex-col justify-between overflow-hidden select-none">
+    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#141414] border border-[rgba(245,239,230,0.10)] p-4 flex flex-col justify-between overflow-hidden select-none">
       {/* Background Radiating Field */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -34,19 +34,19 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
       >
         <defs>
           <pattern id="share-dots" width="24" height="24" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="0.75" fill="rgba(10,10,9,0.05)" />
+            <circle cx="2" cy="2" r="0.75" fill="rgba(245,239,230,0.05)" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#share-dots)" />
       </svg>
 
       {/* Header telemetry */}
-      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#66615A] uppercase border-b border-[rgba(10,10,9,0.08)] pb-1.5">
+      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#857E74] uppercase border-b border-[rgba(245,239,230,0.08)] pb-1.5">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
           OPEN DISSEMINATION & LOOP CLOSURE
         </span>
-        <span className="text-[#EF5A2A] font-mono text-[9px] font-bold">↺ RECIRCULATING</span>
+        <span className="text-[#F2613F] font-mono text-[9px] font-bold">↺ RECIRCULATING</span>
       </div>
 
       {/* Main SVG Knowledge Diffusion Canvas */}
@@ -64,7 +64,7 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
               cx="140"
               cy="75"
               r={radius}
-              stroke={isActive ? 'rgba(239,90,42,0.22)' : 'rgba(10,10,9,0.08)'}
+              stroke={isActive ? 'rgba(242,97,63,0.30)' : 'rgba(245,239,230,0.08)'}
               strokeWidth="0.75"
               strokeDasharray={i % 2 === 0 ? '3 3' : undefined}
               initial={{ opacity: 0.2 }}
@@ -98,7 +98,7 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
                   y1="75"
                   x2={x2}
                   y2={y2}
-                  stroke={isActive ? 'rgba(239,90,42,0.35)' : 'rgba(10,10,9,0.1)'}
+                  stroke={isActive ? 'rgba(242,97,63,0.45)' : 'rgba(245,239,230,0.1)'}
                   strokeWidth="0.8"
                   strokeDasharray="2 3"
                   initial={{ pathLength: 0.3 }}
@@ -118,7 +118,7 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
                   cx={x2}
                   cy={y2}
                   r="1.5"
-                  fill={isActive ? '#EF5A2A' : 'rgba(10,10,9,0.3)'}
+                  fill={isActive ? '#F2613F' : 'rgba(245,239,230,0.3)'}
                 />
               </g>
             );
@@ -127,7 +127,7 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
           {/* LOOP RECIRCULATION TRAJECTORY: Curves from bottom-right back up toward top-left */}
           <motion.path
             d="M 235 95 C 265 125, 220 142, 140 138 C 60 134, 25 110, 35 60 C 42 28, 90 20, 125 35"
-            stroke="#EF5A2A"
+            stroke="#F2613F"
             strokeWidth="1.2"
             strokeDasharray="4 3"
             fill="none"
@@ -149,14 +149,14 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
           {/* Loop Return Indicator Arrow */}
           <polygon
             points="128,31 133,37 124,39"
-            fill="#EF5A2A"
+            fill="#F2613F"
           />
 
           <text
             x="140"
             y="132"
             textAnchor="middle"
-            className="font-dosis font-bold text-[8px] tracking-[0.18em] fill-[#EF5A2A] uppercase"
+            className="font-dosis font-bold text-[8px] tracking-[0.18em] fill-[#F2613F] uppercase"
           >
             CYCLE COMPLETION → SEEDS NEW QUESTION 01
           </text>
@@ -166,15 +166,15 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
             cx="140"
             cy="75"
             r="8"
-            fill="#EBE5DB"
-            stroke="#0A0A09"
+            fill="#181818"
+            stroke="#F5EFE6"
             strokeWidth="1.25"
           />
           <motion.circle
             cx="140"
             cy="75"
             r="4"
-            fill="#EF5A2A"
+            fill="#F2613F"
             animate={
               shouldReduceMotion || !isActive
                 ? {}
@@ -193,11 +193,11 @@ export const ShareVisual: React.FC<ShareVisualProps> = ({ isActive }) => {
       </div>
 
       {/* Utility Tags Footer */}
-      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#0A0A09]/80 border-t border-[rgba(10,10,9,0.08)] pt-1.5 font-semibold">
+      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#F5EFE6]/80 border-t border-[rgba(245,239,230,0.08)] pt-1.5 font-semibold">
         <span>EXHIBIT</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>DOCUMENT</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>OPEN KNOWLEDGE</span>
       </div>
     </div>

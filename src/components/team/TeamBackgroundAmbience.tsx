@@ -20,7 +20,7 @@ export const TeamBackgroundAmbience: React.FC = () => {
   if (shouldReduceMotion) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-1/4 right-10 w-96 h-96 bg-[#EF5A2A]/03 rounded-full filter blur-[100px]" />
+        <div className="absolute top-1/4 right-10 w-96 h-96 bg-[#F2613F]/03 rounded-full filter blur-[100px]" />
         <div className="absolute bottom-1/3 left-10 w-80 h-80 bg-[#FFB800]/03 rounded-full filter blur-[90px]" />
       </div>
     );
@@ -44,7 +44,7 @@ export const TeamBackgroundAmbience: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute top-[8%] -right-20 w-[550px] h-[550px] rounded-full bg-radial from-[#EF5A2A] to-transparent filter blur-[110px]"
+        className="absolute top-[8%] -right-20 w-[550px] h-[550px] rounded-full bg-radial from-[#F2613F] to-transparent filter blur-[110px]"
       />
 
       {/* Drifting Warm Orb 2 (Center-Left) */}
@@ -76,7 +76,7 @@ export const TeamBackgroundAmbience: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute bottom-[15%] right-[5%] w-[480px] h-[480px] rounded-full bg-radial from-[#EF5A2A] to-transparent filter blur-[100px]"
+        className="absolute bottom-[15%] right-[5%] w-[480px] h-[480px] rounded-full bg-radial from-[#F2613F] to-transparent filter blur-[100px]"
       />
 
       {/* Subtle Slow Drifting Architectural Blueprint Grid Overlay */}
@@ -89,11 +89,11 @@ export const TeamBackgroundAmbience: React.FC = () => {
           repeat: Infinity,
           ease: 'linear',
         }}
-        className="absolute inset-0 opacity-[0.022]"
+        className="absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage: `
-            linear-gradient(to right, #0A0A09 1px, transparent 1px),
-            linear-gradient(to bottom, #0A0A09 1px, transparent 1px)
+            linear-gradient(to right, #F5EFE6 1px, transparent 1px),
+            linear-gradient(to bottom, #F5EFE6 1px, transparent 1px)
           `,
           backgroundSize: '48px 48px',
         }}

@@ -183,12 +183,12 @@ export const FluidGlass: React.FC<FluidGlassProps> = ({
   const drawBackgroundArt = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.clearRect(0, 0, width, height);
 
-    // Warm cream paper canvas background
-    ctx.fillStyle = '#F4EEE5';
+    // Dark foundation canvas background
+    ctx.fillStyle = '#0C0C0C';
     ctx.fillRect(0, 0, width, height);
 
     // Subtle coordinate grid
-    ctx.strokeStyle = 'rgba(10, 10, 9, 0.06)';
+    ctx.strokeStyle = 'rgba(245, 239, 230, 0.06)';
     ctx.lineWidth = 1;
     const step = 48;
     for (let x = 0; x < width; x += step) {
@@ -209,27 +209,27 @@ export const FluidGlass: React.FC<FluidGlassProps> = ({
     const cy = height * 0.5;
 
     // Outer geometric circle
-    ctx.strokeStyle = 'rgba(10, 10, 9, 0.12)';
+    ctx.strokeStyle = 'rgba(245, 239, 230, 0.14)';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.arc(cx, cy, Math.min(width, height) * 0.38, 0, Math.PI * 2);
     ctx.stroke();
 
     // Secondary offset circles
-    ctx.strokeStyle = 'rgba(239, 90, 42, 0.35)'; // NEXUS Orange
+    ctx.strokeStyle = 'rgba(242, 97, 63, 0.40)'; // NEXUS Orange
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.arc(cx - 70, cy, Math.min(width, height) * 0.28, 0, Math.PI * 2);
     ctx.stroke();
 
-    ctx.strokeStyle = 'rgba(10, 10, 9, 0.25)';
+    ctx.strokeStyle = 'rgba(245, 239, 230, 0.22)';
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.arc(cx + 70, cy, Math.min(width, height) * 0.28, 0, Math.PI * 2);
     ctx.stroke();
 
     // Central NEXUS intersecting diamond / geometry
-    ctx.fillStyle = '#0A0A09';
+    ctx.fillStyle = '#181818';
     ctx.beginPath();
     ctx.moveTo(cx, cy - 80);
     ctx.lineTo(cx + 80, cy);
@@ -237,22 +237,25 @@ export const FluidGlass: React.FC<FluidGlassProps> = ({
     ctx.lineTo(cx - 80, cy);
     ctx.closePath();
     ctx.fill();
+    ctx.strokeStyle = 'rgba(245, 239, 230, 0.20)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
 
     // Inner orange core
-    ctx.fillStyle = '#EF5A2A';
+    ctx.fillStyle = '#F2613F';
     ctx.beginPath();
     ctx.arc(cx, cy, 18, 0, Math.PI * 2);
     ctx.fill();
 
     // Minimal typographic anchor inside the glass field
-    ctx.fillStyle = '#FAF6EE';
+    ctx.fillStyle = '#F5EFE6';
     ctx.font = 'bold 20px "Fraunces", Georgia, serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText('NEXUS', cx, cy - 110);
 
     // Editorial quadrant notations
-    ctx.fillStyle = '#66615A';
+    ctx.fillStyle = '#857E74';
     ctx.font = '500 12px "Dosis", sans-serif';
     ctx.letterSpacing = '3px';
     ctx.fillText('DESIGN', cx - 180, cy);
@@ -431,7 +434,7 @@ export const FluidGlass: React.FC<FluidGlassProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden border border-[rgba(10,10,9,0.12)] bg-[#F4EEE5] ${className}`}
+      className={`relative w-full overflow-hidden border border-[rgba(245,239,230,0.10)] bg-[#0C0C0C] ${className}`}
       style={{
         aspectRatio: aspectRatio === '4/3' ? '4 / 3' : '16 / 10',
         touchAction: 'pan-y',

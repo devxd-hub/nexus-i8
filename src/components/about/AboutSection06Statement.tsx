@@ -34,12 +34,12 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
       ref={sectionRef}
       id="about-final-statement"
       aria-labelledby="about-final-title"
-      className="w-full py-14 sm:py-18 md:py-24 bg-[#F3EEE5] relative overflow-hidden"
+      className="w-full py-14 sm:py-18 md:py-24 bg-[var(--bg-primary)] text-[var(--text-primary)] relative overflow-hidden transition-colors duration-250"
     >
       {/* Subtle Scroll Parallax Watermark */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: watermarkY }}
-        className="absolute -right-6 md:right-10 top-16 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[#0A0A09]/[0.035] select-none pointer-events-none will-change-transform leading-none z-0"
+        className="absolute -right-6 md:right-10 top-16 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[var(--text-primary)]/[0.03] select-none pointer-events-none will-change-transform leading-none z-0"
         aria-hidden="true"
       >
         06
@@ -54,7 +54,7 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 md:mb-12"
         >
-          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#EF5A2A] font-semibold">
+          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#F2613F] font-semibold">
             06 / FINAL STATEMENT
           </span>
         </motion.div>
@@ -65,7 +65,7 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
             id="about-final-title"
             as="h2"
             text="THERE IS ALWAYS ROOM FOR ONE MORE IDEA."
-            className="font-fraunces text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[#0A0A09] leading-[0.98]"
+            className="font-fraunces text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-[var(--text-primary)] leading-[0.98]"
             delay={0.1}
             stagger={0.04}
           />
@@ -83,10 +83,10 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
                 type="button"
                 id="about-cta-join"
                 onClick={() => onRouteChange('/contact')}
-                className="group inline-flex items-center gap-3 font-dosis uppercase font-bold text-sm sm:text-base tracking-[0.24em] text-[#0A0A09] hover:text-[#EF5A2A] transition-colors cursor-pointer"
+                className="group inline-flex items-center gap-3 font-dosis uppercase font-bold text-sm sm:text-base tracking-[0.24em] text-[var(--text-primary)] hover:text-[#F2613F] transition-colors cursor-pointer"
               >
                 <span>JOIN NEXUS</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-2 text-[#EF5A2A]">
+                <span className="transition-transform duration-300 group-hover:translate-x-2 text-[#F2613F]">
                   →
                 </span>
               </button>
@@ -94,10 +94,10 @@ export const AboutSection06Statement: React.FC<AboutSection06StatementProps> = (
               <a
                 href="#/contact"
                 id="about-cta-join-link"
-                className="group inline-flex items-center gap-3 font-dosis uppercase font-bold text-sm sm:text-base tracking-[0.24em] text-[#0A0A09] hover:text-[#EF5A2A] transition-colors cursor-pointer"
+                className="group inline-flex items-center gap-3 font-dosis uppercase font-bold text-sm sm:text-base tracking-[0.24em] text-[var(--text-primary)] hover:text-[#F2613F] transition-colors cursor-pointer"
               >
                 <span>JOIN NEXUS</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-2 text-[#EF5A2A]">
+                <span className="transition-transform duration-300 group-hover:translate-x-2 text-[#F2613F]">
                   →
                 </span>
               </a>

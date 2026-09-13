@@ -158,13 +158,13 @@ export const PrimaryButton: React.FC<BaseButtonProps> = ({
     relative inline-flex items-center justify-between gap-4 sm:gap-6
     ${sizeClasses}
     ${fullWidth ? 'w-full' : ''}
-    bg-[#0A0A09] text-[#F3EEE5] font-dosis font-bold tracking-[0.2em] uppercase
-    rounded-[2px] border border-[rgba(255,255,255,0.12)]
-    shadow-[0_2px_8px_rgba(0,0,0,0.25)]
+    bg-[var(--bg-surface)] text-[var(--text-primary)] font-dosis font-bold tracking-[0.2em] uppercase
+    rounded-[2px] border border-[var(--border-subtle)]
+    shadow-sm
     transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-    hover:-translate-y-[2px] hover:shadow-[0_6px_16px_rgba(10,10,9,0.35)]
+    hover:-translate-y-[2px] hover:shadow-md hover:border-[var(--border-medium)]
     active:scale-[0.985] active:translate-y-0
-    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF5A2A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EEE5]
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]
     disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none cursor-pointer
     group select-none overflow-hidden
     ${className}
@@ -182,7 +182,7 @@ export const PrimaryButton: React.FC<BaseButtonProps> = ({
             width: '160px',
             height: '160px',
             transform: 'translate(-50%, -50%)',
-            background: 'radial-gradient(circle, rgba(239,90,42,0.22) 0%, rgba(239,90,42,0.06) 50%, transparent 75%)',
+            background: 'radial-gradient(circle, rgba(242,97,63,0.22) 0%, rgba(242,97,63,0.06) 50%, transparent 75%)',
           }}
           aria-hidden="true"
         />
@@ -191,22 +191,22 @@ export const PrimaryButton: React.FC<BaseButtonProps> = ({
       {/* 2. "Drawn Edge" Architectural Line Perimeter Sequence */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[2px]" aria-hidden="true">
         {/* Top edge: draws left to right */}
-        <span className="absolute top-0 left-0 right-0 h-[1.5px] bg-[#EF5A2A] transform origin-left scale-x-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+        <span className="absolute top-0 left-0 right-0 h-[1.5px] bg-[#F2613F] transform origin-left scale-x-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
         {/* Right edge: draws top to bottom */}
-        <span className="absolute top-0 right-0 bottom-0 w-[1.5px] bg-[#EF5A2A] transform origin-top scale-y-0 transition-transform duration-200 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
+        <span className="absolute top-0 right-0 bottom-0 w-[1.5px] bg-[#F2613F] transform origin-top scale-y-0 transition-transform duration-200 delay-75 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
         {/* Bottom edge: draws right to left */}
-        <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#EF5A2A] transform origin-right scale-x-0 transition-transform duration-250 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+        <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#F2613F] transform origin-right scale-x-0 transition-transform duration-250 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
         {/* Left edge: draws bottom to top */}
-        <span className="absolute top-0 left-0 bottom-0 w-[1.5px] bg-[#EF5A2A] transform origin-bottom scale-y-0 transition-transform duration-200 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
+        <span className="absolute top-0 left-0 bottom-0 w-[1.5px] bg-[#F2613F] transform origin-bottom scale-y-0 transition-transform duration-200 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
       </div>
 
       {/* 3. NEXUS Connection Motif: Opposing micro-points */}
       <span
-        className="absolute top-1 left-1 w-1 h-1 rounded-full bg-[#EF5A2A] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        className="absolute top-1 left-1 w-1 h-1 rounded-full bg-[#F2613F] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         aria-hidden="true"
       />
       <span
-        className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-[#EF5A2A] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        className="absolute bottom-1 right-1 w-1 h-1 rounded-full bg-[#F2613F] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -217,7 +217,7 @@ export const PrimaryButton: React.FC<BaseButtonProps> = ({
         </span>
         {showArrow && (
           <span
-            className={`inline-flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-[#EF5A2A] group-hover:text-white ${
+            className={`inline-flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-[#F2613F] group-hover:text-[var(--text-primary)] ${
               arrowType === 'upRight'
                 ? 'group-hover:translate-x-1.5 group-hover:-translate-y-1'
                 : 'group-hover:translate-x-1.5'
@@ -270,7 +270,7 @@ export const PrimaryButton: React.FC<BaseButtonProps> = ({
  * SECONDARY BUTTON
  *
  * Restrained, architectural outlined treatment:
- * - Clean boundary on warm canvas (#FAF6F0) with dark border
+ * - Clean boundary on warm canvas (#141414) with subtle border
  * - "Ink Wash" hover sequence: subtle warm wash sweeps smoothly from left to right (350ms)
  * - Vertical orange micro-marker activates on left boundary
  * - Directional arrow shifts outward 5px
@@ -306,12 +306,12 @@ export const SecondaryButton: React.FC<BaseButtonProps> = ({
     relative inline-flex items-center justify-between gap-3.5
     ${sizeClasses}
     ${fullWidth ? 'w-full' : ''}
-    bg-[#FAF6F0] text-[#0A0A09] font-dosis font-bold tracking-[0.2em] uppercase
-    rounded-[2px] border border-[rgba(10,10,9,0.28)]
+    bg-[var(--bg-subsurface)] text-[var(--text-primary)] font-dosis font-bold tracking-[0.2em] uppercase
+    rounded-[2px] border border-[var(--border-subtle)]
     transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-    hover:border-[#0A0A09] hover:-translate-y-[2px] hover:shadow-[0_4px_12px_rgba(10,10,9,0.08)]
+    hover:border-[#F2613F] hover:bg-[var(--bg-surface)] hover:-translate-y-[2px] hover:shadow-sm
     active:scale-[0.985] active:translate-y-0
-    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0A0A09] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EEE5]
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]
     disabled:opacity-50 disabled:pointer-events-none cursor-pointer
     group select-none overflow-hidden
     ${className}
@@ -321,13 +321,13 @@ export const SecondaryButton: React.FC<BaseButtonProps> = ({
     <>
       {/* 1. Creative Ink/Paper Wash sweeping across the surface */}
       <span
-        className="absolute inset-0 bg-[#EF5A2A]/[0.08] origin-left scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 pointer-events-none"
+        className="absolute inset-0 bg-[#F2613F]/[0.10] origin-left scale-x-0 transition-transform duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 pointer-events-none"
         aria-hidden="true"
       />
 
       {/* 2. Left Edge Orange Architectural Micro-Bar */}
       <span
-        className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-[#EF5A2A] origin-top scale-y-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100 pointer-events-none"
+        className="absolute left-0 top-0 bottom-0 w-[2.5px] bg-[#F2613F] origin-top scale-y-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -338,7 +338,7 @@ export const SecondaryButton: React.FC<BaseButtonProps> = ({
         </span>
         {showArrow && (
           <span
-            className={`inline-flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-[#66615A] group-hover:text-[#EF5A2A] ${
+            className={`inline-flex items-center justify-center transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] text-[var(--text-muted)] group-hover:text-[#F2613F] ${
               arrowType === 'upRight'
                 ? 'group-hover:translate-x-1.5 group-hover:-translate-y-1'
                 : 'group-hover:translate-x-1.5'
@@ -408,10 +408,10 @@ export const TextLink: React.FC<BaseButtonProps> = ({
 
   const baseClasses = `
     relative inline-flex items-center gap-2.5 text-xs font-dosis font-bold tracking-[0.2em] uppercase
-    text-[#0A0A09] hover:text-[#0A0A09]
+    text-[var(--text-primary)] hover:text-[var(--text-primary)]
     transition-colors duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer
     group select-none py-1
-    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#EF5A2A]
+    focus:outline-none focus-visible:ring-1 focus-visible:ring-[#F2613F]
     ${className}
   `;
 
@@ -421,13 +421,13 @@ export const TextLink: React.FC<BaseButtonProps> = ({
         {content}
         {/* Architectural Underline */}
         <span
-          className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-[#EF5A2A] origin-left scale-x-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 pointer-events-none"
+          className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-[#F2613F] origin-left scale-x-0 transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 pointer-events-none"
           aria-hidden="true"
         />
       </span>
       {showArrow && (
         <span
-          className={`inline-flex items-center justify-center transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] text-[#EF5A2A] ${
+          className={`inline-flex items-center justify-center transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] text-[#F2613F] ${
             arrowType === 'upRight'
               ? 'group-hover:translate-x-1 group-hover:-translate-y-1'
               : 'group-hover:translate-x-1.5'
@@ -473,7 +473,7 @@ export const TextLink: React.FC<BaseButtonProps> = ({
  *
  * Geometric, architectural frame for utility and modal actions (Close, Menu, etc.):
  * - Square frame with restrained border
- * - Hover: border turns brand orange (#EF5A2A), subtle orange corner reticle appears, gentle lift
+ * - Hover: border turns brand orange (#F2613F), subtle orange corner reticle appears, gentle lift
  * - Active: tactile compression scale(0.96)
  */
 export interface NexusIconButtonProps {
@@ -505,18 +505,18 @@ export const NexusIconButton: React.FC<NexusIconButtonProps> = ({
       title={title || ariaLabel}
       className={`
         relative inline-flex items-center justify-center p-2.5 sm:p-3
-        bg-[#FAF6F0] text-[#0A0A09] border border-[rgba(10,10,9,0.22)] rounded-[2px]
+        bg-[var(--bg-surface)] text-[var(--text-primary)] border border-[var(--border-subtle)] rounded-[2px]
         transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)]
-        hover:border-[#EF5A2A] hover:bg-white hover:-translate-y-0.5 hover:shadow-xs
+        hover:border-[#F2613F] hover:bg-[var(--bg-elevated)] hover:-translate-y-0.5 hover:shadow-xs
         active:scale-[0.96] active:translate-y-0
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF5A2A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3EEE5]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]
         cursor-pointer group select-none overflow-hidden
         ${className}
       `}
     >
       {/* Top-Right Architectural Corner Reticle */}
       <span
-        className="absolute top-0 right-0 w-1.5 h-1.5 border-t-2 border-r-2 border-[#EF5A2A] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+        className="absolute top-0 right-0 w-1.5 h-1.5 border-t-2 border-r-2 border-[#F2613F] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
         aria-hidden="true"
       />
       {/* Icon with subtle hover reaction */}
@@ -532,7 +532,7 @@ export const NexusIconButton: React.FC<NexusIconButtonProps> = ({
  *
  * Architectural selector for categories, disciplines, and groups:
  * - Stable state: crisp border with editorial uppercase tracking
- * - Active state: solid obsidian #0A0A09 with bright ivory text #F3EEE5 and orange active reticle
+ * - Active state: elevated panel #22201F with bright text #F5EFE6 and orange active reticle
  * - Hover state: subtle lift and border engagement
  */
 export interface NexusFilterButtonProps {
@@ -561,11 +561,11 @@ export const NexusFilterButton: React.FC<NexusFilterButtonProps> = ({
         relative inline-flex items-center gap-2 px-3.5 py-1.5
         font-dosis text-xs uppercase tracking-[0.2em] font-bold rounded-[2px]
         transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer select-none
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF5A2A] focus-visible:ring-offset-1
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F] focus-visible:ring-offset-1
         ${
           active
-            ? 'bg-[#0A0A09] text-[#F3EEE5] border border-[#0A0A09] shadow-xs'
-            : 'bg-[#FAF6F0] text-[#66615A] hover:text-[#0A0A09] border border-[rgba(10,10,9,0.18)] hover:border-[#0A0A09] hover:-translate-y-[1px]'
+            ? 'bg-[var(--bg-elevated)] text-[var(--text-primary)] border border-[#F2613F] shadow-xs'
+            : 'bg-[var(--bg-subsurface)] text-[var(--text-muted)] hover:text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[var(--border-medium)] hover:bg-[var(--bg-surface)] hover:-translate-y-[1px]'
         }
         active:scale-[0.98]
         group
@@ -574,11 +574,11 @@ export const NexusFilterButton: React.FC<NexusFilterButtonProps> = ({
     >
       {/* Active Orange Indicator Notch */}
       {active && (
-        <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] shrink-0" aria-hidden="true" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] shrink-0" aria-hidden="true" />
       )}
       <span>{label}</span>
       {typeof count === 'number' && (
-        <span className={`text-[10px] tracking-normal opacity-60 ${active ? 'text-[#EF5A2A]' : ''}`}>
+        <span className={`text-[10px] tracking-normal opacity-60 ${active ? 'text-[#F2613F]' : ''}`}>
           ({count})
         </span>
       )}
@@ -615,12 +615,12 @@ export const NexusDirectionalButton: React.FC<NexusDirectionalButtonProps> = ({
       onClick={onClick}
       className={`
         relative inline-flex items-center justify-between gap-3 px-3.5 py-2
-        bg-[#FAF6F0] text-[#0A0A09] font-dosis font-bold text-xs tracking-[0.18em] uppercase
-        border border-[rgba(10,10,9,0.22)] rounded-[2px]
+        bg-[var(--bg-surface)] text-[var(--text-primary)] font-dosis font-bold text-xs tracking-[0.18em] uppercase
+        border border-[var(--border-subtle)] rounded-[2px]
         transition-all duration-250 ease-[cubic-bezier(0.16,1,0.3,1)]
-        hover:border-[#EF5A2A] hover:bg-white hover:-translate-y-[1px] hover:shadow-xs
+        hover:border-[#F2613F] hover:bg-[var(--bg-elevated)] hover:-translate-y-[1px] hover:shadow-xs
         active:scale-[0.98] active:translate-y-0
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF5A2A]
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F]
         cursor-pointer group select-none
         ${className}
       `}
@@ -628,7 +628,7 @@ export const NexusDirectionalButton: React.FC<NexusDirectionalButtonProps> = ({
       <span className="transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5">
         {label}
       </span>
-      <span className="inline-flex items-center text-[#EF5A2A] transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
+      <span className="inline-flex items-center text-[#F2613F] transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1">
         {icon || <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />}
       </span>
     </button>

@@ -48,12 +48,12 @@ export const AboutSection04Building: React.FC = () => {
       ref={sectionRef}
       id="about-building"
       aria-labelledby="about-building-title"
-      className="w-full py-12 sm:py-16 md:py-20 border-b border-[#0A0A09]/10 relative overflow-hidden"
+      className="w-full py-12 sm:py-16 md:py-20 border-b border-[var(--border-subtle)] relative overflow-hidden bg-[var(--bg-primary)] transition-colors duration-250"
     >
       {/* Subtle Scroll Parallax Watermark */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: watermarkY }}
-        className="absolute -right-6 md:right-10 top-12 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[#0A0A09]/[0.035] select-none pointer-events-none will-change-transform leading-none z-0"
+        className="absolute -right-6 md:right-10 top-12 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[var(--text-primary)]/[0.03] select-none pointer-events-none will-change-transform leading-none z-0"
         aria-hidden="true"
       >
         04
@@ -68,7 +68,7 @@ export const AboutSection04Building: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 md:mb-12"
         >
-          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#EF5A2A] font-semibold">
+          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#F2613F] font-semibold">
             04 / HOW WE BUILD
           </span>
           <h2 id="about-building-title" className="sr-only">
@@ -95,31 +95,33 @@ export const AboutSection04Building: React.FC = () => {
               >
                 <span
                   className={`font-dosis font-bold text-xs tracking-[0.26em] uppercase ${
-                    step.accent ? 'text-[#EF5A2A]' : 'text-[#66615A]'
+                    step.accent ? 'text-[#F2613F]' : 'text-[var(--text-muted)]'
                   }`}
                 >
                   {step.tag}
                 </span>
-                <h3 className="font-fraunces text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0A0A09] leading-snug">
+
+                <h3 className="font-fraunces text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] leading-tight">
                   {step.title}
                 </h3>
-                <p className="font-bitter text-base text-[#66615A] leading-relaxed pt-2">
+
+                <p className="font-bitter text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>
             ))}
           </div>
 
-          {/* Editorial Pull Quote / Synthesis statement */}
+          {/* Synthesis Statement */}
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
-            transition={{ duration: 0.85, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="pt-12 border-t border-[#0A0A09]/10 max-w-3xl"
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="pt-6 border-t border-[var(--border-subtle)]"
           >
-            <p className="font-fraunces italic text-2xl sm:text-3xl text-[#0A0A09] leading-relaxed">
-              We do not treat engineering as downstream of design, nor design as decoration for code. They are equal partners in discovery.
+            <p className="font-bitter italic text-lg sm:text-xl md:text-2xl text-[var(--text-primary)]/90 max-w-3xl leading-relaxed">
+              &ldquo;Building isn&rsquo;t what happens after thinking. It&rsquo;s how we think.&rdquo;
             </p>
           </motion.div>
         </div>

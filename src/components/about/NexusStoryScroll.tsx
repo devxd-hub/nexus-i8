@@ -236,10 +236,10 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
       ref={sectionRef}
       id="nexus-story-scroll-section"
       aria-label="NEXUS Narrative Story Scroll"
-      className={`nexus-story-scroll relative w-full h-[260svh] bg-[#F3EEE5] text-[#0A0A09] ${className}`}
+      className={`nexus-story-scroll relative w-full h-[260svh] bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-250 ${className}`}
     >
       <div className="nexus-story-track relative w-full h-full">
-        <div className="nexus-story-stage sticky top-20 sm:top-24 md:top-28 w-full h-[calc(100svh-5rem)] sm:h-[calc(100svh-6rem)] md:h-[calc(100svh-7rem)] overflow-hidden flex flex-col justify-center py-4 sm:py-6 border-b border-[#0A0A09]/10">
+        <div className="nexus-story-stage sticky top-20 sm:top-24 md:top-28 w-full h-[calc(100svh-5rem)] sm:h-[calc(100svh-6rem)] md:h-[calc(100svh-7rem)] overflow-hidden flex flex-col justify-center py-4 sm:py-6 border-b border-[var(--border-subtle)]">
           <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 lg:px-20 flex-1 min-h-0 flex items-center">
             
             {/* Story Chapter Container */}
@@ -257,7 +257,7 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
                   >
                     {/* Chapter Label */}
                     <div style={styles.label} className="will-change-transform">
-                      <span className="font-dosis uppercase text-xs sm:text-sm tracking-[0.22em] text-[#EF5A2A] font-bold">
+                      <span className="font-dosis uppercase text-xs sm:text-sm tracking-[0.22em] text-[#F2613F] font-bold">
                         {ch.number} / {ch.label}
                       </span>
                     </div>
@@ -267,7 +267,7 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
                       {ch.headlineLines.map((line, lIdx) => (
                         <div
                           key={lIdx}
-                          className="font-fraunces text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#0A0A09] leading-[1.02] sm:leading-[0.98]"
+                          className="font-fraunces text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.02] sm:leading-[0.98]"
                         >
                           {line}
                         </div>
@@ -279,7 +279,7 @@ export const NexusStoryScroll: React.FC<NexusStoryScrollProps> = ({ className = 
                       {ch.textLines.map((tLine, tIdx) => (
                         <p
                           key={tIdx}
-                          className="font-bitter text-sm sm:text-base md:text-lg text-[#0A0A09]/70 leading-relaxed"
+                          className="font-bitter text-sm sm:text-base md:text-lg text-[var(--text-secondary)] leading-relaxed"
                         >
                           {tLine}
                         </p>

@@ -23,17 +23,17 @@
 
 export const PENGUIN_COLORS: Record<string, string> = {
   '.': 'transparent',
-  K: '#151311', // Primary Charcoal Coat
-  D: '#0D0C0B', // Coat Shadow
-  S: '#2C2925', // Subtle Rim Highlight
+  K: '#181818', // Primary Charcoal Coat
+  D: '#0C0C0C', // Coat Shadow
+  S: '#22201F', // Subtle Rim Highlight
   W: '#FFFFFF', // Eye Glint / Pure White
-  C: '#F3EEE5', // Warm Cream Face & Belly
-  G: '#DDD6C9', // Warm Cream Shading
-  O: '#EF5A2A', // NEXUS Signature Orange (Beak, Emblem, Feet)
+  C: '#F5EFE6', // Warm Cream Face & Belly
+  G: '#C2BBB0', // Warm Cream Shading
+  O: '#F2613F', // NEXUS Signature Orange (Beak, Emblem, Feet)
   L: '#FF7D4F', // Orange Highlight
   F: '#CC4618', // Orange Shadow / Edge
-  E: '#0A0A09', // Deep Pupil
-  R: '#EF5A2A', // Pixel Heart / Accent Orange-Red
+  E: '#0C0C0C', // Deep Pupil
+  R: '#F2613F', // Pixel Heart / Accent Orange-Red
 };
 
 export type PenguinFrameKey =

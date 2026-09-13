@@ -28,12 +28,12 @@ export const AboutSection05Beliefs: React.FC = () => {
       ref={sectionRef}
       id="about-beliefs"
       aria-labelledby="about-beliefs-title"
-      className="w-full py-12 sm:py-16 md:py-20 border-b border-[#0A0A09]/10 relative overflow-hidden"
+      className="w-full py-12 sm:py-16 md:py-20 border-b border-[var(--border-subtle)] relative overflow-hidden bg-[var(--bg-primary)] transition-colors duration-250"
     >
       {/* Subtle Scroll Parallax Watermark */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: watermarkY }}
-        className="absolute -right-6 md:right-10 top-16 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[#0A0A09]/[0.035] select-none pointer-events-none will-change-transform leading-none z-0"
+        className="absolute -right-6 md:right-10 top-16 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[var(--text-primary)]/[0.03] select-none pointer-events-none will-change-transform leading-none z-0"
         aria-hidden="true"
       >
         05
@@ -48,7 +48,7 @@ export const AboutSection05Beliefs: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 md:mb-10"
         >
-          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#EF5A2A] font-semibold">
+          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#F2613F] font-semibold">
             05 / WHAT WE BELIEVE
           </span>
         </motion.div>
@@ -59,7 +59,7 @@ export const AboutSection05Beliefs: React.FC = () => {
             id="about-beliefs-title"
             as="h2"
             text="START BEFORE YOU ARE READY."
-            className="font-fraunces text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-[#0A0A09] leading-[0.98]"
+            className="font-fraunces text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-[var(--text-primary)] leading-[0.98]"
             delay={0.1}
             stagger={0.045}
           />
@@ -71,7 +71,7 @@ export const AboutSection05Beliefs: React.FC = () => {
             transition={{ duration: 0.85, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-xl"
           >
-            <p className="font-bitter text-lg sm:text-xl text-[#66615A] leading-relaxed">
+            <p className="font-bitter text-lg sm:text-xl text-[var(--text-secondary)] leading-relaxed">
               Waiting for complete clarity is a delay tactic. The most valuable insights, skills, and partnerships are discovered in the middle of building—not before.
             </p>
           </motion.div>

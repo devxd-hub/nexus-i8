@@ -85,12 +85,12 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
         top: `${posY}px`,
         zIndex: 9999,
       }}
-      className="w-56 bg-[#16171F] border border-[rgba(243,238,229,0.18)] rounded-[3px] shadow-[0_12px_32px_rgba(0,0,0,0.8)] py-1.5 text-[#F3EEE5] font-mono text-xs select-none animate-in fade-in zoom-in-95 duration-100"
+      className="w-56 bg-[#181818] border border-[rgba(245,239,230,0.14)] rounded-[3px] shadow-[0_12px_32px_rgba(0,0,0,0.8)] py-1.5 text-[#F5EFE6] font-mono text-xs select-none animate-in fade-in zoom-in-95 duration-100"
     >
       {state.targetType === 'project-folder' && state.targetProject ? (
         /* FOLDER CONTEXT MENU */
         <div className="space-y-0.5">
-          <div className="px-3 py-1 text-[10px] text-[#EF5A2A] font-bold border-b border-white/10 uppercase truncate">
+          <div className="px-3 py-1 text-[10px] text-[#F2613F] font-bold border-b border-[rgba(245,239,230,0.10)] uppercase truncate">
             📁 {state.targetProject.title}
           </div>
 
@@ -99,7 +99,7 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onOpenProject(state.targetProject!);
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <Folder className="w-3.5 h-3.5" />
             <span>Open Project</span>
@@ -110,7 +110,7 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onOpenProperties(state.targetProject!);
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Properties & Specs</span>
@@ -122,9 +122,9 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
                 window.open(state.targetProject!.githubUrl, '_blank', 'noopener,noreferrer');
                 onClose();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+              className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-[#EF5A2A]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#F2613F]" />
               <span>Open GitHub</span>
             </button>
           )}
@@ -135,9 +135,9 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
                 window.open(state.targetProject!.demoUrl, '_blank', 'noopener,noreferrer');
                 onClose();
               }}
-              className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+              className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
             >
-              <ExternalLink className="w-3.5 h-3.5 text-[#EF5A2A]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#F2613F]" />
               <span>Open Live Demo</span>
             </button>
           )}
@@ -150,10 +150,10 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onOpenTerminal();
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center justify-between cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center justify-between cursor-pointer transition-colors"
           >
             <div className="flex items-center gap-2">
-              <Terminal className="w-3.5 h-3.5 text-[#EF5A2A]" />
+              <Terminal className="w-3.5 h-3.5 text-[#F2613F]" />
               <span>Open Terminal</span>
             </div>
             <span className="text-[10px] opacity-60">Ctrl+Alt+T</span>
@@ -164,15 +164,15 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onOpenFileManager();
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
-            <Folder className="w-3.5 h-3.5 text-[#EF5A2A]" />
+            <Folder className="w-3.5 h-3.5 text-[#F2613F]" />
             <span>Open Files Explorer</span>
           </button>
 
-          <div className="my-1 border-t border-white/10" />
+          <div className="my-1 border-t border-[rgba(245,239,230,0.10)]" />
 
-          <div className="px-3 py-1 text-[10px] text-[#8C8881] uppercase font-bold tracking-wider">
+          <div className="px-3 py-1 text-[10px] text-[#857E74] uppercase font-bold tracking-wider">
             Sort Projects
           </div>
 
@@ -181,7 +181,7 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onSort('name');
               onClose();
             }}
-            className="w-full px-4 py-1 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-4 py-1 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <span>• By Name (A-Z)</span>
           </button>
@@ -191,7 +191,7 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onSort('year');
               onClose();
             }}
-            className="w-full px-4 py-1 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-4 py-1 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <span>• By Year (Newest)</span>
           </button>
@@ -201,19 +201,19 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onSort('category');
               onClose();
             }}
-            className="w-full px-4 py-1 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-4 py-1 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <span>• By Category</span>
           </button>
 
-          <div className="my-1 border-t border-white/10" />
+          <div className="my-1 border-t border-[rgba(245,239,230,0.10)]" />
 
           <button
             onClick={() => {
               onRefresh();
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center justify-between cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center justify-between cursor-pointer transition-colors"
           >
             <div className="flex items-center gap-2">
               <RotateCw className="w-3.5 h-3.5" />
@@ -227,20 +227,20 @@ export const LinuxContextMenu: React.FC<LinuxContextMenuProps> = ({
               onOpenSystemInfo();
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-[#EF5A2A] hover:text-[#0A0A09] flex items-center gap-2 cursor-pointer transition-colors"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors"
           >
             <Info className="w-3.5 h-3.5" />
             <span>About NEXUS Workspace</span>
           </button>
 
-          <div className="my-1 border-t border-white/10" />
+          <div className="my-1 border-t border-[rgba(245,239,230,0.10)]" />
 
           <button
             onClick={() => {
               onReturnToWeb();
               onClose();
             }}
-            className="w-full px-3 py-1.5 text-left hover:bg-white hover:text-[#0A0A09] text-[#EF5A2A] flex items-center gap-2 cursor-pointer transition-colors font-bold"
+            className="w-full px-3 py-1.5 text-left hover:bg-[#22201F] hover:text-[#F5EFE6] text-[#F2613F] flex items-center gap-2 cursor-pointer transition-colors font-bold"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Web (Exit)</span>

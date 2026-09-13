@@ -20,10 +20,10 @@ export const NexusSignature: React.FC = () => {
     <section
       id="about-nexus-signature"
       aria-label="About NEXUS and Living ASCII Penguin Mascot"
-      className="relative w-full flex flex-col items-center justify-center pt-8 sm:pt-12 md:pt-14 pb-8 sm:pb-12 md:pb-14 bg-[#F3EEE5] border-b border-[#0A0A09]/10 overflow-hidden"
+      className="relative w-full flex flex-col items-center justify-center pt-8 sm:pt-12 md:pt-14 pb-8 sm:pb-12 md:pb-14 bg-[var(--bg-primary)] border-b border-[var(--border-subtle)] overflow-hidden transition-colors duration-250"
     >
       {/* Interactive Ambient ASCII Glitch Background Layer */}
-      <AsciiGlitchBackground accentColor="#EF5A2A" interactive={true} />
+      <AsciiGlitchBackground accentColor="#F2613F" interactive={true} />
 
       {/* Foreground Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 lg:px-20 pointer-events-none">
@@ -33,34 +33,34 @@ export const NexusSignature: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col justify-center text-left pointer-events-auto">
             {/* Subtle Category Eyebrow with ASCII Accent */}
             <div className="mb-3 select-none flex items-center space-x-2">
-              <span className="text-[#EF5A2A] font-mono text-xs">/ /</span>
-              <span className="font-dosis uppercase text-[11px] sm:text-xs tracking-[0.28em] text-[#EF5A2A] font-bold">
+              <span className="text-[#F2613F] font-mono text-xs">/ /</span>
+              <span className="font-dosis uppercase text-[11px] sm:text-xs tracking-[0.28em] text-[#F2613F] font-bold">
                 OUR STORY & PHILOSOPHY
               </span>
             </div>
 
             {/* Primary Heading */}
-            <h1 className="font-fraunces font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#0A0A09] leading-none select-none mb-6">
+            <h1 className="font-fraunces font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[var(--text-primary)] leading-none select-none mb-6">
               About
             </h1>
 
             {/* Kind & Good Text */}
             <div className="space-y-4 max-w-xl">
-              <p className="font-jakarta text-base sm:text-lg md:text-xl text-[#0A0A09]/80 font-normal leading-relaxed">
+              <p className="font-jakarta text-base sm:text-lg md:text-xl text-[var(--text-secondary)] font-normal leading-relaxed">
                 Built with care, kindness, and attention to every detail. We believe that steady, thoughtful steps and genuine curiosity can turn simple ideas into delightful experiences.
               </p>
 
-              <p className="font-jakarta text-sm sm:text-base text-[#0A0A09]/60 font-light leading-relaxed">
+              <p className="font-jakarta text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed">
                 Taking things one stride at a time, with warmth, optimism, and purpose.
               </p>
             </div>
 
             {/* Micro ASCII Architectural Stamp */}
-            <div className="mt-8 flex items-center space-x-3 text-[11px] font-mono text-[#0A0A09]/40 select-none">
-              <span className="text-[#EF5A2A]">[+]</span>
+            <div className="mt-8 flex items-center space-x-3 text-[11px] font-mono text-[var(--text-muted)] select-none">
+              <span className="text-[#F2613F]">[+]</span>
               <span>EST. 2026</span>
-              <span className="text-[#0A0A09]/20">///</span>
-              <span>COMMUNITY_FIRST</span>
+              <span>•</span>
+              <span>CONTINUOUS EVOLUTION</span>
             </div>
           </div>
 
@@ -71,7 +71,7 @@ export const NexusSignature: React.FC = () => {
                 id="nexus-about-ascii-penguin"
                 className="w-full h-full"
                 maxHeight={440}
-                color="#EF5A2A"
+                color="#F2613F"
                 stationary={true}
               />
             </div>

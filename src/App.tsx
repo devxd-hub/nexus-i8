@@ -5,6 +5,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { ThemeProvider } from './context/ThemeContext.tsx';
+import { CinematicTransitionProvider } from './context/CinematicTransitionContext.tsx';
+import { CinematicThemeTransition } from './components/motion/CinematicThemeTransition.tsx';
 import { Navbar } from './components/layout/Navbar.tsx';
 import { Footer } from './components/layout/Footer.tsx';
 import { ContextCursor } from './components/cursor/ContextCursor.tsx';
@@ -73,52 +76,59 @@ export default function App() {
   const isProjectsWorkspace = currentRoute === '/projects';
 
   return (
-    <div className={`min-h-screen flex flex-col ${isProjectsWorkspace ? 'bg-[#0D0E13] text-[#F3EEE5]' : 'bg-[#F3EEE5] text-[#0A0A09]'}`}>
-      {/* Cinematic Brand Preloader: "THE X IS THE NEXUS" */}
-      {showPreloader && (
-        <CinematicPreloader
-          onHandoffStart={() => setIsHandoffStarted(true)}
-          onComplete={() => {
-            setShowPreloader(false);
-            setIsHandoffStarted(true);
-          }}
-        />
-      )}
+    <ThemeProvider>
+      <CinematicTransitionProvider>
+        {/* Cinematic theme transition overlay — above all UI, below nothing */}
+        <CinematicThemeTransition />
 
-      {/* Global Isolated Mascot Director (Active on standard website pages) */}
-      {!isProjectsWorkspace && (
-        <NexusPenguin currentRoute={currentRoute} preloaderFinished={!showPreloader} />
-      )}
+        <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-250">
+          {/* Cinematic Brand Preloader: "THE X IS THE NEXUS" */}
+          {showPreloader && (
+            <CinematicPreloader
+              onHandoffStart={() => setIsHandoffStarted(true)}
+              onComplete={() => {
+                setShowPreloader(false);
+                setIsHandoffStarted(true);
+              }}
+            />
+          )}
 
-      {/* Contextual Cursor for fine-pointer desktop interactions */}
-      <ContextCursor />
+          {/* Global Isolated Mascot Director (Active on standard website pages) */}
+          {!isProjectsWorkspace && (
+            <NexusPenguin currentRoute={currentRoute} preloaderFinished={!showPreloader} />
+          )}
 
-      {/* Persistent Global Responsive Navbar (Shown on all standard pages) */}
-      {!isProjectsWorkspace && (
-        <Navbar currentRoute={currentRoute} onRouteChange={handleRouteChange} />
-      )}
+          {/* Contextual Cursor for fine-pointer desktop interactions */}
+          <ContextCursor />
 
-      {/* Primary Route View */}
-      <main className="flex-1 w-full flex flex-col">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={currentRoute}
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
-            transition={{
-              duration: 0.45,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="w-full flex-1 flex flex-col"
-          >
-            {renderCurrentPage()}
-          </motion.div>
-        </AnimatePresence>
-      </main>
+          {/* Persistent Global Responsive Navbar (Shown on all standard pages) */}
+          {!isProjectsWorkspace && (
+            <Navbar currentRoute={currentRoute} onRouteChange={handleRouteChange} />
+          )}
 
-      {/* Persistent Global Footer (Shown on standard website pages) */}
-      {!isProjectsWorkspace && <Footer onRouteChange={handleRouteChange} />}
-    </div>
+          {/* Primary Route View */}
+          <main className="flex-1 w-full flex flex-col">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={currentRoute}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
+                animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -10 }}
+                transition={{
+                  duration: 0.45,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="w-full flex-1 flex flex-col"
+              >
+                {renderCurrentPage()}
+              </motion.div>
+            </AnimatePresence>
+          </main>
+
+          {/* Persistent Global Footer (Shown on standard website pages) */}
+          {!isProjectsWorkspace && <Footer onRouteChange={handleRouteChange} />}
+        </div>
+      </CinematicTransitionProvider>
+    </ThemeProvider>
   );
 }

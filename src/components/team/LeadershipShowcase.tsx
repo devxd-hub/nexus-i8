@@ -50,29 +50,29 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
   return (
     <section
       id={id}
-      className="relative w-full py-12 sm:py-16 bg-[#EBE4D8] text-[#0A0A09] border-b border-[#0A0A09]/20"
+      className="relative w-full py-12 sm:py-16 bg-[var(--bg-subsurface)] text-[var(--text-primary)] border-b border-[var(--border-subtle)]"
     >
       <Container>
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 sm:pb-8 border-b border-[#0A0A09]/15">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 sm:pb-8 border-b border-[var(--border-subtle)]">
           <div className="space-y-2">
             <div className="flex items-center gap-3">
               <SectionLabel number="01" label="LEADERSHIP &amp; ADVISORY" />
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#0A0A09] text-white text-[10px] font-dosis font-bold tracking-[0.22em] uppercase">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[var(--bg-surface)] text-[var(--text-primary)] text-[10px] font-dosis font-bold tracking-[0.22em] uppercase border border-[rgba(242,97,63,0.3)]">
                 <NexusIcon size="xs" />
                 <span>DIRECTORS</span>
               </span>
             </div>
-            <h2 className="font-fraunces font-bold text-3xl sm:text-4xl text-[#0A0A09] tracking-tight uppercase">
+            <h2 className="font-fraunces font-bold text-3xl sm:text-4xl text-[var(--text-primary)] tracking-tight uppercase">
               COORDINATOR &amp; MENTOR
             </h2>
-            <p className="font-bitter text-sm sm:text-base text-[#66615A] max-w-xl leading-relaxed">
+            <p className="font-bitter text-sm sm:text-base text-[var(--text-secondary)] max-w-xl leading-relaxed">
               Guiding studio operations, cross-disciplinary sprint roadmaps, engineering architecture, and squad mentorship.
             </p>
           </div>
 
-          <div className="flex items-center gap-2 font-dosis text-xs font-bold tracking-[0.2em] text-[#66615A] uppercase self-start sm:self-end">
-            <span className="font-fraunces text-2xl text-[#0A0A09] font-bold">
+          <div className="flex items-center gap-2 font-dosis text-xs font-bold tracking-[0.2em] text-[var(--text-muted)] uppercase self-start sm:self-end">
+            <span className="font-fraunces text-2xl text-[var(--text-primary)] font-bold">
               {String(leadershipMembers.length).padStart(2, '0')}
             </span>
             <span>LEADERS</span>
@@ -102,12 +102,12 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative bg-[#FAF7F2] border-2 border-[#0A0A09]/20 p-6 sm:p-7 flex flex-col justify-between transition-[transform,opacity,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none shadow-sm ${
+                className={`group relative bg-[var(--bg-surface)] border border-[var(--border-subtle)] p-6 sm:p-7 flex flex-col justify-between transition-[transform,opacity,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] transform-gpu cursor-pointer select-none shadow-sm ${
                   isHovered
-                    ? 'border-[#0A0A09] bg-white shadow-2xl -translate-y-1 z-10'
+                    ? 'border-[#F2613F] bg-[var(--bg-elevated)] shadow-xl -translate-y-1 z-10'
                     : isDimmed
-                    ? 'opacity-45'
-                    : 'hover:border-[#0A0A09]'
+                    ? 'opacity-40'
+                    : 'hover:border-[var(--border-medium)]'
                 }`}
                 role="button"
                 tabIndex={0}
@@ -121,15 +121,15 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
               >
                 <div>
                   {/* Top Meta Bar */}
-                  <div className="flex items-center justify-between pb-3 border-b border-[#0A0A09]/15 text-xs font-dosis font-bold tracking-[0.2em] uppercase">
-                    <span className="text-[#66615A]">{categoryLabel}</span>
-                    <span className="px-2 py-0.5 bg-[#EF5A2A] text-white text-[10px] tracking-[0.2em]">
+                  <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)] text-xs font-dosis font-bold tracking-[0.2em] uppercase">
+                    <span className="text-[var(--text-muted)]">{categoryLabel}</span>
+                    <span className="px-2 py-0.5 bg-[#F2613F] text-[#F5EFE6] text-[10px] tracking-[0.2em]">
                       {badge}
                     </span>
                   </div>
 
                   {/* Prominent Portrait (Larger scale than standard cards) */}
-                  <div className="relative w-full aspect-[4/5] my-4 bg-[#E5DFD4] overflow-hidden border border-[#0A0A09]/20 shadow-xs">
+                  <div className="relative w-full aspect-[4/5] my-4 bg-[var(--bg-subsurface)] overflow-hidden border border-[var(--border-subtle)] shadow-xs">
                     {member.imageUrl ? (
                       <img
                         src={member.imageUrl}
@@ -142,7 +142,7 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
                         decoding="async"
                       />
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center text-[#66615A] bg-[#ECE5D8]">
+                      <div className="w-full h-full flex flex-col items-center justify-center text-[var(--text-muted)] bg-[var(--bg-subsurface)]">
                         <NexusIcon size="lg" />
                         <span className="mt-2 font-dosis text-xs tracking-widest uppercase">
                           PORTRAIT
@@ -152,12 +152,12 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
 
                     {/* Corner Architectural Pins */}
                     <div
-                      className={`absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF5A2A] transition-opacity duration-200 ${
+                      className={`absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#F2613F] transition-opacity duration-200 ${
                         isHovered ? 'opacity-100' : 'opacity-80'
                       }`}
                     />
                     <div
-                      className={`absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF5A2A] transition-opacity duration-200 ${
+                      className={`absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#F2613F] transition-opacity duration-200 ${
                         isHovered ? 'opacity-100' : 'opacity-80'
                       }`}
                     />
@@ -166,22 +166,22 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
                   {/* Identity & Role Description */}
                   <div className="space-y-2.5 pt-1">
                     <div className="space-y-1">
-                      <span className="text-xs font-dosis font-bold tracking-[0.24em] text-[#EF5A2A] uppercase block">
+                      <span className="text-xs font-dosis font-bold tracking-[0.24em] text-[#F2613F] uppercase block">
                         {member.role}
                       </span>
-                      <h3 className="font-fraunces font-bold text-2xl sm:text-3xl text-[#0A0A09] tracking-tight leading-tight">
+                      <h3 className="font-fraunces font-bold text-2xl sm:text-3xl text-[var(--text-primary)] tracking-tight leading-tight">
                         {member.name}
                       </h3>
                     </div>
 
                     {member.discipline && (
-                      <p className="font-bitter text-sm sm:text-[15px] font-semibold text-[#0A0A09] leading-snug">
+                      <p className="font-bitter text-sm sm:text-[15px] font-semibold text-[var(--text-primary)] leading-snug">
                         {member.discipline}
                       </p>
                     )}
 
                     {member.bio && (
-                      <p className="font-bitter text-xs sm:text-sm text-[#66615A] leading-relaxed line-clamp-3 pt-1">
+                      <p className="font-bitter text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-3 pt-1">
                         {member.bio}
                       </p>
                     )}
@@ -189,7 +189,7 @@ export const LeadershipShowcase: React.FC<LeadershipShowcaseProps> = ({
                 </div>
 
                 {/* Footer Action */}
-                <div className="pt-5 mt-5 flex items-center justify-between border-t border-[#0A0A09]/15 text-xs font-dosis font-bold tracking-[0.22em] text-[#0A0A09] group-hover:text-[#EF5A2A] transition-colors duration-200">
+                <div className="pt-5 mt-5 flex items-center justify-between border-t border-[var(--border-subtle)] text-xs font-dosis font-bold tracking-[0.22em] text-[var(--text-primary)] group-hover:text-[#F2613F] transition-colors duration-200">
                   <span>EXPLORE DOSSIER</span>
                   <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                 </div>

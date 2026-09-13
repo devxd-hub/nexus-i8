@@ -160,13 +160,13 @@ export const OrangeThread: React.FC<OrangeThreadProps> = ({ className = '' }) =>
         preserveAspectRatio="none"
       >
         {/* Architectural hairline guide ticks at top border margin alignments */}
-        <line x1="120" y1="0" x2="120" y2="14" stroke="rgba(10, 10, 9, 0.12)" strokeWidth="1" />
-        <line x1="1320" y1="0" x2="1320" y2="14" stroke="rgba(10, 10, 9, 0.12)" strokeWidth="1" />
+        <line x1="120" y1="0" x2="120" y2="14" stroke="rgba(245, 239, 230, 0.12)" strokeWidth="1" />
+        <line x1="1320" y1="0" x2="1320" y2="14" stroke="rgba(245, 239, 230, 0.12)" strokeWidth="1" />
 
         {/* Subtle background track */}
         <path
           d={trajectoryPath}
-          stroke="rgba(239, 90, 42, 0.12)"
+          stroke="rgba(242, 97, 63, 0.15)"
           strokeWidth="1"
           fill="none"
         />
@@ -174,7 +174,7 @@ export const OrangeThread: React.FC<OrangeThreadProps> = ({ className = '' }) =>
         {/* Active animated thread with restrained elegance */}
         <motion.path
           d={trajectoryPath}
-          stroke="#EF5A2A"
+          stroke="#F2613F"
           strokeWidth="1.5"
           strokeDasharray="6 4"
           strokeLinecap="round"
@@ -202,12 +202,12 @@ export const OrangeThread: React.FC<OrangeThreadProps> = ({ className = '' }) =>
         {/* Intersection marker nodes representing IDEA → PEOPLE → PROJECT */}
         <g opacity="0.85">
           {/* Node 1: Atmosphere & entry cue, positioned cleanly in upper area */}
-          <circle cx="180" cy="36" r="2.5" fill="#EF5A2A" />
+          <circle cx="180" cy="36" r="2.5" fill="#F2613F" />
           <circle
             cx="180"
             cy="36"
             r="6"
-            stroke="#EF5A2A"
+            stroke="#F2613F"
             strokeWidth="0.75"
             strokeDasharray="2 2"
             fill="none"
@@ -215,19 +215,19 @@ export const OrangeThread: React.FC<OrangeThreadProps> = ({ className = '' }) =>
           />
 
           {/* Node 2: Behind Hero / Central Nexus wordmark */}
-          <circle cx="720" cy="168" r="3.5" fill="#EF5A2A" />
+          <circle cx="720" cy="168" r="3.5" fill="#F2613F" />
           <circle
             cx="720"
             cy="168"
             r="8"
-            stroke="#EF5A2A"
+            stroke="#F2613F"
             strokeWidth="0.75"
             strokeDasharray="2 2"
             fill="none"
           />
 
           {/* Node 3: Downstream transition toward projects */}
-          <circle cx="720" cy="420" r="2.5" fill="#EF5A2A" />
+          <circle cx="720" cy="420" r="2.5" fill="#F2613F" />
         </g>
       </svg>
     </div>

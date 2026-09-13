@@ -48,17 +48,17 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#111217]">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#141414]">
       {/* File Inspector Top Toolbar */}
-      <div className="h-10 px-4 bg-[#181A22] border-b border-[rgba(243,238,229,0.1)] flex items-center justify-between gap-4 shrink-0">
+      <div className="h-10 px-4 bg-[#181818] border-b border-[rgba(245,239,230,0.10)] flex items-center justify-between gap-4 shrink-0">
         {/* Tab Buttons */}
         <div className="flex items-center gap-1 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-3 py-1 font-mono text-xs rounded-[2px] transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'overview'
-                ? 'bg-[#EF5A2A] text-[#0A0A09] font-bold'
-                : 'text-[#A6A095] hover:text-[#F3EEE5] hover:bg-white/[0.06]'
+                ? 'bg-[#F2613F] text-[#F5EFE6] font-bold'
+                : 'text-[#857E74] hover:text-[#F5EFE6] hover:bg-white/[0.06]'
             }`}
           >
             <Layers className="w-3 h-3" />
@@ -69,8 +69,8 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
             onClick={() => setActiveTab('readme')}
             className={`px-3 py-1 font-mono text-xs rounded-[2px] transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'readme'
-                ? 'bg-[#EF5A2A] text-[#0A0A09] font-bold'
-                : 'text-[#A6A095] hover:text-[#F3EEE5] hover:bg-white/[0.06]'
+                ? 'bg-[#F2613F] text-[#F5EFE6] font-bold'
+                : 'text-[#857E74] hover:text-[#F5EFE6] hover:bg-white/[0.06]'
             }`}
           >
             <FileText className="w-3 h-3" />
@@ -81,8 +81,8 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
             onClick={() => setActiveTab('deliverables')}
             className={`px-3 py-1 font-mono text-xs rounded-[2px] transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'deliverables'
-                ? 'bg-[#EF5A2A] text-[#0A0A09] font-bold'
-                : 'text-[#A6A095] hover:text-[#F3EEE5] hover:bg-white/[0.06]'
+                ? 'bg-[#F2613F] text-[#F5EFE6] font-bold'
+                : 'text-[#857E74] hover:text-[#F5EFE6] hover:bg-white/[0.06]'
             }`}
           >
             <CheckCircle2 className="w-3 h-3" />
@@ -93,8 +93,8 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
             onClick={() => setActiveTab('json')}
             className={`px-3 py-1 font-mono text-xs rounded-[2px] transition-colors flex items-center gap-1.5 cursor-pointer ${
               activeTab === 'json'
-                ? 'bg-[#EF5A2A] text-[#0A0A09] font-bold'
-                : 'text-[#A6A095] hover:text-[#F3EEE5] hover:bg-white/[0.06]'
+                ? 'bg-[#F2613F] text-[#F5EFE6] font-bold'
+                : 'text-[#857E74] hover:text-[#F5EFE6] hover:bg-white/[0.06]'
             }`}
           >
             <Code className="w-3 h-3" />
@@ -106,26 +106,26 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={handleCopy}
-            className="p-1.5 text-[#A6A095] hover:text-[#F3EEE5] bg-white/[0.04] hover:bg-white/[0.1] rounded-[2px] transition-colors cursor-pointer"
+            className="p-1.5 text-[#857E74] hover:text-[#F5EFE6] bg-white/[0.04] hover:bg-white/[0.1] rounded-[2px] transition-colors cursor-pointer"
             title="Copy metadata JSON"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-[#EF5A2A]" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-[#F2613F]" /> : <Copy className="w-3.5 h-3.5" />}
           </button>
 
           {project.demoUrl && (
             <button
               onClick={handleOpenDemo}
-              className="px-2.5 py-1 bg-white/[0.08] hover:bg-white/[0.16] text-[#F3EEE5] font-mono text-xs rounded-[2px] flex items-center gap-1.5 transition-colors cursor-pointer border border-white/10"
+              className="px-2.5 py-1 bg-white/[0.08] hover:bg-white/[0.16] text-[#F5EFE6] font-mono text-xs rounded-[2px] flex items-center gap-1.5 transition-colors cursor-pointer border border-white/10"
             >
               <span>LIVE DEMO</span>
-              <ExternalLink className="w-3 h-3 text-[#EF5A2A]" />
+              <ExternalLink className="w-3 h-3 text-[#F2613F]" />
             </button>
           )}
 
           {project.githubUrl ? (
             <button
               onClick={handleOpenGithub}
-              className="px-2.5 py-1 bg-[#EF5A2A] hover:bg-[#d94e22] text-[#0A0A09] font-mono text-xs font-bold rounded-[2px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+              className="px-2.5 py-1 bg-[#F2613F] hover:bg-[#d94e22] text-[#F5EFE6] font-mono text-xs font-bold rounded-[2px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
             >
               <Github className="w-3 h-3" />
               <span>GITHUB</span>
@@ -134,7 +134,7 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
           ) : (
             <span
               title="Repository is currently internal or restricted"
-              className="px-2 py-1 bg-white/[0.04] text-[#66615A] font-mono text-[11px] rounded-[2px] border border-white/5 cursor-not-allowed select-none"
+              className="px-2 py-1 bg-white/[0.04] text-[#857E74] font-mono text-[11px] rounded-[2px] border border-white/5 cursor-not-allowed select-none"
             >
               REPO RESTRICTED
             </span>
@@ -143,43 +143,43 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
       </div>
 
       {/* Tab Content Body */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 text-[#F3EEE5] select-text">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 text-[#F5EFE6] select-text">
         {/* OVERVIEW TAB */}
         {activeTab === 'overview' && (
           <div className="space-y-6 max-w-3xl">
             {/* Header Identity */}
-            <div className="pb-4 border-b border-[rgba(243,238,229,0.1)]">
-              <div className="flex items-center gap-2 font-mono text-xs text-[#EF5A2A] mb-1">
+            <div className="pb-4 border-b border-[rgba(245,239,230,0.10)]">
+              <div className="flex items-center gap-2 font-mono text-xs text-[#F2613F] mb-1">
                 <span>{project.projectNumber}</span>
                 <span>//</span>
                 <span>STATUS: {project.status.toUpperCase()}</span>
                 <span>//</span>
                 <span>{project.year}</span>
               </div>
-              <h1 className="font-fraunces font-bold text-3xl sm:text-4xl text-white tracking-tight">
+              <h1 className="font-fraunces font-bold text-3xl sm:text-4xl text-[#F5EFE6] tracking-tight">
                 {project.title}
               </h1>
-              <p className="font-mono text-xs text-[#A6A095] uppercase tracking-wider mt-1">
+              <p className="font-mono text-xs text-[#857E74] uppercase tracking-wider mt-1">
                 {project.disciplines}
               </p>
             </div>
 
             {/* Core Summary */}
-            <div className="p-4 bg-[#181A22] border border-[rgba(243,238,229,0.08)] rounded-[2px]">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#EF5A2A] block mb-1">
+            <div className="p-4 bg-[#181818] border border-[rgba(245,239,230,0.10)] rounded-[2px]">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-[#F2613F] block mb-1">
                 EXECUTIVE SUMMARY
               </span>
-              <p className="font-bitter text-base text-[#F3EEE5] leading-relaxed">
+              <p className="font-bitter text-base text-[#F5EFE6] leading-relaxed">
                 {project.summary}
               </p>
             </div>
 
             {/* Deep Description */}
             <div className="space-y-2">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#A6A095]">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#857E74]">
                 PROJECT CONTEXT & METHODOLOGY
               </span>
-              <p className="font-bitter text-sm text-[#D3CDC3] leading-relaxed">
+              <p className="font-bitter text-sm text-[#C2BBB0] leading-relaxed">
                 {project.description}
               </p>
             </div>
@@ -187,15 +187,15 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
             {/* Student Leads & Tech Stack */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               {/* Student Leads */}
-              <div className="p-4 bg-[#181A22] border border-[rgba(243,238,229,0.08)] rounded-[2px] space-y-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#EF5A2A] flex items-center gap-1.5">
+              <div className="p-4 bg-[#181818] border border-[rgba(245,239,230,0.10)] rounded-[2px] space-y-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#F2613F] flex items-center gap-1.5">
                   <Users className="w-3 h-3" />
                   <span>STUDENT SQUAD LEADS</span>
                 </span>
                 <ul className="space-y-1">
                   {project.leadStudents.map((lead) => (
-                    <li key={lead} className="font-mono text-xs text-[#F3EEE5] flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-[#EF5A2A] rounded-full" />
+                    <li key={lead} className="font-mono text-xs text-[#F5EFE6] flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-[#F2613F] rounded-full" />
                       <span>{lead}</span>
                     </li>
                   ))}
@@ -203,8 +203,8 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
               </div>
 
               {/* Technologies */}
-              <div className="p-4 bg-[#181A22] border border-[rgba(243,238,229,0.08)] rounded-[2px] space-y-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#EF5A2A] flex items-center gap-1.5">
+              <div className="p-4 bg-[#181818] border border-[rgba(245,239,230,0.10)] rounded-[2px] space-y-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#F2613F] flex items-center gap-1.5">
                   <Tag className="w-3 h-3" />
                   <span>TECHNOLOGY STACK</span>
                 </span>
@@ -212,7 +212,7 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 bg-[#232530] text-[#D3CDC3] font-mono text-[11px] rounded-[2px] border border-white/5"
+                      className="px-2 py-0.5 bg-[#22201F] text-[#C2BBB0] font-mono text-[11px] rounded-[2px] border border-white/5"
                     >
                       {tag}
                     </span>
@@ -223,14 +223,14 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
 
             {/* Deliverables Checklist */}
             {project.deliverables && project.deliverables.length > 0 && (
-              <div className="p-4 bg-[#181A22] border border-[rgba(243,238,229,0.08)] rounded-[2px] space-y-2">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-[#EF5A2A] block">
+              <div className="p-4 bg-[#181818] border border-[rgba(245,239,230,0.10)] rounded-[2px] space-y-2">
+                <span className="font-mono text-[10px] uppercase tracking-widest text-[#F2613F] block">
                   SHIPPED ARTIFACT DELIVERABLES
                 </span>
                 <ul className="space-y-1.5">
                   {project.deliverables.map((item) => (
-                    <li key={item} className="flex items-center gap-2 font-mono text-xs text-[#D3CDC3]">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#EF5A2A] shrink-0" />
+                    <li key={item} className="flex items-center gap-2 font-mono text-xs text-[#C2BBB0]">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#F2613F] shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -243,25 +243,25 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
         {/* README.md TAB */}
         {activeTab === 'readme' && (
           <div className="max-w-3xl font-mono text-xs space-y-4">
-            <div className="p-4 bg-[#0A0A09] border border-[rgba(243,238,229,0.12)] rounded-[2px] text-[#A6A095] space-y-4">
-              <div className="pb-3 border-b border-white/10 text-white">
-                <span className="text-[#EF5A2A]"># </span>
+            <div className="p-4 bg-[#0C0C0C] border border-[rgba(245,239,230,0.10)] rounded-[2px] text-[#857E74] space-y-4">
+              <div className="pb-3 border-b border-white/10 text-[#F5EFE6]">
+                <span className="text-[#F2613F]"># </span>
                 <span className="font-bold text-lg">{project.title}</span>
-                <p className="text-xs text-[#A6A095] mt-1">{project.summary}</p>
+                <p className="text-xs text-[#857E74] mt-1">{project.summary}</p>
               </div>
 
               <div>
-                <span className="text-[#EF5A2A]">## </span>
-                <span className="text-white font-bold">1. Background & Scope</span>
-                <p className="text-[#D3CDC3] mt-1 font-bitter text-sm leading-relaxed">
+                <span className="text-[#F2613F]">## </span>
+                <span className="text-[#F5EFE6] font-bold">1. Background & Scope</span>
+                <p className="text-[#C2BBB0] mt-1 font-bitter text-sm leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               <div>
-                <span className="text-[#EF5A2A]">## </span>
-                <span className="text-white font-bold">2. Architecture & Modules</span>
-                <div className="mt-2 p-3 bg-[#16171E] rounded-[2px] text-[#F3EEE5] text-[11px] space-y-1 border border-white/5">
+                <span className="text-[#F2613F]">## </span>
+                <span className="text-[#F5EFE6] font-bold">2. Architecture & Modules</span>
+                <div className="mt-2 p-3 bg-[#181818] rounded-[2px] text-[#F5EFE6] text-[11px] space-y-1 border border-white/5">
                   <div>📁 src/</div>
                   <div className="pl-4">├── 📄 engine.ts // Core system logic</div>
                   <div className="pl-4">├── 📄 render.ts // Visualization canvas pipeline</div>
@@ -270,9 +270,9 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
               </div>
 
               <div>
-                <span className="text-[#EF5A2A]">## </span>
-                <span className="text-white font-bold">3. Squad Authors</span>
-                <ul className="list-disc list-inside mt-1 text-[#D3CDC3]">
+                <span className="text-[#F2613F]">## </span>
+                <span className="text-[#F5EFE6] font-bold">3. Squad Authors</span>
+                <ul className="list-disc list-inside mt-1 text-[#C2BBB0]">
                   {project.leadStudents.map((lead) => (
                     <li key={lead}>{lead}</li>
                   ))}
@@ -280,13 +280,13 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
               </div>
 
               {project.githubUrl && (
-                <div className="pt-2 border-t border-white/10 text-[#A6A095]">
+                <div className="pt-2 border-t border-white/10 text-[#857E74]">
                   <span>Git Repository: </span>
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#EF5A2A] underline hover:text-white"
+                    className="text-[#F2613F] underline hover:text-[#F5EFE6]"
                   >
                     {project.githubUrl}
                   </a>
@@ -299,24 +299,24 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
         {/* DELIVERABLES.txt TAB */}
         {activeTab === 'deliverables' && (
           <div className="max-w-3xl font-mono text-xs space-y-2">
-            <div className="p-4 bg-[#0A0A09] border border-[rgba(243,238,229,0.12)] rounded-[2px] text-[#D3CDC3] space-y-3">
-              <div className="text-[#EF5A2A] font-bold">
+            <div className="p-4 bg-[#0C0C0C] border border-[rgba(245,239,230,0.10)] rounded-[2px] text-[#C2BBB0] space-y-3">
+              <div className="text-[#F2613F] font-bold">
                 === PROJECT ARTIFACT SPECIFICATION: {project.projectNumber} ===
               </div>
-              <div className="text-[#8C8881]">
+              <div className="text-[#857E74]">
                 Generated on: Cohort {project.year} // Status: {project.status}
               </div>
               <hr className="border-white/10" />
               <div className="space-y-2">
                 {project.deliverables?.map((item, idx) => (
                   <div key={item} className="flex items-center gap-2">
-                    <span className="text-[#EF5A2A]">[PASS]</span>
+                    <span className="text-[#F2613F]">[PASS]</span>
                     <span>0{idx + 1}. {item}</span>
                   </div>
                 ))}
               </div>
               <hr className="border-white/10" />
-              <div className="text-[11px] text-[#8C8881]">
+              <div className="text-[11px] text-[#857E74]">
                 All milestones verified by NEXUS Core Engineering Review Guild.
               </div>
             </div>
@@ -326,7 +326,7 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
         {/* METADATA.json TAB */}
         {activeTab === 'json' && (
           <div className="max-w-3xl font-mono text-xs">
-            <pre className="p-4 bg-[#0A0A09] border border-[rgba(243,238,229,0.12)] rounded-[2px] text-[#D3CDC3] overflow-x-auto leading-relaxed">
+            <pre className="p-4 bg-[#0C0C0C] border border-[rgba(245,239,230,0.10)] rounded-[2px] text-[#C2BBB0] overflow-x-auto leading-relaxed">
               {JSON.stringify(project, null, 2)}
             </pre>
           </div>
@@ -334,15 +334,15 @@ export const LinuxProjectView: React.FC<LinuxProjectViewProps> = ({ project }) =
       </div>
 
       {/* Status Footer Bar */}
-      <div className="h-7 px-4 bg-[#14151C] border-t border-[rgba(243,238,229,0.08)] flex items-center justify-between font-mono text-[10px] text-[#8C8881] shrink-0">
+      <div className="h-7 px-4 bg-[#181818] border-t border-[rgba(245,239,230,0.10)] flex items-center justify-between font-mono text-[10px] text-[#857E74] shrink-0">
         <div className="flex items-center gap-3">
           <span>PATH: /home/nexus/projects/{project.title.toLowerCase()}</span>
           <span>•</span>
           <span>UTF-8</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-[#EF5A2A] rounded-full" />
-          <span className="text-[#F3EEE5] uppercase">{project.category}</span>
+          <span className="w-1.5 h-1.5 bg-[#F2613F] rounded-full" />
+          <span className="text-[#F5EFE6] uppercase">{project.category}</span>
         </div>
       </div>
     </div>

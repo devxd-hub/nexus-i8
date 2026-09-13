@@ -30,16 +30,16 @@ export const ProjectPreview: React.FC<ProjectPreviewProps> = ({ onRouteChange })
   return (
     <RevealSection
       id="nexus-project-preview"
-      className="w-full py-14 sm:py-18 md:py-22 border-b border-[rgba(10,10,9,0.12)] bg-[#F3EEE5]"
+      className="w-full py-14 sm:py-18 md:py-22 border-b border-[var(--border-subtle)] bg-[var(--bg-primary)] transition-colors duration-250"
     >
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-10 pb-4 sm:pb-5 border-b border-[rgba(10,10,9,0.12)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-10 pb-4 sm:pb-5 border-b border-[var(--border-subtle)]">
           <div className="space-y-3">
             <SectionLabel number="03" label="SELECTED WORK" />
             <RevealText
               as="h2"
               staggerMs={45}
-              className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight uppercase"
+              className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[var(--text-primary)] leading-[1.08] tracking-tight uppercase"
             >
               SOME THINGS WE'VE MADE.
             </RevealText>

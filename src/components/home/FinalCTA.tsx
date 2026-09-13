@@ -98,11 +98,11 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onRouteChange }) => {
   return (
     <RevealSection
       id="nexus-final-cta"
-      className="relative w-full py-20 sm:py-24 md:py-28 bg-[#0A0A09] text-[#F3EEE5] overflow-hidden border-t border-[rgba(243,238,229,0.08)]"
+      className="relative w-full py-20 sm:py-24 md:py-28 bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-hidden border-t border-[var(--border-subtle)] transition-colors duration-250"
     >
       {/* Background Subtle Geometric Atmosphere */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#F3EEE5_1px,transparent_1px)] [background-size:24px_24px]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(var(--text-primary)_1px,transparent_1px)] [background-size:24px_24px]"
         aria-hidden="true"
       />
 
@@ -118,7 +118,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onRouteChange }) => {
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-7 sm:space-y-8">
           {/* Centered Brand Emblem */}
           <div className="flex justify-center">
-            <div className="p-3 bg-[#151311] border border-[rgba(239,90,42,0.5)] shadow-[0_0_20px_rgba(239,90,42,0.15)] inline-flex items-center justify-center transform transition-transform duration-300 hover:scale-105">
+            <div className="p-3 bg-[var(--bg-surface)] border border-[rgba(242,97,63,0.4)] shadow-xs inline-flex items-center justify-center transform transition-transform duration-300 hover:scale-105">
               <NexusIcon size="md" />
             </div>
           </div>
@@ -126,22 +126,22 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onRouteChange }) => {
           <SectionLabel
             number="06"
             label="GET IN TOUCH"
-            className="justify-center text-[#F3EEE5]/80"
+            className="justify-center text-[var(--text-muted)]"
           />
 
           <RevealText
             as="h2"
             staggerMs={45}
-            className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[#F3EEE5] tracking-tight uppercase"
+            className="font-fraunces font-bold text-4xl sm:text-5xl lg:text-6xl text-[var(--text-primary)] tracking-tight uppercase"
           >
             BUILD WHAT'S NEXT.
           </RevealText>
 
-          <p className="font-bitter text-base sm:text-lg md:text-xl text-[#F3EEE5]/85 max-w-2xl mx-auto leading-relaxed">
+          <p className="font-bitter text-base sm:text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
             If you want to make projects with people who care about craft, design, and code, NEXUS is where you start.
           </p>
 
-          {/* High-Visibility, Ultra-Reactive CTA Action Buttons */}
+          {/* High-Visibility, Tactile CTA Action Buttons */}
           <div className="pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             {/* Primary Action Button: GET IN TOUCH */}
             <button
@@ -157,13 +157,13 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onRouteChange }) => {
                 primaryGlow.onMouseLeave();
               }}
               style={primaryMagnetic.style}
-              className="relative w-full sm:w-auto inline-flex items-center justify-between gap-6 px-8 py-4 sm:px-9 sm:py-4.5 bg-[#EF5A2A] text-white font-dosis font-bold tracking-[0.22em] text-xs sm:text-[13px] uppercase rounded-[2px] border border-[#FF7448] shadow-[0_4px_24px_rgba(239,90,42,0.4)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(239,90,42,0.65)] hover:bg-[#FF6636] active:scale-[0.98] active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer group select-none overflow-hidden"
+              className="relative w-full sm:w-auto inline-flex items-center justify-between gap-6 px-8 py-4 sm:px-9 sm:py-4.5 bg-[#F2613F] text-white font-dosis font-bold tracking-[0.22em] text-xs sm:text-[13px] uppercase rounded-[2px] border border-[#F2613F] shadow-xs transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:bg-[#FA7958] active:scale-[0.98] active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--text-primary)] cursor-pointer group select-none overflow-hidden"
               aria-label="GET IN TOUCH"
             >
               {/* Dynamic Cursor Light Follower */}
               {primaryGlow.pos.active && (
                 <span
-                  className="absolute pointer-events-none rounded-full opacity-60 mix-blend-overlay"
+                  className="absolute pointer-events-none rounded-full opacity-30 mix-blend-overlay"
                   style={{
                     left: `${primaryGlow.pos.x}px`,
                     top: `${primaryGlow.pos.y}px`,
@@ -203,33 +203,33 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onRouteChange }) => {
                 secondaryGlow.onMouseLeave();
               }}
               style={secondaryMagnetic.style}
-              className="relative w-full sm:w-auto inline-flex items-center justify-between gap-6 px-8 py-4 sm:px-9 sm:py-4.5 bg-[#171513] text-[#F3EEE5] font-dosis font-bold tracking-[0.22em] text-xs sm:text-[13px] uppercase rounded-[2px] border border-[rgba(243,238,229,0.4)] shadow-[0_4px_18px_rgba(0,0,0,0.35)] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-[#EF5A2A] hover:text-white hover:bg-[#1F1C19] hover:shadow-[0_8px_28px_rgba(239,90,42,0.2)] active:scale-[0.98] active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EF5A2A] cursor-pointer group select-none overflow-hidden"
+              className="relative w-full sm:w-auto inline-flex items-center justify-between gap-6 px-8 py-4 sm:px-9 sm:py-4.5 bg-[var(--bg-surface)] text-[var(--text-primary)] font-dosis font-bold tracking-[0.22em] text-xs sm:text-[13px] uppercase rounded-[2px] border border-[var(--border-strong)] shadow-xs transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-[#F2613F] hover:bg-[var(--bg-elevated)] active:scale-[0.98] active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F2613F] cursor-pointer group select-none overflow-hidden"
               aria-label="EXPLORE PROJECTS"
             >
               {/* Dynamic Cursor Highlight */}
               {secondaryGlow.pos.active && (
                 <span
-                  className="absolute pointer-events-none rounded-full opacity-40"
+                  className="absolute pointer-events-none rounded-full opacity-25"
                   style={{
                     left: `${secondaryGlow.pos.x}px`,
                     top: `${secondaryGlow.pos.y}px`,
                     width: '140px',
                     height: '140px',
                     transform: 'translate(-50%, -50%)',
-                    background: 'radial-gradient(circle, rgba(239,90,42,0.5) 0%, rgba(239,90,42,0.1) 50%, transparent 75%)',
+                    background: 'radial-gradient(circle, rgba(242,97,63,0.5) 0%, rgba(242,97,63,0.1) 50%, transparent 75%)',
                   }}
                   aria-hidden="true"
                 />
               )}
 
               {/* Reactive Left Accent Bar */}
-              <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#EF5A2A] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-250 ease-out origin-top" aria-hidden="true" />
+              <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-[#F2613F] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-250 ease-out origin-top" aria-hidden="true" />
 
               {/* Text & Icon Content */}
-              <span className="relative z-10 text-[#F3EEE5] group-hover:text-white font-bold tracking-[0.22em] transition-transform duration-200 group-hover:translate-x-0.5">
+              <span className="relative z-10 text-[var(--text-primary)] font-bold tracking-[0.22em] transition-transform duration-200 group-hover:translate-x-0.5">
                 EXPLORE PROJECTS
               </span>
-              <span className="relative z-10 inline-flex items-center justify-center text-[#EF5A2A] group-hover:text-white transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
+              <span className="relative z-10 inline-flex items-center justify-center text-[#F2613F] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1.5">
                 <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </span>
             </button>

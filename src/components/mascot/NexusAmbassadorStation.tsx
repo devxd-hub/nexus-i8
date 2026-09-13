@@ -330,22 +330,22 @@ export const NexusAmbassadorStation: React.FC = () => {
     <section
       id="nexus-ambassador-station"
       aria-label="NEXUS Official Brand Mascot Station"
-      className="w-full bg-[#110F0E] text-[#F3EEE5] py-10 sm:py-14 border-t border-[rgba(243,238,229,0.08)] select-none"
+      className="w-full bg-[#0C0C0C] text-[#F5EFE6] py-10 sm:py-14 border-t border-[rgba(245,239,230,0.10)] select-none"
     >
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Station Editorial Descriptor */}
           <div className="space-y-2 max-w-md text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[rgba(239,90,42,0.12)] border border-[rgba(239,90,42,0.3)]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
-              <span className="font-dosis text-[11px] font-bold tracking-[0.25em] text-[#EF5A2A] uppercase">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#181818] border border-[rgba(242,97,63,0.3)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
+              <span className="font-dosis text-[11px] font-bold tracking-[0.25em] text-[#F2613F] uppercase">
                 COMMUNITY AMBASSADOR
               </span>
             </div>
-            <h3 className="font-dosis text-xl sm:text-2xl font-bold uppercase tracking-[0.14em] text-[#F3EEE5]">
+            <h3 className="font-dosis text-xl sm:text-2xl font-bold uppercase tracking-[0.14em] text-[#F5EFE6]">
               THE NEXUS PENGUIN
             </h3>
-            <p className="font-bitter text-xs sm:text-sm text-[#F3EEE5]/70 leading-relaxed">
+            <p className="font-bitter text-xs sm:text-sm text-[#C2BBB0] leading-relaxed">
               Our resident pixel-art mascot and companion. Built with authentic character physics,
               spatial curiosity, and playful resistance.
             </p>
@@ -359,13 +359,13 @@ export const NexusAmbassadorStation: React.FC = () => {
               setIsHovered(false);
               if (!isDragging && !isPostDragAnnoyed) setCurrentFrame('idle');
             }}
-            className="relative w-full max-w-[340px] sm:max-w-[380px] h-[160px] bg-[#0A0908] border border-[rgba(243,238,229,0.12)] hover:border-[rgba(239,90,42,0.4)] transition-colors duration-300 px-6 pt-5 pb-4 flex flex-col justify-between overflow-visible"
+            className="relative w-full max-w-[340px] sm:max-w-[380px] h-[160px] bg-[#141414] border border-[rgba(245,239,230,0.14)] hover:border-[rgba(242,97,63,0.4)] transition-colors duration-300 px-6 pt-5 pb-4 flex flex-col justify-between overflow-visible"
           >
             {/* Subtle Station Grid Texture */}
             <div
               className="absolute inset-0 opacity-15 pointer-events-none"
               style={{
-                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(243, 238, 229, 0.3) 1px, transparent 0)',
+                backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(245, 239, 230, 0.3) 1px, transparent 0)',
                 backgroundSize: '16px 16px',
               }}
             />
@@ -373,18 +373,18 @@ export const NexusAmbassadorStation: React.FC = () => {
             {/* Station Header & Node Connection Status */}
             <div className="relative z-10 flex items-center justify-between pointer-events-none">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] text-[#F3EEE5]/40 tracking-wider">
+                <span className="font-mono text-[10px] text-[#857E74] tracking-wider">
                   SYS_MASCOT // V2.6
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 font-dosis text-xs font-bold tracking-widest text-[#EF5A2A] uppercase">
+              <div className="flex items-center gap-1.5 font-dosis text-xs font-bold tracking-widest text-[#F2613F] uppercase">
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
                     isDragging
-                      ? 'bg-[#E63946] animate-ping'
+                      ? 'bg-[#F2613F] animate-ping'
                       : connectionActive
-                      ? 'bg-[#EF5A2A]'
-                      : 'bg-[#555]'
+                      ? 'bg-[#F2613F]'
+                      : 'bg-[#857E74]'
                   }`}
                 />
                 <span>{isDragging ? 'STRUGGLING' : connectionActive ? 'LINKED' : 'STANDBY'}</span>
@@ -403,32 +403,32 @@ export const NexusAmbassadorStation: React.FC = () => {
                 y1="115"
                 x2="235"
                 y2="115"
-                stroke="#EF5A2A"
+                stroke="#F2613F"
                 strokeWidth="1"
                 strokeDasharray="4 4"
-                className="opacity-50"
+                className="opacity-60"
               />
               <line
                 x1="235"
                 y1="115"
                 x2="310"
                 y2="55"
-                stroke="#EF5A2A"
+                stroke="#F2613F"
                 strokeWidth="1"
                 className="opacity-40"
               />
-              <circle cx="235" cy="115" r="2.5" fill="#EF5A2A" />
-              <circle cx="310" cy="55" r="3" fill="#EF5A2A" />
+              <circle cx="235" cy="115" r="2.5" fill="#F2613F" />
+              <circle cx="310" cy="55" r="3" fill="#F2613F" />
               <circle
                 cx="110"
                 cy="115"
                 r="4.5"
                 fill="none"
-                stroke="#EF5A2A"
+                stroke="#F2613F"
                 strokeWidth="1"
                 className="animate-ping opacity-35 origin-center"
               />
-              <circle cx="110" cy="115" r="2" fill="#EF5A2A" />
+              <circle cx="110" cy="115" r="2" fill="#F2613F" />
             </svg>
 
             {/* Character Stage & Grounding Platform */}
@@ -473,10 +473,10 @@ export const NexusAmbassadorStation: React.FC = () => {
 
               {/* Minimalist Right Status Indicator */}
               <div className="flex flex-col items-end text-right space-y-1 pb-1 pointer-events-none">
-                <span className="font-mono text-[9px] text-[#F3EEE5]/40 tracking-widest uppercase">
+                <span className="font-mono text-[9px] text-[#857E74] tracking-widest uppercase">
                   INTERACTION
                 </span>
-                <span className="font-dosis font-bold text-[11px] text-[#F3EEE5]/80 tracking-wider uppercase">
+                <span className="font-dosis font-bold text-[11px] text-[#C2BBB0] tracking-wider uppercase">
                   {isDragging
                     ? 'RESISTING PULL'
                     : isPostDragAnnoyed
@@ -485,14 +485,14 @@ export const NexusAmbassadorStation: React.FC = () => {
                     ? 'RECOGNIZES VISITOR'
                     : 'AWARE & CURIOUS'}
                 </span>
-                <span className="text-[10px] font-mono tracking-wider text-[#EF5A2A]/70 uppercase pt-0.5">
+                <span className="text-[10px] font-mono tracking-wider text-[#F2613F] uppercase pt-0.5">
                   {isDragging ? 'RELEASE TO SETTLE' : 'GRAB & PULL'}
                 </span>
               </div>
             </div>
 
             {/* Crisp Ground Baseline Line */}
-            <div className="absolute bottom-3.5 left-6 right-6 h-[1px] bg-[rgba(243,238,229,0.14)] pointer-events-none" />
+            <div className="absolute bottom-3.5 left-6 right-6 h-[1px] bg-[rgba(245,239,230,0.10)] pointer-events-none" />
           </div>
         </div>
       </Container>

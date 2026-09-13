@@ -54,7 +54,7 @@ export const AsciiGlitchBackground: React.FC<{
   interactive?: boolean;
 }> = ({
   className = '',
-  accentColor = '#EF5A2A',
+  accentColor = '#F2613F',
   interactive = true,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -173,7 +173,7 @@ export const AsciiGlitchBackground: React.FC<{
             vx: Math.cos(angle) * speed,
             vy: Math.sin(angle) * speed - 0.4,
             char: ASCII_POOL[Math.floor(Math.random() * ASCII_POOL.length)],
-            color: Math.random() < 0.45 ? accentColor : '#0A0A09',
+            color: Math.random() < 0.45 ? accentColor : '#F5EFE6',
             alpha: 0.65,
             maxLife: 0.8 + Math.random() * 0.6,
             life: 0,
@@ -282,7 +282,7 @@ export const AsciiGlitchBackground: React.FC<{
         let drawX = cell.x;
         let drawY = cell.y;
         let renderChar = cell.char;
-        let renderColor = '#0A0A09';
+        let renderColor = '#F5EFE6';
 
         if (distToMouse < mouseProximityRadius) {
           isHovered = true;
@@ -379,17 +379,17 @@ export const AsciiGlitchBackground: React.FC<{
       <canvas ref={canvasRef} className="block w-full h-full" />
 
       {/* Subtle Cyber-Editorial Corner ASCII Badges */}
-      <div className="absolute top-4 left-6 pointer-events-none select-none hidden sm:flex items-center space-x-2 text-[10px] font-mono text-[#0A0A09]/25 tracking-widest uppercase">
-        <span className="text-[#EF5A2A]/70">+</span>
+      <div className="absolute top-4 left-6 pointer-events-none select-none hidden sm:flex items-center space-x-2 text-[10px] font-mono text-[#F5EFE6]/25 tracking-widest uppercase">
+        <span className="text-[#F2613F]/70">+</span>
         <span>SYS_COORD:</span>
-        <span className="text-[#0A0A09]/40 font-semibold">
+        <span className="text-[#F5EFE6]/40 font-semibold">
           [{coords.x.toString().padStart(4, '0')},{coords.y.toString().padStart(4, '0')}]
         </span>
       </div>
 
-      <div className="absolute bottom-4 right-6 pointer-events-none select-none hidden sm:flex items-center space-x-2 text-[10px] font-mono text-[#0A0A09]/25 tracking-widest uppercase">
+      <div className="absolute bottom-4 right-6 pointer-events-none select-none hidden sm:flex items-center space-x-2 text-[10px] font-mono text-[#F5EFE6]/25 tracking-widest uppercase">
         <span>[ ASCII_MATRIX // ACTIVE ]</span>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A]/60 animate-pulse" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F]/60 animate-pulse" />
       </div>
     </div>
   );

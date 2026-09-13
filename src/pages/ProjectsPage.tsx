@@ -22,7 +22,7 @@ interface ProjectsPageProps {
  */
 export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onRouteChange }) => {
   return (
-    <div id="nexus-projects-workspace" className="w-full h-full min-h-screen bg-[#0D0E13]">
+    <div id="nexus-projects-workspace" className="w-full h-full min-h-screen bg-[#0C0C0C]">
       <LinuxDesktop onRouteChange={onRouteChange} />
     </div>
   );

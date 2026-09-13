@@ -31,23 +31,23 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
   const getWindowIcon = (win: LinuxWindowData) => {
     switch (win.type) {
       case 'terminal':
-        return <Terminal className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Terminal className="w-3.5 h-3.5 text-[#F2613F]" />;
       case 'file-manager':
-        return <Folder className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Folder className="w-3.5 h-3.5 text-[#F2613F]" />;
       case 'system-info':
-        return <Info className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Info className="w-3.5 h-3.5 text-[#F2613F]" />;
       default:
-        return <Folder className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Folder className="w-3.5 h-3.5 text-[#F2613F]" />;
     }
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-10 bg-[#0D0E13]/95 backdrop-blur-md border-t border-[rgba(243,238,229,0.1)] px-3 flex items-center justify-between z-40 select-none font-mono text-xs">
+    <div className="fixed bottom-0 left-0 right-0 h-10 bg-[#0C0C0C] border-t border-[rgba(245,239,230,0.10)] px-3 flex items-center justify-between z-40 select-none font-mono text-xs">
       {/* Left: Quick Launch Pinned Docks */}
       <div className="flex items-center gap-1">
         <button
           onClick={onOpenFileManager}
-          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#A6A095] hover:text-[#EF5A2A] transition-colors cursor-pointer"
+          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#857E74] hover:text-[#F2613F] transition-colors cursor-pointer"
           title="File Manager"
         >
           <Folder className="w-4 h-4" />
@@ -55,7 +55,7 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
 
         <button
           onClick={onOpenTerminal}
-          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#A6A095] hover:text-[#EF5A2A] transition-colors cursor-pointer"
+          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#857E74] hover:text-[#F2613F] transition-colors cursor-pointer"
           title="Terminal (Ctrl+Alt+T)"
         >
           <Terminal className="w-4 h-4" />
@@ -63,7 +63,7 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
 
         <button
           onClick={onOpenSystemInfo}
-          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#A6A095] hover:text-[#EF5A2A] transition-colors cursor-pointer"
+          className="p-1.5 hover:bg-white/[0.08] rounded-[2px] text-[#857E74] hover:text-[#F2613F] transition-colors cursor-pointer"
           title="System Information"
         >
           <Info className="w-4 h-4" />
@@ -89,10 +89,10 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
               }}
               className={`group flex items-center gap-2 px-3 py-1 rounded-[2px] border transition-all cursor-pointer max-w-[160px] sm:max-w-[200px] shrink-0 ${
                 isActive
-                  ? 'bg-[#1D1F28] border-[#EF5A2A] text-white shadow-xs'
+                  ? 'bg-[#22201F] border-[#F2613F] text-[#F5EFE6] shadow-xs'
                   : win.isMinimized
-                  ? 'bg-black/30 border-white/5 text-[#8C8881] opacity-70 hover:opacity-100 hover:bg-white/[0.04]'
-                  : 'bg-[#14151C] border-white/10 text-[#D3CDC3] hover:bg-white/[0.06]'
+                  ? 'bg-black/30 border-white/5 text-[#857E74] opacity-70 hover:opacity-100 hover:bg-white/[0.04]'
+                  : 'bg-[#181818] border-[rgba(245,239,230,0.10)] text-[#C2BBB0] hover:bg-white/[0.06]'
               }`}
             >
               {getWindowIcon(win)}
@@ -105,7 +105,7 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
                   e.stopPropagation();
                   onCloseWindow(win.id);
                 }}
-                className="opacity-0 group-hover:opacity-100 hover:text-[#EF5A2A] p-0.5 ml-auto transition-opacity"
+                className="opacity-0 group-hover:opacity-100 hover:text-[#F2613F] p-0.5 ml-auto transition-opacity"
                 title="Close"
               >
                 <X className="w-3 h-3" />
@@ -116,9 +116,9 @@ export const LinuxDock: React.FC<LinuxDockProps> = ({
       </div>
 
       {/* Right: Active Workspace Badge */}
-      <div className="flex items-center gap-2 shrink-0 text-[#8C8881] text-[11px] hidden sm:flex">
+      <div className="flex items-center gap-2 shrink-0 text-[#857E74] text-[11px] hidden sm:flex">
         <span>WS:1 [PROJECTS]</span>
-        <span className="w-1.5 h-1.5 bg-[#EF5A2A] rounded-full" />
+        <span className="w-1.5 h-1.5 bg-[#F2613F] rounded-full" />
       </div>
     </div>
   );

@@ -85,11 +85,11 @@ export const LeadCrewMember: React.FC<LeadCrewMemberProps> = ({
     <div
       ref={containerRef}
       id={id || `lead-crew-${member.id}`}
-      className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#F3EEE5] text-[#0A0A09] flex items-center justify-center border-b border-[#0A0A09]/15 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
+      className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#0C0C0C] text-[#F5EFE6] flex items-center justify-center border-b border-[rgba(245,239,230,0.10)] px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden"
     >
       {/* Background Watermark Index */}
       <div
-        className="absolute top-1/2 -translate-y-1/2 right-4 sm:right-16 font-dosis font-bold text-[20vw] text-[#0A0A09]/[0.025] pointer-events-none select-none tracking-tighter"
+        className="absolute top-1/2 -translate-y-1/2 right-4 sm:right-16 font-dosis font-bold text-[20vw] text-[#F5EFE6]/[0.025] pointer-events-none select-none tracking-tighter"
         aria-hidden="true"
       >
         {paddedIndex}
@@ -106,7 +106,7 @@ export const LeadCrewMember: React.FC<LeadCrewMemberProps> = ({
         >
           <div
             onClick={() => onSelectMember(member)}
-            className="group relative w-full max-w-lg aspect-[4/5] bg-[#E3DDD1] overflow-hidden border-2 border-[#0A0A09] shadow-md cursor-pointer"
+            className="group relative w-full max-w-lg aspect-[4/5] bg-[#141414] overflow-hidden border border-[rgba(245,239,230,0.14)] shadow-md cursor-pointer"
             role="button"
             tabIndex={0}
             aria-label={`View dossier of ${member.name}, ${member.role}`}
@@ -126,22 +126,22 @@ export const LeadCrewMember: React.FC<LeadCrewMemberProps> = ({
                 loading="lazy"
               />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-[#66615A] bg-[#E5DFD3]">
+              <div className="w-full h-full flex flex-col items-center justify-center text-[#857E74] bg-[#141414]">
                 <NexusIcon size="xl" />
-                <span className="mt-4 font-dosis text-xs tracking-[0.24em] uppercase text-[#66615A]">
+                <span className="mt-4 font-dosis text-xs tracking-[0.24em] uppercase text-[#857E74]">
                   PORTRAIT
                 </span>
               </div>
             )}
 
             {/* Corner Architectural Pins */}
-            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#EF5A2A]" />
-            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#EF5A2A]" />
+            <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#F2613F]" />
+            <div className="absolute bottom-3 right-3 w-3 h-3 border-b-2 border-r-2 border-[#F2613F]" />
 
             {/* Hover Cue */}
-            <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-[#0A0A09] text-white text-[10px] font-dosis font-bold tracking-[0.22em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-1.5 bg-[#0C0C0C] text-[#F5EFE6] border border-[rgba(245,239,230,0.14)] text-[10px] font-dosis font-bold tracking-[0.22em] uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span>EXPLORE DOSSIER</span>
-              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5] text-[#F2613F]" />
             </div>
           </div>
         </motion.div>
@@ -153,57 +153,57 @@ export const LeadCrewMember: React.FC<LeadCrewMemberProps> = ({
         >
           {/* Index & Header Marker */}
           <div className="flex items-center gap-3">
-            <span className="px-2.5 py-1 bg-[#0A0A09] text-white font-dosis text-xs font-bold tracking-[0.22em] uppercase">
+            <span className="px-2.5 py-1 bg-[#181818] border border-[rgba(242,97,63,0.3)] text-[#F5EFE6] font-dosis text-xs font-bold tracking-[0.22em] uppercase">
               LEAD CREW // {paddedIndex}
             </span>
-            <span className="font-dosis text-xs font-medium tracking-[0.2em] text-[#66615A]">
+            <span className="font-dosis text-xs font-medium tracking-[0.2em] text-[#857E74]">
               [{paddedIndex} / {paddedTotal}]
             </span>
           </div>
 
           {/* Role & Name */}
           <div className="space-y-1">
-            <span className="block font-dosis font-bold text-xs sm:text-sm tracking-[0.24em] text-[#F97316] uppercase">
+            <span className="block font-dosis font-bold text-xs sm:text-sm tracking-[0.24em] text-[#F2613F] uppercase">
               {member.role}
             </span>
-            <h3 className="font-fraunces font-bold text-3xl sm:text-4xl md:text-5xl text-[#0A0A09] tracking-tight leading-[1.08]">
+            <h3 className="font-fraunces font-bold text-3xl sm:text-4xl md:text-5xl text-[#F5EFE6] tracking-tight leading-[1.08]">
               {member.name}
             </h3>
           </div>
 
           {/* Architectural Rule */}
-          <div className="w-full h-[1px] bg-[#0A0A09]/15" />
+          <div className="w-full h-[1px] bg-[rgba(245,239,230,0.10)]" />
 
           {/* Short Bio (Authentic source data only) */}
           {member.bio && (
-            <p className="font-bitter text-base sm:text-lg text-[#0A0A09]/85 leading-relaxed max-w-lg">
+            <p className="font-bitter text-base sm:text-lg text-[#C2BBB0] leading-relaxed max-w-lg">
               {member.bio}
             </p>
           )}
 
           {/* Small Metadata Row: AREA | ROLE | YEAR */}
-          <div className="pt-2 grid grid-cols-3 gap-2 border-t border-b border-[#0A0A09]/10 py-3 text-left">
+          <div className="pt-2 grid grid-cols-3 gap-2 border-t border-b border-[rgba(245,239,230,0.10)] py-3 text-left">
             <div>
-              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#66615A] uppercase">
+              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#857E74] uppercase">
                 AREA
               </span>
-              <span className="font-dosis font-bold text-xs text-[#0A0A09] truncate block mt-0.5" title={member.discipline}>
+              <span className="font-dosis font-bold text-xs text-[#F5EFE6] truncate block mt-0.5" title={member.discipline}>
                 {member.discipline.split('&')[0].trim()}
               </span>
             </div>
             <div>
-              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#66615A] uppercase">
+              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#857E74] uppercase">
                 ROLE
               </span>
-              <span className="font-dosis font-bold text-xs text-[#0A0A09] truncate block mt-0.5" title={member.role}>
+              <span className="font-dosis font-bold text-xs text-[#F5EFE6] truncate block mt-0.5" title={member.role}>
                 {member.role}
               </span>
             </div>
             <div>
-              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#66615A] uppercase">
+              <span className="block text-[9px] font-dosis font-bold tracking-[0.2em] text-[#857E74] uppercase">
                 YEAR
               </span>
-              <span className="font-dosis font-bold text-xs text-[#F97316] truncate block mt-0.5">
+              <span className="font-dosis font-bold text-xs text-[#F2613F] truncate block mt-0.5">
                 {member.yearOfStudy || '—'}
               </span>
             </div>
@@ -214,7 +214,7 @@ export const LeadCrewMember: React.FC<LeadCrewMemberProps> = ({
             <button
               type="button"
               onClick={() => onSelectMember(member)}
-              className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[#0A0A09] text-white hover:bg-[#F97316] transition-colors duration-200 font-dosis font-bold text-xs tracking-[0.22em] uppercase border border-[#0A0A09] cursor-pointer group"
+              className="inline-flex items-center gap-2.5 px-4 py-2.5 bg-[#F2613F] text-[#F5EFE6] hover:bg-[#FA7958] transition-colors duration-200 font-dosis font-bold text-xs tracking-[0.22em] uppercase border border-[#F2613F] cursor-pointer group"
             >
               <span>VIEW PROFILE</span>
               <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />

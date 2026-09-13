@@ -180,7 +180,7 @@ export class AsciiTextWalkingEngine {
     width: number,
     height: number,
     dragOffset: number = 0,
-    textColor: string = '#EF5A2A'
+    textColor: string = '#F2613F'
   ): void {
     if (width <= 0 || height <= 0) return;
 
@@ -223,7 +223,7 @@ export class AsciiTextWalkingEngine {
       0,
       Math.PI * 2
     );
-    ctx.fillStyle = 'rgba(239, 90, 42, 0.07)';
+    ctx.fillStyle = 'rgba(242, 97, 63, 0.07)';
     ctx.fill();
 
     // Left foot ground contact
@@ -237,7 +237,7 @@ export class AsciiTextWalkingEngine {
       0,
       Math.PI * 2
     );
-    ctx.fillStyle = 'rgba(239, 90, 42, 0.14)';
+    ctx.fillStyle = 'rgba(242, 97, 63, 0.14)';
     ctx.fill();
 
     // Right foot ground contact
@@ -251,7 +251,7 @@ export class AsciiTextWalkingEngine {
       0,
       Math.PI * 2
     );
-    ctx.fillStyle = 'rgba(239, 90, 42, 0.14)';
+    ctx.fillStyle = 'rgba(242, 97, 63, 0.14)';
     ctx.fill();
 
     ctx.restore();
