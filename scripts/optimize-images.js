@@ -41,9 +41,9 @@ async function optimizeFolder(folderPath, maxWidth = 1440, quality = 82) {
 
 async function run() {
   console.log('--- Optimizing Gallery Images ---');
-  await optimizeFolder(path.resolve('./public/gallery-img'), 1440, 80);
+  await optimizeFolder(path.resolve('./images/gallery'), 1440, 80);
   console.log('--- Optimizing Team Images ---');
-  await optimizeFolder(path.resolve('./public/team-images'), 800, 80);
+  await optimizeFolder(path.resolve('./images/team'), 800, 80);
   console.log('--- Optimization Complete ---');
 }
 
