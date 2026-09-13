@@ -19,14 +19,14 @@ export const Divider: React.FC<DividerProps> = ({
   id,
 }) => {
   const borderColor = darker
-    ? 'border-[rgba(10,10,9,0.24)]'
-    : 'border-[rgba(10,10,9,0.12)]';
+    ? 'border-[rgba(245,239,230,0.18)]'
+    : 'border-[rgba(245,239,230,0.10)]';
 
   if (label) {
     return (
       <div id={id} className={`relative flex items-center w-full py-4 ${className}`}>
         <div className={`flex-grow border-t ${borderColor}`} />
-        <span className="flex-shrink mx-4 font-mono text-xs uppercase tracking-widest text-[#66615A]">
+        <span className="flex-shrink mx-4 font-mono text-xs uppercase tracking-widest text-[#857E74]">
           {label}
         </span>
         <div className={`flex-grow border-t ${borderColor}`} />

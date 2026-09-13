@@ -49,43 +49,43 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
   return (
     <RevealSection
       id="nexus-gallery-preview"
-      className="w-full py-12 sm:py-16 md:py-22 bg-[#EBE5DB] border-b border-[rgba(10,10,9,0.12)]"
+      className="w-full py-12 sm:py-16 md:py-22 bg-[var(--bg-secondary)] border-b border-[var(--border-subtle)] transition-colors duration-250"
     >
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10 pb-4 sm:pb-5 border-b border-[rgba(10,10,9,0.12)]">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10 pb-4 sm:pb-5 border-b border-[var(--border-subtle)]">
           <div className="space-y-2 sm:space-y-3">
             <SectionLabel number="04" label="STUDIO ARCHIVE" />
             <RevealText
               as="h2"
               staggerMs={45}
-              className="font-fraunces font-bold text-3xl sm:text-5xl lg:text-6xl text-[#0A0A09] leading-[1.08] tracking-tight uppercase"
+              className="font-fraunces font-bold text-3xl sm:text-5xl lg:text-6xl text-[var(--text-primary)] leading-[1.08] tracking-tight uppercase"
             >
               INSIDE NEXUS.
             </RevealText>
-            <p className="font-bitter text-[#66615A] max-w-lg text-sm sm:text-base md:text-lg leading-relaxed">
+            <p className="font-bitter text-[var(--text-secondary)] max-w-lg text-sm sm:text-base md:text-lg leading-relaxed">
               Moments from workshops, sprint nights, team critiques, and hands-on making in the studio.
             </p>
           </div>
           <div className="flex items-center justify-between md:justify-end gap-4">
             {/* Mobile Carousel Controls */}
-            <div className="flex md:hidden items-center gap-1.5 bg-[#FAF6F0] p-1 border border-[rgba(10,10,9,0.12)]">
+            <div className="flex md:hidden items-center gap-1.5 bg-[var(--bg-surface)] p-1 border border-[var(--border-subtle)]">
               <button
                 type="button"
                 onClick={() => scrollToIndex(Math.max(0, activeMobileIdx - 1))}
                 disabled={activeMobileIdx === 0}
-                className="p-1 disabled:opacity-30 text-[#0A0A09]"
+                className="p-1 disabled:opacity-30 text-[var(--text-primary)]"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="text-[10px] font-mono font-bold px-1.5 text-[#66615A]">
+              <span className="text-[10px] font-mono font-bold px-1.5 text-[var(--text-muted)]">
                 {activeMobileIdx + 1} / {previewItems.length}
               </span>
               <button
                 type="button"
                 onClick={() => scrollToIndex(Math.min(previewItems.length - 1, activeMobileIdx + 1))}
                 disabled={activeMobileIdx === previewItems.length - 1}
-                className="p-1 disabled:opacity-30 text-[#0A0A09]"
+                className="p-1 disabled:opacity-30 text-[var(--text-primary)]"
                 aria-label="Next image"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -131,8 +131,8 @@ export const GalleryPreview: React.FC<GalleryPreviewProps> = ({ onRouteChange })
                 aria-label={`Slide ${idx + 1}`}
                 className={`h-1.5 transition-all duration-300 ${
                   activeMobileIdx === idx
-                    ? 'w-6 bg-[#EF5A2A]'
-                    : 'w-1.5 bg-[rgba(10,10,9,0.2)]'
+                    ? 'w-6 bg-[#F2613F]'
+                    : 'w-1.5 bg-[rgba(245,239,230,0.2)]'
                 }`}
               />
             ))}

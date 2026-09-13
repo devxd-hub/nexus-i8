@@ -4,13 +4,29 @@
  */
 
 export const COLOR_TOKENS = {
-  warmBg: '#F3EEE5',
-  deepBlack: '#0A0A09',
-  secondaryDark: '#151311',
-  nexusOrange: '#EF5A2A',
-  mutedText: '#66615A',
-  lightLine: 'rgba(10, 10, 9, 0.12)',
-  lightLineDarker: 'rgba(10, 10, 9, 0.24)',
+  // Semantic Dark Mode System
+  bgPrimary: '#0C0C0C',
+  bgSecondary: '#141414',
+  bgSurface: '#181818',
+  bgElevated: '#22201F',
+  warmDeep: '#481E14',
+  textPrimary: '#F5EFE6',
+  textSecondary: '#C2BBB0',
+  textMuted: '#857E74',
+  borderSubtle: 'rgba(245, 239, 230, 0.10)',
+  borderStrong: 'rgba(245, 239, 230, 0.18)',
+  accentPrimary: '#F2613F',
+  accentHover: '#FA7958',
+  accentDark: '#481E14',
+
+  // Backward-compatible mappings
+  warmBg: '#0C0C0C',
+  deepBlack: '#F5EFE6',
+  secondaryDark: '#141414',
+  nexusOrange: '#F2613F',
+  mutedText: '#C2BBB0',
+  lightLine: 'rgba(245, 239, 230, 0.10)',
+  lightLineDarker: 'rgba(245, 239, 230, 0.18)',
 } as const;
 
 export const SPACING_TOKENS = {

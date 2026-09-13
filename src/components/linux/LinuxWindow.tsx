@@ -76,13 +76,13 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
   const getWindowIcon = () => {
     switch (win.type) {
       case 'terminal':
-        return <Terminal className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Terminal className="w-3.5 h-3.5 text-[#F2613F]" />;
       case 'file-manager':
-        return <Folder className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Folder className="w-3.5 h-3.5 text-[#F2613F]" />;
       case 'system-info':
-        return <Info className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Info className="w-3.5 h-3.5 text-[#F2613F]" />;
       default:
-        return <Folder className="w-3.5 h-3.5 text-[#EF5A2A]" />;
+        return <Folder className="w-3.5 h-3.5 text-[#F2613F]" />;
     }
   };
 
@@ -101,15 +101,15 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
         maxHeight: 'calc(100vh - 76px)',
         zIndex: win.zIndex,
       }}
-      className={`flex flex-col bg-[#14151B] border rounded-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.6)] select-text transition-[width,height,left,top] duration-150 overflow-hidden ${
+      className={`flex flex-col bg-[#181818] border rounded-[3px] shadow-[0_16px_40px_rgba(0,0,0,0.6)] select-text transition-[width,height,left,top] duration-150 overflow-hidden ${
         isActive
-          ? 'border-[rgba(239,90,42,0.45)] ring-1 ring-[rgba(239,90,42,0.25)] shadow-[0_20px_50px_rgba(0,0,0,0.7)]'
-          : 'border-[rgba(243,238,229,0.12)] opacity-95'
+          ? 'border-[rgba(242,97,63,0.45)] ring-1 ring-[rgba(242,97,63,0.25)] shadow-[0_20px_50px_rgba(0,0,0,0.7)]'
+          : 'border-[rgba(245,239,230,0.10)] opacity-95'
       }`}
     >
       {/* Active Orange Header Border Indicator */}
       {isActive && (
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#EF5A2A] z-20" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#F2613F] z-20" />
       )}
 
       {/* Linux Window Title Bar */}
@@ -121,8 +121,8 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
         style={{ touchAction: 'none' }}
         className={`h-10 sm:h-9 px-3 flex items-center justify-between border-b cursor-grab active:cursor-grabbing select-none shrink-0 transition-colors ${
           isActive
-            ? 'bg-[#1D1F27] border-[rgba(243,238,229,0.14)] text-[#F3EEE5]'
-            : 'bg-[#16171E] border-[rgba(243,238,229,0.08)] text-[#8C8881]'
+            ? 'bg-[#22201F] border-[rgba(245,239,230,0.14)] text-[#F5EFE6]'
+            : 'bg-[#181818] border-[rgba(245,239,230,0.08)] text-[#857E74]'
         }`}
       >
         {/* Left Title & Icon */}
@@ -132,7 +132,7 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
             {win.title}
           </span>
           {win.filePath && (
-            <span className="font-mono text-[10px] text-[#66615A] truncate hidden sm:inline">
+            <span className="font-mono text-[10px] text-[#857E74] truncate hidden sm:inline">
               — {win.filePath}
             </span>
           )}
@@ -148,7 +148,7 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
               e.stopPropagation();
               onMinimize(win.id);
             }}
-            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-white/[0.14] text-[#A6A095] hover:text-white transition-colors cursor-pointer"
+            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-white/[0.14] text-[#C2BBB0] hover:text-[#F5EFE6] transition-colors cursor-pointer"
           >
             <Minus className="w-3.5 h-3.5 sm:w-3 sm:h-3" />
           </button>
@@ -161,7 +161,7 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
               e.stopPropagation();
               onMaximize(win.id);
             }}
-            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-white/[0.14] text-[#A6A095] hover:text-white transition-colors cursor-pointer"
+            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-white/[0.14] text-[#C2BBB0] hover:text-[#F5EFE6] transition-colors cursor-pointer"
           >
             <Square className="w-3 h-3 sm:w-2.5 sm:h-2.5" />
           </button>
@@ -174,7 +174,7 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
               e.stopPropagation();
               onClose(win.id);
             }}
-            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-[#EF5A2A] text-[#A6A095] hover:text-white transition-colors cursor-pointer"
+            className="w-7 h-7 sm:w-5 sm:h-5 flex items-center justify-center rounded-[2px] bg-white/[0.06] hover:bg-[#F2613F] text-[#C2BBB0] hover:text-[#F5EFE6] transition-colors cursor-pointer"
           >
             <X className="w-3.5 h-3.5 sm:w-3 sm:h-3" />
           </button>
@@ -182,7 +182,7 @@ export const LinuxWindow: React.FC<LinuxWindowProps> = ({
       </div>
 
       {/* Window Content Body */}
-      <div className="flex-1 overflow-auto bg-[#0E0F14] text-[#F3EEE5] flex flex-col min-h-0">
+      <div className="flex-1 overflow-auto bg-[#141414] text-[#F5EFE6] flex flex-col min-h-0">
         {children}
       </div>
     </div>

@@ -19,8 +19,8 @@ export const LinuxAltTabSwitcher: React.FC<LinuxAltTabSwitcherProps> = ({
   if (windows.length === 0) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs select-none pointer-events-none">
-      <div className="bg-[#14151C]/95 border border-[rgba(239,90,42,0.4)] p-4 rounded-[4px] shadow-[0_20px_50px_rgba(0,0,0,0.9)] flex items-center gap-3">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0C0C0C]/80 select-none pointer-events-none">
+      <div className="bg-[#181818] border border-[rgba(242,97,63,0.4)] p-4 rounded-[4px] shadow-xl flex items-center gap-3">
         {windows.map((win, idx) => {
           const isSelected = idx === selectedIndex;
 
@@ -29,16 +29,16 @@ export const LinuxAltTabSwitcher: React.FC<LinuxAltTabSwitcherProps> = ({
               key={win.id}
               className={`flex flex-col items-center justify-center p-3 rounded-[3px] border transition-all w-28 h-24 text-center ${
                 isSelected
-                  ? 'bg-[#EF5A2A]/25 border-[#EF5A2A] text-white shadow-[0_0_15px_rgba(239,90,42,0.3)] scale-105'
-                  : 'bg-[#1C1E26] border-white/10 text-[#8C8881]'
+                  ? 'bg-[#22201F] border-[#F2613F] text-[#F5EFE6] scale-105'
+                  : 'bg-[#141414] border-[rgba(245,239,230,0.10)] text-[#857E74]'
               }`}
             >
               {win.type === 'terminal' ? (
-                <Terminal className="w-8 h-8 text-[#EF5A2A] mb-2" />
+                <Terminal className="w-8 h-8 text-[#F2613F] mb-2" />
               ) : win.type === 'system-info' ? (
-                <Info className="w-8 h-8 text-[#EF5A2A] mb-2" />
+                <Info className="w-8 h-8 text-[#F2613F] mb-2" />
               ) : (
-                <Folder className="w-8 h-8 text-[#EF5A2A] mb-2" />
+                <Folder className="w-8 h-8 text-[#F2613F] mb-2" />
               )}
               <span className="font-mono text-xs font-bold truncate w-full">
                 {win.title}

@@ -348,7 +348,7 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
   const activeWin = windows.find((w) => w.id === activeWindowId && !w.isMinimized);
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-[#0D0E13] text-[#F3EEE5] overflow-hidden select-none flex flex-col font-sans z-30">
+    <div className="fixed inset-0 w-full h-full bg-[#0C0C0C] text-[#F5EFE6] overflow-hidden select-none flex flex-col font-sans z-30">
       {/* Boot sequence overlay */}
       {isBooting && <LinuxBootSequence onComplete={() => setIsBooting(false)} />}
 
@@ -369,17 +369,17 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
         onContextMenu={handleDesktopContextMenu}
         className="flex-1 w-full h-full relative pt-10 pb-12 overflow-hidden"
         style={{
-          backgroundColor: '#0D0E13',
+          backgroundColor: '#0C0C0C',
           backgroundImage: `
-            radial-gradient(circle at 50% 50%, rgba(239,90,42,0.03) 0%, transparent 70%),
-            linear-gradient(rgba(243,238,229,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(243,238,229,0.03) 1px, transparent 1px)
+            radial-gradient(circle at 50% 50%, rgba(242,97,63,0.03) 0%, transparent 70%),
+            linear-gradient(rgba(245,239,230,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(245,239,230,0.03) 1px, transparent 1px)
           `,
           backgroundSize: '100% 100%, 40px 40px, 40px 40px',
         }}
       >
         {/* Subtle Architectural Coordinate Watermark */}
-        <div className="absolute top-12 right-6 pointer-events-none opacity-20 font-mono text-[10px] text-right space-y-0.5 hidden sm:block">
+        <div className="absolute top-12 right-6 pointer-events-none opacity-20 font-mono text-[10px] text-[#857E74] text-right space-y-0.5 hidden sm:block">
           <div>LAT 37.7749 // LNG -122.4194</div>
           <div>COMPOSITOR: NEXUS_WM_V2</div>
           <div>VFS_STATUS: MOUNTED_RO</div>
@@ -387,7 +387,7 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
 
         {/* Center Minimal NEXUS Watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03]">
-          <span className="font-fraunces font-bold text-[18vw] text-white tracking-tighter">
+          <span className="font-fraunces font-bold text-[18vw] text-[#F5EFE6] tracking-tighter">
             NEXUS
           </span>
         </div>
@@ -423,8 +423,8 @@ export const LinuxDesktop: React.FC<LinuxDesktopProps> = ({ onRouteChange }) => 
         </div>
 
         {/* Floating Instruction Chip for first-time visitors */}
-        <div className="absolute bottom-14 right-6 bg-[#16171F]/90 border border-white/10 rounded-[3px] p-3 text-[11px] font-mono text-[#A6A095] shadow-lg max-w-xs pointer-events-none hidden md:block">
-          <div className="text-[#EF5A2A] font-bold mb-1">💡 WORKSPACE CONTROLS</div>
+        <div className="absolute bottom-14 right-6 bg-[#181818]/95 border border-[rgba(245,239,230,0.10)] rounded-[3px] p-3 text-[11px] font-mono text-[#857E74] shadow-lg max-w-xs pointer-events-none hidden md:block">
+          <div className="text-[#F2613F] font-bold mb-1">💡 WORKSPACE CONTROLS</div>
           <div>• Double-click any project folder to view details & code</div>
           <div>• Right-click desktop for Terminal, Sort, and Tools</div>
           <div>• Click 'Exit Workspace' in top bar to return to website</div>

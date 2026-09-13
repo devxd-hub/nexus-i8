@@ -463,7 +463,7 @@ export const MorphSlider: React.FC<MorphSliderProps> = ({
       }
 
       glCtx.viewport(0, 0, canvas.width, canvas.height);
-      glCtx.clearColor(0.95, 0.93, 0.90, 1.0);
+      glCtx.clearColor(0.047, 0.047, 0.047, 1.0);
       glCtx.clear(glCtx.COLOR_BUFFER_BIT);
 
       glCtx.useProgram(prog);
@@ -554,7 +554,7 @@ export const MorphSlider: React.FC<MorphSliderProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full overflow-hidden select-none bg-[#EAE4D9] ${className}`}
+      className={`relative w-full overflow-hidden select-none bg-[#141414] ${className}`}
       style={{
         aspectRatio: aspectRatio === '4/3' ? '4 / 3' : aspectRatio === '16/9' ? '16 / 9' : '4 / 3',
         ...style,
@@ -610,7 +610,7 @@ export const MorphSlider: React.FC<MorphSliderProps> = ({
 
       {/* Loading Placeholder Skeleton */}
       {!imagesLoaded && webglSupported && !prefersReducedMotion && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#EAE4D9] text-[#66615A] font-dosis text-xs uppercase tracking-widest animate-pulse">
+        <div className="absolute inset-0 flex items-center justify-center bg-[#141414] text-[#857E74] font-dosis text-xs uppercase tracking-widest animate-pulse">
           LOADING NEXUS ARCHIVE...
         </div>
       )}

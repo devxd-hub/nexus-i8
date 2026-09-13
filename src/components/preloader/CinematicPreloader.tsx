@@ -65,7 +65,7 @@ export const CinematicPreloader: React.FC<CinematicPreloaderProps> = ({
       id="nexus-preloader"
       role="status"
       aria-label="Loading NEXUS"
-      className="fixed inset-0 z-[999] flex items-center justify-center bg-[#F3EEE5] select-none transition-opacity duration-450 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="fixed inset-0 z-[999] flex items-center justify-center bg-[#0C0C0C] select-none transition-opacity duration-450 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
         opacity: isExiting ? 0 : 1,
         pointerEvents: isExiting ? 'none' : 'auto',

@@ -14,7 +14,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-4 flex flex-col justify-between overflow-hidden select-none">
+    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#141414] border border-[rgba(245,239,230,0.10)] p-4 flex flex-col justify-between overflow-hidden select-none">
       {/* Background Blueprint Grid */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -25,7 +25,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             <path
               d="M 16 0 L 0 0 0 16"
               fill="none"
-              stroke="rgba(10,10,9,0.04)"
+              stroke="rgba(245,239,230,0.04)"
               strokeWidth="0.5"
             />
           </pattern>
@@ -34,12 +34,12 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
       </svg>
 
       {/* Header telemetry */}
-      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#66615A] uppercase border-b border-[rgba(10,10,9,0.08)] pb-1.5">
+      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#857E74] uppercase border-b border-[rgba(245,239,230,0.08)] pb-1.5">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
           SYSTEM SYNTHESIS & SPRINT
         </span>
-        <span className="text-[#0A0A09]/60 font-mono text-[9px]">CYCLE: ITERATION 04</span>
+        <span className="text-[#F5EFE6]/60 font-mono text-[9px]">CYCLE: ITERATION 04</span>
       </div>
 
       {/* Main SVG Blueprint Assembly Canvas */}
@@ -56,7 +56,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y="20"
             width="200"
             height="105"
-            stroke="rgba(10,10,9,0.15)"
+            stroke="rgba(245,239,230,0.15)"
             strokeWidth="0.75"
             strokeDasharray="4 4"
           />
@@ -71,7 +71,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
                   y1={cy}
                   x2={cx + 4}
                   y2={cy}
-                  stroke="#EF5A2A"
+                  stroke="#F2613F"
                   strokeWidth="1"
                 />
                 <line
@@ -79,7 +79,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
                   y1={cy - 4}
                   x2={cx}
                   y2={cy + 4}
-                  stroke="#EF5A2A"
+                  stroke="#F2613F"
                   strokeWidth="1"
                 />
               </g>
@@ -92,7 +92,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="135"
             x2="240"
             y2="135"
-            stroke="rgba(10,10,9,0.25)"
+            stroke="rgba(245,239,230,0.25)"
             strokeWidth="0.75"
           />
           <line
@@ -100,7 +100,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="132"
             x2="40"
             y2="138"
-            stroke="rgba(10,10,9,0.3)"
+            stroke="rgba(245,239,230,0.3)"
             strokeWidth="0.75"
           />
           <line
@@ -108,14 +108,14 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="132"
             x2="240"
             y2="138"
-            stroke="rgba(10,10,9,0.3)"
+            stroke="rgba(245,239,230,0.3)"
             strokeWidth="0.75"
           />
           <text
             x="140"
             y="141"
             textAnchor="middle"
-            className="font-mono text-[7.5px] fill-[#0A0A09]/50"
+            className="font-mono text-[7.5px] fill-[#F5EFE6]/50"
           >
             MODULAR BOUNDARY: 200 × 105 DP
           </text>
@@ -126,8 +126,8 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y="75"
             width="80"
             height="38"
-            fill="rgba(10,10,9,0.06)"
-            stroke={isActive ? '#0A0A09' : 'rgba(10,10,9,0.25)'}
+            fill="rgba(245,239,230,0.06)"
+            stroke={isActive ? '#F5EFE6' : 'rgba(245,239,230,0.25)'}
             strokeWidth="1.2"
             initial={{ opacity: 0.8, y: 0 }}
             animate={
@@ -143,7 +143,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             x="95"
             y="98"
             textAnchor="middle"
-            className="font-dosis font-bold text-[8.5px] tracking-[0.12em] fill-[#0A0A09]/70 uppercase"
+            className="font-dosis font-bold text-[8.5px] tracking-[0.12em] fill-[#F5EFE6]/70 uppercase"
           >
             CORE SYSTEM
           </text>
@@ -154,8 +154,8 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y="32"
             width="82"
             height="42"
-            fill="rgba(239,90,42,0.06)"
-            stroke={isActive ? '#EF5A2A' : 'rgba(10,10,9,0.25)'}
+            fill="rgba(242,97,63,0.08)"
+            stroke={isActive ? '#F2613F' : 'rgba(245,239,230,0.25)'}
             strokeWidth="1.2"
             initial={{ opacity: 0.8 }}
             animate={
@@ -171,7 +171,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             x="186"
             y="56"
             textAnchor="middle"
-            className="font-dosis font-bold text-[8.5px] tracking-[0.12em] fill-[#EF5A2A] uppercase"
+            className="font-dosis font-bold text-[8.5px] tracking-[0.12em] fill-[#F2613F] uppercase"
           >
             PROTOTYPE v1.2
           </text>
@@ -182,8 +182,8 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y="65"
             width="32"
             height="20"
-            fill="#EBE5DB"
-            stroke="#0A0A09"
+            fill="#181818"
+            stroke="#F5EFE6"
             strokeWidth="1"
             animate={
               shouldReduceMotion || !isActive
@@ -200,7 +200,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="75"
             x2="157"
             y2="75"
-            stroke="#EF5A2A"
+            stroke="#F2613F"
             strokeWidth="1.5"
             strokeDasharray="2 2"
           />
@@ -211,7 +211,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="20"
             x2="95"
             y2="125"
-            stroke="rgba(10,10,9,0.08)"
+            stroke="rgba(245,239,230,0.08)"
             strokeWidth="0.75"
             strokeDasharray="2 3"
           />
@@ -220,7 +220,7 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
             y1="20"
             x2="186"
             y2="125"
-            stroke="rgba(10,10,9,0.08)"
+            stroke="rgba(245,239,230,0.08)"
             strokeWidth="0.75"
             strokeDasharray="2 3"
           />
@@ -228,11 +228,11 @@ export const BuildVisual: React.FC<BuildVisualProps> = ({ isActive }) => {
       </div>
 
       {/* Utility Tags Footer */}
-      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#0A0A09]/80 border-t border-[rgba(10,10,9,0.08)] pt-1.5 font-semibold">
+      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#F5EFE6]/80 border-t border-[rgba(245,239,230,0.08)] pt-1.5 font-semibold">
         <span>PROTOTYPE</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>TEST</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>ITERATE</span>
       </div>
     </div>

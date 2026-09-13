@@ -227,7 +227,7 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
       onWheel={handleWheel}
-      className={`relative w-full h-full min-h-[560px] md:min-h-[680px] lg:min-h-[760px] overflow-hidden bg-[#0D0D0C] select-none cursor-grab active:cursor-grabbing border border-[rgba(255,255,255,0.08)] ${className}`}
+      className={`relative w-full h-full min-h-[560px] md:min-h-[680px] lg:min-h-[760px] overflow-hidden bg-[#0C0C0C] select-none cursor-grab active:cursor-grabbing border border-[rgba(245,239,230,0.10)] ${className}`}
       style={{ touchAction: 'none' }}
     >
       {/* 1. Atmospheric Ambient Radial Glows & Grid */}
@@ -235,14 +235,14 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
         className="absolute inset-0 pointer-events-none opacity-40 z-0"
         style={{
           background:
-            'radial-gradient(circle at 50% 50%, rgba(239, 90, 42, 0.18) 0%, rgba(138, 92, 255, 0.08) 45%, transparent 75%)',
+            'radial-gradient(circle at 50% 50%, rgba(242, 97, 63, 0.12) 0%, rgba(138, 92, 255, 0.05) 45%, transparent 75%)',
         }}
         aria-hidden="true"
       />
       <div
         className="absolute inset-0 pointer-events-none opacity-10 z-0"
         style={{
-          backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(rgba(245, 239, 230, 0.3) 1px, transparent 1px)',
           backgroundSize: '24px 24px',
         }}
         aria-hidden="true"
@@ -250,11 +250,11 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
 
       {/* 2. Top-Left HUD Info Badge */}
       <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20 pointer-events-none flex flex-col gap-1.5">
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/60 backdrop-blur-md border border-[rgba(255,255,255,0.14)] text-[#F3EEE5] text-[11px] font-dosis font-bold tracking-[0.22em] uppercase rounded-full">
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#141414] border border-[rgba(245,239,230,0.14)] text-[#F5EFE6] text-[11px] font-dosis font-bold tracking-[0.22em] uppercase rounded-full">
           <NexusIcon size="xs" />
           <span>3D DOME SPHERE // {nodes.length} ARTIFACTS</span>
         </div>
-        <p className="text-[11px] font-mono text-white/50 tracking-wider hidden sm:block">
+        <p className="text-[11px] font-mono text-[#857E74] tracking-wider hidden sm:block">
           DRAG TO ROTATE 360° · SCROLL TO ZOOM · CLICK TO INSPECT
         </p>
       </div>
@@ -271,8 +271,8 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
             }}
             className={`px-2.5 py-1 text-[10px] sm:text-[11px] font-dosis font-bold tracking-[0.18em] uppercase rounded-full transition-all duration-200 cursor-pointer ${
               activeCategory === cat
-                ? 'bg-[#EF5A2A] text-white shadow-[0_0_12px_rgba(239,90,42,0.4)]'
-                : 'bg-black/50 text-white/70 hover:text-white border border-white/10 hover:border-white/25'
+                ? 'bg-[#F2613F] text-[#F5EFE6] border border-[#F2613F]'
+                : 'bg-[#181818] text-[#C2BBB0] hover:text-[#F5EFE6] border border-[rgba(245,239,230,0.14)] hover:border-[rgba(245,239,230,0.25)]'
             }`}
           >
             {cat}
@@ -333,12 +333,12 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
                 <div
                   className={`w-full h-full flex flex-col rounded-sm overflow-hidden border transition-all duration-300 ${
                     isHovered
-                      ? 'bg-[#1A1A18] border-[#EF5A2A] shadow-[0_12px_32px_rgba(239,90,42,0.3)] ring-1 ring-[#EF5A2A]'
-                      : 'bg-[#141413]/90 backdrop-blur-md border-[rgba(255,255,255,0.12)] hover:border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.6)]'
+                      ? 'bg-[#181818] border-[#F2613F]'
+                      : 'bg-[#141414] border-[rgba(245,239,230,0.14)] hover:border-[rgba(245,239,230,0.30)]'
                   }`}
                 >
                   {/* Top Image Preview */}
-                  <div className="relative w-full h-[155px] overflow-hidden bg-[#242422] border-b border-white/10">
+                  <div className="relative w-full h-[155px] overflow-hidden bg-[#181818] border-b border-[rgba(245,239,230,0.10)]">
                     {item.imageUrl ? (
                       <img
                         src={item.imageUrl}
@@ -348,18 +348,18 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#1E1E1C]">
-                        <NexusIcon size="md" className="opacity-40 text-white" />
+                      <div className="w-full h-full flex items-center justify-center bg-[#141414]">
+                        <NexusIcon size="md" className="opacity-40 text-[#857E74]" />
                       </div>
                     )}
 
                     {/* Category Pill Tag */}
-                    <div className="absolute top-2 left-2 px-2 py-0.5 bg-black/80 backdrop-blur-xs border border-white/20 text-[9px] font-dosis font-bold tracking-[0.2em] text-[#EF5A2A] uppercase rounded-xs">
+                    <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#0C0C0C] border border-[rgba(245,239,230,0.18)] text-[9px] font-dosis font-bold tracking-[0.2em] text-[#F2613F] uppercase rounded-xs">
                       {item.category}
                     </div>
 
                     {/* Date Badge */}
-                    <div className="absolute top-2 right-2 px-1.5 py-0.5 bg-black/80 text-[8px] font-mono text-white/70 tracking-wider">
+                    <div className="absolute top-2 right-2 px-1.5 py-0.5 bg-[#0C0C0C] border border-[rgba(245,239,230,0.10)] text-[8px] font-mono text-[#C2BBB0] tracking-wider">
                       {item.eventDate}
                     </div>
                   </div>
@@ -367,19 +367,19 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
                   {/* Card Content & Metadata */}
                   <div className="p-3.5 flex flex-col justify-between grow">
                     <div className="space-y-1">
-                      <h3 className="font-fraunces font-bold text-sm text-white leading-snug line-clamp-2 group-hover:text-[#EF5A2A] transition-colors">
+                      <h3 className="font-fraunces font-bold text-sm text-[#F5EFE6] leading-snug line-clamp-2 group-hover:text-[#F2613F] transition-colors">
                         {item.title}
                       </h3>
-                      <p className="font-bitter text-[11px] text-white/60 line-clamp-2 leading-relaxed">
+                      <p className="font-bitter text-[11px] text-[#C2BBB0] line-clamp-2 leading-relaxed">
                         {item.caption || item.description}
                       </p>
                     </div>
 
-                    <div className="pt-2 mt-auto border-t border-white/10 flex items-center justify-between text-[9px] font-mono text-white/50">
+                    <div className="pt-2 mt-auto border-t border-[rgba(245,239,230,0.10)] flex items-center justify-between text-[9px] font-mono text-[#857E74]">
                       <span className="truncate max-w-[120px]">
                         {item.author || item.location || 'NEXUS LAB'}
                       </span>
-                      <span className="flex items-center gap-1 text-[#EF5A2A] font-dosis font-bold tracking-wider group-hover:translate-x-0.5 transition-transform">
+                      <span className="flex items-center gap-1 text-[#F2613F] font-dosis font-bold tracking-wider group-hover:translate-x-0.5 transition-transform">
                         <span>VIEW</span>
                         <ArrowRight className="w-2.5 h-2.5" />
                       </span>
@@ -400,17 +400,17 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
             <button
               type="button"
               onClick={() => setIsAutoRotating(!isAutoRotating)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/70 hover:bg-black backdrop-blur-md border border-white/15 hover:border-[#EF5A2A] text-white text-xs font-dosis font-bold tracking-[0.16em] uppercase rounded-full transition-all duration-200 cursor-pointer shadow-md"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#181818] hover:bg-[#22201F] border border-[rgba(245,239,230,0.14)] hover:border-[#F2613F] text-[#F5EFE6] text-xs font-dosis font-bold tracking-[0.16em] uppercase rounded-full transition-all duration-200 cursor-pointer shadow-xs"
               title={isAutoRotating ? 'Pause Auto Spin' : 'Resume Auto Spin'}
             >
               {isAutoRotating ? (
                 <>
-                  <Pause className="w-3.5 h-3.5 text-[#EF5A2A]" />
+                  <Pause className="w-3.5 h-3.5 text-[#F2613F]" />
                   <span>PAUSE</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-3.5 h-3.5 text-[#EF5A2A]" />
+                  <Play className="w-3.5 h-3.5 text-[#F2613F]" />
                   <span>SPIN</span>
                 </>
               )}
@@ -419,38 +419,38 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
             <button
               type="button"
               onClick={handleReset}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black/70 hover:bg-black backdrop-blur-md border border-white/15 hover:border-white/30 text-white text-xs font-dosis font-bold tracking-[0.16em] uppercase rounded-full transition-all duration-200 cursor-pointer shadow-md"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#181818] hover:bg-[#22201F] border border-[rgba(245,239,230,0.14)] hover:border-[rgba(245,239,230,0.25)] text-[#F5EFE6] text-xs font-dosis font-bold tracking-[0.16em] uppercase rounded-full transition-all duration-200 cursor-pointer shadow-xs"
               title="Reset View Orientation"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-white/70" />
+              <RotateCcw className="w-3.5 h-3.5 text-[#C2BBB0]" />
               <span className="hidden sm:inline">RESET</span>
             </button>
           </div>
 
           {/* Center: Mobile Drag Indicator */}
-          <div className="hidden md:flex items-center gap-2 px-3.5 py-1 bg-black/50 backdrop-blur-md border border-white/10 text-[10px] font-mono text-white/60 tracking-widest uppercase rounded-full">
-            <Compass className="w-3 h-3 text-[#EF5A2A] animate-spin-slow" />
+          <div className="hidden md:flex items-center gap-2 px-3.5 py-1 bg-[#141414] border border-[rgba(245,239,230,0.10)] text-[10px] font-mono text-[#857E74] tracking-widest uppercase rounded-full">
+            <Compass className="w-3 h-3 text-[#F2613F] animate-spin-slow" />
             <span>DRAG SPHERE TO NAVIGATE DOME</span>
           </div>
 
           {/* Right: Zoom Level Controls */}
-          <div className="flex items-center gap-1.5 bg-black/70 backdrop-blur-md border border-white/15 p-1 rounded-full pointer-events-auto shadow-md">
+          <div className="flex items-center gap-1.5 bg-[#181818] border border-[rgba(245,239,230,0.14)] p-1 rounded-full pointer-events-auto shadow-xs">
             <button
               type="button"
               onClick={() => setRadius((r) => Math.max(420, r - 60))}
-              className="p-1.5 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+              className="p-1.5 text-[#C2BBB0] hover:text-[#F5EFE6] hover:bg-[#22201F] rounded-full transition-colors cursor-pointer"
               title="Zoom In (Expand Dome)"
             >
               <ZoomIn className="w-3.5 h-3.5" />
             </button>
-            <span className="text-[10px] font-mono text-white/60 px-1 select-none">
+            <span className="text-[10px] font-mono text-[#857E74] px-1 select-none">
               {Math.round(radius)}px
             </span>
             <button
               type="button"
               onClick={() => setRadius((r) => Math.min(960, r + 60))}
-              className="p-1.5 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
-              title="Zoom Out (Contract Dome)"
+              className="p-1.5 text-[#C2BBB0] hover:text-[#F5EFE6] hover:bg-[#22201F] rounded-full transition-colors cursor-pointer"
+              title="Zoom Out (Compress Dome)"
             >
               <ZoomOut className="w-3.5 h-3.5" />
             </button>

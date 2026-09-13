@@ -224,13 +224,13 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
     <section
       ref={sectionRef}
       id="nexus-hero-section"
-      className="relative w-full min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center pt-8 sm:pt-12 md:pt-14 pb-10 sm:pb-14 md:pb-16 border-b border-[rgba(10,10,9,0.1)] overflow-hidden bg-[#F3EEE5] select-none"
+      className="relative w-full min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center pt-8 sm:pt-12 md:pt-14 pb-10 sm:pb-14 md:pb-16 border-b border-[var(--border-subtle)] overflow-hidden bg-[var(--bg-primary)] select-none transition-colors duration-250"
     >
       {/* 1. Subtle Editorial Paper Texture */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply z-0"
+        className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
         style={{
-          backgroundImage: 'radial-gradient(#0A0A09 0.75px, transparent 0.75px)',
+          backgroundImage: 'radial-gradient(var(--text-primary) 0.75px, transparent 0.75px)',
           backgroundSize: '18px 18px',
         }}
         aria-hidden="true"
@@ -244,8 +244,8 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
         <PixelBlast
           variant="circle"
           pixelSize={5}
-          color="#EF5A2A"
-          secondaryColor="#D94A1F"
+          color="#F2613F"
+          secondaryColor="#481E14"
           patternScale={3.2}
           patternDensity={0.76}
           pixelSizeJitter={0.3}
@@ -274,7 +274,7 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
       </div>
 
       {/* 3. Outer Editorial Frame Metadata */}
-      <div className="absolute inset-x-6 sm:inset-x-10 md:inset-x-14 top-6 pointer-events-none hidden sm:flex items-center justify-between text-[9px] font-dosis font-semibold tracking-[0.28em] text-[#66615A]/60 uppercase z-10" aria-hidden="true">
+      <div className="absolute inset-x-6 sm:inset-x-10 md:inset-x-14 top-6 pointer-events-none hidden sm:flex items-center justify-between text-[9px] font-dosis font-semibold tracking-[0.28em] text-[var(--text-muted)] uppercase z-10" aria-hidden="true">
         <span>NEXUS // 2026</span>
         <span>CAMPUS CREATIVE &amp; TECH COLLECTIVE</span>
         <span>STUDENT INITIATIVE</span>
@@ -295,15 +295,15 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
             <motion.div
               layout
               transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-              className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 border border-[rgba(239,90,42,0.28)] bg-[#EBE5DB]/40 backdrop-blur-xs"
+              className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 border border-[rgba(242,97,63,0.35)] bg-[var(--bg-secondary)]"
             >
-              <p className="font-dosis text-[11px] sm:text-xs md:text-[13px] font-semibold tracking-[0.22em] sm:tracking-[0.25em] text-[#EF5A2A] uppercase whitespace-nowrap">
+              <p className="font-dosis text-[11px] sm:text-xs md:text-[13px] font-semibold tracking-[0.22em] sm:tracking-[0.25em] text-[#F2613F] uppercase whitespace-nowrap">
                 WHERE IDEAS FIND
               </p>
               <div className="inline-flex items-center justify-start">
                 <RotatingText
                   texts={['PEOPLE.', 'BUILDERS.', 'CREATORS.', 'MAKERS.', 'COLLABORATORS.']}
-                  mainClassName="font-dosis text-[11px] sm:text-xs md:text-[13px] font-bold tracking-[0.2em] sm:tracking-[0.22em] text-[#0A0A09] uppercase overflow-hidden text-left whitespace-nowrap"
+                  mainClassName="font-dosis text-[11px] sm:text-xs md:text-[13px] font-bold tracking-[0.2em] sm:tracking-[0.22em] text-[var(--text-primary)] uppercase overflow-hidden text-left whitespace-nowrap"
                   splitLevelClassName="overflow-hidden justify-start pb-0.5 whitespace-nowrap"
                   staggerFrom="first"
                   staggerDuration={0.015}
@@ -334,7 +334,7 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
             >
               <span
                 id="hero-main-nexus-wordmark"
-                className="inline-flex items-center font-lovelo font-bold uppercase select-none text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.5rem] tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.22em] text-[#0A0A09]"
+                className="inline-flex items-center font-lovelo font-bold uppercase select-none text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.5rem] tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.22em] text-[var(--text-primary)]"
                 aria-label="NEXUS"
               >
                 <span
@@ -377,7 +377,7 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
 
               <span
                 ref={subtitleRef}
-                className="font-dosis uppercase font-semibold tracking-[0.35em] text-sm md:text-base text-[#66615A] mt-1 sm:mt-1.5 transition-opacity duration-75 ease-out"
+                className="font-dosis uppercase font-semibold tracking-[0.35em] text-sm md:text-base text-[var(--text-secondary)] mt-1 sm:mt-1.5 transition-opacity duration-75 ease-out"
                 style={{ willChange: 'opacity' }}
               >
                 COLLEGE COMMUNITY
@@ -393,7 +393,7 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
             transition={{ duration: 0.6, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
             className="w-full max-w-[580px] mx-auto px-4 mt-4 sm:mt-5 md:mt-6"
           >
-            <p className="font-bitter text-base sm:text-lg md:text-xl text-[#66615A] leading-relaxed font-normal">
+            <p className="font-bitter text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed font-normal">
               A student-led community for building, experimenting and creating projects that matter.
             </p>
           </motion.div>

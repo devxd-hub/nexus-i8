@@ -40,7 +40,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onRouteChange }) => {
     <AboutScrollManager>
       <main
         id="nexus-about-page"
-        className="w-full min-h-screen bg-[#F3EEE5] text-[#0A0A09] selection:bg-[#EF5A2A] selection:text-white flex flex-col"
+        className="w-full min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] selection:bg-[#F2613F] selection:text-white flex flex-col transition-colors duration-250"
       >
         {/* 00 / Nexus Signature */}
         <NexusSignature />

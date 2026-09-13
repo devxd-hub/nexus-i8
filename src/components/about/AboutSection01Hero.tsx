@@ -38,7 +38,7 @@ export const AboutSection01Hero: React.FC = () => {
     <section
       id="about-hero"
       aria-labelledby="about-hero-title"
-      className="w-full flex flex-col justify-center py-12 sm:py-16 md:py-20 border-b border-[#0A0A09]/10"
+      className="w-full flex flex-col justify-center py-12 sm:py-16 md:py-20 border-b border-[var(--border-subtle)] bg-[var(--bg-primary)] transition-colors duration-250"
     >
       <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
         {/* Subtle Section Label */}
@@ -48,7 +48,7 @@ export const AboutSection01Hero: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-6 md:mb-8"
         >
-          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#EF5A2A] font-semibold">
+          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#F2613F] font-semibold">
             01 / ABOUT NEXUS
           </span>
         </motion.div>
@@ -61,7 +61,7 @@ export const AboutSection01Hero: React.FC = () => {
               id="about-hero-title"
               as="h2"
               text="WE START WITH QUESTIONS."
-              className="font-fraunces text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0A0A09] leading-[0.98]"
+              className="font-fraunces text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--text-primary)] leading-[0.98]"
               delay={0.15}
               stagger={0.05}
             />
@@ -72,10 +72,10 @@ export const AboutSection01Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-4 max-w-xl"
             >
-              <p className="font-bitter text-base sm:text-lg md:text-xl text-[#0A0A09]/85 leading-relaxed">
+              <p className="font-bitter text-base sm:text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
                 NEXUS is a student-led community where ideas become projects through collaboration, experimentation and making.
               </p>
-              <p className="font-bitter text-sm sm:text-base text-[#0A0A09]/60 leading-relaxed">
+              <p className="font-bitter text-sm sm:text-base text-[var(--text-muted)] leading-relaxed">
                 Students from different disciplines come together to question, design, engineer and build solutions that matter.
               </p>
             </motion.div>
@@ -91,17 +91,17 @@ export const AboutSection01Hero: React.FC = () => {
             {pillars.map((item, idx) => (
               <div
                 key={idx}
-                className="flex flex-col pb-5 border-b border-[#0A0A09]/10 last:border-b-0 last:pb-0"
+                className="flex flex-col pb-5 border-b border-[var(--border-subtle)] last:border-b-0 last:pb-0"
               >
                 <div className="flex items-baseline space-x-3 mb-1.5">
-                  <span className="font-mono text-xs text-[#EF5A2A] font-bold">
+                  <span className="font-mono text-xs text-[#F2613F] font-bold">
                     {item.num}
                   </span>
-                  <h3 className="font-fraunces font-semibold text-base sm:text-lg text-[#0A0A09]">
+                  <h3 className="font-fraunces font-semibold text-base sm:text-lg text-[var(--text-primary)]">
                     {item.title}
                   </h3>
                 </div>
-                <p className="font-jakarta text-xs sm:text-sm text-[#0A0A09]/60 leading-relaxed pl-7">
+                <p className="font-bitter text-sm text-[var(--text-secondary)] leading-relaxed pl-7">
                   {item.desc}
                 </p>
               </div>

@@ -73,12 +73,12 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
   return (
     <main
       id="nexus-team-page"
-      className="relative w-full bg-[#F3EEE5] text-[#0A0A09] overflow-x-hidden selection:bg-[#EF5A2A] selection:text-white flex flex-col"
+      className="relative w-full bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden selection:bg-[#F2613F] selection:text-[var(--bg-primary)] flex flex-col"
     >
       {/* ========================================================================= */}
       {/* 01. EDITORIAL TEAM HERO HEADER                                            */}
       {/* ========================================================================= */}
-      <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] py-24 sm:py-32 flex items-center justify-center border-b-2 border-[#0A0A09] overflow-hidden">
+      <section className="relative w-full min-h-[60vh] sm:min-h-[70vh] py-24 sm:py-32 flex items-center justify-center border-b border-[var(--border-subtle)] overflow-hidden">
         {/* Ambient Canvas Background */}
         <TeamBackgroundAmbience />
 
@@ -92,7 +92,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="font-fraunces font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#0A0A09] tracking-tight leading-[0.95] uppercase"
+              className="font-fraunces font-bold text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[var(--text-primary)] tracking-tight leading-[0.95] uppercase"
             >
               THE TEAM
             </motion.h1>
@@ -101,7 +101,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="font-dosis font-bold text-xs sm:text-sm tracking-[0.3em] text-[#EF5A2A] uppercase max-w-xl mx-auto"
+              className="font-dosis font-bold text-xs sm:text-sm tracking-[0.3em] text-[#F2613F] uppercase max-w-xl mx-auto"
             >
               THE PEOPLE WHO MAKE IT HAPPEN
             </motion.p>
@@ -110,7 +110,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="pt-4 flex items-center justify-center gap-3 text-xs font-dosis font-medium tracking-[0.2em] text-[#66615A] uppercase"
+              className="pt-4 flex items-center justify-center gap-3 text-xs font-dosis font-medium tracking-[0.2em] text-[var(--text-muted)] uppercase"
             >
               <span>{TEAM_MEMBERS.length} CREW MEMBERS</span>
               <span>•</span>
@@ -144,14 +144,14 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       {/* ========================================================================= */}
       {/* 04. COLLABORATION CTA                                                     */}
       {/* ========================================================================= */}
-      <section className="relative w-full py-20 sm:py-28 bg-[#EBE4D8] text-[#0A0A09] border-t-2 border-[#0A0A09]">
+      <section className="relative w-full py-20 sm:py-28 bg-[var(--bg-primary)] text-[var(--text-primary)] border-t border-[var(--border-subtle)]">
         <Container>
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <SectionLabel number="03" label="CONNECT" />
-            <h2 className="font-fraunces font-bold text-3xl sm:text-4xl lg:text-5xl text-[#0A0A09] uppercase tracking-tight">
+            <h2 className="font-fraunces font-bold text-3xl sm:text-4xl lg:text-5xl text-[var(--text-primary)] uppercase tracking-tight">
               COLLABORATE WITH NEXUS
             </h2>
-            <p className="font-bitter text-[#66615A] text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
+            <p className="font-bitter text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed max-w-xl mx-auto">
               Interested in collaborating on research sprints, physical computing tools, or publication features?
             </p>
             <div className="pt-2">

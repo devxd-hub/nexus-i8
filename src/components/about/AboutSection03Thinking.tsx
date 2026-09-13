@@ -57,12 +57,12 @@ export const AboutSection03Thinking: React.FC = () => {
       ref={sectionRef}
       id="about-thinking"
       aria-labelledby="about-thinking-title"
-      className="w-full py-12 sm:py-16 md:py-20 border-b border-[#0A0A09]/10 relative overflow-hidden"
+      className="w-full py-12 sm:py-16 md:py-20 border-b border-[var(--border-subtle)] relative overflow-hidden bg-[var(--bg-primary)] transition-colors duration-250"
     >
       {/* Subtle Scroll Parallax Watermark */}
       <motion.div
         style={shouldReduceMotion ? undefined : { y: watermarkY }}
-        className="absolute -right-6 md:right-10 top-12 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[#0A0A09]/[0.035] select-none pointer-events-none will-change-transform leading-none z-0"
+        className="absolute -right-6 md:right-10 top-12 font-fraunces text-8xl sm:text-9xl md:text-[14rem] lg:text-[18rem] font-bold text-[var(--text-primary)]/[0.03] select-none pointer-events-none will-change-transform leading-none z-0"
         aria-hidden="true"
       >
         03
@@ -77,7 +77,7 @@ export const AboutSection03Thinking: React.FC = () => {
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8 md:mb-12"
         >
-          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#EF5A2A] font-semibold">
+          <span className="font-dosis uppercase text-xs md:text-sm tracking-[0.24em] text-[#F2613F] font-semibold">
             03 / HOW WE THINK
           </span>
           <h2 id="about-thinking-title" className="sr-only">
@@ -86,7 +86,7 @@ export const AboutSection03Thinking: React.FC = () => {
         </motion.div>
 
         {/* Typographic Matrix with Staggered Entrance */}
-        <div className="space-y-0 divide-y divide-[#0A0A09]/15">
+        <div className="space-y-0 divide-y divide-[var(--border-subtle)]">
           {principles.map((p, idx) => (
             <motion.div
               key={p.name}
@@ -109,10 +109,10 @@ export const AboutSection03Thinking: React.FC = () => {
                 delay: idx * 0.1,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="py-8 sm:py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-10 relative items-center"
+              className="py-8 sm:py-10 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 lg:gap-12 relative items-center"
             >
-              {/* Index marker (Curiosity Pinwheel, Collaboration Orbiting Sparkle, Experimentation Reverse Pinwheel, Craft Orbiting Sparkle) */}
-              <div className="md:col-span-2 relative flex items-center">
+              {/* Index marker */}
+              <div className="md:col-span-2 relative flex items-center shrink-0">
                 {p.number === '01' ? (
                   <NexusCuriosityPinwheel rowRef={curiosityRowRef} />
                 ) : p.number === '02' ? (
@@ -122,22 +122,22 @@ export const AboutSection03Thinking: React.FC = () => {
                 ) : p.number === '04' ? (
                   <NexusOrbitingSparkle rowRef={craftRowRef} />
                 ) : (
-                  <span className="font-dosis font-bold text-xs md:text-sm tracking-[0.28em] text-[#EF5A2A]">
+                  <span className="font-dosis font-bold text-xs md:text-sm tracking-[0.28em] text-[#F2613F]">
                     {p.number}
                   </span>
                 )}
               </div>
 
               {/* Principle Name */}
-              <div className="md:col-span-5">
-                <h3 className="font-fraunces text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#0A0A09]">
+              <div className="md:col-span-5 flex items-center">
+                <h3 className="font-fraunces text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
                   {p.name}
                 </h3>
               </div>
 
               {/* Tagline / Statement */}
-              <div className="md:col-span-5 md:text-right lg:text-left">
-                <p className="font-bitter italic text-xl sm:text-2xl md:text-2xl text-[#66615A] leading-snug">
+              <div className="md:col-span-5 flex items-center md:pl-8 lg:pl-12 xl:pl-16">
+                <p className="font-bitter italic text-lg sm:text-xl md:text-xl lg:text-2xl text-[var(--text-secondary)] leading-snug">
                   {p.tagline}
                 </p>
               </div>

@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Container } from '../primitives/Container.tsx';
 import { AppRoute, NavItem } from '../../types.ts';
+import { ThemeToggle } from './ThemeToggle.tsx';
 
 interface NavbarProps {
   currentRoute: AppRoute;
@@ -23,14 +24,12 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 /**
- * REFINED FLOATING PILL NAVBAR
+ * REFINED FLOATING PILL NAVBAR WITH SEAMLESS THEME TOGGLE
  *
  * Micro-Interaction Architecture:
- * - Tactile Pill Rail: Elevated translucent pill track with fine-tuned border and blur.
- * - Smooth Sliding Active Pill (`layoutId="nexus-nav-active-pill"`): Pure, high-precision
- *   motion spring pill that glides seamlessly between active routes.
- * - Gentle Hover Underlay: Subtle secondary highlight for interactive feedback.
- * - Zero artificial dots/clutter: Pure typographic clarity and optical balance.
+ * - Tactile Pill Rail: Elevated pill track with fine-tuned border and semantic theme tokens.
+ * - Smooth Sliding Active Pill (`layoutId="nexus-nav-active-pill"`): Pure motion spring pill.
+ * - Integrated Editorial Theme Switcher: Minimal, keyboard-accessible light/dark switch.
  */
 export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) => {
   const shouldReduceMotion = useReducedMotion();
@@ -99,12 +98,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
       id="nexus-main-navbar"
       className={`sticky top-0 z-50 w-full transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isScrolled
-          ? 'bg-[#F3EEE5]/92 backdrop-blur-md border-b border-[rgba(10,10,9,0.08)] shadow-[0_4px_20px_-4px_rgba(10,10,9,0.05)]'
-          : 'bg-[#F3EEE5]/40 backdrop-blur-xs border-b border-transparent shadow-none'
+          ? 'bg-[var(--nav-bg-scrolled)] border-b border-[var(--border-subtle)] shadow-xs'
+          : 'bg-[var(--nav-bg)] border-b border-transparent shadow-none'
       }`}
     >
       <Container>
-        {/* Stable, Non-Collapsing Navbar Height (prevents layout shifts and coordinate jumps) */}
+        {/* Stable, Non-Collapsing Navbar Height */}
         <div className="h-18 flex items-center justify-between">
           {/* ====================================================
               1. LEFT: NEXUS BRAND MARK
@@ -113,7 +112,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
             <a
               href="/"
               onClick={(e) => handleNavClick('/', e)}
-              className="group relative flex items-center py-1.5 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#EF5A2A] rounded-xs select-none"
+              className="group relative flex items-center py-1.5 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#F2613F] rounded-xs select-none"
               aria-label="NEXUS College Community Home"
             >
               <div id="navbar-brand-anchor" className="flex items-center gap-3">
@@ -134,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
                 <div className="flex flex-col justify-center">
                   <span
                     id="navbar-brand-subtitle"
-                    className="font-dosis uppercase font-bold text-[11px] sm:text-[12px] tracking-[0.22em] text-[#0A0A09] group-hover:text-[#EF5A2A] transition-colors duration-200"
+                    className="font-dosis uppercase font-bold text-[11px] sm:text-[12px] tracking-[0.22em] text-[var(--text-primary)] group-hover:text-[#F2613F] transition-colors duration-200"
                   >
                     COLLEGE COMMUNITY
                   </span>
@@ -144,81 +143,88 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
           </div>
 
           {/* ====================================================
-              2. CENTER/RIGHT: FINE-TUNED PILL RAIL
+              2. CENTER/RIGHT: FINE-TUNED PILL RAIL + THEME TOGGLE
              ==================================================== */}
-          <nav
-            ref={navContainerRef}
-            aria-label="Main Navigation"
-            className="hidden lg:flex items-center p-1 rounded-full bg-[#E8E2D7]/80 backdrop-blur-md border border-[rgba(10,10,9,0.08)] shadow-[0_2px_8px_-2px_rgba(10,10,9,0.04)]"
-            onMouseLeave={() => setHoveredHref(null)}
-          >
-            {NAV_ITEMS.map((item) => {
-              const isActive = currentRoute === item.href;
-              const isHovered = hoveredHref === item.href;
+          <div className="hidden lg:flex items-center gap-3">
+            <nav
+              ref={navContainerRef}
+              aria-label="Main Navigation"
+              className="flex items-center p-1 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xs"
+              onMouseLeave={() => setHoveredHref(null)}
+            >
+              {NAV_ITEMS.map((item) => {
+                const isActive = currentRoute === item.href;
+                const isHovered = hoveredHref === item.href;
 
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(item.href, e)}
-                  onMouseEnter={() => setHoveredHref(item.href)}
-                  className={`relative py-2 px-4 xl:px-5 text-[13.5px] xl:text-[14px] font-dosis font-bold tracking-[0.16em] uppercase transition-colors duration-200 ease-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#EF5A2A] rounded-full select-none ${
-                    isActive
-                      ? 'text-[#0A0A09]'
-                      : isHovered
-                      ? 'text-[#0A0A09]'
-                      : 'text-[#66615A]'
-                  }`}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {/* Active Sliding Pill Surface */}
-                  {isActive && (
-                    <motion.div
-                      layoutId={shouldReduceMotion ? undefined : 'nexus-nav-active-pill'}
-                      className="absolute inset-0 rounded-full bg-white shadow-[0_2px_10px_rgba(10,10,9,0.08),0_1px_2px_rgba(10,10,9,0.04)] border border-[rgba(10,10,9,0.06)] pointer-events-none"
-                      transition={{
-                        type: 'spring',
-                        stiffness: 380,
-                        damping: 32,
-                        mass: 0.6,
-                      }}
-                      aria-hidden="true"
-                    />
-                  )}
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(item.href, e)}
+                    onMouseEnter={() => setHoveredHref(item.href)}
+                    className={`relative py-2 px-4 xl:px-5 text-[13.5px] xl:text-[14px] font-dosis font-bold tracking-[0.16em] uppercase transition-colors duration-200 ease-out focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#F2613F] rounded-full select-none ${
+                      isActive
+                        ? 'text-[var(--text-primary)]'
+                        : isHovered
+                        ? 'text-[var(--text-primary)]'
+                        : 'text-[var(--text-secondary)]'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {/* Active Sliding Pill Surface */}
+                    {isActive && (
+                      <motion.div
+                        layoutId={shouldReduceMotion ? undefined : 'nexus-nav-active-pill'}
+                        className="absolute inset-0 rounded-full bg-[var(--bg-elevated)] shadow-xs border border-[var(--border-strong)] pointer-events-none"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 380,
+                          damping: 32,
+                          mass: 0.6,
+                        }}
+                        aria-hidden="true"
+                      />
+                    )}
 
-                  {/* Gentle Hover Underlay for Inactive Items */}
-                  {!isActive && isHovered && (
-                    <motion.div
-                      layoutId={shouldReduceMotion ? undefined : 'nexus-nav-hover-pill'}
-                      className="absolute inset-0 rounded-full bg-white/40 pointer-events-none"
-                      transition={{
-                        type: 'spring',
-                        stiffness: 400,
-                        damping: 34,
-                        mass: 0.5,
-                      }}
-                      aria-hidden="true"
-                    />
-                  )}
+                    {/* Gentle Hover Underlay for Inactive Items */}
+                    {!isActive && isHovered && (
+                      <motion.div
+                        layoutId={shouldReduceMotion ? undefined : 'nexus-nav-hover-pill'}
+                        className="absolute inset-0 rounded-full bg-black/[0.04] dark:bg-white/[0.06] pointer-events-none"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 400,
+                          damping: 34,
+                          mass: 0.5,
+                        }}
+                        aria-hidden="true"
+                      />
+                    )}
 
-                  {/* Nav Item Label */}
-                  <span className="relative z-10 block leading-none">
-                    {item.label}
-                  </span>
-                </a>
-              );
-            })}
-          </nav>
+                    {/* Nav Item Label */}
+                    <span className="relative z-10 block leading-none">
+                      {item.label}
+                    </span>
+                  </a>
+                );
+              })}
+            </nav>
+
+            {/* Desktop Theme Switcher */}
+            <ThemeToggle variant="desktop" />
+          </div>
 
           {/* ====================================================
-              3. RIGHT: MOBILE MENU TOGGLE
+              3. RIGHT: MOBILE MENU & COMPACT THEME TOGGLE
              ==================================================== */}
-          <div className="flex items-center lg:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle variant="desktop" />
+
             <button
               type="button"
               id="mobile-menu-trigger"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(10,10,9,0.12)] bg-[#E8E2D7]/80 backdrop-blur-md hover:bg-white transition-all duration-200 text-[#0A0A09] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#EF5A2A] select-none"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-surface)] hover:bg-[var(--bg-elevated)] transition-all duration-200 text-[var(--text-primary)] focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#F2613F] select-none"
               aria-label={mobileMenuOpen ? 'Close main navigation menu' : 'Open main navigation menu'}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu-drawer"
@@ -226,7 +232,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
               <span className="font-dosis font-bold text-xs tracking-[0.18em] uppercase">
                 {mobileMenuOpen ? 'CLOSE' : 'MENU'}
               </span>
-              <span className="font-mono text-xs font-bold text-[#EF5A2A]">
+              <span className="font-mono text-xs font-bold text-[#F2613F]">
                 {mobileMenuOpen ? '✕' : '+'}
               </span>
             </button>
@@ -248,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
               duration: shouldReduceMotion ? 0.2 : 0.3,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="lg:hidden bg-[#F3EEE5]/98 backdrop-blur-2xl px-6 py-6 shadow-[0_20px_40px_rgba(10,10,9,0.08)] overflow-hidden border-b border-[rgba(10,10,9,0.08)]"
+            className="lg:hidden bg-[var(--bg-secondary)] px-6 py-6 shadow-lg overflow-hidden border-b border-[var(--border-subtle)] space-y-4"
           >
             {/* Staggered Navigation Pills in Mobile Drawer */}
             <nav aria-label="Mobile Navigation" className="flex flex-col space-y-2">
@@ -269,8 +275,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
                     }}
                     className={`flex items-center justify-between px-5 py-3 rounded-full transition-all duration-200 ${
                       isActive
-                        ? 'bg-white shadow-[0_2px_10px_rgba(10,10,9,0.06)] border border-[rgba(10,10,9,0.08)] text-[#0A0A09] font-bold'
-                        : 'text-[#66615A] hover:text-[#0A0A09] hover:bg-white/40'
+                        ? 'bg-[var(--bg-elevated)] shadow-[0_2px_10px_rgba(0,0,0,0.15)] border border-[var(--border-strong)] text-[var(--text-primary)] font-bold'
+                        : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-black/5 dark:hover:bg-white/5'
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >
@@ -279,7 +285,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
                     </span>
 
                     {isActive && (
-                      <span className="font-dosis text-[11px] font-bold text-[#EF5A2A] tracking-[0.18em] uppercase">
+                      <span className="font-dosis text-[11px] font-bold text-[#F2613F] tracking-[0.18em] uppercase">
                         ACTIVE
                       </span>
                     )}
@@ -287,6 +293,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
                 );
               })}
             </nav>
+
+            {/* Mobile Theme Toggle Section */}
+            <div className="pt-2 border-t border-[var(--border-subtle)]">
+              <ThemeToggle variant="mobile" />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

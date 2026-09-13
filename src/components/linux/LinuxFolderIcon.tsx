@@ -28,15 +28,15 @@ export const LinuxFolderIcon: React.FC<LinuxFolderIconProps> = ({
   const getCategoryIcon = () => {
     switch (project.category) {
       case 'Technology':
-        return <Code className="w-3 h-3 text-[#EF5A2A]" />;
+        return <Code className="w-3 h-3 text-[#F2613F]" />;
       case 'Physical Computing':
-        return <Cpu className="w-3 h-3 text-[#EF5A2A]" />;
+        return <Cpu className="w-3 h-3 text-[#F2613F]" />;
       case 'Creative Production':
-        return <Sparkles className="w-3 h-3 text-[#EF5A2A]" />;
+        return <Sparkles className="w-3 h-3 text-[#F2613F]" />;
       case 'Community Tools':
-        return <Globe className="w-3 h-3 text-[#EF5A2A]" />;
+        return <Globe className="w-3 h-3 text-[#F2613F]" />;
       default:
-        return <Layers className="w-3 h-3 text-[#EF5A2A]" />;
+        return <Layers className="w-3 h-3 text-[#F2613F]" />;
     }
   };
 
@@ -60,7 +60,7 @@ export const LinuxFolderIcon: React.FC<LinuxFolderIconProps> = ({
       }}
       className={`group flex flex-col items-center justify-center p-3 rounded-[3px] transition-all duration-150 cursor-pointer select-none text-center outline-none relative ${
         isSelected
-          ? 'bg-[#EF5A2A]/20 border border-[#EF5A2A] shadow-[0_0_12px_rgba(239,90,42,0.25)]'
+          ? 'bg-[#F2613F]/20 border border-[#F2613F] shadow-[0_0_12px_rgba(242,97,63,0.25)]'
           : 'bg-transparent border border-transparent hover:bg-white/[0.04] hover:border-white/10'
       }`}
       style={{
@@ -79,22 +79,22 @@ export const LinuxFolderIcon: React.FC<LinuxFolderIconProps> = ({
           {/* Back Tab */}
           <path
             d="M2 7C2 4.79086 3.79086 3 6 3H22L27 9H50C52.2091 9 54 10.7909 54 13V38C54 40.2091 52.2091 42 50 42H6C3.79086 42 2 40.2091 2 38V7Z"
-            fill="#1E2026"
-            stroke="rgba(243,238,229,0.18)"
+            fill="#181818"
+            stroke="rgba(245,239,230,0.14)"
             strokeWidth="1.2"
           />
 
           {/* Orange Accent Top Ridge */}
           <path
             d="M6 3H22L27 9H6C3.79086 9 2 7.20914 2 5V7C2 4.79086 3.79086 3 6 3Z"
-            fill="#EF5A2A"
+            fill="#F2613F"
           />
 
           {/* Front Body Flap */}
           <path
             d="M2 15C2 13.3431 3.34315 12 5 12H51C52.6569 12 54 13.3431 54 15V38C54 40.2091 52.2091 42 50 42H6C3.79086 42 2 40.2091 2 38V15Z"
-            fill={isSelected ? '#2A2C35' : '#17181F'}
-            stroke={isSelected ? '#EF5A2A' : 'rgba(243,238,229,0.22)'}
+            fill={isSelected ? '#22201F' : '#141414'}
+            stroke={isSelected ? '#F2613F' : 'rgba(245,239,230,0.14)'}
             strokeWidth="1.2"
           />
 
@@ -104,20 +104,20 @@ export const LinuxFolderIcon: React.FC<LinuxFolderIconProps> = ({
             y1="18"
             x2="50"
             y2="18"
-            stroke="rgba(243,238,229,0.08)"
+            stroke="rgba(245,239,230,0.08)"
             strokeWidth="1"
           />
         </svg>
 
         {/* Category Badge Icon Center Overlay */}
         <div className="absolute inset-0 flex items-center justify-center pt-2 pointer-events-none">
-          <div className="p-1 rounded-[2px] bg-[#0A0A09]/70 border border-[rgba(243,238,229,0.12)]">
+          <div className="p-1 rounded-[2px] bg-[#0C0C0C]/80 border border-[rgba(245,239,230,0.10)]">
             {getCategoryIcon()}
           </div>
         </div>
 
         {/* Small Project Number Tag in Corner */}
-        <span className="absolute -bottom-1 -right-1 font-mono text-[8px] font-bold text-[#EF5A2A] px-1 py-0.2 bg-[#0A0A09] border border-[rgba(239,90,42,0.4)] rounded-[2px]">
+        <span className="absolute -bottom-1 -right-1 font-mono text-[8px] font-bold text-[#F2613F] px-1 py-0.2 bg-[#0C0C0C] border border-[rgba(242,97,63,0.4)] rounded-[2px]">
           {project.projectNumber.split('/')[1]?.trim() || `0${index + 1}`}
         </span>
       </div>
@@ -127,14 +127,14 @@ export const LinuxFolderIcon: React.FC<LinuxFolderIconProps> = ({
         <span
           className={`font-mono text-[11px] font-bold tracking-tight block truncate px-1 py-0.5 rounded-[2px] ${
             isSelected
-              ? 'bg-[#EF5A2A] text-[#0A0A09]'
-              : 'text-[#F3EEE5] group-hover:text-white'
+              ? 'bg-[#F2613F] text-[#F5EFE6] font-bold'
+              : 'text-[#F5EFE6] group-hover:text-[#F5EFE6]'
           }`}
         >
           {project.title.toLowerCase()}
         </span>
 
-        <span className="font-mono text-[9px] text-[#8C8881] block truncate uppercase mt-0.5">
+        <span className="font-mono text-[9px] text-[#857E74] block truncate uppercase mt-0.5">
           {project.year} // {project.category.slice(0, 8)}
         </span>
       </div>

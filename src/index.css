@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/* ── Cinematic theme transition: suppress CSS color transitions ──────────────
+ * Applied to <html> during the fully-covered phase of the NEXUS curtain
+ * transition. This prevents page elements from visibly color-crossfading as
+ * the panels open, which would otherwise cause a brief bleed of intermediate
+ * color states on slow devices.
+ * Targets only color/background/border/fill/stroke/box-shadow transitions —
+ * not transform or opacity — so Framer Motion animations are unaffected.
+ * ─────────────────────────────────────────────────────────────────────────── */
+html[data-nexus-covering] *,
+html[data-nexus-covering] *::before,
+html[data-nexus-covering] *::after {
+  transition-property: none !important;
+}
+
+
 @layer base {
-  :root {
-    --nexus-warm-bg: #F3EEE5;
-    --nexus-deep-black: #0A0A09;
-    --nexus-secondary-dark: #151311;
-    --nexus-orange: #EF5A2A;
-    --nexus-muted-text: #66615A;
-    --nexus-light-line: rgba(10, 10, 9, 0.12);
+  :root,
+  [data-theme="light"],
+  .light {
+    /* Semantic Light Mode Color System (Editorial Warm Ivory & Obsidian) */
+    --bg-primary: #F3EEE5;
+    --bg-secondary: #EBE4D8;
+    --bg-surface: #FAF6F0;
+    --bg-elevated: #E2DDD5;
+    --warm-deep: #481E14;
+
+    --text-primary: #0A0A09;
+    --text-secondary: #4A4640;
+    --text-muted: #8C867E;
+
+    --border-subtle: rgba(10, 10, 9, 0.10);
+    --border-strong: rgba(10, 10, 9, 0.20);
+
+    --accent-primary: #F2613F;
+    --accent-hover: #FA7958;
+    --accent-dark: #481E14;
+
+    --nav-bg: rgba(243, 238, 229, 0.95);
+    --nav-bg-scrolled: #F3EEE5;
+    --nav-pill-bg: #EBE4D8;
+    --nav-pill-active: #FAF6F0;
+
+    /* Legacy compatibility aliases */
+    --nexus-warm-bg: var(--bg-primary);
+    --nexus-deep-black: var(--text-primary);
+    --nexus-secondary-dark: var(--bg-secondary);
+    --nexus-orange: var(--accent-primary);
+    --nexus-muted-text: var(--text-secondary);
+    --nexus-light-line: var(--border-subtle);
     --ease-nexus-primary: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-nexus-mechanical: cubic-bezier(0.65, 0, 0.35, 1);
   }
 
+  [data-theme="dark"],
+  .dark {
+    /* Semantic Dark Mode Color System (Obsidian & Warm Crimson Accent) */
+    --bg-primary: #0C0C0C;
+    --bg-secondary: #141414;
+    --bg-surface: #181818;
+    --bg-elevated: #22201F;
+    --warm-deep: #481E14;
+
+    --text-primary: #F5EFE6;
+    --text-secondary: #C2BBB0;
+    --text-muted: #857E74;
+
+    --border-subtle: rgba(245, 239, 230, 0.10);
+    --border-strong: rgba(245, 239, 230, 0.18);
+
+    --accent-primary: #F2613F;
+    --accent-hover: #FA7958;
+    --accent-dark: #481E14;
+
+    --nav-bg: rgba(12, 12, 12, 0.95);
+    --nav-bg-scrolled: #0C0C0C;
+    --nav-pill-bg: #181818;
+    --nav-pill-active: #22201F;
+
+    /* Legacy compatibility aliases */
+    --nexus-warm-bg: var(--bg-primary);
+    --nexus-deep-black: var(--text-primary);
+    --nexus-secondary-dark: var(--bg-secondary);
+    --nexus-orange: var(--accent-primary);
+    --nexus-muted-text: var(--text-secondary);
+    --nexus-light-line: var(--border-subtle);
+  }
+
   body {
-    background-color: var(--nexus-warm-bg);
-    color: var(--nexus-deep-black);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     font-family: 'Bitter', Georgia, serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
+}
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-warm-deep: var(--warm-deep);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-dark: var(--accent-dark);
 }
 
 /* 1. Core Typography Families */
@@ -99,14 +194,14 @@
   font-family: 'Bitter', Georgia, serif;
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: #66615A;
+  color: var(--text-secondary);
 }
 
 .nexus-body-small {
   font-family: 'Bitter', Georgia, serif;
   font-size: 0.9375rem;
   line-height: 1.65;
-  color: #66615A;
+  color: var(--text-secondary);
 }
 
 .nexus-label {
@@ -115,14 +210,14 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #0A0A09;
+  color: var(--text-primary);
 }
 
 .nexus-caption {
   font-family: 'Dosis', -apple-system, system-ui, sans-serif;
   font-size: 0.8125rem;
   line-height: 1.5;
-  color: #66615A;
+  color: var(--text-muted);
   letter-spacing: 0.12em;
 }
 
@@ -138,7 +233,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #EF5A2A;
+  background-color: var(--accent-primary);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
@@ -155,7 +250,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background-color: #EF5A2A;
+  background-color: var(--accent-primary);
   transform: scaleX(1);
 }
 
@@ -182,15 +277,15 @@
 
 /* 6. Custom Explore Button - NEXUS Editorial Style */
 .cssbuttons-io-button {
-  background: #0A0A09;
-  color: #F3EEE5;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   font-family: 'Dosis', -apple-system, system-ui, sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   border-radius: 0px;
-  border: 1px solid #0A0A09;
+  border: 1px solid var(--border-strong);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
@@ -206,11 +301,12 @@
 }
 
 .cssbuttons-io-button:hover {
-  border-color: #EF5A2A;
+  border-color: var(--accent-primary);
+  background: var(--bg-elevated);
 }
 
 .cssbuttons-io-button:focus-visible {
-  outline: 2px solid #EF5A2A;
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
@@ -221,12 +317,12 @@
 }
 
 .cssbuttons-io-button:hover .btn-text {
-  color: #FFFFFF;
+  color: #F5EFE6;
   transform: translateX(2px);
 }
 
 .cssbuttons-io-button .icon {
-  background: #EF5A2A;
+  background: var(--accent-primary);
   position: absolute;
   display: flex;
   align-items: center;
@@ -251,7 +347,7 @@
   width: 16px;
   height: 16px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  color: #FFFFFF;
+  color: #F5EFE6;
 }
 
 .cssbuttons-io-button:hover .icon svg {

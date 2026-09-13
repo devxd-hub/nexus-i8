@@ -166,7 +166,7 @@ export const InteractiveNexusX: React.FC<{
           contour={0.25}
           lightColor="#F7F5F0"
           darkColor="#12100E"
-          tintColor="#EF5A2A"
+          tintColor="#F2613F"
           isHovered={isHovered}
           mousePos={mousePos}
           className="w-full h-full block"
@@ -205,7 +205,7 @@ export const NexusWordmark: React.FC<NexusWordmarkProps> = ({
     hero: 'text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[6.5rem] tracking-[0.15em] sm:tracking-[0.2em] md:tracking-[0.22em]',
   }[size];
 
-  const textColor = inverted ? 'text-[#F3EEE5]' : 'text-[#0A0A09]';
+  const textColor = 'text-[var(--text-primary)]';
 
   return (
     <span
@@ -260,7 +260,7 @@ export const NexusLogo: React.FC<NexusLogoProps> = ({
   onClick,
   enableMetallicHover,
 }) => {
-  const subtitleColor = inverted ? 'text-[#F3EEE5]/60' : 'text-[#66615A]';
+  const subtitleColor = 'text-[var(--text-secondary)]';
   const shouldEnableMetallicHover = enableMetallicHover ?? (size === 'hero');
 
   const subtitleSizes = {
@@ -288,9 +288,7 @@ export const NexusLogo: React.FC<NexusLogoProps> = ({
         />
         {showSubtitle && (
           <span
-            className={`font-dosis uppercase font-semibold pl-3 border-l ${
-              inverted ? 'border-[rgba(243,238,229,0.2)]' : 'border-[rgba(10,10,9,0.18)]'
-            } ${subtitleSizes} ${subtitleColor}`}
+            className={`font-dosis uppercase font-semibold pl-3 border-l border-[rgba(245,239,230,0.18)] ${subtitleSizes} ${subtitleColor}`}
           >
             COLLEGE COMMUNITY
           </span>

@@ -29,10 +29,10 @@ export const LinuxBootSequence: React.FC<LinuxBootSequenceProps> = ({ onComplete
   return (
     <div
       onClick={onComplete}
-      className="fixed inset-0 z-50 bg-[#0A0A09] text-[#F3EEE5] font-mono text-xs p-6 flex flex-col justify-end select-none cursor-pointer"
+      className="fixed inset-0 z-50 bg-[#0C0C0C] text-[#F5EFE6] font-mono text-xs p-6 flex flex-col justify-end select-none cursor-pointer"
     >
       <div className="space-y-1.5 max-w-xl mb-8">
-        <div className="text-[#EF5A2A] font-bold text-sm mb-4">
+        <div className="text-[#F2613F] font-bold text-sm mb-4">
           === NEXUS WORKSPACE INITIALIZING ===
         </div>
 
@@ -58,13 +58,13 @@ export const LinuxBootSequence: React.FC<LinuxBootSequenceProps> = ({ onComplete
         )}
 
         {step >= 3 && (
-          <div className="flex items-center gap-2 text-[#EF5A2A] animate-pulse">
+          <div className="flex items-center gap-2 text-[#F2613F] animate-pulse">
             <span>&gt; Rendering desktop environment...</span>
           </div>
         )}
       </div>
 
-      <div className="text-[10px] text-[#66615A]">
+      <div className="text-[10px] text-[#857E74]">
         Press any key or click to skip initialization
       </div>
     </div>

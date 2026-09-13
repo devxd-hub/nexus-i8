@@ -35,7 +35,7 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
   ];
 
   return (
-    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#EBE5DB]/50 border border-[rgba(10,10,9,0.1)] p-4 flex flex-col justify-between overflow-hidden select-none">
+    <div className="relative w-full h-[190px] sm:h-[210px] bg-[#141414] border border-[rgba(245,239,230,0.10)] p-4 flex flex-col justify-between overflow-hidden select-none">
       {/* Background Subtle Tech Dots */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
@@ -43,19 +43,19 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
       >
         <defs>
           <pattern id="assemble-dots" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="2" cy="2" r="0.75" fill="rgba(10,10,9,0.06)" />
+            <circle cx="2" cy="2" r="0.75" fill="rgba(245,239,230,0.06)" />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#assemble-dots)" />
       </svg>
 
       {/* Header telemetry */}
-      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#66615A] uppercase border-b border-[rgba(10,10,9,0.08)] pb-1.5">
+      <div className="relative z-10 flex items-center justify-between text-[10px] font-dosis tracking-[0.2em] text-[#857E74] uppercase border-b border-[rgba(245,239,230,0.08)] pb-1.5">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
           MULTI-DISCIPLINE MATCHING
         </span>
-        <span className="text-[#0A0A09]/60 font-mono text-[9px]">SQUAD: 5/5 LINKED</span>
+        <span className="text-[#F5EFE6]/60 font-mono text-[9px]">SQUAD: 5/5 LINKED</span>
       </div>
 
       {/* Main SVG Mesh Canvas */}
@@ -71,7 +71,7 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
             cx="140"
             cy="88"
             r="28"
-            stroke="rgba(239,90,42,0.18)"
+            stroke="rgba(242,97,63,0.22)"
             strokeWidth="0.75"
             strokeDasharray="2 3"
           />
@@ -87,7 +87,7 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
                 y1={n1.y}
                 x2={n2.x}
                 y2={n2.y}
-                stroke={isActive ? 'rgba(239,90,42,0.32)' : 'rgba(10,10,9,0.12)'}
+                stroke={isActive ? 'rgba(242,97,63,0.42)' : 'rgba(245,239,230,0.12)'}
                 strokeWidth={isActive ? '1.2' : '0.8'}
                 strokeDasharray={idx > 4 ? '3 3' : undefined}
                 initial={{ pathLength: 0.3 }}
@@ -117,19 +117,19 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
               y1={n.y}
               x2="140"
               y2="88"
-              stroke="rgba(10,10,9,0.08)"
+              stroke="rgba(245,239,230,0.08)"
               strokeWidth="0.75"
               strokeDasharray="2 2"
             />
           ))}
 
           {/* Central Nexus Core Node */}
-          <circle cx="140" cy="88" r="5" fill="#EBE5DB" stroke="#0A0A09" strokeWidth="1" />
+          <circle cx="140" cy="88" r="5" fill="#181818" stroke="#F5EFE6" strokeWidth="1" />
           <motion.circle
             cx="140"
             cy="88"
             r="2.5"
-            fill="#EF5A2A"
+            fill="#F2613F"
             animate={
               shouldReduceMotion || !isActive
                 ? {}
@@ -154,7 +154,7 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
                   cx={n.x}
                   cy={n.y}
                   r="7"
-                  stroke="rgba(239,90,42,0.35)"
+                  stroke="rgba(242,97,63,0.35)"
                   strokeWidth="0.75"
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: [0.9, 1.2, 0.9], opacity: [0.2, 0.6, 0.2] }}
@@ -168,8 +168,8 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
                 cx={n.x}
                 cy={n.y}
                 r="3.5"
-                fill={isActive ? '#0A0A09' : 'rgba(10,10,9,0.6)'}
-                stroke="#EBE5DB"
+                fill={isActive ? '#F5EFE6' : 'rgba(245,239,230,0.6)'}
+                stroke="#141414"
                 strokeWidth="1"
               />
 
@@ -178,7 +178,7 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
                 x={n.x}
                 y={n.y > 100 ? n.y + 12 : n.y - 7}
                 textAnchor="middle"
-                className="font-dosis font-bold text-[8.5px] tracking-[0.14em] fill-[#0A0A09]/75 uppercase"
+                className="font-dosis font-bold text-[8.5px] tracking-[0.14em] fill-[#F5EFE6]/75 uppercase"
               >
                 {n.label}
               </text>
@@ -188,11 +188,11 @@ export const AssembleVisual: React.FC<AssembleVisualProps> = ({ isActive }) => {
       </div>
 
       {/* Utility Tags Footer */}
-      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#0A0A09]/80 border-t border-[rgba(10,10,9,0.08)] pt-1.5 font-semibold">
+      <div className="relative z-10 flex items-center justify-between text-[11px] font-dosis tracking-[0.16em] text-[#F5EFE6]/80 border-t border-[rgba(245,239,230,0.08)] pt-1.5 font-semibold">
         <span>PEOPLE</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>SKILLS</span>
-        <span className="text-[#EF5A2A]">·</span>
+        <span className="text-[#F2613F]">·</span>
         <span>PERSPECTIVES</span>
       </div>
     </div>

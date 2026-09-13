@@ -97,8 +97,8 @@ export const ContextCursor: React.FC = () => {
         willChange: 'transform, opacity',
       }}
     >
-      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#0A0A09] text-[#F3EEE5] text-[10px] font-dosis font-bold tracking-[0.2em] uppercase border border-[rgba(239,90,42,0.4)] shadow-md select-none">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A]" />
+      <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#181818] text-[#F5EFE6] text-[10px] font-dosis font-bold tracking-[0.2em] uppercase border border-[rgba(242,97,63,0.4)] shadow-md select-none">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F]" />
         <span>{cursorText}</span>
       </div>
     </div>

@@ -179,7 +179,7 @@ void main() {
 `;
 
 export const ColorBends: React.FC<ColorBendsProps> = ({
-  colors = ['#EF5A2A', '#F26504', '#2A2421', '#D94A1F', '#FAF6F0'],
+  colors = ['#F2613F', '#F26504', '#481E14', '#D94A1F', '#0C0C0C'],
   rotation = 90,
   speed = 0.2,
   scale = 1,
@@ -192,7 +192,7 @@ export const ColorBends: React.FC<ColorBendsProps> = ({
   intensity = 1.5,
   bandWidth = 6,
   transparent = true,
-  color = '#EF5A2A',
+  color = '#F2613F',
   className = '',
   style = {},
 }) => {

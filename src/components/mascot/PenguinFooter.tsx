@@ -221,21 +221,15 @@ export const PenguinFooter: React.FC<PenguinFooterProps> = ({ className = '' }) 
       className={`relative inline-flex flex-col items-start select-none ${className}`}
     >
       <div className="flex items-center gap-2 mb-2.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#EF5A2A] animate-pulse" />
-        <span className="font-dosis text-[11px] font-bold tracking-[0.25em] text-[#EF5A2A] uppercase">
-          OFFICIAL AMBASSADOR
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F2613F] animate-pulse" />
+        <span className="font-dosis text-[11px] font-bold tracking-[0.25em] text-[#F2613F] uppercase">
+          COMMUNITY AMBASSADOR
         </span>
       </div>
 
-      <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          if (!isDragging && !isPostDragAnnoyed) setCurrentFrame('idle');
-        }}
-        className="relative p-4 sm:p-5 bg-[#0E0D0C] border border-[rgba(243,238,229,0.12)] hover:border-[rgba(239,90,42,0.4)] transition-all duration-300"
-        style={{ width: '260px', minHeight: '150px' }}
-      >
+      {/* Interactive Mascot Stage Viewport (Desktop & Mobile) */}
+      <div className="relative w-full h-[155px] bg-[#141414] border border-[rgba(245,239,230,0.10)] px-6 py-4 overflow-hidden select-none">
+        {/* Network Connection Lines & Status Badges */}
         <svg
           className={`absolute inset-0 w-full h-full pointer-events-none transition-opacity duration-700 ${
             networkActive ? 'opacity-100' : 'opacity-0'
@@ -247,13 +241,13 @@ export const PenguinFooter: React.FC<PenguinFooterProps> = ({ className = '' }) 
             y1="105"
             x2="175"
             y2="105"
-            stroke="#EF5A2A"
+            stroke="#F2613F"
             strokeWidth="1"
             strokeDasharray="3 3"
             className="opacity-60"
           />
-          <circle cx="175" cy="105" r="2" fill="#EF5A2A" />
-          <circle cx="90" cy="105" r="2" fill="#EF5A2A" />
+          <circle cx="175" cy="105" r="2" fill="#F2613F" />
+          <circle cx="90" cy="105" r="2" fill="#F2613F" />
         </svg>
 
         <div className="relative z-10 flex items-end justify-between h-full pt-1">
@@ -280,16 +274,16 @@ export const PenguinFooter: React.FC<PenguinFooterProps> = ({ className = '' }) 
           </motion.div>
 
           <div className="flex flex-col items-end text-right space-y-1 pb-1 pointer-events-none">
-            <span className="font-mono text-[9px] text-[#F3EEE5]/40 tracking-widest uppercase">
+            <span className="font-mono text-[9px] text-[#857E74] tracking-widest uppercase">
               STATUS
             </span>
-            <span className="font-dosis font-bold text-xs text-[#F3EEE5] tracking-wider uppercase">
+            <span className="font-dosis font-bold text-xs text-[#F5EFE6] tracking-wider uppercase">
               {isDragging ? 'RESISTING' : networkActive ? 'LINKED' : 'STANDBY'}
             </span>
           </div>
         </div>
 
-        <div className="absolute bottom-3 left-4 right-4 h-[1px] bg-[rgba(243,238,229,0.15)] pointer-events-none" />
+        <div className="absolute bottom-3 left-4 right-4 h-[1px] bg-[rgba(245,239,230,0.10)] pointer-events-none" />
       </div>
     </div>
   );
