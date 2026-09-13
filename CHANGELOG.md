@@ -48,6 +48,11 @@ Changes are grouped by session and ordered from most recent to oldest.
 | Total         | ~800 ms | ~1280 ms| ~1750 ms   |
 
 ### 2. Team & Leadership Updates
+- **New Member - Jitesh Raj**:
+  - Added to Coordinators & Mentors section as **Head Of Operations, NEXUS**.
+  - Synchronized portrait asset (`jitesh_bhaiya.jpeg` / `jitesh_bhaiya.webp`) from `assets/team/`.
+  - Updated `TEAM_MEMBERS` dataset, `LeadershipShowcase` 4-column side-by-side grid, and `CrewDirectory`.
+  - Re-seeded database members via `npm run db:seed`.
 - **New Member - Siba Prasand Panda**:
   - Added to Coordinators & Mentors section as **Vice Head Of Ops**.
   - Synchronized portrait asset (`siba-hoops.png` / `siba-hoops.webp`) from `assets/team/`.

@@ -22,19 +22,17 @@ function normalizeName(filename: string): string {
 
 function sync() {
   const possibleSourceDirs = [
-    path.resolve(process.cwd(), 'assets/team'),
+    // 'assets/team' no longer exists; script is kept for future use when
+    // new raw originals are dropped into these locations.
     path.resolve(process.cwd(), 'team images'),
     path.resolve(process.cwd(), 'team images '),
   ];
 
-  const targetDirKebab = path.resolve(process.cwd(), 'public/team-images');
-  const targetDirOriginal = path.resolve(process.cwd(), 'public/team images');
+  // Canonical image root: nexus-i8-/images/
+  const targetDirKebab = path.resolve(process.cwd(), 'images/team');
 
   if (!fs.existsSync(targetDirKebab)) {
     fs.mkdirSync(targetDirKebab, { recursive: true });
-  }
-  if (!fs.existsSync(targetDirOriginal)) {
-    fs.mkdirSync(targetDirOriginal, { recursive: true });
   }
 
   for (const srcDir of possibleSourceDirs) {
@@ -45,32 +43,16 @@ function sync() {
       const fullPath = path.join(srcDir, file);
       const stat = fs.statSync(fullPath);
       if (stat.isFile() && /\.(png|jpe?g|webp|gif|svg)$/i.test(file)) {
-        const normalized = normalizeName(file);
-        
-        // Copy to public/team-images with normalized name
-        const destKebab = path.join(targetDirKebab, normalized);
-        fs.copyFileSync(fullPath, destKebab);
-
-        // Also copy with exact file name to public/team-images and public/team images
-        fs.copyFileSync(fullPath, path.join(targetDirOriginal, file));
-        fs.copyFileSync(fullPath, path.join(targetDirKebab, file));
-
         if (file.toLowerCase().includes('nexus-removebg')) {
-          const rootTargets = [
-            'public/NEXUS-removebg-preview-1.png',
-            'public/NEXUS-removebg-preview.png',
-            'public/nexus-x.png',
-            'dist/NEXUS-removebg-preview-1.png',
-            'dist/NEXUS-removebg-preview.png',
-            'dist/nexus-x.png',
-          ];
-          for (const rt of rootTargets) {
-            const dir = path.dirname(path.resolve(process.cwd(), rt));
-            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-            fs.copyFileSync(fullPath, path.resolve(process.cwd(), rt));
-          }
+          // Canonical logo location: nexus-i8-/images/logos/
+          const canonicalLogo = path.resolve(process.cwd(), 'images/logos/NEXUS-removebg-preview-1.png');
+          fs.copyFileSync(fullPath, canonicalLogo);
+          continue;
         }
 
+        const normalized = normalizeName(file);
+        const destKebab = path.join(targetDirKebab, normalized);
+        fs.copyFileSync(fullPath, destKebab);
         console.log(`[Sync] Copied ${file} -> ${normalized}`);
       }
     }

@@ -1,0 +1,488 @@
+{
+  "timestamp": "2026-09-13T14:18:39.955Z",
+  "sourceRepository": "nexus-i8-",
+  "sourceFile": "frontend/src/data/nexusData.ts",
+  "targetDataset": "Eid-card/data/members.json",
+  "summary": {
+    "totalExtracted": 26,
+    "valid": true,
+    "issueCount": 0,
+    "uniqueIdsCount": 26,
+    "uniqueSlugsCount": 26,
+    "uniqueImagesCount": 26,
+    "imagesVerifiedOnDisk": 26
+  },
+  "mapping": [
+    {
+      "uniqueId": "NX-001",
+      "name": "JITESH RAJ",
+      "slug": "jitesh-raj",
+      "role": "HEAD OF OPERATIONS, NEXUS",
+      "group": "COORDINATOR & MENTOR",
+      "domain": "Operations & Studio Leadership",
+      "image": "/images/team/jitesh_bhaiya.webp",
+      "sourceId": "team-coord-03"
+    },
+    {
+      "uniqueId": "NX-002",
+      "name": "MANISH PRAKASH",
+      "slug": "manish-prakash",
+      "role": "COORDINATOR",
+      "group": "COORDINATOR & MENTOR",
+      "domain": "Studio Operations & Program Coordination",
+      "image": "/images/team/manish-prakash-coordinator.webp",
+      "sourceId": "team-coord-01"
+    },
+    {
+      "uniqueId": "NX-003",
+      "name": "SIBA PRASAND PANDA",
+      "slug": "siba-prasand-panda",
+      "role": "VICE HEAD OF OPS",
+      "group": "COORDINATOR & MENTOR",
+      "domain": "Studio Operations & Program Coordination",
+      "image": "/images/team/siba-hoops.webp",
+      "sourceId": "team-coord-02"
+    },
+    {
+      "uniqueId": "NX-004",
+      "name": "OM PANDEY",
+      "slug": "om-pandey",
+      "role": "MENTOR",
+      "group": "COORDINATOR & MENTOR",
+      "domain": "Systems Architecture & Creative Mentorship",
+      "image": "/images/team/om-pandey.webp",
+      "sourceId": "team-mentor-01"
+    },
+    {
+      "uniqueId": "NX-005",
+      "name": "ANSHITA DASH",
+      "slug": "anshita-dash",
+      "role": "IDEATION & INTERACTION LEAD",
+      "group": "IDEATION",
+      "domain": "Computer Science & Human-Centered Design",
+      "image": "/images/team/anshita-dash-ideation.webp",
+      "sourceId": "team-03"
+    },
+    {
+      "uniqueId": "NX-006",
+      "name": "ANKITA DUTTA",
+      "slug": "ankita-dutta",
+      "role": "IDEATION & DESIGN STRATEGIST",
+      "group": "IDEATION",
+      "domain": "Visual Communication & Design Systems",
+      "image": "/images/team/ankita-dutta-ideation.webp",
+      "sourceId": "team-04"
+    },
+    {
+      "uniqueId": "NX-007",
+      "name": "AADYASHA SWAIN",
+      "slug": "aadyasha-swain",
+      "role": "IDEATION & EXPERIENCE DESIGNER",
+      "group": "IDEATION",
+      "domain": "Human-Computer Interaction",
+      "image": "/images/team/aadyasha-swain-ideation.webp",
+      "sourceId": "team-05"
+    },
+    {
+      "uniqueId": "NX-008",
+      "name": "ANANYA RAJ",
+      "slug": "ananya-raj",
+      "role": "IDEATION & HARDWARE PROTOTYPER",
+      "group": "IDEATION",
+      "domain": "Electronics & Systems Engineering",
+      "image": "/images/team/ananya-raj-ideation.webp",
+      "sourceId": "team-06"
+    },
+    {
+      "uniqueId": "NX-009",
+      "name": "UMESH KUMAR SAHU",
+      "slug": "umesh-kumar-sahu",
+      "role": "IDEATION & SYSTEMS ARCHITECT",
+      "group": "IDEATION",
+      "domain": "Software Engineering & Cloud Systems",
+      "image": "/images/team/umesh-kumar-sahu-ideation.webp",
+      "sourceId": "team-07"
+    },
+    {
+      "uniqueId": "NX-010",
+      "name": "SURYAPRASAD BRAHMA",
+      "slug": "suryaprasad-brahma",
+      "role": "IDEATION & CREATIVE TECHNOLOGIST",
+      "group": "IDEATION",
+      "domain": "Computational Media & Systems",
+      "image": "/images/team/suryaprasad-brahma-ideation.webp",
+      "sourceId": "team-08"
+    },
+    {
+      "uniqueId": "NX-011",
+      "name": "TUSHTI SINHA",
+      "slug": "tushti-sinha",
+      "role": "CONTENT & EDITORIAL LEAD",
+      "group": "CONTENT",
+      "domain": "Editorial Strategy & Media Communication",
+      "image": "/images/team/tushti-sinha-content.webp",
+      "sourceId": "team-content-01"
+    },
+    {
+      "uniqueId": "NX-012",
+      "name": "SMITA JENA",
+      "slug": "smita-jena",
+      "role": "CONTENT & CURATION LEAD",
+      "group": "CONTENT",
+      "domain": "Visual Media & Creative Writing",
+      "image": "/images/team/smita-jena-content.webp",
+      "sourceId": "team-content-02"
+    },
+    {
+      "uniqueId": "NX-013",
+      "name": "SIDDHARTH BASU",
+      "slug": "siddharth-basu",
+      "role": "TECHNICAL WRITING & CASE STUDIES",
+      "group": "CONTENT",
+      "domain": "Computer Science & Technical Communication",
+      "image": "/images/team/siddharth-basu-content.webp",
+      "sourceId": "team-content-03"
+    },
+    {
+      "uniqueId": "NX-014",
+      "name": "SASWAT PALO",
+      "slug": "saswat-palo",
+      "role": "MEDIA PRODUCTION & CINEMATICS",
+      "group": "CONTENT",
+      "domain": "Film, Digital Media & Visual Storytelling",
+      "image": "/images/team/saswat-palo-content.webp",
+      "sourceId": "team-content-04"
+    },
+    {
+      "uniqueId": "NX-015",
+      "name": "PRATYUSH SAHOO",
+      "slug": "pratyush-sahoo",
+      "role": "GRAPHIC DESIGN & PUBLICATION",
+      "group": "CONTENT",
+      "domain": "Visual Communication & Design",
+      "image": "/images/team/pratyush-sahoo-content.webp",
+      "sourceId": "team-content-05"
+    },
+    {
+      "uniqueId": "NX-016",
+      "name": "OMM PRAKASH TRIPATHY",
+      "slug": "omm-prakash-tripathy",
+      "role": "RESEARCH & DOCUMENTATION",
+      "group": "CONTENT",
+      "domain": "Information Systems & Technical Research",
+      "image": "/images/team/omm-prakash-tripathy-content.webp",
+      "sourceId": "team-content-06"
+    },
+    {
+      "uniqueId": "NX-017",
+      "name": "JAGRUTI PANDEY",
+      "slug": "jagruti-pandey",
+      "role": "COMMUNITY STORYTELLING",
+      "group": "CONTENT",
+      "domain": "Media Studies & Human-Centered Design",
+      "image": "/images/team/jagruti-pandey-content.webp",
+      "sourceId": "team-content-07"
+    },
+    {
+      "uniqueId": "NX-018",
+      "name": "DEBOJEET",
+      "slug": "debojeet",
+      "role": "AUDIO & DIGITAL MEDIA",
+      "group": "CONTENT",
+      "domain": "Sound Engineering & Digital Audio",
+      "image": "/images/team/debojeet-content.webp",
+      "sourceId": "team-content-08"
+    },
+    {
+      "uniqueId": "NX-019",
+      "name": "ANSHUMAN MEHER",
+      "slug": "anshuman-meher",
+      "role": "SPRINT ARCHIVE & ASSETS",
+      "group": "CONTENT",
+      "domain": "Applied Computer Science",
+      "image": "/images/team/anshuman-meher-content.webp",
+      "sourceId": "team-content-09"
+    },
+    {
+      "uniqueId": "NX-020",
+      "name": "ISHIKA",
+      "slug": "ishika",
+      "role": "EDITORIAL RESEARCH & SOCIAL",
+      "group": "CONTENT",
+      "domain": "Communication & Design",
+      "image": "/images/team/ishika.webp",
+      "sourceId": "team-content-10"
+    },
+    {
+      "uniqueId": "NX-021",
+      "name": "HARSHIT",
+      "slug": "harshit",
+      "role": "CREATIVE MEDIA & OUTREACH",
+      "group": "CONTENT",
+      "domain": "Digital Arts & Engineering",
+      "image": "/images/team/harshit.webp",
+      "sourceId": "team-content-11"
+    },
+    {
+      "uniqueId": "NX-022",
+      "name": "SIMRITA BARICK",
+      "slug": "simrita-barick",
+      "role": "EDITORIAL & WRITTEN MEDIA",
+      "group": "CONTENT",
+      "domain": "Media Communication & Technical Writing",
+      "image": "/images/team/simrita-barick-content.webp",
+      "sourceId": "team-content-12"
+    },
+    {
+      "uniqueId": "NX-023",
+      "name": "SINDHUSUTA RATH",
+      "slug": "sindhusuta-rath",
+      "role": "CREATIVE DOCUMENTATION & MEDIA",
+      "group": "CONTENT",
+      "domain": "Visual Media & Creative Writing",
+      "image": "/images/team/sindhusuta-rath-content.webp",
+      "sourceId": "team-content-13"
+    },
+    {
+      "uniqueId": "NX-024",
+      "name": "SWARNIM",
+      "slug": "swarnim",
+      "role": "MULTIMEDIA PRODUCTION & ARCHIVE",
+      "group": "CONTENT",
+      "domain": "Digital Media & Visual Arts",
+      "image": "/images/team/swarnim-content.webp",
+      "sourceId": "team-content-14"
+    },
+    {
+      "uniqueId": "NX-025",
+      "name": "ANSHUMAN TIWARY",
+      "slug": "anshuman-tiwary",
+      "role": "MANAGEMENT LEAD",
+      "group": "MANAGEMENT",
+      "domain": "Systems & Engineering Operations",
+      "image": "/images/team/anshuman-tiwary-management.webp",
+      "sourceId": "team-01"
+    },
+    {
+      "uniqueId": "NX-026",
+      "name": "OROSMIT MISHRA",
+      "slug": "orosmit-mishra",
+      "role": "MANAGEMENT LEAD",
+      "group": "MANAGEMENT",
+      "domain": "Community & Project Strategy",
+      "image": "/images/team/orosmit-mishra.webp",
+      "sourceId": "team-02"
+    }
+  ],
+  "imageAudit": [
+    {
+      "uniqueId": "NX-001",
+      "name": "JITESH RAJ",
+      "relativeImagePath": "/images/team/jitesh_bhaiya.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 112500
+    },
+    {
+      "uniqueId": "NX-002",
+      "name": "MANISH PRAKASH",
+      "relativeImagePath": "/images/team/manish-prakash-coordinator.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 17424
+    },
+    {
+      "uniqueId": "NX-003",
+      "name": "SIBA PRASAND PANDA",
+      "relativeImagePath": "/images/team/siba-hoops.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 19848
+    },
+    {
+      "uniqueId": "NX-004",
+      "name": "OM PANDEY",
+      "relativeImagePath": "/images/team/om-pandey.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 21016
+    },
+    {
+      "uniqueId": "NX-005",
+      "name": "ANSHITA DASH",
+      "relativeImagePath": "/images/team/anshita-dash-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 23574
+    },
+    {
+      "uniqueId": "NX-006",
+      "name": "ANKITA DUTTA",
+      "relativeImagePath": "/images/team/ankita-dutta-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 60392
+    },
+    {
+      "uniqueId": "NX-007",
+      "name": "AADYASHA SWAIN",
+      "relativeImagePath": "/images/team/aadyasha-swain-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 75560
+    },
+    {
+      "uniqueId": "NX-008",
+      "name": "ANANYA RAJ",
+      "relativeImagePath": "/images/team/ananya-raj-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 87752
+    },
+    {
+      "uniqueId": "NX-009",
+      "name": "UMESH KUMAR SAHU",
+      "relativeImagePath": "/images/team/umesh-kumar-sahu-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 36420
+    },
+    {
+      "uniqueId": "NX-010",
+      "name": "SURYAPRASAD BRAHMA",
+      "relativeImagePath": "/images/team/suryaprasad-brahma-ideation.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 8790
+    },
+    {
+      "uniqueId": "NX-011",
+      "name": "TUSHTI SINHA",
+      "relativeImagePath": "/images/team/tushti-sinha-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 60514
+    },
+    {
+      "uniqueId": "NX-012",
+      "name": "SMITA JENA",
+      "relativeImagePath": "/images/team/smita-jena-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 79072
+    },
+    {
+      "uniqueId": "NX-013",
+      "name": "SIDDHARTH BASU",
+      "relativeImagePath": "/images/team/siddharth-basu-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 36520
+    },
+    {
+      "uniqueId": "NX-014",
+      "name": "SASWAT PALO",
+      "relativeImagePath": "/images/team/saswat-palo-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 22566
+    },
+    {
+      "uniqueId": "NX-015",
+      "name": "PRATYUSH SAHOO",
+      "relativeImagePath": "/images/team/pratyush-sahoo-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 57356
+    },
+    {
+      "uniqueId": "NX-016",
+      "name": "OMM PRAKASH TRIPATHY",
+      "relativeImagePath": "/images/team/omm-prakash-tripathy-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 40164
+    },
+    {
+      "uniqueId": "NX-017",
+      "name": "JAGRUTI PANDEY",
+      "relativeImagePath": "/images/team/jagruti-pandey-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 46988
+    },
+    {
+      "uniqueId": "NX-018",
+      "name": "DEBOJEET",
+      "relativeImagePath": "/images/team/debojeet-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 82632
+    },
+    {
+      "uniqueId": "NX-019",
+      "name": "ANSHUMAN MEHER",
+      "relativeImagePath": "/images/team/anshuman-meher-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 26736
+    },
+    {
+      "uniqueId": "NX-020",
+      "name": "ISHIKA",
+      "relativeImagePath": "/images/team/ishika.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 24460
+    },
+    {
+      "uniqueId": "NX-021",
+      "name": "HARSHIT",
+      "relativeImagePath": "/images/team/harshit.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 80402
+    },
+    {
+      "uniqueId": "NX-022",
+      "name": "SIMRITA BARICK",
+      "relativeImagePath": "/images/team/simrita-barick-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 213642
+    },
+    {
+      "uniqueId": "NX-023",
+      "name": "SINDHUSUTA RATH",
+      "relativeImagePath": "/images/team/sindhusuta-rath-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 146786
+    },
+    {
+      "uniqueId": "NX-024",
+      "name": "SWARNIM",
+      "relativeImagePath": "/images/team/swarnim-content.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 43938
+    },
+    {
+      "uniqueId": "NX-025",
+      "name": "ANSHUMAN TIWARY",
+      "relativeImagePath": "/images/team/anshuman-tiwary-management.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 12466
+    },
+    {
+      "uniqueId": "NX-026",
+      "name": "OROSMIT MISHRA",
+      "relativeImagePath": "/images/team/orosmit-mishra.webp",
+      "publicPathExists": true,
+      "imagesDirExists": true,
+      "fileSizeBytes": 34076
+    }
+  ],
+  "issues": []
+}
