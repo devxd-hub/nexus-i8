@@ -47,6 +47,9 @@ const DETERMINISTIC_ID_MAPPING: Record<string, string> = {
   'team-content-14': 'NX-024',// SWARNIM
   'team-01': 'NX-025',       // ANSHUMAN TIWARY
   'team-02': 'NX-026',       // OROSMIT MISHRA
+  'team-head-02': 'NX-027',  // IMTIAZ ALLAM
+  'team-09': 'NX-028',       // ABHINAB JENA
+  'team-content-15': 'NX-029',// HIMANSHI MOHAPATRA
 };
 
 // Sort members deterministically according to their assigned uniqueId
@@ -278,7 +281,7 @@ const humanReportContent = `# NEXUS E-ID Member Dataset — Extraction, Normaliz
 **Dataset Path**: \`Eid-card/data/members.json\`  
 **Machine-Readable Report**: \`Eid-card/data/member-validation-report.json\`  
 **Source of Truth**: \`nexus-i8-/frontend/src/data/nexusData.ts\` (\`TEAM_MEMBERS\`)  
-**Status**: ${validationIssues.length === 0 ? '✓ ALL 26 MEMBERS VALIDATED (100% PASS)' : '✗ VALIDATION ISSUES DETECTED'}
+**Status**: ${validationIssues.length === 0 ? `✓ ALL ${membersDataset.length} MEMBERS VALIDATED (100% PASS)` : '✗ VALIDATION ISSUES DETECTED'}
 
 ---
 
@@ -286,11 +289,11 @@ const humanReportContent = `# NEXUS E-ID Member Dataset — Extraction, Normaliz
 
 This dataset represents a pure, zero-invention data extraction from the authentic NEXUS website codebase (\`nexus-i8-\`). Every record maps directly to an active student or coordinator listed in the primary website's team data.
 
-- **Total Members Extracted**: \`26\`
-- **Unique Public Identifiers**: \`NX-001\` through \`NX-026\` (100% unique, sequential, and permanent)
+- **Total Members Extracted**: \`${membersDataset.length}\`
+- **Unique Public Identifiers**: \`NX-001\` through \`NX-${String(membersDataset.length).padStart(3, '0')}\` (100% unique, sequential, and permanent)
 - **Name Preservation**: 100% authentic names preserved directly from source
 - **Zero Fabrication**: No roles, emails, biographies, social handles, or portraits were invented. Fields absent from source data are explicitly \`null\`.
-- **Image Integrity**: All 26 referenced WebP images exist physically on disk and are referenced at their canonical paths (\`/images/team/*.webp\`).
+- **Image Integrity**: All ${membersDataset.length} referenced images exist physically on disk and are referenced at their canonical paths (\`/images/team/*\`).
 
 ---
 
@@ -327,7 +330,7 @@ ${imageExistenceChecks
 ## 4. Normalization Rules Applied
 
 1. **Unique ID Assignment**:
-   - Sequential, stable, and deterministic allocation (\`NX-001\` to \`NX-026\`).
+   - Sequential, stable, and deterministic allocation (\`NX-001\` to \`NX-${String(membersDataset.length).padStart(3, '0')}\`).
    - Permanent identifier for card QR codes and URL paths (\`/memberID/{slug}/{uniqueId}\`).
 2. **Slug Generation**:
    - Strictly lowercase alphanumeric with hyphens, derived from the actual member name: \`name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')\`.
@@ -336,16 +339,16 @@ ${imageExistenceChecks
 4. **Data Hygiene & Null Discipline**:
    - Unspecified emails, social handles, or secondary links remain \`null\`. Zero mocked or invented data.
 5. **No Image Duplication**:
-   - References canonical WebP files without re-encoding, resizing, or creating duplicate copies.
+   - References canonical portraits without re-encoding, resizing, or creating duplicate copies.
 
 ---
 
 ## 5. Validation Checklist
 
-- [x] **Unique IDs are Unique**: 26 / 26 unique identifiers (\`NX-001\` – \`NX-026\`).
-- [x] **Names are Non-Empty**: All 26 records have authentic non-empty names.
-- [x] **Slugs are Unique & URL-Safe**: 26 / 26 distinct URL-safe slugs.
-- [x] **Image References Exist**: 26 / 26 WebP portraits verified on filesystem.
+- [x] **Unique IDs are Unique**: ${membersDataset.length} / ${membersDataset.length} unique identifiers (\`NX-001\` – \`NX-${String(membersDataset.length).padStart(3, '0')}\`).
+- [x] **Names are Non-Empty**: All ${membersDataset.length} records have authentic non-empty names.
+- [x] **Slugs are Unique & URL-Safe**: ${membersDataset.length} / ${membersDataset.length} distinct URL-safe slugs.
+- [x] **Image References Exist**: ${membersDataset.length} / ${membersDataset.length} portraits verified on filesystem.
 - [x] **JSON is Valid**: Validated syntax in \`Eid-card/data/members.json\`.
 - [x] **No Duplicate People**: 0 duplicate records.
 - [x] **No Shared Images**: Every member has their own dedicated portrait.

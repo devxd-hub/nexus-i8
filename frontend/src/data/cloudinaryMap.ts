@@ -624,6 +624,13 @@ export const CLOUDINARY_IMAGE_MAP: Record<string, CloudinaryImageRecord> = {
     category: "team",
     sha256: "eb05e4710899498d64f5ba65a6dc5e1a83b0d0df077521e10d6e189b35676ff1",
   },
+  "/images/team/abhinab_jena.jpg": {
+    localPath: "/images/team/abhinab_jena.jpg",
+    publicId: "aarambh/team/abhinab_jena",
+    deliveryUrl: "https://res.cloudinary.com/plg8gola/image/upload/aarambh/team/abhinab_jena.jpg",
+    category: "team",
+    sha256: "local-abhinab-jena",
+  },
 };
 
 /**

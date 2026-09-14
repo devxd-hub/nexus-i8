@@ -202,6 +202,17 @@ const RAW_TEAM_MEMBERS: TeamMember[] = [
     imageUrl: '/images/team/suryaprasad-brahma-ideation.webp',
     imagePosition: 'center 15%',
   },
+  {
+    id: 'team-09',
+    name: 'ABHINAB JENA',
+    role: 'IDEATION & CONCEPT DEVELOPER',
+    group: 'IDEATION',
+    discipline: 'Computer Science & Engineering',
+    yearOfStudy: 'Junior // 2027',
+    bio: 'Focuses on interactive concept design, prototype explorations, and collaborative ideation sprints.',
+    imageUrl: '/images/team/abhinab_jena.jpg',
+    imagePosition: 'center 20%',
+  },
 
   // CONTENT
   {
@@ -357,6 +368,17 @@ const RAW_TEAM_MEMBERS: TeamMember[] = [
     bio: 'Creates audiovisual captures, interactive media archives, and sprint demonstration reels.',
     imageUrl: '/images/team/swarnim-content.webp',
     imagePosition: 'center 18%',
+  },
+  {
+    id: 'team-content-15',
+    name: 'HIMANSHI MOHAPATRA',
+    role: 'CONTENT & EDITORIAL STRATEGIST',
+    group: 'CONTENT',
+    discipline: 'Media Communication & Editorial Strategy',
+    yearOfStudy: 'Junior // 2027',
+    bio: 'Directs narrative strategy, publication releases, and editorial documentation across studio cohorts.',
+    imageUrl: '/images/team/himanshi_mohapatra.jpeg',
+    imagePosition: 'center 20%',
   },
 
   // COORDINATOR & MENTOR

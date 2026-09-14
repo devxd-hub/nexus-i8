@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-09-14T09:33:02.107Z",
+  "timestamp": "2026-09-14T14:16:21.087Z",
   "sourceRepository": "nexus-i8-",
   "sourceFile": "frontend/src/data/nexusData.ts",
   "targetDataset": "Eid-card/data/members.json",
   "summary": {
-    "totalExtracted": 26,
+    "totalExtracted": 29,
     "valid": true,
     "issueCount": 0,
-    "uniqueIdsCount": 26,
-    "uniqueSlugsCount": 26,
-    "uniqueImagesCount": 26,
-    "imagesVerifiedOnDisk": 26
+    "uniqueIdsCount": 29,
+    "uniqueSlugsCount": 29,
+    "uniqueImagesCount": 29,
+    "imagesVerifiedOnDisk": 29
   },
   "mapping": [
     {
@@ -272,6 +272,36 @@
       "domain": "Community & Project Strategy",
       "image": "/images/team/orosmit-mishra.webp",
       "sourceId": "team-02"
+    },
+    {
+      "uniqueId": "NX-027",
+      "name": "IMTIAZ ALLAM",
+      "slug": "imtiaz-allam",
+      "role": "HEAD OF TECH",
+      "group": "HEADS",
+      "domain": "Technical Architecture & Systems Engineering",
+      "image": "/images/team/Imtiaz_Allam.jpeg",
+      "sourceId": "team-head-02"
+    },
+    {
+      "uniqueId": "NX-028",
+      "name": "ABHINAB JENA",
+      "slug": "abhinab-jena",
+      "role": "IDEATION & CONCEPT DEVELOPER",
+      "group": "IDEATION",
+      "domain": "Computer Science & Engineering",
+      "image": "/images/team/abhinab_jena.jpg",
+      "sourceId": "team-09"
+    },
+    {
+      "uniqueId": "NX-029",
+      "name": "HIMANSHI MOHAPATRA",
+      "slug": "himanshi-mohapatra",
+      "role": "CONTENT & EDITORIAL STRATEGIST",
+      "group": "CONTENT",
+      "domain": "Media Communication & Editorial Strategy",
+      "image": "/images/team/himanshi_mohapatra.jpeg",
+      "sourceId": "team-content-15"
     }
   ],
   "imageAudit": [
@@ -456,6 +486,27 @@
       "relativeImagePath": "/images/team/orosmit-mishra.webp",
       "imagesDirExists": true,
       "fileSizeBytes": 34076
+    },
+    {
+      "uniqueId": "NX-027",
+      "name": "IMTIAZ ALLAM",
+      "relativeImagePath": "/images/team/Imtiaz_Allam.jpeg",
+      "imagesDirExists": true,
+      "fileSizeBytes": 45918
+    },
+    {
+      "uniqueId": "NX-028",
+      "name": "ABHINAB JENA",
+      "relativeImagePath": "/images/team/abhinab_jena.jpg",
+      "imagesDirExists": true,
+      "fileSizeBytes": 110520
+    },
+    {
+      "uniqueId": "NX-029",
+      "name": "HIMANSHI MOHAPATRA",
+      "relativeImagePath": "/images/team/himanshi_mohapatra.jpeg",
+      "imagesDirExists": true,
+      "fileSizeBytes": 150253
     }
   ],
   "issues": []
