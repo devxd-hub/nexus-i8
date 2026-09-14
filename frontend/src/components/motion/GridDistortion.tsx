@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { getLocalFallbackUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 export interface GridDistortionProps {
   imageSrc: string;
@@ -347,6 +348,15 @@ export const GridDistortion: React.FC<GridDistortionProps> = ({
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       renderStaticFrame();
     };
+    img.onerror = () => {
+      const fallback = getLocalFallbackUrl(imageSrc);
+      if (fallback && fallback !== imageSrc && img.src !== fallback) {
+        console.warn(
+          `[Cloudinary Fallback] WebGL texture failed to resolve from Cloudinary CDN: "${imageSrc}" -> Falling back to canonical local asset: "${fallback}"`
+        );
+        img.src = fallback;
+      }
+    };
 
     // Set Uniforms
     const uLightColor = gl.getUniformLocation(program, 'u_lightColor');
@@ -556,6 +566,7 @@ export const GridDistortion: React.FC<GridDistortionProps> = ({
           className="w-full h-full object-cover pointer-events-none block filter contrast-[1.04]"
           loading="lazy"
           decoding="async"
+          onError={handleImageFallbackError}
         />
       )}
     </div>

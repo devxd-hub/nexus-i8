@@ -1,0 +1,542 @@
+/* ========================================================================= */
+/* NEXUS HOLOGRAPHIC 3D PROFILE CARD                                         */
+/* Highly optimized CSS with localized variables, GPU acceleration, and      */
+/* responsive typography matched to the NEXUS design system.                 */
+/* ========================================================================= */
+
+.pc-card-wrapper {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --pointer-from-center: 0;
+  --pointer-from-top: 0.5;
+  --pointer-from-left: 0.5;
+  --card-opacity: 0;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+  --grain: none;
+  --icon: none;
+  --behind-glow-color: rgba(242, 97, 63, 0.55);
+  --behind-glow-size: 40%;
+  --inner-gradient: linear-gradient(145deg, rgba(242, 97, 63, 0.28) 0%, rgba(14, 15, 20, 0.95) 50%, rgba(242, 97, 63, 0.12) 100%);
+  --sunpillar-1: hsl(14, 88%, 62%);
+  --sunpillar-2: hsl(35, 92%, 60%);
+  --sunpillar-3: hsl(50, 95%, 65%);
+  --sunpillar-4: hsl(180, 60%, 65%);
+  --sunpillar-5: hsl(220, 70%, 68%);
+  --sunpillar-6: hsl(280, 65%, 65%);
+  --card-radius: 22px;
+  --avatar-position: center 20%;
+
+  perspective: 900px;
+  transform: translate3d(0, 0, 0.1px);
+  position: relative;
+  touch-action: pan-y;
+  contain: layout style;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+/* Ambient glow behind card */
+.pc-behind {
+  position: absolute;
+  inset: -15px;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--pointer-x) var(--pointer-y),
+    var(--behind-glow-color) 0%,
+    transparent var(--behind-glow-size)
+  );
+  filter: blur(36px) saturate(1.2);
+  opacity: calc(0.75 * var(--card-opacity));
+  transition: opacity 240ms ease-out;
+  border-radius: calc(var(--card-radius) + 16px);
+  will-change: opacity;
+}
+
+.pc-card-wrapper:hover,
+.pc-card-wrapper.active {
+  --card-opacity: 1;
+}
+
+/* Shell & Card Container */
+.pc-card-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.pc-card {
+  width: 100%;
+  aspect-ratio: 0.72;
+  min-height: 480px;
+  max-height: 540px;
+  display: grid;
+  border-radius: var(--card-radius);
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.65) calc((var(--pointer-from-left) * 12px) - 6px)
+    calc((var(--pointer-from-top) * 24px) - 12px) 28px -6px;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+  background: rgba(12, 13, 18, 0.96);
+  border: 1px solid rgba(242, 97, 63, 0.22);
+  backface-visibility: hidden;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pc-card:hover,
+.pc-card.active {
+  transition: none;
+  transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+  border-color: rgba(242, 97, 63, 0.65);
+}
+
+.pc-card-shell.entering .pc-card {
+  transition: transform 180ms ease-out;
+}
+
+.pc-card * {
+  display: grid;
+  grid-area: 1/-1;
+  pointer-events: none;
+}
+
+/* Inside Background */
+.pc-inside {
+  inset: 0;
+  position: absolute;
+  background-image: var(--inner-gradient);
+  background-color: rgba(10, 11, 15, 0.94);
+  transform: none;
+  border-radius: var(--card-radius);
+}
+
+/* Holographic Shine */
+.pc-shine {
+  mask-image: var(--icon);
+  mask-mode: luminance;
+  mask-repeat: repeat;
+  mask-size: 140px;
+  mask-position: calc(var(--background-x) * 1.2) calc(var(--background-y) * 1.2);
+  transition: filter 0.6s ease, opacity 0.4s ease;
+  filter: brightness(0.7) contrast(1.3) saturate(0.5) opacity(0.35);
+  mix-blend-mode: color-dodge;
+  z-index: 3;
+  pointer-events: none;
+  border-radius: var(--card-radius);
+}
+
+.pc-shine,
+.pc-shine::after {
+  --space: 6%;
+  --angle: -45deg;
+  transform: translate3d(0, 0, 1px);
+  overflow: hidden;
+  background: transparent;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      var(--sunpillar-1) calc(var(--space) * 1),
+      var(--sunpillar-2) calc(var(--space) * 2),
+      var(--sunpillar-3) calc(var(--space) * 3),
+      var(--sunpillar-4) calc(var(--space) * 4),
+      var(--sunpillar-5) calc(var(--space) * 5),
+      var(--sunpillar-6) calc(var(--space) * 6),
+      var(--sunpillar-1) calc(var(--space) * 7)
+    ),
+    repeating-linear-gradient(
+      var(--angle),
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    ),
+    radial-gradient(
+      farthest-corner circle at var(--pointer-x) var(--pointer-y),
+      hsla(0, 0%, 0%, 0.1) 12%,
+      hsla(0, 0%, 0%, 0.15) 20%,
+      hsla(0, 0%, 0%, 0.25) 120%
+    );
+  background-position:
+    0 var(--background-y),
+    var(--background-x) var(--background-y),
+    center;
+  background-blend-mode: color, hard-light;
+  background-size:
+    400% 400%,
+    300% 300%,
+    200% 200%;
+  background-repeat: repeat;
+}
+
+.pc-shine::before,
+.pc-shine::after {
+  content: '';
+  background-position: center;
+  background-size: cover;
+  grid-area: 1/1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  border-radius: var(--card-radius);
+}
+
+.pc-card:hover .pc-shine,
+.pc-card.active .pc-shine {
+  filter: brightness(0.95) contrast(1.4) saturate(0.85) opacity(0.8);
+}
+
+.pc-card:hover .pc-shine::before,
+.pc-card.active .pc-shine::before,
+.pc-card:hover .pc-shine::after,
+.pc-card.active .pc-shine::after {
+  opacity: 1;
+}
+
+.pc-shine::before {
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--sunpillar-4),
+      var(--sunpillar-5),
+      var(--sunpillar-6),
+      var(--sunpillar-1),
+      var(--sunpillar-2),
+      var(--sunpillar-3)
+    ),
+    radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(14, 85%, 65%) 0%, hsla(0, 0%, 20%, 0.3) 90%),
+    var(--grain);
+  background-size:
+    250% 250%,
+    100% 100%,
+    200px 200px;
+  background-position:
+    var(--pointer-x) var(--pointer-y),
+    center,
+    calc(var(--pointer-x) * 0.01) calc(var(--pointer-y) * 0.01);
+  background-blend-mode: color-dodge;
+  filter: brightness(calc(1.8 - var(--pointer-from-center) * 0.5)) contrast(calc(var(--pointer-from-center) + 1.8))
+    saturate(calc(0.7 + var(--pointer-from-center) * 0.5));
+  mix-blend-mode: luminosity;
+}
+
+.pc-shine::after {
+  background-position:
+    0 var(--background-y),
+    calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5),
+    center;
+  background-size:
+    200% 300%,
+    600% 600%,
+    100% 100%;
+  mix-blend-mode: difference;
+  filter: brightness(0.8) contrast(1.4);
+}
+
+/* Specular Glare */
+.pc-glare {
+  transform: translate3d(0, 0, 1.1px);
+  overflow: hidden;
+  background-image: radial-gradient(
+    farthest-corner circle at var(--pointer-x) var(--pointer-y),
+    rgba(255, 255, 255, 0.45) 8%,
+    rgba(242, 97, 63, 0.25) 24%,
+    transparent 70%
+  );
+  mix-blend-mode: overlay;
+  filter: brightness(0.9) contrast(1.2);
+  z-index: 4;
+  border-radius: var(--card-radius);
+}
+
+/* Avatar Portrait Content */
+.pc-avatar-content {
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  z-index: 2;
+  transform: translateZ(2px);
+  backface-visibility: hidden;
+}
+
+.pc-avatar-content .avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--avatar-position, center 20%);
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  backface-visibility: hidden;
+  will-change: transform;
+  transition: transform 120ms ease-out;
+  transform: scale(1.04) translate3d(
+    calc((var(--pointer-from-left) - 0.5) * 8px),
+    calc((var(--pointer-from-top) - 0.5) * 8px),
+    0
+  );
+}
+
+/* Atmospheric Vignette Gradient over portrait */
+.pc-avatar-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 11, 16, 0.88) 0%,
+    rgba(10, 11, 16, 0.35) 22%,
+    rgba(10, 11, 16, 0.08) 46%,
+    rgba(10, 11, 16, 0.55) 75%,
+    rgba(10, 11, 16, 0.95) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  border-radius: var(--card-radius);
+}
+
+/* Header Meta & Typography */
+.pc-content:not(.pc-avatar-content) {
+  position: relative;
+  z-index: 5;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transform: translate3d(
+    calc((var(--pointer-from-left) - 0.5) * -6px),
+    calc((var(--pointer-from-top) - 0.5) * -6px),
+    1px
+  );
+}
+
+.pc-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+}
+
+.pc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(242, 97, 63, 0.15);
+  border: 1px solid rgba(242, 97, 63, 0.5);
+  color: #F2613F;
+  font-family: var(--font-dosis, 'Dosis', sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.pc-details h3 {
+  font-family: var(--font-fraunces, 'Fraunces', serif);
+  font-weight: 700;
+  font-size: 1.65rem;
+  line-height: 1.15;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  background-image: linear-gradient(135deg, #FFFFFF 0%, #F5EFE6 55%, #F2613F 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.pc-details p {
+  font-family: var(--font-dosis, 'Dosis', sans-serif);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #F2613F;
+  margin: 2px 0 0 0;
+  line-height: 1.3;
+}
+
+/* User Info Bar at Bottom */
+.pc-user-info {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(16, 17, 24, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(242, 97, 63, 0.25);
+  border-radius: 14px;
+  padding: 10px 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  pointer-events: auto;
+  gap: 12px;
+}
+
+.pc-user-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pc-mini-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid rgba(242, 97, 63, 0.6);
+  flex-shrink: 0;
+  background: #12131a;
+}
+
+.pc-mini-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.pc-user-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pc-handle {
+  font-family: var(--font-dosis, 'Dosis', sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #F5EFE6;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pc-status {
+  font-family: var(--font-dosis, 'Dosis', sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(245, 239, 230, 0.65);
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pc-status::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F2613F;
+  box-shadow: 0 0 8px #F2613F;
+}
+
+/* Contact Button */
+.pc-contact-btn {
+  border: 1px solid rgba(242, 97, 63, 0.45);
+  background: rgba(242, 97, 63, 0.12);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: var(--font-dosis, 'Dosis', sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #F5EFE6;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pc-contact-btn:hover {
+  background: #F2613F;
+  color: #12131a;
+  border-color: #F2613F;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(242, 97, 63, 0.35);
+}
+
+.pc-contact-btn:active {
+  transform: translateY(0);
+}
+
+/* Mobile & Tablet Adjustments */
+@media (max-width: 768px) {
+  .pc-card-wrapper {
+    max-width: 360px;
+  }
+  .pc-card {
+    min-height: 440px;
+    max-height: 480px;
+  }
+  .pc-details h3 {
+    font-size: 1.45rem;
+  }
+  .pc-details p {
+    font-size: 11px;
+  }
+  .pc-user-info {
+    padding: 8px 12px;
+  }
+  .pc-mini-avatar {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pc-card-wrapper {
+    max-width: 320px;
+  }
+  .pc-card {
+    min-height: 400px;
+    max-height: 450px;
+  }
+  .pc-details h3 {
+    font-size: 1.3rem;
+  }
+  .pc-details p {
+    font-size: 10px;
+  }
+  .pc-contact-btn {
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .pc-card {
+    transition: none !important;
+    transform: none !important;
+  }
+  .pc-behind,
+  .pc-shine,
+  .pc-glare {
+    animation: none !important;
+    transition: none !important;
+  }
+}

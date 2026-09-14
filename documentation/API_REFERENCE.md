@@ -218,7 +218,7 @@ List active public squad members.
       "id": "team-01",
       "publicId": "anshuman-tiwary",
       "name": "ANSHUMAN TIWARY",
-      "role": "Management Lead",
+      "role": "Management",
       "domain": "Management & Strategy",
       "bio": "Directs sprint logistics and operations.",
       "photoUrl": "/images/team/anshuman-tiwary-management.webp",

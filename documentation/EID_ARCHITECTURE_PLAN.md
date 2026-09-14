@@ -55,7 +55,7 @@ Eid-card/ui/src/
   - Top-right technical ID badge (`NX-001` through `NX-024`).
   - Centered 122×122px square portrait photo with contrast/brightness filter, industrial crosshairs overlay, clearance badge (`LVL-04 // SPEC`), and shield icon.
   - Member Name (uppercase Lovelo/display font, 20px).
-  - Role / Designation (`// MANAGEMENT LEAD`).
+  - Role / Designation (`// MANAGEMENT`).
   - Discipline & Core Pillar.
   - Station indicator (`STATION // NODE 01 // TOKYO`), industrial barcode lines, and repeat ID.
   - Bottom status rail with `NEXUS ID SYSTEM`, Web Share button, and `TAP TO FLIP` prompt.
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS members (
   public_id TEXT UNIQUE NOT NULL,-- e.g. "anshuman-tiwary", "orosmit-mishra"
   name TEXT NOT NULL,            -- e.g. "OROSMIT MISHRA"
   email TEXT UNIQUE,             -- e.g. "orosmit-mishra@nexus.campus"
-  role TEXT NOT NULL,            -- e.g. "MANAGEMENT LEAD"
+  role TEXT NOT NULL,            -- e.g. "MANAGEMENT"
   domain TEXT,                   -- e.g. "Community & Project Strategy"
   bio TEXT,                      -- e.g. "Leads organizational growth, team matching..."
   photo_url TEXT,                -- e.g. "/images/team/orosmit-mishra.webp"
@@ -107,16 +107,16 @@ The canonical team data exists in `nexus-i8-/frontend/src/data/nexusData.ts`. It
 
 | ID | Public ID (Slug) | Full Name | Official Role | Group | Canonical Photo Path |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| `team-01` | `anshuman-tiwary` | ANSHUMAN TIWARY | MANAGEMENT LEAD | MANAGEMENT | `/images/team/anshuman-tiwary-management.webp` |
-| `team-02` | `orosmit-mishra` | OROSMIT MISHRA | MANAGEMENT LEAD | MANAGEMENT | `/images/team/orosmit-mishra.webp` |
-| `team-03` | `anshita-dash` | ANSHITA DASH | IDEATION & INTERACTION LEAD | IDEATION | `/images/team/anshita-dash-ideation.webp` |
+| `team-01` | `anshuman-tiwary` | ANSHUMAN TIWARY | MANAGEMENT | MANAGEMENT | `/images/team/anshuman-tiwary-management.webp` |
+| `team-02` | `orosmit-mishra` | OROSMIT MISHRA | MANAGEMENT | MANAGEMENT | `/images/team/orosmit-mishra.webp` |
+| `team-03` | `anshita-dash` | ANSHITA DASH | IDEATION & INTERACTION | IDEATION | `/images/team/anshita-dash-ideation.webp` |
 | `team-04` | `ankita-dutta` | ANKITA DUTTA | IDEATION & DESIGN STRATEGIST | IDEATION | `/images/team/ankita-dutta-ideation.webp` |
 | `team-05` | `aadyasha-swain` | AADYASHA SWAIN | IDEATION & EXPERIENCE DESIGNER | IDEATION | `/images/team/aadyasha-swain-ideation.webp` |
 | `team-06` | `ananya-raj` | ANANYA RAJ | IDEATION & HARDWARE PROTOTYPER | IDEATION | `/images/team/ananya-raj-ideation.webp` |
 | `team-07` | `umesh-kumar-sahu` | UMESH KUMAR SAHU | IDEATION & SYSTEMS ARCHITECT | IDEATION | `/images/team/umesh-kumar-sahu-ideation.webp` |
 | `team-08` | `suryaprasad-brahma` | SURYAPRASAD BRAHMA | IDEATION & CREATIVE TECHNOLOGIST | IDEATION | `/images/team/suryaprasad-brahma-ideation.webp` |
-| `team-content-01` | `tushti-sinha` | TUSHTI SINHA | CONTENT & EDITORIAL LEAD | CONTENT | `/images/team/tushti-sinha-content.webp` |
-| `team-content-02` | `smita-jena` | SMITA JENA | CONTENT & CURATION LEAD | CONTENT | `/images/team/smita-jena-content.webp` |
+| `team-content-01` | `tushti-sinha` | TUSHTI SINHA | CONTENT & EDITORIAL | CONTENT | `/images/team/tushti-sinha-content.webp` |
+| `team-content-02` | `smita-jena` | SMITA JENA | CONTENT & CURATION | CONTENT | `/images/team/smita-jena-content.webp` |
 | `team-content-03` | `siddharth-basu` | SIDDHARTH BASU | TECHNICAL WRITING & CASE STUDIES | CONTENT | `/images/team/siddharth-basu-content.webp` |
 | `team-content-04` | `saswat-palo` | SASWAT PALO | MEDIA PRODUCTION & CINEMATICS | CONTENT | `/images/team/saswat-palo-content.webp` |
 | `team-content-05` | `pratyush-sahoo` | PRATYUSH SAHOO | VISUAL DOCUMENTATION & MOTION | CONTENT | `/images/team/pratyush-sahoo-content.webp` |
@@ -175,7 +175,7 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_members_card_id ON members(card_id);
 | `id` | `card_id` | `TEXT UNIQUE` | `"NX-026"` |
 | `slug` | `public_id` | `TEXT UNIQUE` | `"orosmit-mishra"` |
 | `name` | `name` | `TEXT` | `"OROSMIT MISHRA"` |
-| `designation` | `role` | `TEXT` | `"MANAGEMENT LEAD"` |
+| `designation` | `role` | `TEXT` | `"MANAGEMENT"` |
 | `corePillar` | `domain` | `TEXT` | `"Community & Project Strategy"` |
 | `department` | `department` | `TEXT` | `"MANAGEMENT"` → mapped to `"ENGINEERING"`/`"DESIGN"`/`"RESEARCH"` |
 | `photo` / `image` | `photo_url` | `TEXT` | `"/images/team/orosmit-mishra.webp"` |
@@ -208,10 +208,10 @@ Returns all verified members with card configurations for directory or list hydr
       "id": "NX-026",
       "slug": "orosmit-mishra",
       "name": "OROSMIT MISHRA",
-      "designation": "MANAGEMENT LEAD",
+      "designation": "MANAGEMENT",
       "department": "ENGINEERING",
       "corePillar": "COMMUNITY & PROJECT STRATEGY",
-      "clearanceLevel": "LVL-04 // LEAD",
+      "clearanceLevel": "LVL-04 // SPEC",
       "photo": "/images/team/orosmit-mishra.webp",
       "specialWord": "ORCHESTRATOR",
       "quote": "When multidisciplinary minds align, execution becomes effortless.",
@@ -276,8 +276,8 @@ Card IDs must be strictly unique, short, industrial, and deterministic.
 - `NX-002`: Manish Prakash (Coordinator)
 - `NX-003`: Siba Prasand Panda (Vice Head of Ops)
 - `NX-004`: Om Pandey (Mentor)
-- `NX-010` – `NX-017`: Ideation Squad Leads (Anshita, Ankita, Aadyasha, Ananya, Umesh, Suryaprasad)
-- `NX-020` – `NX-029`: Management Leads (Anshuman Tiwary `NX-025`, Orosmit Mishra `NX-026`)
+- `NX-010` – `NX-017`: Ideation Squad (Anshita, Ankita, Aadyasha, Ananya, Umesh, Suryaprasad)
+- `NX-020` – `NX-029`: Management (Anshuman Tiwary `NX-025`, Orosmit Mishra `NX-026`)
 - `NX-030` – `NX-045`: Content & Editorial Crew (Tushti, Smita, Siddharth, Saswat, etc.)
 
 ---

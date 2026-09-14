@@ -348,7 +348,7 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
                 {/* Central Iconic X: Preserves authentic geometry & Liquid Metallic Paint, transitions to Navbar on scroll */}
                 <span
                   ref={xAnchorRef}
-                  className="relative inline-flex items-center justify-center mx-[0.06em] self-center"
+                  className="relative inline-flex items-center justify-center mx-[0.10em] sm:mx-[0.14em] self-center"
                 >
                   <div
                     ref={xWrapperRef}
@@ -360,8 +360,8 @@ export const Hero: React.FC<HeroProps> = ({ onRouteChange }) => {
                     }}
                   >
                     <InteractiveNexusX
-                      sizeClass="w-[0.84em] h-[0.84em] -translate-y-[0.02em]"
-                      className="transform transition-transform duration-200 group-hover:scale-105"
+                      sizeClass="w-[1.18em] h-[1.18em] sm:w-[1.22em] sm:h-[1.22em] -translate-y-[0.02em]"
+                      className="transform transition-transform duration-150 group-hover:scale-105"
                     />
                   </div>
                 </span>

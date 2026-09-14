@@ -10,6 +10,7 @@ import { Container } from '../primitives/Container.tsx';
 import { SectionLabel } from '../primitives/SectionLabel.tsx';
 import { NexusIcon } from '../brand/NexusLogo.tsx';
 import { SquadCardHover } from './SquadCardHover.tsx';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface CrewDirectoryProps {
   id?: string;
@@ -290,6 +291,7 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
                         style={{ objectPosition: member.imagePosition || 'center 20%' }}
                         loading="lazy"
                         decoding="async"
+                        onError={handleImageFallbackError}
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center text-[var(--text-muted)] bg-[var(--bg-subsurface)]">

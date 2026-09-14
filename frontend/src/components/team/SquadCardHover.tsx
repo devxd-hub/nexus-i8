@@ -7,6 +7,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { TeamMember } from '../../types.ts';
 import { InlineNoise } from '../ui/card-hover.tsx';
 import { ArrowUpRight } from 'lucide-react';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface SquadCardHoverProps {
   members: TeamMember[];
@@ -101,6 +102,7 @@ export const SquadCardHover: React.FC<SquadCardHoverProps> = ({
                       alt={member.name}
                       loading="lazy"
                       decoding="async"
+                      onError={handleImageFallbackError}
                       style={{
                         objectPosition: member.imagePosition || 'center 20%',
                         transform: isExpanded ? 'scale(1.04)' : 'scale(1)',

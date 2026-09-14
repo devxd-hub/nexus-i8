@@ -4,6 +4,7 @@
  */
 
 import { Project, TeamMember, GalleryItem } from '../types.ts';
+import { resolveImageUrl } from './cloudinaryMap.ts';
 
 export const PROJECTS: Project[] = [
   {
@@ -109,12 +110,12 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export const TEAM_MEMBERS: TeamMember[] = [
+const RAW_TEAM_MEMBERS: TeamMember[] = [
   // MANAGEMENT
   {
     id: 'team-01',
     name: 'ANSHUMAN TIWARY',
-    role: 'MANAGEMENT LEAD',
+    role: 'MANAGEMENT',
     group: 'MANAGEMENT',
     discipline: 'Systems & Engineering Operations',
     yearOfStudy: 'Senior // 2026',
@@ -125,7 +126,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-02',
     name: 'OROSMIT MISHRA',
-    role: 'MANAGEMENT LEAD',
+    role: 'MANAGEMENT',
     group: 'MANAGEMENT',
     discipline: 'Community & Project Strategy',
     yearOfStudy: 'Junior // 2027',
@@ -138,7 +139,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-03',
     name: 'ANSHITA DASH',
-    role: 'IDEATION & INTERACTION LEAD',
+    role: 'IDEATION & INTERACTION',
     group: 'IDEATION',
     discipline: 'Computer Science & Human-Centered Design',
     yearOfStudy: 'Junior // 2027',
@@ -201,12 +202,23 @@ export const TEAM_MEMBERS: TeamMember[] = [
     imageUrl: '/images/team/suryaprasad-brahma-ideation.webp',
     imagePosition: 'center 15%',
   },
+  {
+    id: 'team-09',
+    name: 'ABHINAB JENA',
+    role: 'IDEATION & CONCEPT DEVELOPER',
+    group: 'IDEATION',
+    discipline: 'Computer Science & Engineering',
+    yearOfStudy: 'Junior // 2027',
+    bio: 'Focuses on interactive concept design, prototype explorations, and collaborative ideation sprints.',
+    imageUrl: '/images/team/abhinab_jena.jpg',
+    imagePosition: 'center 20%',
+  },
 
   // CONTENT
   {
     id: 'team-content-01',
     name: 'TUSHTI SINHA',
-    role: 'CONTENT & EDITORIAL LEAD',
+    role: 'CONTENT & EDITORIAL',
     group: 'CONTENT',
     discipline: 'Editorial Strategy & Media Communication',
     yearOfStudy: 'Junior // 2027',
@@ -217,7 +229,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-content-02',
     name: 'SMITA JENA',
-    role: 'CONTENT & CURATION LEAD',
+    role: 'CONTENT & CURATION',
     group: 'CONTENT',
     discipline: 'Visual Media & Creative Writing',
     yearOfStudy: 'Junior // 2027',
@@ -357,6 +369,17 @@ export const TEAM_MEMBERS: TeamMember[] = [
     imageUrl: '/images/team/swarnim-content.webp',
     imagePosition: 'center 18%',
   },
+  {
+    id: 'team-content-15',
+    name: 'HIMANSHI MOHAPATRA',
+    role: 'CONTENT & EDITORIAL STRATEGIST',
+    group: 'CONTENT',
+    discipline: 'Media Communication & Editorial Strategy',
+    yearOfStudy: 'Junior // 2027',
+    bio: 'Directs narrative strategy, publication releases, and editorial documentation across studio cohorts.',
+    imageUrl: '/images/team/himanshi_mohapatra.jpeg',
+    imagePosition: 'center 20%',
+  },
 
   // COORDINATOR & MENTOR
   {
@@ -420,7 +443,13 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-export const GALLERY_ITEMS: GalleryItem[] = [
+export const TEAM_MEMBERS: TeamMember[] = RAW_TEAM_MEMBERS.map((member) => ({
+  ...member,
+  imageUrl: member.imageUrl ? resolveImageUrl(member.imageUrl) : member.imageUrl,
+  alternateImageUrl: member.alternateImageUrl ? resolveImageUrl(member.alternateImageUrl) : member.alternateImageUrl,
+}));
+
+const RAW_GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 'gal-01',
     title: 'NEXUS Cohort Chronicle — Chapter 01',
@@ -530,4 +559,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspectRatio: '3/2',
   },
 ];
+
+export const GALLERY_ITEMS: GalleryItem[] = RAW_GALLERY_ITEMS.map((item) => ({
+  ...item,
+  imageUrl: item.imageUrl ? resolveImageUrl(item.imageUrl) : item.imageUrl,
+}));
+
 

@@ -37,7 +37,6 @@ export interface TeamMember {
     | 'IDEATION'
     | 'CONTENT'
     | 'COORDINATOR & MENTOR'
-    | 'LEADS'
     | 'CORE MEMBERS'
     | 'ADVISORS / MENTORS'
     | 'TECH'

@@ -6,6 +6,7 @@
 import React from 'react';
 import { NexusIcon } from '../brand/NexusLogo.tsx';
 import { TeamMember } from '../../types.ts';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface TeamCardProps {
   member: TeamMember;
@@ -131,7 +132,13 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                     className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
                     style={{ objectPosition: activePosition }}
                     referrerPolicy="no-referrer"
-                    onError={() => setImageError(true)}
+                    onError={(e) => {
+                      if (e.currentTarget.dataset.fallbackTried === 'true') {
+                        setImageError(true);
+                      } else {
+                        handleImageFallbackError(e);
+                      }
+                    }}
                   />
                   <div
                     className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/40 via-transparent to-transparent opacity-60 pointer-events-none transition-opacity group-hover:opacity-30"
@@ -234,7 +241,13 @@ export const TeamCard: React.FC<TeamCardProps> = ({
                 className="w-full h-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                 style={{ objectPosition: activePosition }}
                 referrerPolicy="no-referrer"
-                onError={() => setImageError(true)}
+                onError={(e) => {
+                  if (e.currentTarget.dataset.fallbackTried === 'true') {
+                    setImageError(true);
+                  } else {
+                    handleImageFallbackError(e);
+                  }
+                }}
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)]/40 via-transparent to-transparent opacity-60 pointer-events-none"

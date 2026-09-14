@@ -19,6 +19,22 @@
   }
 }
 
+@font-face {
+  font-family: 'Lovelo';
+  src: url('https://db.onlinewebfonts.com/t/088f292cf151a6e496fc8cdc5441b3e3.eot');
+  src: url('https://db.onlinewebfonts.com/t/088f292cf151a6e496fc8cdc5441b3e3.eot?#iefix') format('embedded-opentype'),
+       url('https://db.onlinewebfonts.com/t/088f292cf151a6e496fc8cdc5441b3e3.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/088f292cf151a6e496fc8cdc5441b3e3.woff') format('woff'),
+       url('https://db.onlinewebfonts.com/t/088f292cf151a6e496fc8cdc5441b3e3.ttf') format('truetype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-lovelo {
+  font-family: 'Lovelo', 'Lovelo-Black', 'Lovelo Black', 'Montserrat', -apple-system, sans-serif;
+}
+
 .font-display {
   font-family: 'Syne', 'Plus Jakarta Sans', sans-serif;
 }

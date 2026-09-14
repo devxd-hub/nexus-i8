@@ -5,6 +5,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
+
+const NEXUS_PRELOADER_LOGO = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
 
 interface CinematicPreloaderProps {
   onComplete: () => void;
@@ -85,11 +88,12 @@ export const CinematicPreloader: React.FC<CinematicPreloaderProps> = ({
         className="relative flex items-center justify-center w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 aspect-square"
       >
         <img
-          src="/images/logos/NEXUS-removebg-preview-1.png"
+          src={NEXUS_PRELOADER_LOGO}
           alt="NEXUS X"
           className="w-full h-full object-contain pointer-events-none select-none"
           loading="eager"
           decoding="async"
+          onError={handleImageFallbackError}
         />
       </motion.div>
     </div>

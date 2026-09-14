@@ -5,6 +5,11 @@
 
 import React, { useState, useEffect } from 'react';
 import MetallicPaint from './MetallicPaint.tsx';
+import logo from './logo.svg';
+import logoOrange from './logo-orange.svg';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
+
+const NEXUS_ICON_SRC = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
 
 export interface NexusIconProps {
   className?: string;
@@ -39,12 +44,13 @@ export const NexusIcon: React.FC<NexusIconProps> = ({
   return (
     <img
       id={id}
-      src="/images/logos/NEXUS-removebg-preview-1.png"
+      src={NEXUS_ICON_SRC}
       alt={alt}
       referrerPolicy="no-referrer"
       className={`inline-block shrink-0 select-none object-contain aspect-square pointer-events-none ${sizeClasses} ${className}`}
       loading="eager"
       decoding="async"
+      onError={handleImageFallbackError}
     />
   );
 };
@@ -52,30 +58,28 @@ export const NexusIcon: React.FC<NexusIconProps> = ({
 /**
  * Interactive Central X:
  * Base: canonical orange NEXUS X.
- * Hover: seamlessly transitions into sophisticated liquid metallic brushed aluminum.
+ * Hover: seamlessly transitions into metallic liquid paint effect.
  * Exit: smoothly crossfades back into the original orange X.
- * Confined strictly to the X bounding geometry.
  */
 export const InteractiveNexusX: React.FC<{
   className?: string;
   sizeClass?: string;
   size?: string;
   alt?: string;
-}> = ({ className = '', sizeClass = 'w-[0.84em] h-[0.84em]', size, alt = 'NEXUS X' }) => {
+}> = ({ className = '', sizeClass = 'w-[1.12em] h-[1.12em]', size, alt = 'NEXUS X' }) => {
   const resolvedSizeClass = size
     ? {
-        xs: 'w-3.5 h-3.5',
-        sm: 'w-5 h-5',
-        md: 'w-7 h-7',
-        lg: 'w-9 h-9',
-        xl: 'w-12 h-12',
-        '2xl': 'w-16 h-16',
-        '3xl': 'w-24 h-24',
-        hero: 'w-28 h-28 md:w-36 md:h-36',
+        xs: 'w-4 h-4',
+        sm: 'w-6 h-6',
+        md: 'w-8 h-8',
+        lg: 'w-10 h-10',
+        xl: 'w-14 h-14',
+        '2xl': 'w-20 h-20',
+        '3xl': 'w-28 h-28',
+        hero: 'w-36 h-36 md:w-48 md:h-48',
       }[size] || sizeClass
     : sizeClass;
   const [isHovered, setIsHovered] = useState(false);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0.5, y: 0.5 });
   const [canHover, setCanHover] = useState(true);
 
   // Check touch vs mouse device (mobile constraint: keep orange on touch devices)
@@ -89,21 +93,9 @@ export const InteractiveNexusX: React.FC<{
     }
   }, []);
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = () => {
     if (!canHover) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-    setMousePos({ x, y });
     setIsHovered(true);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!canHover) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const y = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
-    setMousePos({ x, y });
   };
 
   const handleMouseLeave = () => {
@@ -113,62 +105,57 @@ export const InteractiveNexusX: React.FC<{
   return (
     <div
       onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative inline-flex items-center justify-center shrink-0 select-none aspect-square cursor-pointer ${resolvedSizeClass} ${className}`}
+      className={`relative inline-flex items-center justify-center shrink-0 select-none aspect-square cursor-pointer transition-transform duration-150 ease-out active:scale-95 ${resolvedSizeClass} ${className}`}
       aria-label="NEXUS X"
     >
-      {/* Canonical Bottom Layer: 100% untouched original orange X */}
+      {/* Canonical Bottom Layer: Canonical orange NEXUS X */}
       <img
-        src="/images/logos/NEXUS-removebg-preview-1.png"
+        src={logoOrange}
         alt={alt}
-        referrerPolicy="no-referrer"
-        className="w-full h-full object-contain aspect-square pointer-events-none select-none block"
+        className={`w-full h-full object-contain aspect-square pointer-events-none select-none block transition-all duration-150 ease-out ${
+          isHovered ? 'opacity-0 scale-95' : 'opacity-100 scale-100'
+        }`}
         loading="eager"
         decoding="async"
       />
 
-      {/* Top Layer: MetallicPaint Liquid Metal X with seamless physical crossfade */}
+      {/* Top Layer: MetallicPaint Liquid Metal X with snappy enhanced crossfade on hover */}
       <div
-        className="absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity ease-out"
-        style={{
-          opacity: isHovered ? 1 : 0,
-          transitionDuration: isHovered ? '500ms' : '550ms',
-          WebkitMaskImage: 'url("/images/logos/NEXUS-removebg-preview-1.png")',
-          maskImage: 'url("/images/logos/NEXUS-removebg-preview-1.png")',
-          WebkitMaskSize: 'contain',
-          maskSize: 'contain',
-          WebkitMaskRepeat: 'no-repeat',
-          maskRepeat: 'no-repeat',
-          WebkitMaskPosition: 'center',
-          maskPosition: 'center',
-        }}
+        className={`absolute inset-0 w-full h-full pointer-events-none select-none transition-all duration-150 ease-out ${
+          isHovered
+            ? 'opacity-100 scale-100 drop-shadow-[0_0_18px_rgba(254,179,255,0.75)] drop-shadow-[0_0_34px_rgba(239,90,42,0.45)]'
+            : 'opacity-0 scale-95 drop-shadow-none'
+        }`}
         aria-hidden="true"
       >
         <MetallicPaint
-          imageSrc="/images/logos/NEXUS-removebg-preview-1.png"
+          imageSrc={logo}
+          // Pattern
           seed={42}
           scale={4}
-          patternSharpness={1.1}
-          noiseScale={0.35}
-          speed={0.25}
-          liquid={0.22}
-          mouseAnimation={true}
-          brightness={1.22}
-          contrast={0.52}
-          refraction={0.005}
-          blur={0.01}
-          chromaticSpread={0.002}
-          fresnel={0.8}
-          angle={45}
-          waveAmplitude={0.4}
-          distortion={0.12}
-          contour={0.25}
-          lightColor="#F7F5F0"
-          darkColor="#12100E"
-          tintColor="#F2613F"
+          patternSharpness={1}
+          noiseScale={0.5}
+          // Animation
+          speed={0.3}
+          liquid={0.75}
+          mouseAnimation={false}
+          // Visual
+          brightness={2}
+          contrast={0.5}
+          refraction={0.01}
+          blur={0.015}
+          chromaticSpread={2}
+          fresnel={1}
+          angle={0}
+          waveAmplitude={1}
+          distortion={1}
+          contour={0.2}
+          // Colors
+          lightColor="#ffffff"
+          darkColor="#000000"
+          tintColor="#feb3ff"
           isHovered={isHovered}
-          mousePos={mousePos}
           className="w-full h-full block"
         />
       </div>
@@ -214,16 +201,16 @@ export const NexusWordmark: React.FC<NexusWordmarkProps> = ({
       aria-label="NEXUS"
     >
       <span>NE</span>
-      <span className="inline-flex items-center justify-center mx-[0.06em] self-center">
+      <span className="inline-flex items-center justify-center mx-[0.10em] self-center">
         {enableMetallicHover ? (
           <InteractiveNexusX
-            sizeClass="w-[0.84em] h-[0.84em] -translate-y-[0.02em]"
-            className="transform transition-transform duration-200 group-hover:scale-105"
+            sizeClass="w-[1.12em] h-[1.12em] -translate-y-[0.02em]"
+            className="transform transition-transform duration-150 group-hover:scale-105"
           />
         ) : (
           <NexusIcon
             size="custom"
-            className="w-[0.84em] h-[0.84em] -translate-y-[0.02em] transform transition-transform duration-200 group-hover:scale-105"
+            className="w-[1.12em] h-[1.12em] -translate-y-[0.02em] transform transition-transform duration-150 group-hover:scale-105"
           />
         )}
       </span>

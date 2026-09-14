@@ -11,6 +11,7 @@ import { PrimaryButton } from '../components/primitives/Button.tsx';
 import { NexusIcon } from '../components/brand/NexusLogo.tsx';
 import { AppRoute, TeamMember } from '../types.ts';
 import { TEAM_MEMBERS } from '../data/nexusData.ts';
+import { resolveImageUrl } from '../data/cloudinaryMap.ts';
 import { LeadershipShowcase } from '../components/team/LeadershipShowcase.tsx';
 import { HeadsShowcase } from '../components/team/HeadsShowcase.tsx';
 import { CrewDirectory } from '../components/team/CrewDirectory.tsx';
@@ -52,7 +53,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Studio Operations & Program Coordination',
       yearOfStudy: 'Coordinator',
       bio: 'Coordinates studio operations, event logistics, and multidisciplinary project sprints across NEXUS squads.',
-      imageUrl: '/images/team/manish-prakash-coordinator.webp',
+      imageUrl: resolveImageUrl('/images/team/manish-prakash-coordinator.webp'),
       imagePosition: 'center 20%',
     },
   ];
@@ -67,7 +68,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Systems Architecture & Creative Mentorship',
       yearOfStudy: 'Mentor',
       bio: 'Mentors squad members on design engineering, technical problem-solving, and professional project execution.',
-      imageUrl: '/images/team/om-pandey.webp',
+      imageUrl: resolveImageUrl('/images/team/om-pandey.webp'),
       imagePosition: 'center 22%',
     },
   ];
@@ -82,8 +83,8 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Operations & Studio Leadership',
       yearOfStudy: 'Lead // 2026',
       bio: 'Directs strategic operations, project lifecycle governance, and squad orchestration across NEXUS.',
-      imageUrl: '/images/team/jitesh_bhaiya.webp',
-      alternateImageUrl: '/images/team/jitesh_bhaiya.jpeg',
+      imageUrl: resolveImageUrl('/images/team/jitesh_bhaiya.webp'),
+      alternateImageUrl: resolveImageUrl('/images/team/jitesh_bhaiya.jpeg'),
       imagePosition: 'center 36%',
     },
     TEAM_MEMBERS.find((m) => m.id === 'team-head-02') || {
@@ -94,7 +95,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Technical Architecture & Systems Engineering',
       yearOfStudy: 'Lead // 2026',
       bio: 'Leads technical infrastructure, software architecture, and engineering sprints across NEXUS projects.',
-      imageUrl: '/images/team/Imtiaz_Allam.jpeg',
+      imageUrl: resolveImageUrl('/images/team/Imtiaz_Allam.jpeg'),
       imagePosition: 'center 25%',
     },
     TEAM_MEMBERS.find((m) => m.id === 'team-coord-02') || {
@@ -105,8 +106,8 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       discipline: 'Studio Operations & Program Coordination',
       yearOfStudy: 'Lead // 2026',
       bio: 'Oversees operational logistics, squad workflows, resource coordination, and cross-team execution across NEXUS.',
-      imageUrl: '/images/team/siba-hoops.webp',
-      alternateImageUrl: '/images/team/siba-hoops.png',
+      imageUrl: resolveImageUrl('/images/team/siba-hoops.webp'),
+      alternateImageUrl: resolveImageUrl('/images/team/siba-hoops.png'),
       imagePosition: 'center 20%',
     },
   ];

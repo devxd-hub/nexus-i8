@@ -21,6 +21,7 @@ import {
 import { NexusIcon } from '../brand/NexusLogo.tsx';
 import { GalleryItem } from '../../types.ts';
 import { GALLERY_ITEMS } from '../../data/nexusData.ts';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 export interface DomeGalleryProps {
   items?: GalleryItem[];
@@ -346,6 +347,7 @@ export const DomeGallery: React.FC<DomeGalleryProps> = ({
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108 filter brightness-[0.92] contrast-[1.05] group-hover:brightness-105"
                         loading="lazy"
                         referrerPolicy="no-referrer"
+                        onError={handleImageFallbackError}
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#141414]">
