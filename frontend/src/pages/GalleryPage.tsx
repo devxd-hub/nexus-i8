@@ -37,7 +37,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const [categoryFilter, setCategoryFilter] = useState<string>('ALL');
 
-  const categories = ['ALL', 'PEOPLE', 'WORKSHOPS', 'PROJECTS', 'PROTOTYPING', 'COLLABORATION', 'PRESENTATIONS'];
+  const categories = React.useMemo(() => {
+    const activeCats = Array.from(new Set(GALLERY_ITEMS.map((item) => item.category.toUpperCase())));
+    return ['ALL', ...activeCats];
+  }, []);
 
   const filteredItems = GALLERY_ITEMS.filter((item) => {
     if (categoryFilter === 'ALL') return true;
@@ -160,17 +163,29 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
-            {filteredItems.map((item) => (
-              <div key={item.id} className="w-full">
-                <GalleryTile
-                  item={item}
-                  aspectRatio={item.aspectRatio || '1/1'}
-                  onSelect={(selected) => setActiveItem(selected)}
-                />
-              </div>
-            ))}
-          </div>
+          {filteredItems.length === 0 ? (
+            <div className="py-20 text-center space-y-4 border border-dashed border-[var(--border-subtle)] p-8">
+              <p className="font-bitter text-[var(--text-muted)] text-base">
+                No archive records found for &ldquo;{categoryFilter}&rdquo;.
+              </p>
+              <SecondaryButton
+                label="VIEW ALL RECORDS"
+                onClick={() => setCategoryFilter('ALL')}
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+              {filteredItems.map((item) => (
+                <div key={item.id} className="w-full">
+                  <GalleryTile
+                    item={item}
+                    aspectRatio={item.aspectRatio || '1/1'}
+                    onSelect={(selected) => setActiveItem(selected)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 

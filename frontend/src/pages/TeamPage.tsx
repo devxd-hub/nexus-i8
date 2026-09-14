@@ -12,6 +12,7 @@ import { NexusIcon } from '../components/brand/NexusLogo.tsx';
 import { AppRoute, TeamMember } from '../types.ts';
 import { TEAM_MEMBERS } from '../data/nexusData.ts';
 import { LeadershipShowcase } from '../components/team/LeadershipShowcase.tsx';
+import { HeadsShowcase } from '../components/team/HeadsShowcase.tsx';
 import { CrewDirectory } from '../components/team/CrewDirectory.tsx';
 import { MemberProfileOverlay } from '../components/team/MemberProfileOverlay.tsx';
 import { TeamBackgroundAmbience } from '../components/team/TeamBackgroundAmbience.tsx';
@@ -25,11 +26,12 @@ interface TeamPageProps {
  * 
  * Clean, authoritative, and editorial:
  * 1. Team Hero Header with ambient architectural canvas
- * 2. Lead Crew Sequence (Coordinators: Manish Prakash, Anshuman Tiwary, Orosmit Mishra)
+ * 2. Lead Crew Sequence (Coordinators: Manish Prakash)
  * 3. Advisory Crew Sequence (Mentors: Om Pandey)
- * 4. Crew Directory (Complete interactive member database with search, category filtering & focus)
- * 5. Member Profile Dossier Overlay
- * 6. Squad Collaboration CTA
+ * 4. Heads Sequence (Head of Operations: Jitesh Raj, Head of Tech: Imtiaz Allam, Vice Head of Ops: Siba Prasand Panda)
+ * 5. Crew Directory (Complete interactive member database with search, category filtering & focus)
+ * 6. Member Profile Dossier Overlay
+ * 7. Squad Collaboration CTA
  */
 export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
@@ -40,20 +42,8 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Coordinators & Ops Leadership (Authentic dataset)
+  // Coordinators (Authentic dataset)
   const coordinators: TeamMember[] = [
-    TEAM_MEMBERS.find((m) => m.id === 'team-coord-03') || {
-      id: 'team-coord-03',
-      name: 'JITESH RAJ',
-      role: 'HEAD OF OPERATIONS, NEXUS',
-      group: 'COORDINATOR & MENTOR',
-      discipline: 'Operations & Studio Leadership',
-      yearOfStudy: 'Coordinator',
-      bio: 'Directs strategic operations, project lifecycle governance, and squad orchestration across NEXUS.',
-      imageUrl: '/images/team/jitesh_bhaiya.webp',
-      alternateImageUrl: '/images/team/jitesh_bhaiya.jpeg',
-      imagePosition: 'center 36%',
-    },
     TEAM_MEMBERS.find((m) => m.id === 'team-coord-01') || {
       id: 'team-coord-01',
       name: 'MANISH PRAKASH',
@@ -63,18 +53,6 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       yearOfStudy: 'Coordinator',
       bio: 'Coordinates studio operations, event logistics, and multidisciplinary project sprints across NEXUS squads.',
       imageUrl: '/images/team/manish-prakash-coordinator.webp',
-      imagePosition: 'center 20%',
-    },
-    TEAM_MEMBERS.find((m) => m.id === 'team-coord-02') || {
-      id: 'team-coord-02',
-      name: 'SIBA PRASAND PANDA',
-      role: 'VICE HEAD OF OPS',
-      group: 'COORDINATOR & MENTOR',
-      discipline: 'Studio Operations & Program Coordination',
-      yearOfStudy: 'Coordinator',
-      bio: 'Oversees operational logistics, squad workflows, resource coordination, and cross-team execution across NEXUS.',
-      imageUrl: '/images/team/siba-hoops.webp',
-      alternateImageUrl: '/images/team/siba-hoops.png',
       imagePosition: 'center 20%',
     },
   ];
@@ -91,6 +69,45 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       bio: 'Mentors squad members on design engineering, technical problem-solving, and professional project execution.',
       imageUrl: '/images/team/om-pandey.webp',
       imagePosition: 'center 22%',
+    },
+  ];
+
+  // Studio Heads (Operations & Tech)
+  const heads: TeamMember[] = [
+    TEAM_MEMBERS.find((m) => m.id === 'team-coord-03') || {
+      id: 'team-coord-03',
+      name: 'JITESH RAJ',
+      role: 'HEAD OF OPERATIONS, NEXUS',
+      group: 'HEADS',
+      discipline: 'Operations & Studio Leadership',
+      yearOfStudy: 'Lead // 2026',
+      bio: 'Directs strategic operations, project lifecycle governance, and squad orchestration across NEXUS.',
+      imageUrl: '/images/team/jitesh_bhaiya.webp',
+      alternateImageUrl: '/images/team/jitesh_bhaiya.jpeg',
+      imagePosition: 'center 36%',
+    },
+    TEAM_MEMBERS.find((m) => m.id === 'team-head-02') || {
+      id: 'team-head-02',
+      name: 'IMTIAZ ALLAM',
+      role: 'HEAD OF TECH',
+      group: 'HEADS',
+      discipline: 'Technical Architecture & Systems Engineering',
+      yearOfStudy: 'Lead // 2026',
+      bio: 'Leads technical infrastructure, software architecture, and engineering sprints across NEXUS projects.',
+      imageUrl: '/images/team/Imtiaz_Allam.jpeg',
+      imagePosition: 'center 25%',
+    },
+    TEAM_MEMBERS.find((m) => m.id === 'team-coord-02') || {
+      id: 'team-coord-02',
+      name: 'SIBA PRASAND PANDA',
+      role: 'VICE HEAD OF OPS',
+      group: 'HEADS',
+      discipline: 'Studio Operations & Program Coordination',
+      yearOfStudy: 'Lead // 2026',
+      bio: 'Oversees operational logistics, squad workflows, resource coordination, and cross-team execution across NEXUS.',
+      imageUrl: '/images/team/siba-hoops.webp',
+      alternateImageUrl: '/images/team/siba-hoops.png',
+      imagePosition: 'center 20%',
     },
   ];
 
@@ -147,12 +164,21 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 02. LEADERSHIP & ADVISORY (COORDINATOR & MENTOR SAME ROW)                */}
+      {/* 01. LEADERSHIP & ADVISORY (COORDINATOR & MENTOR)                          */}
       {/* ========================================================================= */}
       <LeadershipShowcase
         id="leadership-showcase"
         coordinators={coordinators}
         mentors={mentors}
+        onSelectMember={setSelectedMember}
+      />
+
+      {/* ========================================================================= */}
+      {/* 02. STUDIO HEADS (OPERATIONS & TECH HEADS)                                */}
+      {/* ========================================================================= */}
+      <HeadsShowcase
+        id="heads-showcase"
+        heads={heads}
         onSelectMember={setSelectedMember}
       />
 
@@ -163,6 +189,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
         id="crew-directory"
         members={TEAM_MEMBERS}
         onSelectMember={setSelectedMember}
+        sectionNumber="03"
       />
 
       {/* ========================================================================= */}
@@ -171,7 +198,7 @@ export const TeamPage: React.FC<TeamPageProps> = ({ onRouteChange }) => {
       <section className="relative w-full py-20 sm:py-28 bg-[var(--bg-primary)] text-[var(--text-primary)] border-t border-[var(--border-subtle)]">
         <Container>
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <SectionLabel number="03" label="CONNECT" />
+            <SectionLabel number="04" label="CONNECT" />
             <h2 className="font-fraunces font-bold text-3xl sm:text-4xl lg:text-5xl text-[var(--text-primary)] uppercase tracking-tight">
               COLLABORATE WITH NEXUS
             </h2>
