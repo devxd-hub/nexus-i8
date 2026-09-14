@@ -15,6 +15,7 @@ interface CrewDirectoryProps {
   id?: string;
   members: TeamMember[];
   onSelectMember: (member: TeamMember) => void;
+  sectionNumber?: string;
 }
 
 /**
@@ -30,6 +31,7 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
   id = 'crew-directory',
   members,
   onSelectMember,
+  sectionNumber = '03',
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -37,12 +39,14 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
   const [viewMode, setViewMode] = useState<'card-hover' | 'grid'>('card-hover');
 
   // Strictly use existing categories from dataset
-  const categories = ['ALL', 'COORDINATOR & MENTOR', 'MANAGEMENT', 'IDEATION', 'CONTENT'];
+  const categories = ['ALL', 'COORDINATOR & MENTOR', 'HEADS', 'MANAGEMENT', 'IDEATION', 'CONTENT'];
 
   const isLeadership = (m: TeamMember) =>
     m.group === 'COORDINATOR & MENTOR' ||
+    m.group === 'HEADS' ||
     m.role.toUpperCase().includes('COORDINATOR') ||
-    m.role.toUpperCase().includes('MENTOR');
+    m.role.toUpperCase().includes('MENTOR') ||
+    m.role.toUpperCase().includes('HEAD');
 
   const filteredMembers = members.filter((member) => {
     const query = searchQuery.trim().toLowerCase();
@@ -60,13 +64,27 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
     }
 
     if (activeCategory === 'COORDINATOR & MENTOR') {
-      return isLeadership(member) && matchesQuery;
+      return (
+        (member.group === 'COORDINATOR & MENTOR' ||
+          member.role.toUpperCase().includes('COORDINATOR') ||
+          member.role.toUpperCase().includes('MENTOR')) &&
+        !member.role.toUpperCase().includes('HEAD') &&
+        matchesQuery
+      );
+    }
+
+    if (activeCategory === 'HEADS') {
+      return (
+        (member.group === 'HEADS' || member.role.toUpperCase().includes('HEAD')) &&
+        matchesQuery
+      );
     }
 
     return member.group === activeCategory && matchesQuery;
   });
 
-  const isLeadershipCategory = activeCategory === 'COORDINATOR & MENTOR';
+  const isLeadershipCategory =
+    activeCategory === 'COORDINATOR & MENTOR' || activeCategory === 'HEADS';
   const isSquadCategory =
     activeCategory === 'MANAGEMENT' ||
     activeCategory === 'IDEATION' ||
@@ -86,7 +104,7 @@ export const CrewDirectory: React.FC<CrewDirectoryProps> = ({
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 sm:pb-10 border-b border-[var(--border-subtle)]">
           <div className="space-y-3 max-w-2xl">
             <div className="flex items-center gap-3">
-              <SectionLabel number="02" label="DATABASE" />
+              <SectionLabel number={sectionNumber} label="DATABASE" />
               <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-[var(--bg-surface)] text-[var(--text-primary)] text-[10px] font-dosis font-bold tracking-[0.2em] uppercase border border-[rgba(242,97,63,0.3)]">
                 <NexusIcon size="xs" />
                 <span>ACTIVE CREW</span>

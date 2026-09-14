@@ -44,7 +44,8 @@ export interface TeamMember {
     | 'DESIGN'
     | 'MEDIA'
     | 'PROJECTS'
-    | 'CORE TEAM';
+    | 'CORE TEAM'
+    | 'HEADS';
   discipline: string;
   yearOfStudy: string;
   bio?: string;

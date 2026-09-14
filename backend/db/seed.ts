@@ -226,6 +226,15 @@ export function seedDatabase(customDb?: ReturnType<typeof getDatabase>): {
     }
   }
 
+  // Prune any legacy seed archive items that are no longer in SEED_ARCHIVE
+  const seedArchiveIds = new Set(SEED_ARCHIVE.map((i) => i.id));
+  const { items: existingArchive } = archiveRepository.findPaginated({ limit: 1000 });
+  for (const arch of existingArchive) {
+    if (arch.id.startsWith('gal-') && !seedArchiveIds.has(arch.id)) {
+      archiveRepository.deleteById(arch.id);
+    }
+  }
+
   // 7. Seed Resources
   let resourceCount = 0;
   for (const r of SEED_RESOURCES) {
