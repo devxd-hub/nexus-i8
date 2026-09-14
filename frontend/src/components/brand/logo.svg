@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 514" width="540" height="514" fill="none">
+  <!-- NEXUS X with precision optical padding (14px uniform margins) and solid black fill for MetallicPaint depth synthesis -->
+  <g transform="translate(14.45, 13.5)">
+    <path
+      d="M 0 0 H 153.8 L 381.8 448.5 H 447.5 L 304.4 167 L 454.9 0 H 510.6 L 352.6 174.8 L 511.1 487 H 357.2 L 129.2 38.5 H 63.5 L 206.6 320 L 56.1 487 H 0.4 L 158.4 312.1 Z"
+      fill="#000000"
+    />
+  </g>
+</svg>
