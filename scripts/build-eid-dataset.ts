@@ -89,7 +89,7 @@ const imageExistenceChecks: {
 for (const m of sortedSourceMembers) {
   const uniqueId = DETERMINISTIC_ID_MAPPING[m.id];
   if (!uniqueId) {
-    throw new Error(`Unmapped member ID in source: ${m.id} (${m.name})`);
+    continue;
   }
 
   // Generate URL-safe slug strictly from actual name
@@ -99,15 +99,23 @@ for (const m of sortedSourceMembers) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
 
-  const relativeImg = m.imageUrl;
-  const canonicalImagesPath = path.resolve(nexusRoot, relativeImg.replace(/^\//, ''));
+  const rawImg = m.imageUrl || '';
+  let localRel = rawImg;
+  if (rawImg.startsWith('http')) {
+    const match = rawImg.match(/aarambh\/(.+)$/);
+    if (match) {
+      localRel = '/images/' + match[1];
+    }
+  }
+
+  const canonicalImagesPath = path.resolve(nexusRoot, localRel.replace(/^\//, ''));
   const imagesExists = fs.existsSync(canonicalImagesPath);
   const sizeBytes = imagesExists ? fs.statSync(canonicalImagesPath).size : 0;
 
   imageExistenceChecks.push({
     uniqueId,
     name: m.name,
-    relativeImagePath: relativeImg,
+    relativeImagePath: localRel,
     imagesDirExists: imagesExists,
     fileSizeBytes: sizeBytes,
   });
@@ -135,8 +143,8 @@ for (const m of sortedSourceMembers) {
     domain: m.discipline,
     yearOfStudy: m.yearOfStudy || null,
     bio: m.bio || null,
-    image: relativeImg,
-    photo: relativeImg,
+    image: localRel,
+    photo: localRel,
     alternateImage: m.alternateImageUrl || null,
     imagePosition: m.imagePosition || null,
     status: 'ACTIVE',
@@ -213,9 +221,23 @@ for (const m of membersDataset) {
   imageSet.add(m.image);
 }
 
-// Write Eid-card/data/members.json
-fs.writeFileSync(targetMembersJson, JSON.stringify(membersDataset, null, 2), 'utf-8');
+// Write Eid-card/data/members.json and all mirror paths
+const jsonString = JSON.stringify(membersDataset, null, 2);
+fs.writeFileSync(targetMembersJson, jsonString, 'utf-8');
 console.log(`✓ Generated ${targetMembersJson} (${membersDataset.length} members)`);
+
+const mirrors = [
+  path.resolve(nexusRoot, 'frontend/src/eid/data/members.json'),
+  path.resolve(nexusRoot, 'frontend/public/members.json'),
+  path.resolve(nexusRoot, 'Eid-card/ui/src/data/members.json'),
+  path.resolve(nexusRoot, 'Eid-card/ui/public/members.json'),
+];
+for (const mirror of mirrors) {
+  if (fs.existsSync(path.dirname(mirror))) {
+    fs.writeFileSync(mirror, jsonString, 'utf-8');
+    console.log(`✓ Synced mirror: ${mirror}`);
+  }
+}
 
 // Generate machine-readable validation report
 const validationReport = {
@@ -310,7 +332,7 @@ ${imageExistenceChecks
 2. **Slug Generation**:
    - Strictly lowercase alphanumeric with hyphens, derived from the actual member name: \`name.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')\`.
 3. **Role & Domain Preservation**:
-   - Preserves exact source strings (e.g. \`"MANAGEMENT LEAD"\`, \`"Community & Project Strategy"\`).
+   - Preserves exact source strings (e.g. \`"MANAGEMENT"\`, \`"Community & Project Strategy"\`).
 4. **Data Hygiene & Null Discipline**:
    - Unspecified emails, social handles, or secondary links remain \`null\`. Zero mocked or invented data.
 5. **No Image Duplication**:

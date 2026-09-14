@@ -5,6 +5,9 @@
 
 import React, { useState, useEffect } from 'react';
 import MetallicPaint from './MetallicPaint.tsx';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
+
+const NEXUS_ICON_SRC = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
 
 export interface NexusIconProps {
   className?: string;
@@ -39,12 +42,13 @@ export const NexusIcon: React.FC<NexusIconProps> = ({
   return (
     <img
       id={id}
-      src="/images/logos/NEXUS-removebg-preview-1.png"
+      src={NEXUS_ICON_SRC}
       alt={alt}
       referrerPolicy="no-referrer"
       className={`inline-block shrink-0 select-none object-contain aspect-square pointer-events-none ${sizeClasses} ${className}`}
       loading="eager"
       decoding="async"
+      onError={handleImageFallbackError}
     />
   );
 };
@@ -120,12 +124,13 @@ export const InteractiveNexusX: React.FC<{
     >
       {/* Canonical Bottom Layer: 100% untouched original orange X */}
       <img
-        src="/images/logos/NEXUS-removebg-preview-1.png"
+        src={NEXUS_ICON_SRC}
         alt={alt}
         referrerPolicy="no-referrer"
         className="w-full h-full object-contain aspect-square pointer-events-none select-none block"
         loading="eager"
         decoding="async"
+        onError={handleImageFallbackError}
       />
 
       {/* Top Layer: MetallicPaint Liquid Metal X with seamless physical crossfade */}
@@ -134,8 +139,8 @@ export const InteractiveNexusX: React.FC<{
         style={{
           opacity: isHovered ? 1 : 0,
           transitionDuration: isHovered ? '500ms' : '550ms',
-          WebkitMaskImage: 'url("/images/logos/NEXUS-removebg-preview-1.png")',
-          maskImage: 'url("/images/logos/NEXUS-removebg-preview-1.png")',
+          WebkitMaskImage: `url("${NEXUS_ICON_SRC}")`,
+          maskImage: `url("${NEXUS_ICON_SRC}")`,
           WebkitMaskSize: 'contain',
           maskSize: 'contain',
           WebkitMaskRepeat: 'no-repeat',
@@ -146,7 +151,7 @@ export const InteractiveNexusX: React.FC<{
         aria-hidden="true"
       >
         <MetallicPaint
-          imageSrc="/images/logos/NEXUS-removebg-preview-1.png"
+          imageSrc={NEXUS_ICON_SRC}
           seed={42}
           scale={4}
           patternSharpness={1.1}

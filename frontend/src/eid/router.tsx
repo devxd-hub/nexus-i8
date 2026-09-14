@@ -236,7 +236,17 @@ export const RouterProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     // 3. Extract identifier from current URL
     const search = typeof window !== 'undefined' ? window.location.search : '';
     const hash = typeof window !== 'undefined' ? window.location.hash : '';
-    const { identifier, slugPair } = parseIdentifierFromUrl(pathname, search, hash);
+    let { identifier, slugPair } = parseIdentifierFromUrl(pathname, search, hash);
+
+    // If identifier is an NX ID but slugPair was omitted (e.g. /NX-001 or /memberID/NX-001), auto-resolve known slug
+    if (identifier && !slugPair && isStrictUniqueIdFormat(identifier)) {
+      const match =
+        membersList.find((m) => m.id.toLowerCase() === identifier.toLowerCase()) ||
+        teamMembers.find((m) => m.id.toLowerCase() === identifier.toLowerCase());
+      if (match) {
+        slugPair = match.slug;
+      }
+    }
 
     // Enforce that BOTH slug and unique ID must be provided and properly formatted
     if (!slugPair || !identifier || !isStrictUniqueIdFormat(identifier)) {

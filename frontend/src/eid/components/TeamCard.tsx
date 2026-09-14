@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ShieldCheck, RotateCw, Share2 } from 'lucide-react';
 import { TeamMember } from '../types';
 import { QrCode } from './QrCode';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface TeamCardProps {
   member: TeamMember;
@@ -10,9 +11,9 @@ interface TeamCardProps {
   onShare?: () => void;
 }
 
-// EID card background images resolve from the canonical nexus-i8-/images/eid/ root.
-const CARD_FRONT_THEME = '/images/eid/nexus-card-theme.png';
-const CARD_BACK_THEME = '/images/eid/nexus-card-back-theme.png';
+// EID card background images resolve through Cloudinary CDN with local fallback.
+const CARD_FRONT_THEME = resolveImageUrl('/images/eid/nexus-card-theme.png');
+const CARD_BACK_THEME = resolveImageUrl('/images/eid/nexus-card-back-theme.png');
 
 export const TeamCard: React.FC<TeamCardProps> = ({
   member,
@@ -52,7 +53,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
     <div
       id={`card-assembly-${member.id}`}
       role="region"
-      aria-label={`ID Badge for ${member.name}, ${member.designation}. ${isFlipped ? 'Back side visible' : 'Front side visible'}. Press space or enter to flip.`}
+      aria-label={`ID Badge for ${member.name}. ${isFlipped ? 'Back side visible' : 'Front side visible'}. Press space or enter to flip.`}
       tabIndex={0}
       onKeyDown={handleKeyDown}
       onClick={handleCardClick}
@@ -78,6 +79,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-0"
             loading="eager"
             draggable={false}
+            onError={handleImageFallbackError}
           />
 
           {/* Satin Polycarbonate Specular Surface Sheen */}
@@ -109,53 +111,45 @@ export const TeamCard: React.FC<TeamCardProps> = ({
           </div>
 
           {/* ================= MIDDLE CONTENT SECTION ================= */}
-          <div className="absolute top-[82px] left-0 right-0 z-20 flex flex-col items-center px-4">
-            {/* Member Photo Portrait */}
-            <div className="relative w-[122px] h-[122px] rounded-2xl overflow-hidden border-2 border-[#1E1C1A] bg-[#141412] shadow-md shrink-0">
+          <div className="absolute top-[75px] left-0 right-0 z-20 flex flex-col items-center px-4">
+            {/* Member Photo Portrait — Enlarged, Integrated Industrial Badging Frame */}
+            <div className="relative w-[clamp(184px,60%,204px)] h-[clamp(184px,60%,204px)] aspect-square rounded-[22px] overflow-hidden border-2 border-[#1C1A17] bg-[#141412] shadow-[0_10px_25px_-5px_rgba(0,0,0,0.38),0_4px_10px_rgba(0,0,0,0.18)] shrink-0 ring-1 ring-white/10">
               <img
                 src={member.photo || member.image}
-                alt={`${member.name} - ${member.designation}`}
-                className="w-full h-full object-cover grayscale contrast-115 brightness-95"
+                alt={member.name}
+                className="w-full h-full object-cover grayscale contrast-115 brightness-95 transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                style={{ objectPosition: member.imagePosition || 'center 20%' }}
                 loading="lazy"
                 referrerPolicy="no-referrer"
+                onError={handleImageFallbackError}
               />
 
               {/* Industrial crosshairs overlay */}
-              <div className="absolute inset-0 pointer-events-none border border-white/[0.06]">
-                <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 border-t border-l border-white/50" />
-                <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 border-t border-r border-white/50" />
-                <div className="absolute bottom-1.5 left-1.5 w-1.5 h-1.5 border-b border-l border-white/50" />
-                <div className="absolute bottom-1.5 right-1.5 w-1.5 h-1.5 border-b border-r border-white/50" />
-              </div>
-
-              {/* Security clearance badge tag */}
-              <div className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-[#0A0A0A]/85 backdrop-blur-xs border border-white/15 text-[7px] font-mono-tech text-[#EAEAEA] flex items-center gap-1">
-                <span className="w-1 h-1 rounded-full bg-[#FF5A1F]" />
-                <span>{member.clearanceLevel}</span>
+              <div className="absolute inset-0 pointer-events-none border border-white/[0.08]">
+                <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-white/60" />
+                <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-white/60" />
+                <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-white/60" />
+                <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-white/60" />
               </div>
 
               {/* Verification shield icon */}
-              <div className="absolute top-1 right-1 p-1 rounded bg-[#0A0A0A]/80 backdrop-blur-xs border border-white/15">
-                <ShieldCheck className="w-2.5 h-2.5 text-[#FF5A1F]" />
+              <div className="absolute top-2 right-2 p-1.5 rounded-lg bg-[#0A0A0A]/85 backdrop-blur-xs border border-white/15 shadow-xs">
+                <ShieldCheck className="w-3 h-3 text-[#FF5A1F]" />
               </div>
             </div>
 
-            {/* Member Name */}
-            <div className="mt-2.5 text-center w-full px-2">
-              <h3 className="font-display font-extrabold text-[20px] text-[#141412] tracking-tight leading-snug group-hover:text-black transition-colors">
+            {/* Member Name & Core Pillar */}
+            <div className="mt-3.5 text-center w-full px-3">
+              <h3 className="font-display font-extrabold text-[20.5px] text-[#141412] tracking-tight leading-tight group-hover:text-black transition-colors">
                 {member.name}
               </h3>
 
-              {/* Designation / Role */}
-              <p className="text-[9.5px] font-mono-tech font-bold text-[#C84119] tracking-wider uppercase mt-0.5 flex items-center justify-center gap-1">
-                <span className="text-[#141412]/30">//</span>
-                <span className="truncate max-w-[250px]">{member.designation}</span>
-              </p>
-
               {/* Discipline & Core Pillar */}
-              <div className="flex items-center justify-center gap-1.5 text-[8.5px] font-mono-tech text-[#4A4A43] mt-1">
-                <span className="font-medium truncate max-w-[240px]">{member.corePillar}</span>
-              </div>
+              {member.corePillar && (
+                <div className="flex items-center justify-center gap-1.5 text-[8.5px] sm:text-[9px] font-mono-tech font-medium text-[#4A4A43] tracking-wider uppercase mt-1.5">
+                  <span className="truncate max-w-[260px]">{member.corePillar}</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -231,6 +225,7 @@ export const TeamCard: React.FC<TeamCardProps> = ({
             className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none z-0"
             loading="lazy"
             draggable={false}
+            onError={handleImageFallbackError}
           />
 
           {/* Satin Polycarbonate Specular Surface Sheen */}

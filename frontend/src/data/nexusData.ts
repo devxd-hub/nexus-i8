@@ -4,6 +4,7 @@
  */
 
 import { Project, TeamMember, GalleryItem } from '../types.ts';
+import { resolveImageUrl } from './cloudinaryMap.ts';
 
 export const PROJECTS: Project[] = [
   {
@@ -109,12 +110,12 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export const TEAM_MEMBERS: TeamMember[] = [
+const RAW_TEAM_MEMBERS: TeamMember[] = [
   // MANAGEMENT
   {
     id: 'team-01',
     name: 'ANSHUMAN TIWARY',
-    role: 'MANAGEMENT LEAD',
+    role: 'MANAGEMENT',
     group: 'MANAGEMENT',
     discipline: 'Systems & Engineering Operations',
     yearOfStudy: 'Senior // 2026',
@@ -125,7 +126,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-02',
     name: 'OROSMIT MISHRA',
-    role: 'MANAGEMENT LEAD',
+    role: 'MANAGEMENT',
     group: 'MANAGEMENT',
     discipline: 'Community & Project Strategy',
     yearOfStudy: 'Junior // 2027',
@@ -138,7 +139,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-03',
     name: 'ANSHITA DASH',
-    role: 'IDEATION & INTERACTION LEAD',
+    role: 'IDEATION & INTERACTION',
     group: 'IDEATION',
     discipline: 'Computer Science & Human-Centered Design',
     yearOfStudy: 'Junior // 2027',
@@ -206,7 +207,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-content-01',
     name: 'TUSHTI SINHA',
-    role: 'CONTENT & EDITORIAL LEAD',
+    role: 'CONTENT & EDITORIAL',
     group: 'CONTENT',
     discipline: 'Editorial Strategy & Media Communication',
     yearOfStudy: 'Junior // 2027',
@@ -217,7 +218,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'team-content-02',
     name: 'SMITA JENA',
-    role: 'CONTENT & CURATION LEAD',
+    role: 'CONTENT & CURATION',
     group: 'CONTENT',
     discipline: 'Visual Media & Creative Writing',
     yearOfStudy: 'Junior // 2027',
@@ -420,7 +421,13 @@ export const TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-export const GALLERY_ITEMS: GalleryItem[] = [
+export const TEAM_MEMBERS: TeamMember[] = RAW_TEAM_MEMBERS.map((member) => ({
+  ...member,
+  imageUrl: member.imageUrl ? resolveImageUrl(member.imageUrl) : member.imageUrl,
+  alternateImageUrl: member.alternateImageUrl ? resolveImageUrl(member.alternateImageUrl) : member.alternateImageUrl,
+}));
+
+const RAW_GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 'gal-01',
     title: 'NEXUS Cohort Chronicle — Chapter 01',
@@ -530,4 +537,10 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     aspectRatio: '3/2',
   },
 ];
+
+export const GALLERY_ITEMS: GalleryItem[] = RAW_GALLERY_ITEMS.map((item) => ({
+  ...item,
+  imageUrl: item.imageUrl ? resolveImageUrl(item.imageUrl) : item.imageUrl,
+}));
+
 

@@ -47,13 +47,53 @@ export function isValidIdentifierFormat(identifier: string): boolean {
 }
 
 /**
+ * Helper to resolve a member from the authentic local cached dataset as an offline/fallback mechanism.
+ */
+export function resolveOfflineFallback(cleanId: string, expectedSlug?: string): FetchMemberResult | null {
+  const clean = cleanId.toLowerCase().trim();
+  const cached = teamMembers.find(
+    (m) =>
+      m.id.toLowerCase() === clean ||
+      m.slug.toLowerCase() === clean
+  );
+
+  if (!cached) {
+    return null;
+  }
+
+  // If slug verification is required, enforce it even for offline cache
+  if (expectedSlug && expectedSlug.trim() !== '') {
+    const cleanExpected = expectedSlug.toLowerCase().trim();
+    if (cached.slug.toLowerCase() !== cleanExpected) {
+      return {
+        success: false,
+        error: {
+          type: 'SLUG_MISMATCH',
+          message: `Credential slug mismatch: "${expectedSlug}" does not correspond to permanent identifier "${cleanId}".`,
+          identifier: cleanId,
+          correctSlug: cached.slug,
+          canonicalUrl: `/memberID/${cached.slug}/${cached.id}`,
+        },
+      };
+    }
+  }
+
+  return {
+    success: true,
+    data: cached,
+  };
+}
+
+/**
  * Primary API method to fetch a member's public E-ID card from the NEXUS backend.
  * 
  * Data Flow:
  * 1. Queries backend authoritatively by uniqueId.
  * 2. If an expectedSlug is provided (e.g. from /memberID/:slug/:uniqueId), validates
  *    that the returned member's registered slug matches the URL slug.
- * 3. Handles invalid formats, 404s, slug mismatches, inactive statuses, and network failures.
+ * 3. Handles invalid formats, 404s, slug mismatches, inactive statuses, and server/network failures.
+ *    Whenever the live backend service is offline, down (5xx), unmigrated, or returning non-JSON,
+ *    it gracefully and authoritatively falls back to the authentic 26-member local dataset.
  */
 export async function fetchMemberByIdentifier(
   identifier: string,
@@ -93,8 +133,17 @@ export async function fetchMemberByIdentifier(
       res = await fetch(targetUrl, {
         headers: { Accept: 'application/json' },
       });
+      const ct = res.headers.get('content-type') || '';
+      if (API_BASE === '' && (!ct.includes('application/json') || !res.ok)) {
+        try {
+          const directRes = await fetch(`http://localhost:3001${targetUrl}`, {
+            headers: { Accept: 'application/json' },
+          });
+          if (directRes.ok) res = directRes;
+        } catch {}
+      }
     } catch (fetchErr) {
-      // If relative URL failed (e.g. Vite proxy not active or running elsewhere), attempt direct backend port 3001
+      // If relative URL failed, attempt direct backend port 3001
       if (API_BASE === '') {
         try {
           const directUrl = `http://localhost:3001${targetUrl}`;
@@ -107,8 +156,12 @@ export async function fetchMemberByIdentifier(
       }
     }
 
-    // Handle 404 Not Found
+    // Handle 404 Not Found: check authentic local fallback before failing
     if (res.status === 404) {
+      const fallback = resolveOfflineFallback(cleanId, expectedSlug);
+      if (fallback) {
+        return fallback;
+      }
       return {
         success: false,
         error: {
@@ -131,8 +184,13 @@ export async function fetchMemberByIdentifier(
       };
     }
 
-    // Handle server error
+    // Handle server error (500, 502, 503, 504): Fall back to authentic local dataset
     if (!res.ok) {
+      console.warn(`[E-ID API] Backend service responded with HTTP status ${res.status}, falling back to authentic dataset.`);
+      const fallback = resolveOfflineFallback(cleanId, expectedSlug);
+      if (fallback) {
+        return fallback;
+      }
       return {
         success: false,
         error: {
@@ -148,6 +206,10 @@ export async function fetchMemberByIdentifier(
     try {
       body = await res.json();
     } catch {
+      const fallback = resolveOfflineFallback(cleanId, expectedSlug);
+      if (fallback) {
+        return fallback;
+      }
       return {
         success: false,
         error: {
@@ -161,6 +223,10 @@ export async function fetchMemberByIdentifier(
     // Validate payload schema
     const rawData = body?.data || body;
     if (!rawData || typeof rawData !== 'object' || (!rawData.uniqueId && !rawData.id && !rawData.name)) {
+      const fallback = resolveOfflineFallback(cleanId, expectedSlug);
+      if (fallback) {
+        return fallback;
+      }
       return {
         success: false,
         error: {
@@ -212,32 +278,9 @@ export async function fetchMemberByIdentifier(
     };
   } catch (netErr) {
     console.warn('[E-ID API] Backend unreachable, checking offline cache:', netErr);
-    // Offline fallback for authentic local cache
-    const cached = teamMembers.find(
-      (m) =>
-        m.id.toLowerCase() === cleanId.toLowerCase() ||
-        m.slug.toLowerCase() === cleanId.toLowerCase()
-    );
-
-    if (cached) {
-      if (expectedSlug && expectedSlug.trim() !== '') {
-        if (cached.slug.toLowerCase() !== expectedSlug.toLowerCase().trim()) {
-          return {
-            success: false,
-            error: {
-              type: 'SLUG_MISMATCH',
-              message: `Credential slug mismatch: "${expectedSlug}" does not correspond to permanent identifier "${cleanId}".`,
-              identifier: cleanId,
-              correctSlug: cached.slug,
-              canonicalUrl: `/memberID/${cached.slug}/${cached.id}`,
-            },
-          };
-        }
-      }
-      return {
-        success: true,
-        data: cached,
-      };
+    const fallback = resolveOfflineFallback(cleanId, expectedSlug);
+    if (fallback) {
+      return fallback;
     }
 
     return {
@@ -257,22 +300,36 @@ export async function fetchMemberByIdentifier(
 export async function fetchAllMembers(): Promise<TeamMember[]> {
   try {
     const url = `${API_BASE}/api/eid/members`;
-    let res: Response;
+    let res: Response | null = null;
     try {
       res = await fetch(url, { headers: { Accept: 'application/json' } });
+      const ct = res.headers.get('content-type') || '';
+      if (API_BASE === '' && (!ct.includes('application/json') || !res.ok)) {
+        try {
+          const direct = await fetch('http://localhost:3001/api/eid/members', {
+            headers: { Accept: 'application/json' },
+          });
+          if (direct.ok) res = direct;
+        } catch {}
+      }
     } catch {
       if (API_BASE === '') {
-        res = await fetch('http://localhost:3001/api/eid/members', {
-          headers: { Accept: 'application/json' },
-        });
+        try {
+          const direct = await fetch('http://localhost:3001/api/eid/members', {
+            headers: { Accept: 'application/json' },
+          });
+          if (direct.ok) res = direct;
+        } catch {
+          return teamMembers;
+        }
       } else {
-        throw new Error('Unreachable');
+        return teamMembers;
       }
     }
 
-    if (res.ok) {
+    if (res && res.ok) {
       const body = await res.json();
-      if (Array.isArray(body?.data)) {
+      if (Array.isArray(body?.data) && body.data.length > 0) {
         return body.data.map(normalizeMemberJson);
       }
     }

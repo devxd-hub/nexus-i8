@@ -6,39 +6,9 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { useTheme } from '../../context/ThemeContext.tsx';
 import { useCinematicTransition } from '../../context/CinematicTransitionContext.tsx';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
-/**
- * CinematicThemeTransition — NEXUS Signature Theme Curtain
- *
- * Visual sequence (total ~800ms):
- *   CURRENT THEME
- *   → [Beat 1: panels close, 260ms]
- *   → [Beat 2: NEXUS X appears, theme switches, ~230ms]
- *   → [Beat 3: panels open, 260ms]
- *   → DESTINATION THEME
- *
- * Panel geometry:
- *   LEFT  panel: exactly 50% viewport width, flush-left
- *                translateX(-100%) → translateX(0)
- *   RIGHT panel: exactly 50% viewport width, flush-right
- *                translateX(+100%) → translateX(0)
- *   Meet at mathematical center. No gap. No overlap.
- *   No border-radius. No blur. No shadow. No feathering.
- *
- * Bug fixes vs. previous versions:
- *   1. Abort-race: superseded invocations detect they were replaced and skip
- *      onTransitionComplete() so they do not reset state mid-new-transition.
- *   2. Color-flash: html[data-nexus-covering] CSS rule suppresses all page
- *      CSS color transitions while the panels are covering the viewport.
- *   3. display: block instead of flex (avoids spurious relayout on mobile).
- *   4. X image is preloaded on first mount so it is cache-warm by click time.
- *   5. Cleanup is always reached (no try/finally needed — catch + sequential
- *      code ensures cleanup even after abort).
- *
- * GPU contract: only `transform` and `opacity` are animated. No layout reflow.
- */
-
-const X_LOGO_SRC = '/NEXUS-removebg-preview-1.png';
+const X_LOGO_SRC = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
 
 // Preload the X image in a module-level singleton so it is fetched once
 // regardless of how many times the component remounts.
@@ -359,6 +329,7 @@ export const CinematicThemeTransition: React.FC = () => {
             pointerEvents: 'none',
           }}
           draggable={false}
+          onError={handleImageFallbackError}
         />
       </div>
     </div>

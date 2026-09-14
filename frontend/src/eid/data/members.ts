@@ -1,5 +1,6 @@
 import { TeamMember } from '../types';
 import membersData from './members.json';
+import { resolveImageUrl } from '../../data/cloudinaryMap.ts';
 
 /**
  * Normalizes any raw JSON object or string into a fully compliant TeamMember object.
@@ -50,12 +51,13 @@ export function normalizeMemberJson(input: unknown): TeamMember {
       ? 'RESEARCH'
       : 'ENGINEERING';
 
-  const photo = String(
+  const rawPhoto = String(
     raw.photo ||
       raw.image ||
       raw.avatar ||
       '/images/team/orosmit-mishra.webp'
   );
+  const photo = resolveImageUrl(rawPhoto);
 
   const specialWord = String(
     raw.specialWord || raw.keyword || raw.word || 'VISIONARY'

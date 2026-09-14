@@ -37,7 +37,7 @@ Rather than spinning up an isolated second database, the existing SQLite product
 | `name` | `TEXT` | `NOT NULL` | Full legal / club member name (e.g. `Orosmit Mishra`) |
 | `display_name` | `TEXT` | `NULL` | Uppercase display name for card faces (e.g. `OROSMIT MISHRA`) |
 | `email` | `TEXT` | `UNIQUE` (`idx_members_email`) | Campus email address (kept private, not leaked) |
-| `role` | `TEXT` | `NOT NULL` | Official NEXUS role (e.g. `MANAGEMENT LEAD`) |
+| `role` | `TEXT` | `NOT NULL` | Official NEXUS role (e.g. `MANAGEMENT`) |
 | `department` | `TEXT` | `DEFAULT 'ENGINEERING'` | High-level pillar: `Coordination`, `Design`, `Engineering`, `Editorial`, `Research` |
 | `domain` | `TEXT` | `NULL` | Disciplines / pillars (e.g. `Community & Project Strategy, AI Systems`) |
 | `bio` | `TEXT` | `NULL` | Member narrative or biography |
@@ -90,14 +90,14 @@ CREATE INDEX IF NOT EXISTS idx_members_email ON members(email);
 | `NX-002` | `manish-prakash` | Manish Prakash | Coordinator | Coordination | CATALYST | `LVL-04 // SPEC` |
 | `NX-003` | `siba-prasand-panda` | Siba Prasand Panda | Vice Head of Ops | Coordination | DISCIPLINE | `LVL-04 // SPEC` |
 | `NX-004` | `om-pandey` | Om Pandey | Mentor | Coordination | ARCHITECT | `LVL-05 // MENTOR` |
-| `NX-005` | `anshita-dash` | Anshita Dash | Ideation & Interaction Lead | Design | VISIONARY | `LVL-04 // SPEC` |
+| `NX-005` | `anshita-dash` | Anshita Dash | Ideation & Interaction | Design | VISIONARY | `LVL-04 // SPEC` |
 | `NX-006` | `ankita-dutta` | Ankita Dutta | Ideation & Design Strategist | Design | CREATOR | `LVL-04 // SPEC` |
 | `NX-007` | `aadyasha-swain` | Aadyasha Swain | Ideation & Experience Designer | Design | INNOVATOR | `LVL-03 // SPEC` |
 | `NX-008` | `ananya-raj` | Ananya Raj | Ideation & Hardware Prototyper | Engineering | PIONEER | `LVL-03 // SPEC` |
 | `NX-009` | `umesh-kumar-sahu` | Umesh Kumar Sahu | Ideation & Systems Architect | Engineering | BUILDER | `LVL-04 // SPEC` |
 | `NX-010` | `suryaprasad-brahma` | Suryaprasad Brahma | Ideation & Creative Technologist | Engineering | ALCHEMIST | `LVL-03 // SPEC` |
-| `NX-011` | `tushti-sinha` | Tushti Sinha | Content & Editorial Lead | Editorial | STRATEGIST | `LVL-04 // SPEC` |
-| `NX-012` | `smita-jena` | Smita Jena | Content & Curation Lead | Editorial | CURATOR | `LVL-04 // SPEC` |
+| `NX-011` | `tushti-sinha` | Tushti Sinha | Content & Editorial | Editorial | STRATEGIST | `LVL-04 // SPEC` |
+| `NX-012` | `smita-jena` | Smita Jena | Content & Curation | Editorial | CURATOR | `LVL-04 // SPEC` |
 | `NX-013` | `siddharth-basu` | Siddharth Basu | Technical Writing & Case Studies | Editorial | SCRIBE | `LVL-03 // SPEC` |
 | `NX-014` | `saswat-palo` | Saswat Palo | Media Production & Cinematics | Editorial | CHRONICLER | `LVL-03 // SPEC` |
 | `NX-015` | `pratyush-sahoo` | Pratyush Sahoo | Graphic Design & Publication | Design | DESIGNER | `LVL-03 // SPEC` |
@@ -110,8 +110,8 @@ CREATE INDEX IF NOT EXISTS idx_members_email ON members(email);
 | `NX-022` | `simrita-barick` | Simrita Barick | Editorial & Written Media | Editorial | JOURNALIST | `LVL-03 // SPEC` |
 | `NX-023` | `sindhusuta-rath` | Sindhusuta Rath | Creative Documentation & Media | Editorial | REFLECTOR | `LVL-03 // SPEC` |
 | `NX-024` | `swarnim` | Swarnim | Multimedia Production & Archive | Editorial | PRODUCER | `LVL-03 // SPEC` |
-| `NX-025` | `anshuman-tiwary` | Anshuman Tiwary | Management Lead | Engineering | DIRECTOR | `LVL-04 // LEAD` |
-| `NX-026` | `orosmit-mishra` | Orosmit Mishra | Management Lead | Engineering | ORCHESTRATOR | `LVL-04 // LEAD` |
+| `NX-025` | `anshuman-tiwary` | Anshuman Tiwary | Management | Engineering | DIRECTOR | `LVL-04 // SPEC` |
+| `NX-026` | `orosmit-mishra` | Orosmit Mishra | Management | Engineering | ORCHESTRATOR | `LVL-04 // SPEC` |
 
 ---
 
@@ -127,7 +127,7 @@ A dedicated JSON file has been created at `Eid-card/data/members.json` with auth
     "name": "Orosmit Mishra",
     "displayName": "OROSMIT MISHRA",
     "email": "orosmit-mishra@nexus.campus",
-    "role": "Management Lead",
+    "role": "Management",
     "department": "Engineering",
     "domain": [
       "Community & Project Strategy",
@@ -136,7 +136,7 @@ A dedicated JSON file has been created at `Eid-card/data/members.json` with auth
     "image": "/images/team/orosmit-mishra.webp",
     "bio": "Leads organizational growth, team matching sessions, partnerships, and cross-disciplinary sprint execution.",
     "status": "ACTIVE",
-    "clearanceLevel": "LVL-04 // LEAD",
+    "clearanceLevel": "LVL-04 // SPEC",
     "specialWord": "ORCHESTRATOR",
     "quote": "When multidisciplinary minds align, execution becomes effortless.",
     "nodeLocation": "SOA LAB 204 // BHUBANESWAR",
@@ -226,13 +226,13 @@ Returns all verified E-ID cards with complete badge configurations:
       "slug": "orosmit-mishra",
       "name": "Orosmit Mishra",
       "displayName": "OROSMIT MISHRA",
-      "role": "Management Lead",
+      "role": "Management",
       "department": "Engineering",
       "domain": ["Community & Project Strategy", "AI Systems"],
       "image": "/images/team/orosmit-mishra.webp",
       "bio": "Leads organizational growth, team matching sessions...",
       "status": "ACTIVE",
-      "clearanceLevel": "LVL-04 // LEAD",
+      "clearanceLevel": "LVL-04 // SPEC",
       "specialWord": "ORCHESTRATOR",
       "quote": "When multidisciplinary minds align, execution becomes effortless.",
       "nodeLocation": "SOA LAB 204 // BHUBANESWAR",

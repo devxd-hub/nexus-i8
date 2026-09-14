@@ -236,7 +236,7 @@ export const MemberProfilePage: React.FC<MemberProfilePageProps> = ({
           await navigator.share({
             files: [imageFile],
             title: `NEXUS ID // ${member.name} (${member.id})`,
-            text: `${member.name} // ${member.designation} — Digital Identity Badge on NEXUS`,
+            text: `${member.name} // ${member.corePillar || 'Digital Identity Badge on NEXUS'}`,
             url: shareUrl,
           });
           setToastMessage('Badge shared successfully');
@@ -254,7 +254,7 @@ export const MemberProfilePage: React.FC<MemberProfilePageProps> = ({
       // 2. Try Native Web Share API without file (standard link/text share)
       const shareData = {
         title: `NEXUS ID // ${member.name} (${member.id})`,
-        text: `${member.name} // ${member.designation} — Digital Identity Badge on NEXUS`,
+        text: `${member.name} // ${member.corePillar || 'Digital Identity Badge on NEXUS'}`,
         url: shareUrl,
       };
 
@@ -686,7 +686,7 @@ export const MemberProfilePage: React.FC<MemberProfilePageProps> = ({
           ) : (
             <Share2 className="w-3.5 h-3.5 text-[#FF5A1F] group-hover:scale-110 transition-transform duration-200" />
           )}
-          <span className="font-semibold tracking-wider text-[10px] uppercase">
+          <span className="font-lovelo font-bold tracking-wider text-[11px] uppercase pt-0.5">
             {isSharingImage ? 'GENERATING...' : 'SHARE BADGE'}
           </span>
         </button>

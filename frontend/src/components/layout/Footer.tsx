@@ -9,10 +9,11 @@ import { NexusLogo, NexusWordmark } from '../brand/NexusLogo.tsx';
 import { InteractiveFooterPenguin } from '../mascot/InteractiveFooterPenguin.tsx';
 import { AppRoute } from '../../types.ts';
 import { useTheme } from '../../context/ThemeContext.tsx';
-// Coding Ninjas logo paths resolve from the canonical nexus-i8-/images/ root
-// served at URL /images/ by vite-plugin-static-copy in both dev and build.
-const codingNinjasDarkLogo = '/images/logos/coding_ninjas_dark_clean.png';
-const codingNinjasLightLogo = '/images/logos/coding_ninjas_light_clean.png';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
+
+// Coding Ninjas logo paths resolve through Cloudinary CDN with local fallback.
+const codingNinjasDarkLogo = resolveImageUrl('/images/logos/coding_ninjas_dark_clean.png');
+const codingNinjasLightLogo = resolveImageUrl('/images/logos/coding_ninjas_light_clean.png');
 
 interface FooterProps {
   onRouteChange: (route: AppRoute) => void;
@@ -157,6 +158,7 @@ export const Footer: React.FC<FooterProps> = ({ onRouteChange }) => {
                 className="w-full max-w-[240px] sm:max-w-[260px] h-auto object-contain block select-none"
                 loading="lazy"
                 decoding="async"
+                onError={handleImageFallbackError}
               />
             </div>
           </div>

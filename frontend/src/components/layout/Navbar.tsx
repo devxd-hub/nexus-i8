@@ -8,6 +8,9 @@ import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { Container } from '../primitives/Container.tsx';
 import { AppRoute, NavItem } from '../../types.ts';
 import { ThemeToggle } from './ThemeToggle.tsx';
+import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
+
+const NEXUS_BRAND_ICON_SRC = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
 
 interface NavbarProps {
   currentRoute: AppRoute;
@@ -122,10 +125,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentRoute, onRouteChange }) =
                   className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0"
                 >
                   <img
-                    src="/images/logos/NEXUS-removebg-preview-1.png"
+                    src={NEXUS_BRAND_ICON_SRC}
                     alt="NEXUS X"
                     className="w-full h-full object-contain aspect-square pointer-events-none select-none transition-transform duration-250 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
                     loading="eager"
+                    onError={handleImageFallbackError}
                   />
                 </div>
 

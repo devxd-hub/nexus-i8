@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils.ts";
+import { handleImageFallbackError } from "../../data/cloudinaryMap.ts";
 
 const images = [
   "https://cdn.21st.dev/assets/mirror/67/6736e09c72013915f540c0dfd48fb34eab707dd3745c8e3e7932e7dde2bb0d28.png",
@@ -177,6 +178,7 @@ const CardHover: React.FC<CardHoverProps> = ({
                                 className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                                 src={member.imageUrl}
                                 alt={member.name || `Crew member ${idx + 1}`}
+                                onError={handleImageFallbackError}
                                 style={{
                                   objectPosition: member.imagePosition || "center 20%",
                                   transform: isExpanded ? "scale(1.03)" : "scale(1)",

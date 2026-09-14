@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { getLocalFallbackUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 export interface MorphSliderItem {
   image: string;
@@ -423,6 +424,14 @@ export const MorphSlider: React.FC<MorphSliderProps> = ({
       };
 
       img.onerror = () => {
+        const fallback = getLocalFallbackUrl(item.image);
+        if (fallback && fallback !== item.image && img.src !== fallback) {
+          console.warn(
+            `[Cloudinary Fallback] Texture failed to resolve from Cloudinary CDN: "${item.image}" -> Falling back to canonical local asset: "${fallback}"`
+          );
+          img.src = fallback;
+          return;
+        }
         loadedCount++;
         if (loadedCount === items.length) {
           setImagesLoaded(true);
@@ -603,6 +612,7 @@ export const MorphSlider: React.FC<MorphSliderProps> = ({
                 idx === currentIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
               }`}
               referrerPolicy="no-referrer"
+              onError={handleImageFallbackError}
             />
           ))}
         </div>

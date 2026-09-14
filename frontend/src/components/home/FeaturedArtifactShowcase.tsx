@@ -11,6 +11,7 @@ import { NexusIcon } from '../brand/NexusLogo.tsx';
 import { RevealSection, RevealText } from '../motion/MotionPrimitives.tsx';
 import { Project } from '../../types.ts';
 import { ArrowUpRight } from 'lucide-react';
+import { resolveImageUrl } from '../../data/cloudinaryMap.ts';
 
 interface FeaturedArtifactShowcaseProps {
   project: Project;
@@ -114,7 +115,7 @@ export const FeaturedArtifactShowcase: React.FC<FeaturedArtifactShowcaseProps> =
             {/* Interactive GridDistortion Surface */}
             <div className="relative w-full aspect-[16/9] min-h-[260px] sm:min-h-[320px] max-h-[560px] bg-[#0C0C0C] overflow-hidden touch-pan-y">
               <GridDistortion
-                imageSrc="/images/projects/voxen-prototype.svg"
+                imageSrc={resolveImageUrl('/images/projects/voxen-prototype.svg')}
                 grid={10}
                 mouse={0.09}
                 strength={0.11}

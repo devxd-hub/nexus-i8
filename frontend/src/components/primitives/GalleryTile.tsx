@@ -7,6 +7,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { NexusIcon } from '../brand/NexusLogo.tsx';
 import { GalleryItem } from '../../types.ts';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface GalleryTileProps {
   item: GalleryItem;
@@ -87,9 +88,13 @@ export const GalleryTile: React.FC<GalleryTileProps> = ({
               src={item.imageUrl}
               alt={item.title}
               onLoad={() => setIsLoaded(true)}
-              onError={() => {
-                setHasError(true);
-                setIsLoaded(true);
+              onError={(e) => {
+                if (e.currentTarget.dataset.fallbackTried === 'true') {
+                  setHasError(true);
+                  setIsLoaded(true);
+                } else {
+                  handleImageFallbackError(e);
+                }
               }}
               className={`w-full h-full object-cover filter grayscale contrast-[1.05] group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500 ${
                 isLoaded ? 'opacity-100' : 'opacity-0'

@@ -70,6 +70,22 @@ export default defineConfig(() => {
         '/api': {
           target: 'http://localhost:3001',
           changeOrigin: true,
+          configure: (proxy) => {
+            proxy.on('error', (_err, _req, res) => {
+              if (res && 'writeHead' in res && !res.headersSent) {
+                res.writeHead(503, { 'Content-Type': 'application/json' });
+                res.end(
+                  JSON.stringify({
+                    success: false,
+                    error: {
+                      code: 'SERVICE_UNAVAILABLE',
+                      message: 'Backend API server on port 3001 is offline.',
+                    },
+                  })
+                );
+              }
+            });
+          },
         },
       },
     },

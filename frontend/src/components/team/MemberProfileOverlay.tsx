@@ -7,6 +7,7 @@ import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { TeamMember } from '../../types.ts';
 import { NexusIcon } from '../brand/NexusLogo.tsx';
+import { handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
 interface MemberProfileOverlayProps {
   member: TeamMember | null;
@@ -90,6 +91,7 @@ export const MemberProfileOverlay: React.FC<MemberProfileOverlayProps> = ({ memb
                   style={{ objectPosition: member.imagePosition || 'center 20%' }}
                   loading="lazy"
                   decoding="async"
+                  onError={handleImageFallbackError}
                 />
               ) : (
                 <div className="w-full h-full flex flex-col items-center justify-center text-[var(--text-muted)] p-6 text-center">

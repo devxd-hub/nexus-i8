@@ -13,6 +13,7 @@ import { RevealSection, RevealText } from '../components/motion/MotionPrimitives
 import { ColorBends } from '../components/motion/ColorBends.tsx';
 import { AppRoute, GalleryItem } from '../types.ts';
 import { GALLERY_ITEMS } from '../data/nexusData.ts';
+import { handleImageFallbackError } from '../data/cloudinaryMap.ts';
 import {
   X,
   Calendar,
@@ -252,6 +253,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onRouteChange }) => {
                   className="w-full h-full max-h-[480px] object-contain object-center"
                   loading="eager"
                   referrerPolicy="no-referrer"
+                  onError={handleImageFallbackError}
                 />
               ) : (
                 <div className="py-24 text-center">
