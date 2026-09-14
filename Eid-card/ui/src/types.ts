@@ -25,6 +25,7 @@ export interface TeamMember {
   clearanceLevel: string;
   image: string;
   photo: string; // canonical photo URL / path
+  imagePosition?: string;
   bio?: string; // canonical bio alias (maps to shortBio)
   shortBio?: string;
   message: string;
