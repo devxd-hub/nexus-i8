@@ -128,7 +128,7 @@ export default function App() {
         {/* Cinematic theme transition overlay — above all UI, below nothing */}
         <CinematicThemeTransition />
 
-        <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-250">
+        <div className="min-h-screen flex flex-col bg-[var(--bg-primary)] text-[var(--text-primary)]">
           {/* Cinematic Brand Preloader: "THE X IS THE NEXUS" */}
           {showPreloader && (
             <CinematicPreloader

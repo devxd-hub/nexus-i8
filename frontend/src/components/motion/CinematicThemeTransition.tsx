@@ -8,10 +8,35 @@ import { useTheme } from '../../context/ThemeContext.tsx';
 import { useCinematicTransition } from '../../context/CinematicTransitionContext.tsx';
 import { resolveImageUrl, handleImageFallbackError } from '../../data/cloudinaryMap.ts';
 
-const X_LOGO_SRC = resolveImageUrl('/images/logos/NEXUS-removebg-preview-1.png');
+/**
+ * CinematicThemeTransition — NEXUS Preloader-Sibling Theme Shutter
+ *
+ * Sequence (Total ~750ms):
+ *   0–250ms:   Two large opaque panels close from left & right, meeting at center (50vw).
+ *   250–430ms: NEXUS X rapidly forms and resolves at exact center (left: 50%, top: 50%, translate(-50%, -50%)).
+ *              Uses the canonical preloader SVG contour synthesis (#F2613F) resolving into the authentic mark.
+ *   430–500ms: Theme state switches under full curtain cover (setTheme(pendingTheme)).
+ *              X holds briefly as the authentic brand seal.
+ *   500–750ms: Panels open outward to reveal the newly themed website; X departs cleanly.
+ *
+ * Visual Rules:
+ *   - Exactly ONE theme-switch transition.
+ *   - Authentic NEXUS X asset, never rotated, never stretched, perfectly centered.
+ *   - Semantic palette: #0C0C0C (Dark) / #F3EEE5 (Light) panels; #F2613F NEXUS mark.
+ *   - Purity: Zero particles, glow, gradient bursts, blur, 3D, glitch, or spark effects.
+ */
 
-// Preload the X image in a module-level singleton so it is fetched once
-// regardless of how many times the component remounts.
+// Exact canonical closed-polygon path for the authentic NEXUS X geometry (512 x 488)
+const CANONICAL_PATH =
+  'M 0 0 H 153.8 L 381.8 448.5 H 447.5 L 304.4 167 L 454.9 0 H 510.6 L 352.6 174.8 L 511.1 487 H 357.2 L 129.2 38.5 H 63.5 L 206.6 320 L 56.1 487 H 0.4 L 158.4 312.1 Z';
+
+// Mathematical perimeter length of the authentic polygon
+const PERIMETER_LENGTH = 3809;
+
+// Authentic NEXUS X asset
+const X_LOGO_SRC = resolveImageUrl('/logo/NEXUS-removebg-preview.png');
+
+// Preload the X image in a module-level singleton
 if (typeof window !== 'undefined') {
   const preloadLink = document.createElement('link');
   preloadLink.rel = 'preload';
@@ -24,14 +49,14 @@ export const CinematicThemeTransition: React.FC = () => {
   const { setTheme } = useTheme();
   const { isTransitioning, pendingTheme, onTransitionComplete } = useCinematicTransition();
 
-  const overlayRef    = useRef<HTMLDivElement>(null);
-  const leftPanelRef  = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const leftPanelRef = useRef<HTMLDivElement>(null);
   const rightPanelRef = useRef<HTMLDivElement>(null);
-  const logoRef       = useRef<HTMLDivElement>(null);
+  const logoContainerRef = useRef<HTMLDivElement>(null);
+  const svgPathRef = useRef<SVGPathElement>(null);
+  const logoImgRef = useRef<HTMLImageElement>(null);
+
   const reducedMotion = useRef(false);
-  // Each call to runTransition stamps a generation ID.
-  // If a new call starts (abort scenario), the old one checks
-  // generationRef.current !== myGeneration before calling onTransitionComplete.
   const generationRef = useRef(0);
 
   useEffect(() => {
@@ -41,7 +66,7 @@ export const CinematicThemeTransition: React.FC = () => {
   }, []);
 
   // ── Helper: manage data-nexus-covering attribute ───────────────────────────
-  // Suppresses CSS color transitions on the page while panels fully cover it.
+  // Suppresses CSS transitions on the page while panels fully cover it.
   const setCovering = (active: boolean) => {
     if (active) {
       document.documentElement.setAttribute('data-nexus-covering', '');
@@ -52,167 +77,179 @@ export const CinematicThemeTransition: React.FC = () => {
 
   const runTransition = useCallback(async () => {
     const overlay = overlayRef.current;
-    const left    = leftPanelRef.current;
-    const right   = rightPanelRef.current;
-    const logo    = logoRef.current;
+    const left = leftPanelRef.current;
+    const right = rightPanelRef.current;
+    const logoContainer = logoContainerRef.current;
+    const svgPath = svgPathRef.current;
+    const logoImg = logoImgRef.current;
 
-    if (!overlay || !left || !right || !logo || !pendingTheme) return;
+    if (!overlay || !left || !right || !logoContainer || !pendingTheme) return;
 
-    // Increment generation counter — this call "owns" this generation ID.
-    // Any previous in-flight call will see its generation is stale and bail.
+    // Increment generation counter for abort/race prevention
     generationRef.current += 1;
     const myGeneration = generationRef.current;
 
-    // Ensure covering attribute is cleared from any interrupted previous run
     setCovering(false);
 
     const sleep = (ms: number) =>
       new Promise<void>((resolve, reject) => {
         const id = setTimeout(resolve, ms);
-        // Poll-free abort: check generation on each sleep boundary
         const checkStale = () => {
           if (generationRef.current !== myGeneration) {
             clearTimeout(id);
             reject(new DOMException('superseded'));
           }
         };
-        // Schedule a check at the midpoint and end of each sleep
         const mid = setTimeout(checkStale, ms / 2);
         setTimeout(() => clearTimeout(mid), ms);
       });
 
-    // ── NEXUS palette ────────────────────────────────────────────────────────
+    // ── Semantic palette matching incoming theme ─────────────────────────────
     const goingDark = pendingTheme === 'dark';
-    left.style.background  = goingDark ? '#0C0C0C' : '#F3EEE5';
-    right.style.background = goingDark ? '#481E14' : '#E8E2D6';
-
-    // ── Motion constants ─────────────────────────────────────────────────────
-    // Long, gentle ease-in-out: panels breathe in slowly, settle at center
-    const EASE          = 'cubic-bezier(0.55, 0, 0.1, 1)';
-    const PANEL_CLOSE   = 580; // ms — was 420ms
-    const PANEL_OPEN    = 580; // ms — was 420ms
-    const X_START_EARLY = 80;  // ms before close finishes that X starts appearing
-    const X_FADE_IN     = 200; // ms — was 160ms
-    const THEME_HOLD    = 180; // ms — was 140ms
-    const X_FADE_OUT    = 150; // ms — was 120ms
+    const panelBg = goingDark ? '#0C0C0C' : '#F3EEE5';
+    left.style.background = panelBg;
+    right.style.background = panelBg;
 
     // Show the overlay container
-    overlay.style.display       = 'block';
+    overlay.style.display = 'block';
     overlay.style.pointerEvents = 'all';
+    overlay.style.background = 'transparent';
 
     let themeWasApplied = false;
 
     try {
       if (reducedMotion.current) {
-        // ── REDUCED MOTION ───────────────────────────────────────────────────
-        // Instant cover → theme switch → instant uncover. No panel movement.
-        overlay.style.background = goingDark ? '#0C0C0C' : '#F3EEE5';
-        overlay.style.opacity    = '0';
-        overlay.style.transition = 'opacity 80ms linear';
-        void overlay.offsetHeight; // flush
+        // ── REDUCED MOTION: Clean instant crossfade ──────────────────────────
+        overlay.style.background = panelBg;
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 70ms linear';
+        void overlay.offsetHeight;
         overlay.style.opacity = '1';
-        await sleep(130);
+        await sleep(90);
 
         setCovering(true);
         setTheme(pendingTheme);
         themeWasApplied = true;
-        await sleep(80);
+        await sleep(60);
 
         setCovering(false);
-        overlay.style.transition = 'opacity 120ms linear';
-        overlay.style.opacity    = '0';
-        await sleep(130);
-
+        overlay.style.transition = 'opacity 90ms linear';
+        overlay.style.opacity = '0';
+        await sleep(100);
       } else {
-        // ── FULL CINEMATIC PATH ──────────────────────────────────────────────
+        // ── FULL CINEMATIC PRELOADER-SIBLING SEQUENCE (~750ms) ───────────────
 
-        // ── Reset all elements (no transition) ─────────────────────────────
-        left.style.transition  = 'none';
+        // 1. Reset all elements to initial state (no transition)
+        left.style.transition = 'none';
         right.style.transition = 'none';
-        logo.style.transition  = 'none';
+        logoContainer.style.transition = 'none';
+        if (svgPath) {
+          svgPath.style.transition = 'none';
+          svgPath.style.strokeDashoffset = `${PERIMETER_LENGTH}`;
+          svgPath.style.fillOpacity = '0';
+          svgPath.setAttribute('stroke-dashoffset', `${PERIMETER_LENGTH}`);
+          svgPath.setAttribute('fill-opacity', '0');
+        }
+        if (logoImg) {
+          logoImg.style.transition = 'none';
+          logoImg.style.opacity = '0';
+        }
 
-        left.style.transform  = 'translateX(-100%)';
+        left.style.transform = 'translateX(-100%)';
         right.style.transform = 'translateX(100%)';
-        logo.style.opacity    = '0';
-        logo.style.transform  = 'translate(-50%, -50%) scale(0.94)';
+        logoContainer.style.opacity = '0';
+        logoContainer.style.transform = 'translate(-50%, -50%) scale(0.92)';
 
-        // Two-phase flush: offsetWidth resets geometry, offsetHeight resets paint
+        // Flush layout
         void overlay.offsetWidth;
         void overlay.offsetHeight;
 
-        // ── BEAT 1 — CLOSE ─────────────────────────────────────────────────
-        left.style.transition  = `transform ${PANEL_CLOSE}ms ${EASE}`;
-        right.style.transition = `transform ${PANEL_CLOSE}ms ${EASE}`;
-        left.style.transform   = 'translateX(0)';
-        right.style.transform  = 'translateX(0)';
+        // ── BEAT 1: PANELS CLOSE (0 -> 250ms) ────────────────────────────────
+        const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)';
+        left.style.transition = `transform 250ms ${EASE}`;
+        right.style.transition = `transform 250ms ${EASE}`;
+        left.style.transform = 'translateX(0)';
+        right.style.transform = 'translateX(0)';
 
-        // X begins appearing 40ms before panels fully land (continuous motion)
-        await sleep(PANEL_CLOSE - X_START_EARLY);
+        await sleep(250);
         if (generationRef.current !== myGeneration) throw new DOMException('superseded');
 
-        logo.style.transition = `opacity ${X_FADE_IN}ms ease-out, transform ${X_FADE_IN}ms ${EASE}`;
-        logo.style.opacity    = '1';
-        logo.style.transform  = 'translate(-50%, -50%) scale(1)';
+        // Panels are now flush together. Set underlying overlay background to ensure
+        // zero possible subpixel seam artifacts while covered.
+        overlay.style.background = panelBg;
 
-        // Wait for panels to fully close (remaining overlap + one paint frame)
-        await sleep(X_START_EARLY + 16);
+        // ── BEAT 2: NEXUS X FORMS / RESOLVES (250ms -> 430ms) ────────────────
+        // Container enters with subtle scale settle
+        logoContainer.style.transition = `opacity 90ms ease-out, transform 180ms ${EASE}`;
+        logoContainer.style.opacity = '1';
+        logoContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+
+        // SVG contour trace draws in (120ms) and fill resolves (130ms)
+        if (svgPath) {
+          svgPath.style.transition = `stroke-dashoffset 120ms ${EASE}, fill-opacity 130ms ease-out`;
+          svgPath.style.strokeDashoffset = '0';
+          svgPath.style.fillOpacity = '1';
+          svgPath.setAttribute('stroke-dashoffset', '0');
+          svgPath.setAttribute('fill-opacity', '1');
+        }
+
+        // At 120ms: SVG contour trace and fill are complete; resolve to authentic mark
+        await sleep(120);
         if (generationRef.current !== myGeneration) throw new DOMException('superseded');
 
-        // ── BEAT 2 — X SEAL + THEME SWITCH ─────────────────────────────────
-        // Panels are now fully closed. Suppress page color transitions,
-        // then apply the theme change — zero visible effect to the user.
+        if (logoImg) {
+          logoImg.style.transition = 'opacity 60ms ease-out';
+          logoImg.style.opacity = '1';
+        }
+
+        // Remainder of the 180ms formation window (60ms)
+        await sleep(60);
+        if (generationRef.current !== myGeneration) throw new DOMException('superseded');
+
+        // ── BEAT 3: THEME STATE CHANGES & X HOLDS (430ms -> 500ms) ───────────
         setCovering(true);
         setTheme(pendingTheme);
         themeWasApplied = true;
 
-        // Hold: user sees NEXUS X as the "seal" between themes
-        await sleep(THEME_HOLD);
+        // Hold the completed authentic X as the central seal (70ms)
+        await sleep(70);
         if (generationRef.current !== myGeneration) throw new DOMException('superseded');
 
-        // X retreats cleanly — opacity only, no scale shift on exit
-        logo.style.transition = `opacity ${X_FADE_OUT}ms ease-in`;
-        logo.style.opacity    = '0';
-
-        await sleep(X_FADE_OUT);
-        if (generationRef.current !== myGeneration) throw new DOMException('superseded');
-
-        // Remove covering attribute just before panels start opening.
-        // By this frame the theme is fully applied and all CSS vars resolved.
+        // ── BEAT 4: PANELS OPEN & NEW THEME REVEALED (500ms -> 750ms) ────────
         setCovering(false);
+        overlay.style.background = 'transparent';
 
-        // ── BEAT 3 — OPEN ──────────────────────────────────────────────────
-        left.style.transition  = `transform ${PANEL_OPEN}ms ${EASE}`;
-        right.style.transition = `transform ${PANEL_OPEN}ms ${EASE}`;
-        left.style.transform   = 'translateX(-100%)';
-        right.style.transform  = 'translateX(100%)';
+        left.style.transition = `transform 250ms ${EASE}`;
+        right.style.transition = `transform 250ms ${EASE}`;
+        left.style.transform = 'translateX(-100%)';
+        right.style.transform = 'translateX(100%)';
 
-        await sleep(PANEL_OPEN + 16);
+        // X departs cleanly as panels split
+        logoContainer.style.transition = 'opacity 90ms ease-in';
+        logoContainer.style.opacity = '0';
+
+        await sleep(250);
       }
     } catch {
       // Interrupted or superseded.
-      // Only apply theme if this generation is still current and it hasn't been applied yet.
       if (generationRef.current === myGeneration && !themeWasApplied && pendingTheme) {
         setTheme(pendingTheme);
       }
     }
 
-    // ── Cleanup — always runs, even after catch ──────────────────────────────
-    // Only the current generation should reset shared overlay state.
-    // A superseded call must NOT touch the overlay or call onTransitionComplete.
+    // ── Cleanup ──────────────────────────────────────────────────────────────
     if (generationRef.current !== myGeneration) return;
 
-    // Ensure covering is removed even if we exited via catch
     setCovering(false);
-
     overlay.style.pointerEvents = 'none';
-    overlay.style.display       = 'none';
-    overlay.style.background    = 'transparent';
-    overlay.style.opacity       = '';   // clear inline opacity (let CSS own it)
-    overlay.style.transition    = '';   // clear inline transition
+    overlay.style.display = 'none';
+    overlay.style.background = 'transparent';
+    overlay.style.opacity = '';
+    overlay.style.transition = '';
 
-    logo.style.transition = 'none';
-    logo.style.opacity    = '0';
-    logo.style.transform  = 'translate(-50%, -50%) scale(0.94)';
+    logoContainer.style.transition = 'none';
+    logoContainer.style.opacity = '0';
+    logoContainer.style.transform = 'translate(-50%, -50%) scale(0.92)';
 
     onTransitionComplete();
   }, [pendingTheme, setTheme, onTransitionComplete]);
@@ -223,8 +260,7 @@ export const CinematicThemeTransition: React.FC = () => {
     }
   }, [isTransitioning, pendingTheme, runTransition]);
 
-  // Safety: if this component unmounts while a transition is running
-  // (should never happen since it's at root, but defensive), clear covering.
+  // Safety cleanup on unmount
   useEffect(() => {
     return () => {
       setCovering(false);
@@ -235,7 +271,6 @@ export const CinematicThemeTransition: React.FC = () => {
     <div
       ref={overlayRef}
       aria-hidden="true"
-      // Initial styles — overlay is invisible and non-interactive at rest
       style={{
         position: 'fixed',
         inset: 0,
@@ -243,18 +278,12 @@ export const CinematicThemeTransition: React.FC = () => {
         pointerEvents: 'none',
         display: 'none',
         background: 'transparent',
-        // overflow: hidden ensures no panel edge bleeds outside the viewport.
-        // Critical on mobile where 50% of a slightly-wider container could
-        // otherwise produce a horizontal scrollbar.
         overflow: 'hidden',
       }}
     >
       {/*
-       * LEFT PANEL — flush left, exactly 50vw
-       * Anchored at left: 0 with width: 50%.
-       * The fixed overlay's width equals 100vw, so 50% = exactly 50vw.
-       * Slides in: translateX(-100%) → translateX(0)
-       * Right edge is perfectly sharp — no border-radius, no blur.
+       * LEFT SHUTTER PANEL — flush left, width calc(50% + 2px)
+       * translateX(-100%) -> translateX(0)
        */}
       <div
         ref={leftPanelRef}
@@ -262,7 +291,7 @@ export const CinematicThemeTransition: React.FC = () => {
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '50%',
+          width: 'calc(50% + 2px)',
           height: '100%',
           borderRadius: 0,
           transform: 'translateX(-100%)',
@@ -271,19 +300,17 @@ export const CinematicThemeTransition: React.FC = () => {
       />
 
       {/*
-       * RIGHT PANEL — flush right, exactly 50vw
-       * Anchored at right: 0 with width: 50%.
-       * Slides in: translateX(100%) → translateX(0)
-       * Left edge of this panel meets the right edge of the left panel
-       * at 50vw — a mathematically exact seam.
+       * RIGHT SHUTTER PANEL — anchored at calc(50% - 2px), width calc(50% + 2px)
+       * translateX(100%) -> translateX(0)
+       * Overlaps left panel by 4px at center, eliminating subpixel gaps on any display.
        */}
       <div
         ref={rightPanelRef}
         style={{
           position: 'absolute',
           top: 0,
-          right: 0,
-          width: '50%',
+          left: 'calc(50% - 2px)',
+          width: 'calc(50% + 2px)',
           height: '100%',
           borderRadius: 0,
           transform: 'translateX(100%)',
@@ -292,41 +319,73 @@ export const CinematicThemeTransition: React.FC = () => {
       />
 
       {/*
-       * NEXUS X — the visual seal at the panel seam
-       *
-       * left: 50%, top: 50%, translate(-50%, -50%) = mathematical viewport center.
-       * zIndex: 1 — renders above both panels.
-       * Appears via opacity + subtle scale (0.94 → 1).
-       * Disappears via opacity only (clean, no bounce).
+       * NEXUS X — Central Brand Mark
+       * Exactly centered: left: 50%, top: 50%, transform: translate(-50%, -50%)
+       * Uses the exact preloader SVG contour synthesis + authentic mark resolution.
+       * Zero rotation, zero stretch, zero glow, zero blur, zero particles.
        */}
       <div
-        ref={logoRef}
+        ref={logoContainerRef}
         style={{
           position: 'absolute',
           left: '50%',
           top: '50%',
-          transform: 'translate(-50%, -50%) scale(0.94)',
+          transform: 'translate(-50%, -50%) scale(0.92)',
           opacity: 0,
           willChange: 'opacity, transform',
           pointerEvents: 'none',
-          zIndex: 1,
-          // Prevent any layout influence from this absolutely-positioned element
-          lineHeight: 0,
+          zIndex: 100,
+          width: 'clamp(75px, 8.5vw, 110px)',
+          height: 'clamp(71px, 8.1vw, 105px)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
+        {/* SVG Canonical Contour Tracing Layer */}
+        <svg
+          viewBox="0 0 512 488"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+          }}
+        >
+          <path
+            ref={svgPathRef}
+            d={CANONICAL_PATH}
+            fill="#F2613F"
+            fillOpacity={0}
+            stroke="#F2613F"
+            strokeWidth="3.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray={PERIMETER_LENGTH}
+            strokeDashoffset={PERIMETER_LENGTH}
+          />
+        </svg>
+
+        {/* Authentic NEXUS X Mark Asset */}
         <img
+          ref={logoImgRef}
           src={X_LOGO_SRC}
           alt=""
           role="presentation"
-          width={100}
-          height={100}
+          width={110}
+          height={105}
           style={{
-            width: 'clamp(60px, 7.5vw, 100px)',
-            height: 'clamp(60px, 7.5vw, 100px)',
-            display: 'block',
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
             objectFit: 'contain',
-            userSelect: 'none',
+            opacity: 0,
             pointerEvents: 'none',
+            userSelect: 'none',
           }}
           draggable={false}
           onError={handleImageFallbackError}
