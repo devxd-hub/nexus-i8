@@ -86,11 +86,11 @@ List projects with optional filtering, search, and pagination.
       "id": "nxs-001",
       "slug": "nxs-001",
       "projectNumber": "NXS / 001",
-      "title": "ALGOLAB",
+      "title": "ALGOLOG",
       "category": "Technology",
       "year": "2026",
       "summary": "A learning environment that helps students practice algorithms through structured repetition.",
-      "description": "Algolab was built by first- and second-year students...",
+      "description": "Algolog was built by first- and second-year students...",
       "disciplines": "TECH × EDUCATION",
       "status": "Active",
       "featured": true,
@@ -98,7 +98,7 @@ List projects with optional filtering, search, and pagination.
       "deliverables": ["Interactive Web Sandbox", "Curated Algorithm Visualizer", "Self-paced Exercises"],
       "coverImage": "/images/nexus/archive/drafting-nxs-001.svg",
       "demoUrl": null,
-      "repositoryUrl": "https://github.com/nexus-club/algolab",
+      "repositoryUrl": "https://github.com/nexus-club/algolog",
       "members": [
         {
           "id": "team-01",
